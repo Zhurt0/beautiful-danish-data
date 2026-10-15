@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variable map | Beautiful Danish Data</title>
+    <meta name="description" content="A map of Statistics Denmark registers and variables used in the papers, at the individual level (BEF, IND, FORM, IDA, BFL, DREAM, UDDA, LPR, LMDB, MFR, DOD, crime) and the firm level (FIRM, FIRE, FIDA, UHDI, VAT, CVR, patents).">
+    <meta name="author" content="Rentian Zhu">
+    <link rel="canonical" href="https://zhurt0.github.io/beautiful-danish-data/variables.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Beautiful Danish Data">
+    <meta property="og:title" content="Variable map | Beautiful Danish Data">
+    <meta property="og:description" content="A map of Statistics Denmark registers and variables used in the papers, at the individual level (BEF, IND, FORM, IDA, BFL, DREAM, UDDA, LPR, LMDB, MFR, DOD, crime) and the firm level (FIRM, FIRE, FIDA, UHDI, VAT, CVR, patents).">
+    <meta property="og:url" content="https://zhurt0.github.io/beautiful-danish-data/variables.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <p class="eyebrow"><a href="https://zhurt0.github.io/rentianzhu/">Rentian Zhu</a> &rsaquo; Useful links</p>
+            <h1><a href="index.html">Beautiful Danish Data</a></h1>
+            <p class="tagline">A field guide to economics published with Danish administrative data</p>
+        </div>
+    </header>
+    <nav>
+        <div class="container">
+            <ul><li><a href="index.html">Summary</a></li><li><a href="themes.html">Themes</a></li><li><a href="variables.html" class="active">Variable map</a></li><li><a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a></li></ul>
+        </div>
+    </nav>
+    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">Variable map</h2>
+            <p>Statistics Denmark delivers data as registers, one per topic, that all share the personal identifier (<code>PNR</code>) on the individual side and the firm identifier (<code>CVRNR</code>) on the firm side. The two sides are joined through the employer link in IDA, FIDA or the monthly payroll data. The map below lists the registers behind the papers on this site, the variables that matter most, and which papers use each register.</p>
+            <p class="note">Variable names follow Statistics Denmark's documentation of high-quality variables, but names and version suffixes (such as <code>_13</code>) change between years and projects. Treat the codes as pointers and check the current documentation at <a href="https://www.dst.dk/da/TilSalg/Forskningsservice/Dokumentation/hoejkvalitetsvariable" target="_blank" rel="noopener">dst.dk</a> before writing code.</p>
+            <ul class="toc">
+                <li><a href="#individual">Individual level</a><span>14 registers</span></li>
+                <li><a href="#firm">Firm level</a><span>6 registers</span></li>
+                <li><a href="#bridge">Linking the two</a></li>
+            </ul>
+        </div>
+    </section>
+    <section class="section" id="individual">
+        <div class="container">
+            <h2 class="section-title">Individual level</h2>
+            <p class="blurb">Keyed on <code>PNR</code>. One row per person per year unless noted.</p>
+            <div class="register">
+                <h3>BEF — Population register</h3>
+                <p class="what">One row per resident per year (or per month in BEF monthly). The spine for everything else.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>PNR</code></td><td>Personal identifier (anonymised). Links every register.</td></tr>
+                    <tr><td><code>KOEN</code></td><td>Sex.</td></tr>
+                    <tr><td><code>FOED_DAG / ALDER</code></td><td>Date of birth / age at reference date.</td></tr>
+                    <tr><td><code>IE_TYPE</code></td><td>Origin type: Danish origin, immigrant, descendant.</td></tr>
+                    <tr><td><code>OPR_LAND</code></td><td>Country of origin.</td></tr>
+                    <tr><td><code>KOM</code></td><td>Municipality of residence.</td></tr>
+                    <tr><td><code>CIVST</code></td><td>Marital status.</td></tr>
+                    <tr><td><code>FAMILIE_ID / FAMILIE_TYPE</code></td><td>Family identifier and family type (couple, single, children).</td></tr>
+                    <tr><td><code>MOR_PNR / FAR_PNR</code></td><td>Mother&#x27;s and father&#x27;s PNR. Builds parent–child and sibling links.</td></tr>
+                    <tr><td><code>AEGTE_ID</code></td><td>Spouse or partner PNR.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#kleven2019">Kleven (2019)</a>, <a href="index.html#damm2014">Damm (2014)</a>, <a href="index.html#fadlon2019">Fadlon (2019)</a>, <a href="index.html#druedahl2022">Druedahl (2022)</a>, <a href="index.html#boserup2018">Boserup (2018)</a>, <a href="index.html#bingley2019">Bingley (2019)</a>, <a href="index.html#landerso2017">Landersø (2017)</a></p>
+            </div>
+            <div class="register">
+                <h3>IND — Income register</h3>
+                <p class="what">Annual income from tax returns, almost entirely third-party reported.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>PERINDKIALT_13</code></td><td>Total personal income before tax.</td></tr>
+                    <tr><td><code>LOENMV_13</code></td><td>Wage income incl. fringe benefits.</td></tr>
+                    <tr><td><code>ERHVERVSINDK_13</code></td><td>Earnings from employment and self-employment.</td></tr>
+                    <tr><td><code>NETOVSKUD_13</code></td><td>Profit from self-employment.</td></tr>
+                    <tr><td><code>OVERFORSINDK_13</code></td><td>Public transfers received.</td></tr>
+                    <tr><td><code>DISPON_13</code></td><td>Disposable income after tax and interest.</td></tr>
+                    <tr><td><code>FORMUEINDK_BRUTTO</code></td><td>Capital income (interest, dividends).</td></tr>
+                    <tr><td><code>RENTUDGPR</code></td><td>Interest expenses (basis for marginal-rate proxies).</td></tr>
+                    <tr><td><code>SKATMVIALT_13</code></td><td>Total taxes paid.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#kleven2014aej">Kleven (2014)</a>, <a href="index.html#jakobsen2020">Jakobsen (2020)</a>, <a href="index.html#hvidberg2023">Hvidberg (2023)</a>, <a href="index.html#kleven2019">Kleven (2019)</a>, <a href="index.html#bingley2019">Bingley (2019)</a>, <a href="index.html#lethpetersen2010">Leth-Petersen (2010)</a></p>
+            </div>
+            <div class="register">
+                <h3>FORM — Wealth register</h3>
+                <p class="what">Year-end assets and liabilities reported by banks, mortgage institutions and custodians. Universal wealth tax records until 1996, then asset and debt components.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>FORMREST_NY05</code></td><td>Net wealth excluding pension wealth.</td></tr>
+                    <tr><td><code>BANKAKT</code></td><td>Bank deposits.</td></tr>
+                    <tr><td><code>AKTIER / OBLIGATIONER</code></td><td>Stocks and bonds at market value.</td></tr>
+                    <tr><td><code>KOEJD</code></td><td>Tax-assessed value of real estate.</td></tr>
+                    <tr><td><code>BANKGAELD / REALKREDIT</code></td><td>Bank debt / mortgage debt.</td></tr>
+                    <tr><td><code>PENSFORM (from pension registers)</code></td><td>Pension wealth, available for later years.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#chetty2014">Chetty (2014)</a>, <a href="index.html#jakobsen2020">Jakobsen (2020)</a>, <a href="index.html#alstadsaeter2019">Alstadsæter (2019)</a>, <a href="index.html#lethpetersen2010">Leth-Petersen (2010)</a>, <a href="index.html#jensen2017">Jensen (2017)</a>, <a href="index.html#druedahl2022">Druedahl (2022)</a>, <a href="index.html#boserup2018">Boserup (2018)</a></p>
+            </div>
+            <div class="register">
+                <h3>IDA / IDAN / IDAP — Integrated labour market database</h3>
+                <p class="what">Person-level (IDAP) and job-level (IDAN) files that link every worker to employers and workplaces in November each year.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>ARBGNR / CVRNR</code></td><td>Employer (legal unit) identifier.</td></tr>
+                    <tr><td><code>ARBNR</code></td><td>Workplace (establishment) identifier.</td></tr>
+                    <tr><td><code>TILKNYT</code></td><td>Attachment type (primary job, secondary job).</td></tr>
+                    <tr><td><code>TIMELON</code></td><td>Hourly wage in the November job.</td></tr>
+                    <tr><td><code>STILL / DISCO</code></td><td>Occupation (DISCO-08 from 2010).</td></tr>
+                    <tr><td><code>ERHVER</code></td><td>Labour market experience (years, from 1964).</td></tr>
+                    <tr><td><code>ARLEDGR</code></td><td>Degree of unemployment during the year.</td></tr>
+                    <tr><td><code>PSTILL / SOCIO13</code></td><td>Socio-economic status (employed, unemployed, outside labour force).</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#lentz2023">Lentz (2023)</a>, <a href="index.html#bagger2014">Bagger (2014)</a>, <a href="index.html#bagger2019">Bagger (2019)</a>, <a href="index.html#hummels2014">Hummels (2014)</a>, <a href="index.html#foged2016">Foged (2016)</a>, <a href="index.html#kleven2019">Kleven (2019)</a>, <a href="index.html#munch2006">Munch (2006)</a></p>
+            </div>
+            <div class="register">
+                <h3>AKM — Labour market classification</h3>
+                <p class="what">Annual socio-economic classification of the whole population.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>SOCIO13</code></td><td>Main socio-economic status in the year.</td></tr>
+                    <tr><td><code>BESKST13</code></td><td>Employment status code.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#kleven2019">Kleven (2019)</a>, <a href="index.html#fadlon2021">Fadlon (2021)</a></p>
+            </div>
+            <div class="register">
+                <h3>BFL / eIndkomst — Monthly payroll</h3>
+                <p class="what">Monthly employer-reported wages, hours and job spells for every employee since 2008. Replaces the November-only snapshot in IDA for recent years.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>CVRNR / ARBNR</code></td><td>Employer and workplace.</td></tr>
+                    <tr><td><code>AJO_SMAL_LOENBELOEB</code></td><td>Narrow wage payment in the month.</td></tr>
+                    <tr><td><code>AJO_LOENTIMER</code></td><td>Paid hours in the month.</td></tr>
+                    <tr><td><code>AJO_JOB_START_DATO / AJO_JOB_SLUT_DATO</code></td><td>Job start and end dates.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#kreiner2016">Kreiner (2016)</a></p>
+            </div>
+            <div class="register">
+                <h3>DREAM — Public transfers (weekly)</h3>
+                <p class="what">Weekly codes for all public transfers (unemployment benefits, social assistance, sickness, parental leave, pensions) since 1991.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>Y_&lt;yyyy&gt;&lt;ww&gt;</code></td><td>One variable per week with the benefit code received.</td></tr>
+                    <tr><td><code>BRANCHE</code></td><td>Monthly industry of employment.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#dustmann2024">Dustmann (2024)</a>, <a href="index.html#munch2006">Munch (2006)</a></p>
+            </div>
+            <div class="register">
+                <h3>UDDA — Education register</h3>
+                <p class="what">Highest completed education and enrolment spells (KOTRE) for all residents.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>HFAUDD</code></td><td>Highest completed education (AUDD code).</td></tr>
+                    <tr><td><code>HFPRIA</code></td><td>Expected normal duration of the highest education (years).</td></tr>
+                    <tr><td><code>HF_VFRA / HF_VTIL</code></td><td>Start and completion dates.</td></tr>
+                    <tr><td><code>AUDD / ELEV3_VFRA (KOTRE)</code></td><td>Enrolment spells by programme.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#nielsen2010">Nielsen (2010)</a>, <a href="index.html#hvidberg2023">Hvidberg (2023)</a>, <a href="index.html#landerso2017">Landersø (2017)</a>, <a href="index.html#daysal2022">Daysal (2022)</a>, <a href="index.html#houmark2024">Houmark (2024)</a></p>
+            </div>
+            <div class="register">
+                <h3>LPR — National Patient Register</h3>
+                <p class="what">All hospital contacts (inpatient, outpatient, emergency) with diagnoses, since 1977 (1995 for outpatient).</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>C_ADIAG</code></td><td>Primary diagnosis (ICD-10).</td></tr>
+                    <tr><td><code>C_DIAG / C_DIAGTYPE</code></td><td>Secondary diagnoses and type.</td></tr>
+                    <tr><td><code>D_INDDTO / D_UDDTO</code></td><td>Admission and discharge dates.</td></tr>
+                    <tr><td><code>C_PATTYPE</code></td><td>Contact type (inpatient, outpatient, emergency).</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#fadlon2019">Fadlon (2019)</a>, <a href="index.html#fadlon2021">Fadlon (2021)</a>, <a href="index.html#daysal2022">Daysal (2022)</a></p>
+            </div>
+            <div class="register">
+                <h3>LMDB — Prescription register</h3>
+                <p class="what">All prescriptions dispensed at Danish pharmacies since 1995.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>ATC</code></td><td>Drug classification code.</td></tr>
+                    <tr><td><code>EKSD</code></td><td>Dispensing date.</td></tr>
+                    <tr><td><code>APK / VOLUME</code></td><td>Number of packages and defined daily doses.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#fadlon2019">Fadlon (2019)</a></p>
+            </div>
+            <div class="register">
+                <h3>MFR — Medical Birth Register</h3>
+                <p class="what">Every birth in Denmark with mother, child and birth characteristics.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>VAEGT</code></td><td>Birth weight in grams.</td></tr>
+                    <tr><td><code>GESTATIONSALDER</code></td><td>Gestational age.</td></tr>
+                    <tr><td><code>APGAR</code></td><td>Apgar score.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#daysal2022">Daysal (2022)</a>, <a href="index.html#houmark2024">Houmark (2024)</a></p>
+            </div>
+            <div class="register">
+                <h3>DOD — Death register</h3>
+                <p class="what">Date and cause of death.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>DODDATO</code></td><td>Date of death.</td></tr>
+                    <tr><td><code>C_DOD1A–C_DOD1D</code></td><td>Underlying and contributing causes (ICD-10).</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#fadlon2021">Fadlon (2021)</a>, <a href="index.html#druedahl2022">Druedahl (2022)</a></p>
+            </div>
+            <div class="register">
+                <h3>KRAF / KRSI — Crime registers</h3>
+                <p class="what">Charges (KRAF) and convictions / sentences (KRSI) with offence codes, since 1980.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>AFG_GER7</code></td><td>Offence code (7-digit).</td></tr>
+                    <tr><td><code>AFG_AFGTYP</code></td><td>Decision type (fine, prison, etc.).</td></tr>
+                    <tr><td><code>AFG_GERDTO</code></td><td>Date of offence.</td></tr>
+                    <tr><td><code>AFG_AFGDTO</code></td><td>Date of decision.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#damm2014">Damm (2014)</a>, <a href="index.html#landerso2017">Landersø (2017)</a>, <a href="index.html#dustmann2024">Dustmann (2024)</a></p>
+            </div>
+            <div class="register">
+                <h3>VNDS / Residence histories</h3>
+                <p class="what">Full address histories with dates of moves, including municipality, parish and address identifiers.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>ADRESSE_ID / BOP_VFRA</code></td><td>Address identifier and move-in date.</td></tr>
+                    <tr><td><code>KOM / SOGNEKODE</code></td><td>Municipality and parish.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#damm2014">Damm (2014)</a>, <a href="index.html#dustmann2019">Dustmann (2019)</a>, <a href="index.html#foged2016">Foged (2016)</a>, <a href="index.html#munch2006">Munch (2006)</a></p>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="firm">
+        <div class="container">
+            <h2 class="section-title">Firm level</h2>
+            <p class="blurb">Keyed on <code>CVRNR</code> (legal unit) and <code>ARBNR</code> (workplace). One row per firm per year unless noted.</p>
+            <div class="register">
+                <h3>FIRM / FIRE — Firm statistics and Accounts Statistics</h3>
+                <p class="what">Annual accounts for private-sector firms. FIRM covers all firms (basic size variables); FIRE is the accounts survey with full income statement and balance sheet for a large sample, census for larger firms.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>CVRNR</code></td><td>Firm (legal unit) identifier, links to all firm registers and to workers via IDA/BFL.</td></tr>
+                    <tr><td><code>BRANCHE (DB07)</code></td><td>Industry code (NACE rev. 2).</td></tr>
+                    <tr><td><code>JUR_VIRK_FORM</code></td><td>Legal form (sole proprietorship, limited company, etc.).</td></tr>
+                    <tr><td><code>ANT_ANSATTE / AARSV</code></td><td>Number of employees / full-time equivalents.</td></tr>
+                    <tr><td><code>OMS</code></td><td>Turnover.</td></tr>
+                    <tr><td><code>EKSP</code></td><td>Export value.</td></tr>
+                    <tr><td><code>VTV</code></td><td>Value added.</td></tr>
+                    <tr><td><code>KAPI / AKTIVER</code></td><td>Capital stock / total assets.</td></tr>
+                    <tr><td><code>RESULT / RESULT_FOER_SKAT</code></td><td>Profit (after/before tax).</td></tr>
+                    <tr><td><code>LOENOMK</code></td><td>Wage costs.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#bennedsen2007">Bennedsen (2007)</a>, <a href="index.html#lentz2008">Lentz (2008)</a>, <a href="index.html#bagger2019">Bagger (2019)</a>, <a href="index.html#hummels2014">Hummels (2014)</a></p>
+            </div>
+            <div class="register">
+                <h3>FIDA — Firm–employee link</h3>
+                <p class="what">Annual file linking every employee (PNR) to firm (CVRNR) and workplace (ARBNR). The bridge between the individual and the firm side.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>PNR</code></td><td>Worker.</td></tr>
+                    <tr><td><code>CVRNR</code></td><td>Firm.</td></tr>
+                    <tr><td><code>ARBNR</code></td><td>Workplace.</td></tr>
+                    <tr><td><code>ANSAT_TYPE</code></td><td>Employee attachment (primary, secondary).</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#lentz2023">Lentz (2023)</a>, <a href="index.html#bagger2014">Bagger (2014)</a>, <a href="index.html#bagger2019">Bagger (2019)</a>, <a href="index.html#hummels2014">Hummels (2014)</a>, <a href="index.html#foged2016">Foged (2016)</a>, <a href="index.html#kreiner2016">Kreiner (2016)</a></p>
+            </div>
+            <div class="register">
+                <h3>UHDI / UHDM — Foreign trade by firm</h3>
+                <p class="what">Imports and exports by firm, product (CN8) and partner country, from customs (extra-EU) and Intrastat (intra-EU).</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>CVRNR</code></td><td>Firm.</td></tr>
+                    <tr><td><code>VARE (CN8)</code></td><td>Product code.</td></tr>
+                    <tr><td><code>LAND</code></td><td>Partner country.</td></tr>
+                    <tr><td><code>VAERDI / MAENGDE</code></td><td>Value in DKK / quantity.</td></tr>
+                    <tr><td><code>IMPEKS</code></td><td>Import or export flag.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#hummels2014">Hummels (2014)</a></p>
+            </div>
+            <div class="register">
+                <h3>VNDS / Moms — VAT-based turnover</h3>
+                <p class="what">Monthly or quarterly VAT returns giving domestic sales and purchases for all VAT-registered firms. Useful for high-frequency firm activity.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>CVRNR</code></td><td>Firm.</td></tr>
+                    <tr><td><code>SALG / KOEB</code></td><td>Sales / purchases subject to VAT.</td></tr>
+                    <tr><td><code>PERIODE</code></td><td>Reporting period.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="register">
+                <h3>Company registers (CVR, ownership, management)</h3>
+                <p class="what">Owners, board members and CEOs of limited companies, with personal identifiers for Danish residents. Used to link managers and owners to their families and careers.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>CVRNR</code></td><td>Firm.</td></tr>
+                    <tr><td><code>PNR</code></td><td>Owner / CEO / board member.</td></tr>
+                    <tr><td><code>ROLLE</code></td><td>Role (CEO, chair, board member, owner).</td></tr>
+                    <tr><td><code>EJERANDEL</code></td><td>Ownership share.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#bennedsen2007">Bennedsen (2007)</a></p>
+            </div>
+            <div class="register">
+                <h3>Patents and R&amp;D (external, linked by firm)</h3>
+                <p class="what">PATSTAT or DKPTO patent records and the R&amp;D survey (FUI), linked to CVRNR by name or by Statistics Denmark&#x27;s matching.</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Meaning</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>appln_id / publn_nr</code></td><td>Patent application and publication identifiers.</td></tr>
+                    <tr><td><code>IPC / CPC</code></td><td>Technology class.</td></tr>
+                    <tr><td><code>FUI: FOUUDG</code></td><td>In-house R&amp;D expenditure.</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>Used by:</strong> <a href="index.html#lentz2008">Lentz (2008)</a></p>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="bridge">
+        <div class="container">
+            <h2 class="section-title">Linking the two</h2>
+            <div class="register">
+                <table>
+                    <thead><tr><th>You have</th><th>You want</th><th>Go through</th></tr></thead>
+                    <tbody>
+                        <tr><td>A worker (<code>PNR</code>)</td><td>Their employer's accounts</td><td>IDAN or FIDA gives <code>CVRNR</code> for the November job; BFL gives it monthly. Then join FIRM/FIRE on <code>CVRNR</code> and year.</td></tr>
+                        <tr><td>A firm (<code>CVRNR</code>)</td><td>All its workers and their wages</td><td>FIDA or IDAN filtered on <code>CVRNR</code> gives the <code>PNR</code> set. Join IND for annual earnings or BFL for monthly wages and hours.</td></tr>
+                        <tr><td>A firm</td><td>Its CEO's or owner's family</td><td>Company registers give the CEO's <code>PNR</code>; BEF gives parents, spouse and children.</td></tr>
+                        <tr><td>A worker</td><td>Co-workers at the same establishment</td><td>IDAN on <code>ARBNR</code> and year, not <code>CVRNR</code>, since a firm can have many workplaces.</td></tr>
+                        <tr><td>A worker's job history</td><td>Firm-level trade exposure</td><td>Job spells from IDAN/BFL joined to UHDI on <code>CVRNR</code> and year, as in Hummels et al. (2014).</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>Maintained by <a href="https://zhurt0.github.io/rentianzhu/">Rentian Zhu</a>, Copenhagen Business School. Summaries are my own reading of each paper. Corrections and additions are welcome as pull requests on <a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a>.</p>
+        </div>
+    </footer>
+</body>
+</html>
