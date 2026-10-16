@@ -21,6 +21,8 @@ GROUPS = [
     ("aej", "American Economic Journals", "American Economic Journal: Applied Economics, Economic Policy and Macroeconomics."),
     ("restat", "Review of Economics and Statistics", ""),
     ("ej", "Economic Journal", ""),
+    ("jole", "Journal of Labor Economics", "The leading field journal in labour economics."),
+    ("jpube", "Journal of Public Economics", "The leading field journal in public economics."),
 ]
 
 THEMES = [
@@ -139,7 +141,7 @@ def build_index():
     out += f"""    <section class="section intro">
         <div class="container">
             <h2 class="section-title">Why this page</h2>
-            <p>Denmark links every resident, firm, hospital visit, tax return and job to a single identifier, and lets researchers work with the whole population from the 1980s onwards. This page is a reading list of the economics that has come out of that infrastructure in the top general-interest journals: what question each paper asks, what it finds, and which registers it is built from.</p>
+            <p>Denmark links every resident, firm, hospital visit, tax return and job to a single identifier, and lets researchers work with the whole population from the 1980s onwards. This page is a reading list of the economics that has come out of that infrastructure in the top general-interest journals and in the two leading field journals for labour and public economics: what question each paper asks, what it finds, and which registers it is built from.</p>
             <p>The list covers {len(PAPERS)} papers. It was assembled by searching Crossref for every article in these journals whose title or abstract mentions Denmark or Danish data, and by going through the publication lists of the main Danish research groups and authors, then checking each paper. It excludes <em>AEA Papers and Proceedings</em>, finance journals and papers that only use Danish data as one country among many. It will still miss papers whose abstracts do not name the country, so additions are welcome. The <a href="themes.html">Themes</a> page regroups the same papers by topic, and the <a href="variables.html">Variable map</a> lists the registers and variables they rely on, at the individual and the firm level. If a paper is missing or a summary is wrong, open an issue or a pull request on GitHub.</p>
             <ul class="counts">
 {"".join(f'                <li><a href="#{g}">{e(n)}</a><span>{counts[g]}</span></li>' + chr(10) for g, n, _ in GROUPS)}            </ul>

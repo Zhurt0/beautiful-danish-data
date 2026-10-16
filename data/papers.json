@@ -2242,5 +2242,790 @@
       "School and neighbourhood identifiers"
     ],
     "level": "individual"
+  },
+  {
+    "id": "christensen2005",
+    "authors": "Bent Jesper Christensen, Rasmus Lentz, Dale T. Mortensen, George R. Neumann and Axel Werwatz",
+    "year": 2005,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "On-the-Job Search and the Wage Distribution",
+    "summary": "Estimates an on-the-job search model on the Danish Integrated Database for Labour Market Research, splitting each firm's separation rate into an exogenous part and a job-to-job part that falls with the firm's wage. Workers search less intensely the higher their wage, and the estimated model accounts for the gap between the distribution of wages earned and the distribution of wage offers.",
+    "themes": [
+      "labor"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA)",
+      "Job spells and separations"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "damm2009",
+    "authors": "Anna Piil Damm",
+    "year": 2009,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Ethnic Enclaves and Immigrant Labor Market Outcomes: Quasi-Experimental Evidence",
+    "summary": "Uses the quasi-random dispersal of refugees across Danish municipalities between 1986 and 1998 to separate the effect of living in an ethnic enclave from self-selection. Larger enclaves raise refugee men's annual earnings without changing their employment rates, and the gains are larger where more co-nationals are employed, pointing to job information networks.",
+    "themes": [
+      "migration",
+      "labor"
+    ],
+    "data": [
+      "Refugee placement records",
+      "Income and employment registers (IND, IDA)",
+      "Population register with origin (BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "dahl2013",
+    "authors": "Christian M. Dahl, Daniel le Maire and Jakob R. Munch",
+    "year": 2013,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Wage Dispersion and Decentralization of Wage Bargaining",
+    "summary": "Exploits the shift in Denmark during the 1990s from centralised to firm-level wage bargaining. Workers covered by firm-level bargaining earn a wage premium, returns to skills are higher, and wage dispersion is greater than under sector-level bargaining.",
+    "themes": [
+      "labor",
+      "inequality"
+    ],
+    "data": [
+      "Matched employer-employee data with bargaining regime (IDA)",
+      "Wage statistics register (lønstatistik)"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "bruze2015",
+    "authors": "Gustaf Bruze, Michael Svarer and Yoram Weiss",
+    "year": 2015,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "The Dynamics of Marriage and Divorce",
+    "summary": "Estimates a dynamic model of marriage, divorce and remarriage with learning about match quality on long register histories of Danish cohorts. Spousal education is complementary in generating marital surplus, education stabilises marriages, education raises men's share of the surplus, and divorce costs are high both early and late in a marriage.",
+    "themes": [
+      "family",
+      "gender",
+      "education"
+    ],
+    "data": [
+      "Marital histories from the population register (BEF)",
+      "Education registers (UDDA)",
+      "Income registers (IND)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "bingley2017",
+    "authors": "Paul Bingley and Alessandro Martinello",
+    "year": 2017,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Measurement Error in Income and Schooling and the Bias of Linear Estimators",
+    "summary": "Links survey reports of income and schooling for Danish respondents to the same variables in the registers. Measurement errors in survey income and schooling are correlated and non-classical, so standard corrections fail, and the paper quantifies the resulting bias in linear estimators such as returns to schooling.",
+    "themes": [
+      "methods",
+      "education"
+    ],
+    "data": [
+      "Survey responses linked on PNR",
+      "Income registers (IND)",
+      "Education registers (UDDA)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "gautier2018",
+    "authors": "Pieter Gautier, Paul Muller, Bas van der Klaauw, Michael Rosholm and Michael Svarer",
+    "year": 2018,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Estimating Equilibrium Effects of Job Search Assistance",
+    "summary": "A randomised activation experiment in two Danish counties helped treated job seekers find work faster, but untreated job seekers in the same counties found work more slowly than in comparison counties. An equilibrium search model fitted to the data shows that these displacement effects make a large-scale rollout far less beneficial than the partial estimates suggest.",
+    "themes": [
+      "labor"
+    ],
+    "data": [
+      "Experimental assignment records",
+      "Unemployment spells and benefits (DREAM)",
+      "Employment registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "breining2020",
+    "authors": "Sanni Breining, Joseph Doyle, David N. Figlio, Krzysztof Karbownik and Jeffrey Roth",
+    "year": 2020,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Birth Order and Delinquency: Evidence from Denmark and Florida",
+    "summary": "In both Denmark and Florida, second-born boys are substantially more likely than their first-born brothers to be disciplined in school and to enter the criminal justice system. The evidence points to reduced parental time investment for later-born children, rather than differences in health at birth or neighbourhood, as the mechanism.",
+    "themes": [
+      "crime",
+      "children",
+      "family"
+    ],
+    "data": [
+      "Crime registers",
+      "School and education registers",
+      "Family links and birth order (BEF, MFR)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "bingley2020",
+    "authors": "Paul Bingley, Petter Lundborg and Stéphanie Vincent Lyk-Jensen",
+    "year": 2020,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "The Opportunity Costs of Mandatory Military Service: Evidence from a Draft Lottery",
+    "summary": "Uses the Danish draft lottery to estimate the effect of conscription on later outcomes. Military service delays education and labour market entry, and the paper quantifies the resulting losses in schooling and earnings for those who serve.",
+    "themes": [
+      "labor",
+      "education"
+    ],
+    "data": [
+      "Draft lottery records",
+      "Education registers (UDDA)",
+      "Income and employment registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "brenoe2020",
+    "authors": "Anne Ardila Brenøe and Ulf Zölitz",
+    "year": 2020,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Exposure to More Female Peers Widens the Gender Gap in STEM Participation",
+    "summary": "Exploits idiosyncratic variation in the share of female peers across cohorts within Danish high schools. A higher share of female peers lowers women's probability of enrolling in and graduating from STEM programmes and raises men's, widening the gender gap in STEM.",
+    "themes": [
+      "education",
+      "gender"
+    ],
+    "data": [
+      "High school cohort and class registers",
+      "Education registers (UDDA)",
+      "Parental background (BEF, IND)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "labanca2022",
+    "authors": "Claudio Labanca and Dario Pozzoli",
+    "year": 2022,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Constraints on Hours within the Firm",
+    "summary": "Uses Danish linked employer-employee data with hours and tax-rate variation from the 2010 Danish tax reform. Employees in firms with tight constraints on working hours do not adjust their hours when their taxes change, while employees in more flexible firms respond both directly and through spillovers from their coworkers.",
+    "themes": [
+      "labor",
+      "taxation",
+      "firms"
+    ],
+    "data": [
+      "Monthly payroll records with hours (BFL)",
+      "Matched employer-employee data (IDA)",
+      "Income tax records"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "vonessen2023",
+    "authors": "Emma von Essen and Nina Smith",
+    "year": 2023,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Network Connections and Board Seats: Are Female Networks Less Valuable?",
+    "summary": "Uses Danish employer-employee data from 1995 to 2011 to study how professional networks affect first appointments to supervisory boards. Larger networks raise the chance of a board seat, more so for men, because men's networks connect them more often to larger and listed firms and to other men.",
+    "themes": [
+      "gender",
+      "labor",
+      "firms"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA) for network construction",
+      "Board membership from company registers"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "hansen2024jole",
+    "authors": "Anne Toft Hansen, Ulrik Hvidman and Hans Henrik Sievertsen",
+    "year": 2024,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Grades and Employer Learning",
+    "summary": "Uses a nationwide rescaling of Danish university grades to identify the return to GPA that is unrelated to ability. A reform-induced higher GPA raises earnings right after graduation, especially for graduates with fewer other signals, but the effect fades within a few years, consistent with employers learning quickly about productivity.",
+    "themes": [
+      "education",
+      "labor"
+    ],
+    "data": [
+      "University grade records",
+      "Education registers (UDDA)",
+      "Earnings registers (IND, BFL)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "fluchtmann2024jole",
+    "authors": "Jonas Fluchtmann, Anita M. Glenny, Nikolaj A. Harmon and Jonas Maibom",
+    "year": 2024,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Unemployed Job Search across People and over Time: Evidence from Applied-For Jobs",
+    "summary": "Uses the logs of job applications made by Danish unemployment insurance recipients to document how the jobs people apply for differ across job seekers and change over an unemployment spell, and what these patterns imply for models of directed search.",
+    "themes": [
+      "labor"
+    ],
+    "data": [
+      "Job application logs from the public employment service (Jobnet)",
+      "Unemployment insurance records (DREAM)",
+      "Prior job characteristics (IDA, BFL)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "brenoe2024",
+    "authors": "Anne Ardila Brenøe, Serena Canaan, Nikolaj A. Harmon and Heather N. Royer",
+    "year": 2024,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Is Parental Leave Costly for Firms and Coworkers?",
+    "summary": "Compares small Danish firms where a female employee is about to give birth with similar firms without an impending birth. There is little evidence of negative effects on firm output or coworkers: most firms cover the absence by hiring temporary workers and raising other employees' hours, and only firms unable to reallocate work show losses.",
+    "themes": [
+      "gender",
+      "firms",
+      "family"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA, BFL)",
+      "Birth records (BEF, MFR)",
+      "Firm accounts (FIRE)"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "foged2024jole",
+    "authors": "Mette Foged, Linea Hasager and Giovanni Peri",
+    "year": 2024,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Comparing the Effects of Policies for the Labor Market Integration of Refugees",
+    "summary": "Uses quasi-experimental variation from several Danish reforms to compare, in a common framework, the long-run employment and earnings effects of language training, active labour market programmes and benefit cuts for refugees, and ranks the policies by their effects and costs.",
+    "themes": [
+      "migration",
+      "labor"
+    ],
+    "data": [
+      "Residence permit dates",
+      "Integration programme records",
+      "Income, employment and benefit registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "arendt2025",
+    "authors": "Jacob Nielsen Arendt, Christian Dustmann and Hyejin Ku",
+    "year": 2025,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Permanent Residency and Refugee Immigrants' Skill Investment",
+    "summary": "A Danish reform tightened the employment and language requirements refugees must meet to obtain permanent residency. Rather than encouraging investment, it lowered overall employment and barely moved language proficiency, because refugees with weak pre-reform prospects reduced effort when the requirements looked out of reach.",
+    "themes": [
+      "migration",
+      "labor",
+      "education"
+    ],
+    "data": [
+      "Residence permit and permanent residency records",
+      "Danish language test records",
+      "Employment and earnings registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "eshaghnia2025",
+    "authors": "Sadegh Eshaghnia, James J. Heckman and Rasmus Landersø",
+    "year": 2025,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "The Impact of the Level and Timing of Parental Resources on Child Development and Intergenerational Mobility",
+    "summary": "Uses Danish registers covering parents' full income histories to separate the level of parents' lifetime resources from their timing during childhood. Lifetime resources matter far more than when income arrives, and conventional intergenerational elasticities based on short income windows give a misleading picture of mobility.",
+    "themes": [
+      "children",
+      "inequality"
+    ],
+    "data": [
+      "Parental income histories (IND)",
+      "Child education and earnings registers",
+      "Family links (BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "heinesen2026",
+    "authors": "Eskil Heinesen, Christian Hvid, Lars Kirkebøen, Edwin Leuven and Magne Mogstad",
+    "year": 2026,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Instrumental Variables with Unordered Treatments: Theory and Evidence from Returns to Fields of Study",
+    "summary": "Shows that the assumptions needed to identify returns to unordered treatments, such as fields of study, have testable implications, and characterises the bias when they fail. Using admission cut-offs and applicants' ranked choices in Denmark and Norway, payoffs to fields are strongly correlated across the two countries once fields violating the assumptions are dropped.",
+    "themes": [
+      "education",
+      "methods"
+    ],
+    "data": [
+      "University application and admission records (KOT)",
+      "Education registers (UDDA)",
+      "Earnings registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "frederiksen2026",
+    "authors": "Anders Frederiksen, Takao Kato and Nina Smith",
+    "year": 2026,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Working Hours, Top Management Appointments, and Gender: Evidence from Linked Employer-Employee Data",
+    "summary": "Links the Danish Labour Force Survey's detailed hours to register career histories. Long hours, hours relative to peers and nonstandard hours raise the odds of a top management appointment within the firm, and the gender gap in hours, driven mainly by supply-side factors, is a major contributor to the gender gap in reaching top management.",
+    "themes": [
+      "gender",
+      "labor"
+    ],
+    "data": [
+      "Danish Labour Force Survey linked on PNR",
+      "Matched employer-employee data with occupations (IDA)"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "almar2026",
+    "authors": "Frederik Almar, Benjamin Friedrich, Ana Reynoso, Bastian Schulz and Rune Vejlin",
+    "year": 2026,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Educational Ambition, Marital Sorting, and Inequality",
+    "summary": "Classifies detailed Danish education programmes into ambition types by their graduates' starting wages and wage growth. Assortative matching by educational ambition has risen sharply even though sorting by conventional education levels looks flat, and the marriage market accounts for more than 40 percent of the rise in household income inequality since 1980.",
+    "themes": [
+      "family",
+      "inequality",
+      "education"
+    ],
+    "data": [
+      "Education registers by detailed programme (UDDA)",
+      "Couple links (BEF)",
+      "Income registers (IND)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "svarer2005",
+    "authors": "Michael Svarer, Michael Rosholm and Jakob Roland Munch",
+    "year": 2005,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Rent Control and Unemployment Duration",
+    "summary": "Uses Danish register data on unemployment spells and housing to study whether living in rent-controlled housing affects job finding. Unemployed workers in rent-controlled dwellings have lower exit rates from unemployment, consistent with rent control reducing geographic mobility.",
+    "themes": [
+      "housing",
+      "labor"
+    ],
+    "data": [
+      "Unemployment spells (IDA, DREAM)",
+      "Housing and address registers (BBR, BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "bingley2007",
+    "authors": "Paul Bingley and Gauthier Lanot",
+    "year": 2007,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Public Pension Programmes and the Retirement of Married Couples in Denmark",
+    "summary": "Estimates a dynamic discrete choice model of couples' joint retirement and saving on a 1 percent register sample of Danish couples, using the introduction and reforms of the early retirement programme (efterløn) for identification. Retirement responds asymmetrically for men and women to their own and their spouse's income flows.",
+    "themes": [
+      "labor",
+      "family",
+      "taxation"
+    ],
+    "data": [
+      "1 percent sample of the population registers",
+      "Early retirement benefit records",
+      "Income and wealth registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "graversen2008",
+    "authors": "Brian Krogh Graversen and Jan C. van Ours",
+    "year": 2008,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "How to Help Unemployed Find Jobs Quickly: Experimental Evidence from a Mandatory Activation Program",
+    "summary": "A randomised experiment in two Danish counties assigned newly unemployed workers to an intensive activation programme with early job search courses, frequent meetings and mandatory activation. Treated workers found jobs substantially faster, with the threat of mandatory activation an important part of the effect.",
+    "themes": [
+      "labor"
+    ],
+    "data": [
+      "Experimental assignment records",
+      "Unemployment spells and benefits (DREAM)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "dattagupta2010",
+    "authors": "Nabanita Datta Gupta and Marianne Simonsen",
+    "year": 2010,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Non-cognitive Child Outcomes and Universal High Quality Child Care",
+    "summary": "Links the Danish Longitudinal Survey of Children to the registers to compare non-cognitive outcomes at age seven for children in universal preschool, family day care and home care at age three. Attending high-quality preschool does not harm non-cognitive outcomes relative to home care, while long hours in family day care are associated with worse outcomes for some groups.",
+    "themes": [
+      "children",
+      "education"
+    ],
+    "data": [
+      "Danish Longitudinal Survey of Children linked on PNR",
+      "Childcare enrolment records",
+      "Parental income and education registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "lemaire2013",
+    "authors": "Daniel le Maire and Bertel Schjerning",
+    "year": 2013,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Tax Bunching, Income Shifting and Self-Employment",
+    "summary": "Self-employed Danes bunch sharply at the top tax kink, but much of the bunching reflects intertemporal shifting of income through retained earnings in the business rather than real changes in effort. Accounting for shifting implies a much smaller elasticity of real income.",
+    "themes": [
+      "taxation",
+      "firms"
+    ],
+    "data": [
+      "Income tax records of the self-employed",
+      "Business tax scheme records (retained earnings)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "kreiner2015",
+    "authors": "Claus Thustrup Kreiner, Jakob Roland Munch and Hans Jørgen Whitta-Jacobsen",
+    "year": 2015,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Taxation and the Long Run Allocation of Labor: Theory and Danish Evidence",
+    "summary": "Estimates a search model with non-linear taxation, in which workers keep looking for better-paid jobs, on employer-employee register data for all Danish workers and workplaces in 2004 to 2006. Danish taxes reduce total income by about 12 percent through the allocation of labour across jobs, and moving to low-tax OECD levels would recover four fifths of the loss.",
+    "themes": [
+      "taxation",
+      "labor"
+    ],
+    "data": [
+      "Matched employer-employee data for the full population (IDA)",
+      "Income tax records"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "joensen2018",
+    "authors": "Juanna Schrøter Joensen and Helena Skyt Nielsen",
+    "year": 2018,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Spillovers in Education Choice",
+    "summary": "Exploits the Danish high school pilot that made advanced mathematics cheaper to take for some cohorts. An older sibling's advanced maths choice raises the probability that the younger sibling also chooses advanced maths, with spillovers that depend on the siblings' gender composition.",
+    "themes": [
+      "education",
+      "family",
+      "children"
+    ],
+    "data": [
+      "High school course registers",
+      "Sibling links (BEF)",
+      "Education registers (UDDA)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "rossinslater2018",
+    "authors": "Maya Rossin-Slater and Miriam Wüst",
+    "year": 2018,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Parental Responses to Child Support Obligations: Evidence from Administrative Data",
+    "summary": "Uses discontinuities in the Danish child support schedule by fathers' income to estimate how higher obligations affect separated parents. The paper documents responses in fathers' income, subsequent family formation and the parents' living arrangements.",
+    "themes": [
+      "family",
+      "children",
+      "labor"
+    ],
+    "data": [
+      "Child support records",
+      "Income registers (IND)",
+      "Family and address registers (BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "fadlon2019jpube",
+    "authors": "Itzik Fadlon and Torben Heien Nielsen",
+    "year": 2019,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Household Labor Supply and the Gains from Social Insurance",
+    "summary": "Shows how the labour supply response of surviving spouses after a partner's death can serve as a sufficient statistic for the welfare value of survivors' insurance, and implements it with Danish administrative records on spousal deaths, earnings and transfers.",
+    "themes": [
+      "family",
+      "labor",
+      "household-finance"
+    ],
+    "data": [
+      "Death register",
+      "Income and transfer registers",
+      "Family links (BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "sogaard2019",
+    "authors": "Jakob Egholt Søgaard",
+    "year": 2019,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Labor Supply and Optimization Frictions: Evidence from the Danish Student Labor Market",
+    "summary": "Danish students lose part of their study grant when annual earnings exceed a threshold. Register data show bunching below the threshold that grows as students gain experience with the rule, so optimisation frictions hide a structural elasticity well above the observed response.",
+    "themes": [
+      "taxation",
+      "labor",
+      "education"
+    ],
+    "data": [
+      "Student grant records (SU)",
+      "Income registers (IND)",
+      "Education enrolment registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "daysal2021jpube",
+    "authors": "N. Meltem Daysal, Michael Lovenheim, Nikolaj Siersbæk and David N. Wasser",
+    "year": 2021,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Home Prices, Fertility, and Early-Life Health Outcomes",
+    "summary": "For Danish homeowners aged 20 to 44, a 100,000 kroner rise in home prices raises the probability of giving birth by about 2.35 percent. Birth outcomes improve too, but mostly because of who gives birth, and there is no effect on children's health in the first five years.",
+    "themes": [
+      "housing",
+      "family",
+      "health",
+      "children"
+    ],
+    "data": [
+      "Property registers and house prices",
+      "Medical Birth Register (MFR)",
+      "National Patient Register",
+      "Population register (BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "simonsen2021jpube",
+    "authors": "Marianne Simonsen, Lars Skipper, Niels Skipper and Anne Illemann Christensen",
+    "year": 2021,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Spot Price Biases in Non-Linear Health Insurance Contracts",
+    "summary": "The Danish prescription drug reimbursement scheme has coverage that rises with annual spending and resets each year. Consumers look forward-looking around the reset but react too strongly to current prices within the year, and liquidity constraints rather than plan literacy or cognitive decline explain the spot-price bias.",
+    "themes": [
+      "health",
+      "household-finance"
+    ],
+    "data": [
+      "Prescription register with reimbursement (LMDB)",
+      "Income and wealth registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "jakobsen2022jpube",
+    "authors": "Katrine Jakobsen and Jakob Egholt Søgaard",
+    "year": 2022,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Identifying Behavioral Responses to Tax Reforms: New Insights and a New Approach",
+    "summary": "Shows that standard estimates of taxable income elasticities from tax reforms are biased by mean reversion and diverging income trends across the distribution, and proposes an approach that exploits reform timing to separate behavioural responses from these trends, applied to Danish tax reforms.",
+    "themes": [
+      "taxation",
+      "methods"
+    ],
+    "data": [
+      "Full-population income tax records",
+      "Tax schedule parameters by year"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "foged2023jpube",
+    "authors": "Mette Foged, Linea Hasager, Giovanni Peri, Jacob Nielsen Arendt and Iben Bolvig",
+    "year": 2023,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Intergenerational Spillover Effects of Language Training for Refugees",
+    "summary": "Follows the children of refugees affected by the 1999 Danish reform that improved language training. Children of treated parents achieve better educational outcomes, showing that the integration gains from language training carry over to the next generation.",
+    "themes": [
+      "migration",
+      "children",
+      "education"
+    ],
+    "data": [
+      "Residence permit dates",
+      "Parent–child links (BEF)",
+      "School and education registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "cairo2023",
+    "authors": "Sofie Cairo and Robert Mahlstedt",
+    "year": 2023,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "The Disparate Effects of Information Provision: A Field Experiment on the Work Incentives of Social Welfare",
+    "summary": "A field experiment in Denmark informed welfare recipients about a minimum work requirement, either with personalised running counts of their hours or with generic rules. Personalised information raised employment among those below the required hours, while generic notices reduced labour supply among those at low near-term risk of sanctions.",
+    "themes": [
+      "labor",
+      "taxation"
+    ],
+    "data": [
+      "Experimental assignment records",
+      "Monthly payroll hours (BFL)",
+      "Social assistance records"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "sigaard2023",
+    "authors": "Hans Schytte Sigaard",
+    "year": 2023,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Estimating Labor Supply Responses to Danish Tax Reforms",
+    "summary": "Applies taxable income elasticity methods to register data on hours actually worked. The intensive-margin labour supply elasticity is about 0.08, close to the labour income and taxable income elasticities, and it comes from changes in contract hours, paid absence and switches between main and secondary jobs.",
+    "themes": [
+      "taxation",
+      "labor"
+    ],
+    "data": [
+      "Monthly payroll records with hours (BFL)",
+      "Income tax records"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "garciamiralles2024jpube",
+    "authors": "Esteban García-Miralles and Jonathan M. Leganza",
+    "year": 2024,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Joint Retirement of Couples: Evidence from Discontinuities in Denmark",
+    "summary": "Uses age discontinuities in eligibility for Danish early retirement and public pensions to show that when one spouse becomes eligible and retires, the other spouse is substantially more likely to retire as well, quantifying spillovers that matter for evaluating retirement reforms.",
+    "themes": [
+      "labor",
+      "family"
+    ],
+    "data": [
+      "Pension and early retirement records",
+      "Employment registers",
+      "Couple links (BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "jensen2024jpube",
+    "authors": "Mathias Fjællegaard Jensen and Jack Blundell",
+    "year": 2024,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Income Effects and Labour Supply: Evidence from a Child Benefits Reform",
+    "summary": "A 2011 Danish cap on child benefits cut payments to families with several young children and left smaller families unaffected. Mothers' labour supply rises substantially after the cut, mainly on the extensive margin, and sterilisation records are used to control for differences in preferences for more children.",
+    "themes": [
+      "family",
+      "labor",
+      "gender"
+    ],
+    "data": [
+      "Child benefit records",
+      "Employment and hours (BFL)",
+      "Sterilisation records from the patient register"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "hasager2024",
+    "authors": "Linea Hasager",
+    "year": 2024,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Does Granting Refugee Status to Family-Reunified Women Improve Their Integration?",
+    "summary": "Women who enter Denmark through family reunification usually hold permits that depend on staying married. Granting them independent refugee status improves their economic integration, raises divorce rates and lowers the risk of violence against them, consistent with reduced residency uncertainty and greater bargaining power.",
+    "themes": [
+      "migration",
+      "gender",
+      "family"
+    ],
+    "data": [
+      "Residence permit and asylum records",
+      "Employment and income registers",
+      "Victimisation records from crime registers",
+      "Marital status (BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "jorgensen2024",
+    "authors": "Thomas Høgholm Jørgensen and Jakob Egholt Søgaard",
+    "year": 2024,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "The Division of Parental Leave: Empirical Evidence and Policy Design",
+    "summary": "Uses sharp incentives in the Danish parental leave benefit system for about 190,000 births to estimate parents' willingness to pay for leave. Parents bunch at kinks and are willing to pay for a traditional split with little leave for fathers, and simulations show that earmarked leave works much better when combined with high replacement rates.",
+    "themes": [
+      "gender",
+      "family",
+      "taxation"
+    ],
+    "data": [
+      "Parental leave benefit records",
+      "Birth records (BEF)",
+      "Income registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "hasager2026",
+    "authors": "Linea Hasager and Mia Jørgensen",
+    "year": 2026,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "Sick of Your Poor Neighborhood? Quasi-Experimental Evidence on Neighborhood Effects on Health",
+    "summary": "Uses the quasi-random dispersal of refugees across Danish neighbourhoods from 1986 to 1998. Refugees placed in low-income neighbourhoods had a 12 percent higher risk of developing a lifestyle-related disease 8 to 15 years later, driven by neighbours and the local environment rather than health care access, ethnic networks or labour market outcomes.",
+    "themes": [
+      "health",
+      "migration",
+      "inequality"
+    ],
+    "data": [
+      "Refugee placement records",
+      "National Patient Register and prescriptions",
+      "Neighbourhood income from registers"
+    ],
+    "level": "individual"
   }
 ]

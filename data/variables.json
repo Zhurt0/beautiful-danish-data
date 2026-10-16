@@ -63,7 +63,19 @@
         "jensen2026aer",
         "bingley2021",
         "dustmann2023ej",
-        "black2021"
+        "black2021",
+        "damm2009",
+        "bruze2015",
+        "breining2020",
+        "joensen2018",
+        "rossinslater2018",
+        "fadlon2019jpube",
+        "hasager2024",
+        "jorgensen2024",
+        "almar2026",
+        "eshaghnia2025",
+        "foged2023jpube",
+        "jensen2024jpube"
       ]
     },
     {
@@ -126,7 +138,17 @@
         "bruze2024",
         "bingley2013",
         "joensen2016",
-        "jensen2026aer"
+        "jensen2026aer",
+        "damm2009",
+        "bruze2015",
+        "bingley2017",
+        "eshaghnia2025",
+        "almar2026",
+        "sogaard2019",
+        "lemaire2013",
+        "jakobsen2022jpube",
+        "kreiner2015",
+        "simonsen2021jpube"
       ]
     },
     {
@@ -176,7 +198,9 @@
         "andersen2022",
         "bruze2024",
         "jakobsen2026",
-        "akcigit2024"
+        "akcigit2024",
+        "bingley2007",
+        "simonsen2021jpube"
       ]
     },
     {
@@ -239,7 +263,15 @@
         "clark2009",
         "stoyanov2012",
         "ejrnaes2013",
-        "hummels2025"
+        "hummels2025",
+        "christensen2005",
+        "dahl2013",
+        "labanca2022",
+        "vonessen2023",
+        "brenoe2024",
+        "frederiksen2026",
+        "kreiner2015",
+        "svarer2005"
       ]
     },
     {
@@ -287,7 +319,14 @@
         "kleven2025",
         "fluchtmann2024",
         "altmann2026",
-        "hummels2025"
+        "hummels2025",
+        "labanca2022",
+        "sigaard2023",
+        "cairo2023",
+        "jensen2024jpube",
+        "brenoe2024",
+        "hansen2024jole",
+        "fluchtmann2024jole"
       ]
     },
     {
@@ -313,7 +352,12 @@
         "geerdsen2006",
         "fluchtmann2024",
         "altmann2026",
-        "ejrnaes2013"
+        "ejrnaes2013",
+        "gautier2018",
+        "graversen2008",
+        "svarer2005",
+        "fluchtmann2024jole",
+        "foged2024jole"
       ]
     },
     {
@@ -351,7 +395,17 @@
         "joensen2016",
         "frederiksen2018",
         "lundborg2024",
-        "houmark2025ej"
+        "houmark2025ej",
+        "bruze2015",
+        "bingley2017",
+        "bingley2020",
+        "brenoe2020",
+        "hansen2024jole",
+        "heinesen2026",
+        "almar2026",
+        "joensen2018",
+        "foged2023jpube",
+        "arendt2025"
       ]
     },
     {
@@ -389,7 +443,10 @@
         "serena2025",
         "hummels2025",
         "simonsen2025",
-        "black2021"
+        "black2021",
+        "daysal2021jpube",
+        "hasager2026",
+        "jensen2024jpube"
       ]
     },
     {
@@ -415,7 +472,9 @@
         "hansen2025",
         "serena2025",
         "simonsen2025",
-        "jensen2026aer"
+        "jensen2026aer",
+        "simonsen2021jpube",
+        "hasager2026"
       ]
     },
     {
@@ -442,7 +501,10 @@
         "altindag2024",
         "lundborg2017",
         "lundborg2024",
-        "keller2022"
+        "keller2022",
+        "daysal2021jpube",
+        "breining2020",
+        "brenoe2024"
       ]
     },
     {
@@ -466,7 +528,8 @@
         "altindag2024",
         "hjort2017",
         "kristiansen2025",
-        "jensen2026aer"
+        "jensen2026aer",
+        "fadlon2019jpube"
       ]
     },
     {
@@ -499,7 +562,9 @@
         "dustmann2024app",
         "jensen2025",
         "andersen2026app",
-        "dustmann2023ej"
+        "dustmann2023ej",
+        "breining2020",
+        "hasager2024"
       ]
     },
     {
@@ -522,7 +587,10 @@
         "munch2006",
         "bjerrenielsen2024",
         "bingley2021",
-        "dustmann2023ej"
+        "dustmann2023ej",
+        "damm2009",
+        "hasager2026",
+        "svarer2005"
       ]
     }
   ],
@@ -586,7 +654,8 @@
         "friedrich2022",
         "he2025",
         "hummels2025",
-        "degiorgi2019"
+        "degiorgi2019",
+        "brenoe2024"
       ]
     },
     {
@@ -627,7 +696,14 @@
         "olney2021",
         "friedrich2022",
         "he2025",
-        "stoyanov2012"
+        "stoyanov2012",
+        "christensen2005",
+        "dahl2013",
+        "labanca2022",
+        "vonessen2023",
+        "brenoe2024",
+        "frederiksen2026",
+        "kreiner2015"
       ]
     },
     {
@@ -714,7 +790,8 @@
       "used_by": [
         "bennedsen2007",
         "he2025",
-        "jakobsen2026"
+        "jakobsen2026",
+        "vonessen2023"
       ]
     },
     {
