@@ -77,7 +77,22 @@ nav li a:hover, nav li a.active { color: var(--accent-color); border-bottom-colo
 .paper .meta { font-size: 0.92rem; color: var(--muted); margin-bottom: 8px; }
 .paper .level { border: 1px solid var(--border-color); border-radius: 3px; padding: 0 6px; font-size: 0.8rem; }
 .paper .summary { margin-bottom: 8px; max-width: 76ch; }
-.paper .data { font-size: 0.92rem; color: var(--secondary-color); margin-bottom: 6px; }
+.facts { font-size: 0.9rem; color: var(--secondary-color); margin: 0 0 8px; display: grid; gap: 3px; max-width: 76ch; }
+.facts > div { display: grid; grid-template-columns: 7.5em 1fr; gap: 10px; }
+.facts dt { font-weight: 700; color: var(--primary-color); }
+.facts dd ul { list-style: none; }
+.facts dd li::before { content: "\2013\00a0"; color: var(--muted); }
+.facts .desc { color: var(--muted); }
+.facts .src { font-size: 0.82rem; white-space: nowrap; }
+.na { color: var(--muted); font-style: italic; }
+.filter { width: 100%; max-width: 420px; padding: 8px 10px; font: inherit; font-size: 0.95rem; border: 1px solid var(--border-color); border-radius: 3px; margin-bottom: 14px; background: var(--background-color); color: var(--text-color); }
+.table-wrap { overflow-x: auto; }
+table.sortable th { cursor: pointer; white-space: nowrap; }
+table.sortable th::after { content: " \2195"; color: var(--muted); font-weight: 400; }
+table.sortable td { font-size: 0.88rem; }
+table.sortable td:first-child { white-space: normal; min-width: 14em; }
+table.sortable .t { color: var(--muted); font-size: 0.82rem; }
+table.sortable td.d { min-width: 16em; color: var(--secondary-color); }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag { font-size: 0.8rem; background: var(--section-bg); border: 1px solid var(--border-color); border-radius: 3px; padding: 1px 8px; color: var(--secondary-color); }
 .tag:hover { border-color: var(--accent-color); color: var(--accent-color); }
@@ -95,6 +110,7 @@ td:first-child { white-space: nowrap; }
 footer { border-top: 1px solid var(--border-color); padding: 24px 0 40px; margin-top: 20px; font-size: 0.9rem; color: var(--secondary-color); text-align: center; }
 
 @media (max-width: 600px) {
+    .facts > div { grid-template-columns: 1fr; gap: 0; }
     header h1 { font-size: 1.9rem; }
     nav li a { padding: 10px 12px; }
     td:first-child { white-space: normal; }

@@ -4,6 +4,7 @@
 Run `python3 build.py` after editing data/papers.json or data/variables.json.
 """
 import html
+import re
 import json
 import urllib.parse
 from pathlib import Path
@@ -83,7 +84,7 @@ def head(title, description, canonical):
 
 
 def nav(active):
-    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("variables.html", "Variable map")]
+    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("variables.html", "Variable map")]
     lis = ""
     for href, label in items:
         cls = ' class="active"' if href == active else ""
@@ -113,19 +114,47 @@ FOOTER = f"""    <footer>
 """
 
 
+NOT_FOUND = "Not stated in the sources checked"
+
+
+def short_cite(p):
+    first = p["authors"].split(",")[0].split(" and ")[0].split()[-1]
+    n = len([a for a in re.split(r",| and ", p["authors"]) if a.strip()])
+    return f"{first}{' et al.' if n > 2 else (' and ' + p['authors'].split(' and ')[-1].split()[-1] if n == 2 else '')} ({p['year']})"
+
+
+def facts(p):
+    rows = []
+    rows.append(("Data", ", ".join(e(d) for d in p["data"])))
+    if p.get("variables"):
+        rows.append(("Key variables", "<ul>" + "".join(f"<li>{e(v)}</li>" for v in p["variables"]) + "</ul>"))
+    rows.append(("Period", e(p["period"]) if p.get("period") else f'<span class="na">{NOT_FOUND}</span>'))
+    if p.get("sample_size"):
+        size = f'<strong>{e(p["sample_size"])}</strong>'
+    else:
+        size = f'<span class="na">{NOT_FOUND}</span>'
+    desc = f' <span class="desc">{e(p["sample"])}</span>' if p.get("sample") else ""
+    src = ""
+    if p.get("sample_source"):
+        tag = " (abstract)" if p.get("sample_confidence") == "abstract" else ""
+        src = f' <a class="src" href="{e(p["sample_source"])}" target="_blank" rel="noopener">source{tag}</a>'
+    rows.append(("Sample", size + desc + src))
+    return '                    <dl class="facts">\n' + "".join(
+        f'                        <div><dt>{k}</dt><dd>{v}</dd></div>\n' for k, v in rows
+    ) + "                    </dl>\n"
+
+
 def paper_card(p, show_themes=True):
     themes = ""
     if show_themes:
         themes = '<p class="tags">' + " ".join(
             f'<a class="tag" href="themes.html#{t}">{e(THEME_NAME[t])}</a>' for t in p["themes"]
         ) + "</p>"
-    data = ", ".join(e(d) for d in p["data"])
     return f"""                <article class="paper" id="{p['id']}">
                     <h4><a href="{scholar(p['title'])}" target="_blank" rel="noopener">{e(p['title'])}</a></h4>
                     <p class="meta">{e(p['authors'])} &middot; <em>{e(p['journal'])}</em>, {p['year']} &middot; <span class="level">{LEVEL_LABEL[p['level']]}</span></p>
                     <p class="summary">{e(p['summary'])}</p>
-                    <p class="data"><strong>Data:</strong> {data}</p>
-{themes}
+{facts(p)}{themes}
                 </article>
 """
 
@@ -142,7 +171,7 @@ def build_index():
         <div class="container">
             <h2 class="section-title">Why this page</h2>
             <p>Denmark links every resident, firm, hospital visit, tax return and job to a single identifier, and lets researchers work with the whole population from the 1980s onwards. This page is a reading list of the economics that has come out of that infrastructure in the top general-interest journals and in the two leading field journals for labour and public economics: what question each paper asks, what it finds, and which registers it is built from.</p>
-            <p>The list covers {len(PAPERS)} papers. It was assembled by searching Crossref for every article in these journals whose title or abstract mentions Denmark or Danish data, and by going through the publication lists of the main Danish research groups and authors, then checking each paper. It excludes <em>AEA Papers and Proceedings</em>, finance journals and papers that only use Danish data as one country among many. It will still miss papers whose abstracts do not name the country, so additions are welcome. The <a href="themes.html">Themes</a> page regroups the same papers by topic, and the <a href="variables.html">Variable map</a> lists the registers and variables they rely on, at the individual and the firm level. If a paper is missing or a summary is wrong, open an issue or a pull request on GitHub.</p>
+            <p>The list covers {len(PAPERS)} papers. It was assembled by searching Crossref for every article in these journals whose title or abstract mentions Denmark or Danish data, and by going through the publication lists of the main Danish research groups and authors, then checking each paper. It excludes <em>AEA Papers and Proceedings</em>, finance journals and papers that only use Danish data as one country among many. It will still miss papers whose abstracts do not name the country, so additions are welcome. Each paper lists its datasets, key variables, data period and sample size, and the <a href="samples.html">Data &amp; samples</a> page puts these in one sortable table. The <a href="themes.html">Themes</a> page regroups the same papers by topic, and the <a href="variables.html">Variable map</a> lists the registers and variables they rely on, at the individual and the firm level. If a paper is missing or a summary is wrong, open an issue or a pull request on GitHub.</p>
             <ul class="counts">
 {"".join(f'                <li><a href="#{g}">{e(n)}</a><span>{counts[g]}</span></li>' + chr(10) for g, n, _ in GROUPS)}            </ul>
         </div>
@@ -283,8 +312,84 @@ def build_variables():
     return out
 
 
+def build_samples():
+    out = head(
+        "Data & samples | Beautiful Danish Data",
+        "Sample periods, sample sizes and datasets of every paper in Beautiful Danish Data, in one sortable table.",
+        "samples.html",
+    )
+    out += nav("samples.html")
+    known = sum(1 for p in PAPERS if p.get("sample_size"))
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">Data &amp; samples</h2>
+            <p>Every paper in one table: the years its data cover, the size of its main estimation sample and the registers it draws on. Click a column header to sort, or type to filter. Sample sizes are copied from each paper or its working-paper version; the source link on the paper's card says where. Where neither the paper nor its abstract states a figure, the cell is left blank rather than estimated.</p>
+            <p class="note">{known} of {len(PAPERS)} papers have a stated sample size. Sample sizes are not comparable across papers: some count people, others person-years, firms or jobs.</p>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <input id="filter" class="filter" type="search" placeholder="Filter by author, title, register or journal" aria-label="Filter table">
+            <div class="table-wrap">
+            <table id="samples" class="sortable">
+                <thead><tr><th data-k="cite">Paper</th><th data-k="journal">Journal</th><th data-k="period">Period</th><th data-k="size">Sample size</th><th data-k="level">Level</th><th data-k="data">Data</th></tr></thead>
+                <tbody>
+"""
+    for p in sorted(PAPERS, key=lambda p: (-p["year"], p["authors"])):
+        size = e(p["sample_size"]) if p.get("sample_size") else '<span class="na">&ndash;</span>'
+        period = e(p["period"]) if p.get("period") else '<span class="na">&ndash;</span>'
+        out += (f'                    <tr><td><a href="index.html#{p["id"]}">{e(short_cite(p))}</a><br><span class="t">{e(p["title"])}</span></td>'
+                f'<td>{e(p["journal"])}</td><td>{period}</td><td>{size}</td><td>{LEVEL_LABEL[p["level"]]}</td>'
+                f'<td class="d">{", ".join(e(d) for d in p["data"])}</td></tr>\n')
+    out += """                </tbody>
+            </table>
+            </div>
+        </div>
+    </section>
+    <script>
+    (function () {
+        var table = document.getElementById('samples');
+        var body = table.tBodies[0];
+        var rows = Array.prototype.slice.call(body.rows);
+        var dir = {};
+        function key(row, i) {
+            var t = row.cells[i].innerText.trim();
+            if (i === 2) { var m = t.match(/\\d{4}/); return m ? +m[0] : 9999; }
+            if (i === 3) {
+                var x = t.replace(/,/g, '').match(/([\\d.]+)\\s*(million|billion)?/i);
+                if (!x) return -1;
+                var v = parseFloat(x[1]);
+                if (x[2]) v *= /billion/i.test(x[2]) ? 1e9 : 1e6;
+                return v;
+            }
+            return t.toLowerCase();
+        }
+        Array.prototype.forEach.call(table.tHead.rows[0].cells, function (th, i) {
+            th.addEventListener('click', function () {
+                dir[i] = !dir[i];
+                rows.sort(function (a, b) {
+                    var ka = key(a, i), kb = key(b, i);
+                    if (ka < kb) return dir[i] ? -1 : 1;
+                    if (ka > kb) return dir[i] ? 1 : -1;
+                    return 0;
+                });
+                rows.forEach(function (r) { body.appendChild(r); });
+            });
+        });
+        document.getElementById('filter').addEventListener('input', function () {
+            var q = this.value.toLowerCase();
+            rows.forEach(function (r) { r.style.display = r.innerText.toLowerCase().indexOf(q) === -1 ? 'none' : ''; });
+        });
+    })();
+    </script>
+"""
+    out += FOOTER
+    return out
+
+
 if __name__ == "__main__":
     (ROOT / "index.html").write_text(build_index())
     (ROOT / "themes.html").write_text(build_themes())
     (ROOT / "variables.html").write_text(build_variables())
-    print(f"built 3 pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers")
+    (ROOT / "samples.html").write_text(build_samples())
+    print(f"built 4 pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers")
