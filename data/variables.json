@@ -57,7 +57,13 @@
         "jensen2025",
         "kleven2021",
         "daysal2026",
-        "heinesen2009"
+        "heinesen2009",
+        "lundborg2017",
+        "keller2022",
+        "jensen2026aer",
+        "bingley2021",
+        "dustmann2023ej",
+        "black2021"
       ]
     },
     {
@@ -114,7 +120,13 @@
         "dahl2024",
         "taubinsky2026",
         "foged2024",
-        "caplin2026"
+        "caplin2026",
+        "degiorgi2019",
+        "crawley2023",
+        "bruze2024",
+        "bingley2013",
+        "joensen2016",
+        "jensen2026aer"
       ]
     },
     {
@@ -158,7 +170,13 @@
         "johannesen2026",
         "gruber2021",
         "garciamiralles2024",
-        "browning2013"
+        "browning2013",
+        "degiorgi2019",
+        "crawley2023",
+        "andersen2022",
+        "bruze2024",
+        "jakobsen2026",
+        "akcigit2024"
       ]
     },
     {
@@ -211,7 +229,17 @@
         "utar2018",
         "friedrich2021",
         "albaek1998",
-        "sander2026"
+        "sander2026",
+        "degiorgi2019",
+        "keller2022",
+        "olney2021",
+        "friedrich2022",
+        "he2025",
+        "frederiksen2018",
+        "clark2009",
+        "stoyanov2012",
+        "ejrnaes2013",
+        "hummels2025"
       ]
     },
     {
@@ -256,7 +284,10 @@
       "used_by": [
         "kreiner2016",
         "kreiner2020restat",
-        "kleven2025"
+        "kleven2025",
+        "fluchtmann2024",
+        "altmann2026",
+        "hummels2025"
       ]
     },
     {
@@ -279,7 +310,10 @@
         "agersnap2020",
         "andersen2023",
         "dustmann2024app",
-        "geerdsen2006"
+        "geerdsen2006",
+        "fluchtmann2024",
+        "altmann2026",
+        "ejrnaes2013"
       ]
     },
     {
@@ -312,7 +346,12 @@
         "humlum2025",
         "bagger2020",
         "rossinslater2020",
-        "foged2024"
+        "foged2024",
+        "akcigit2024",
+        "joensen2016",
+        "frederiksen2018",
+        "lundborg2024",
+        "houmark2025ej"
       ]
     },
     {
@@ -345,7 +384,12 @@
         "friedrich2021",
         "humlum2025",
         "daysal2025",
-        "kristiansen2025"
+        "kristiansen2025",
+        "andersen2026app",
+        "serena2025",
+        "hummels2025",
+        "simonsen2025",
+        "black2021"
       ]
     },
     {
@@ -368,7 +412,10 @@
       "used_by": [
         "fadlon2019",
         "fadlon2026",
-        "hansen2025"
+        "hansen2025",
+        "serena2025",
+        "simonsen2025",
+        "jensen2026aer"
       ]
     },
     {
@@ -392,7 +439,10 @@
         "daysal2022",
         "houmark2024",
         "daysal2026",
-        "altindag2024"
+        "altindag2024",
+        "lundborg2017",
+        "lundborg2024",
+        "keller2022"
       ]
     },
     {
@@ -415,7 +465,8 @@
         "fadlon2026",
         "altindag2024",
         "hjort2017",
-        "kristiansen2025"
+        "kristiansen2025",
+        "jensen2026aer"
       ]
     },
     {
@@ -446,7 +497,9 @@
         "anker2021",
         "dustmann2021",
         "dustmann2024app",
-        "jensen2025"
+        "jensen2025",
+        "andersen2026app",
+        "dustmann2023ej"
       ]
     },
     {
@@ -466,7 +519,10 @@
         "damm2014",
         "dustmann2019",
         "foged2016",
-        "munch2006"
+        "munch2006",
+        "bjerrenielsen2024",
+        "bingley2021",
+        "dustmann2023ej"
       ]
     }
   ],
@@ -524,7 +580,13 @@
         "utar2014",
         "renkin2024",
         "buus2025",
-        "andersen2026"
+        "andersen2026",
+        "munch2018",
+        "stoyanov2012",
+        "friedrich2022",
+        "he2025",
+        "hummels2025",
+        "degiorgi2019"
       ]
     },
     {
@@ -559,7 +621,13 @@
         "taber2020",
         "utar2014",
         "utar2018",
-        "chetty2011"
+        "chetty2011",
+        "degiorgi2019",
+        "keller2022",
+        "olney2021",
+        "friedrich2022",
+        "he2025",
+        "stoyanov2012"
       ]
     },
     {
@@ -593,7 +661,12 @@
         "utar2014",
         "utar2018",
         "buus2025",
-        "renkin2024"
+        "renkin2024",
+        "munch2018",
+        "keller2022",
+        "olney2021",
+        "friedrich2022",
+        "hummels2025"
       ]
     },
     {
@@ -639,7 +712,9 @@
         ]
       ],
       "used_by": [
-        "bennedsen2007"
+        "bennedsen2007",
+        "he2025",
+        "jakobsen2026"
       ]
     },
     {
@@ -660,7 +735,8 @@
         ]
       ],
       "used_by": [
-        "lentz2008"
+        "lentz2008",
+        "akcigit2024"
       ]
     }
   ]
