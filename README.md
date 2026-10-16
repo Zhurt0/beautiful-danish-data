@@ -4,12 +4,13 @@ A field guide to economics published with Danish administrative register data.
 
 Live site: https://zhurt0.github.io/beautiful-danish-data/
 
-Four pages:
+Five pages:
 
 1. **Summary** (`index.html`): one-paragraph summaries of papers in the Top 5 journals, the *American Economic Journals* (Applied and Policy), the *Review of Economics and Statistics*, the *Economic Journal*, the *Journal of Labor Economics* and the *Journal of Public Economics* that are built on Danish registers, grouped by journal.
 2. **Themes** (`themes.html`): the same papers regrouped by topic (taxation, household finance, labour, trade, family, health, migration, crime, children, inequality).
 3. **Data & samples** (`samples.html`): one sortable table with each paper's data period, sample size, level and datasets.
-4. **Variable map** (`variables.html`): the Statistics Denmark registers and variables behind those papers, at the individual level and at the firm level, with a short guide to linking the two sides.
+4. **3D data landscape** (`landscape.html`): an interactive 3D chart with years and registers on the floor and every paper floating above it as one line per register over its data period.
+5. **Variable map** (`variables.html`): the Statistics Denmark registers and variables behind those papers, at the individual level and at the firm level, with a short guide to linking the two sides.
 
 ## Editing
 

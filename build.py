@@ -84,7 +84,7 @@ def head(title, description, canonical):
 
 
 def nav(active):
-    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("variables.html", "Variable map")]
+    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("landscape.html", "3D data landscape"), ("variables.html", "Variable map")]
     lis = ""
     for href, label in items:
         cls = ' class="active"' if href == active else ""
@@ -338,9 +338,10 @@ def build_samples():
     for p in sorted(PAPERS, key=lambda p: (-p["year"], p["authors"])):
         size = e(p["sample_size"]) if p.get("sample_size") else '<span class="na">&ndash;</span>'
         period = e(p["period"]) if p.get("period") else '<span class="na">&ndash;</span>'
-        out += (f'                    <tr><td><a href="index.html#{p["id"]}">{e(short_cite(p))}</a><br><span class="t">{e(p["title"])}</span></td>'
-                f'<td>{e(p["journal"])}</td><td>{period}</td><td>{size}</td><td>{LEVEL_LABEL[p["level"]]}</td>'
-                f'<td class="d">{", ".join(e(d) for d in p["data"])}</td></tr>\n')
+        dl = "<ul>" + "".join(f"<li>{e(d)}</li>" for d in p["data"]) + "</ul>"
+        out += (f'                    <tr><td data-label="Paper"><a href="index.html#{p["id"]}">{e(short_cite(p))}</a><br><span class="t">{e(p["title"])}</span></td>'
+                f'<td data-label="Journal">{e(p["journal"])}</td><td data-label="Period">{period}</td><td data-label="Sample size">{size}</td><td data-label="Level">{LEVEL_LABEL[p["level"]]}</td>'
+                f'<td class="d" data-label="Data">{dl}</td></tr>\n')
     out += """                </tbody>
             </table>
             </div>
@@ -387,9 +388,156 @@ def build_samples():
     return out
 
 
+REG_SHORT = {
+    "BEF — Population register": "Population (BEF)",
+    "IND — Income register": "Income (IND)",
+    "FORM — Wealth register": "Wealth (FORM)",
+    "IDA / IDAN / IDAP — Integrated labour market database": "Labour market (IDA)",
+    "AKM — Labour market classification": "Labour status (AKM/RAS)",
+    "BFL / eIndkomst — Monthly payroll": "Monthly payroll (BFL)",
+    "DREAM — Public transfers (weekly)": "Transfers (DREAM)",
+    "UDDA — Education register": "Education (UDDA)",
+    "LPR — National Patient Register": "Hospital (LPR)",
+    "LMDB — Prescription register": "Prescriptions (LMDB)",
+    "MFR — Medical Birth Register": "Births (MFR)",
+    "DOD — Death register": "Deaths (DOD)",
+    "KRAF / KRSI — Crime registers": "Crime (KRAF/KRSI)",
+    "VNDS / Residence histories": "Migration and addresses",
+    "FIRM / FIRE — Firm statistics and Accounts Statistics": "Firm accounts (FIRM/FIRE)",
+    "FIDA — Firm–employee link": "Firm–worker link (FIDA)",
+    "UHDI / UHDM — Foreign trade by firm": "Foreign trade (UHDI)",
+    "VNDS / Moms — VAT-based turnover": "VAT turnover",
+    "Company registers (CVR, ownership, management)": "Company registers (CVR)",
+    "Patents and R&D (external, linked by firm)": "Patents and R&D",
+}
+TIERS = [("Top 5 and AER: Insights", {"top5", "aeri"}),
+         ("AEJ, ReStat and Economic Journal", {"aej", "restat", "ej"}),
+         ("JOLE and JPubE", {"jole", "jpube"})]
+
+
+def landscape_data():
+    regs = [REG_SHORT.get(r["register"], r["register"]) for r in VARS["individual"] + VARS["firm"]] + ["Other data only"]
+    uses = {}
+    for r in VARS["individual"] + VARS["firm"]:
+        for pid in r["used_by"]:
+            uses.setdefault(pid, []).append(REG_SHORT.get(r["register"], r["register"]))
+    rows, skipped = [], []
+    for p in PAPERS:
+        yrs = [int(y) for y in re.findall(r"(?<!\d)(19[0-9]{2}|20[0-2][0-9])(?!\d)", p.get("period") or "")]
+        yrs = [y for y in yrs if 1900 <= y <= 2026]
+        if not yrs:
+            skipped.append(p["id"]); continue
+        tier = next(i for i, (_, g) in enumerate(TIERS) if p["group"] in g)
+        rows.append(dict(id=p["id"], cite=short_cite(p), title=p["title"], journal=p["journal"],
+                         period=p["period"], size=p.get("sample_size") or "not stated",
+                         a=min(yrs), b=max(yrs), regs=uses.get(p["id"]) or ["Other data only"], tier=tier))
+    rows.sort(key=lambda r: (r["a"], r["b"], r["cite"]))
+    for i, r in enumerate(rows):
+        r["z"] = i + 1
+    return regs, rows, skipped
+
+
+def build_landscape():
+    regs, rows, skipped = landscape_data()
+    out = head(
+        "3D data landscape | Beautiful Danish Data",
+        "A 3D view of which Danish registers each paper uses and which years its data cover, with papers stacked above a year-by-register base.",
+        "landscape.html",
+    )
+    out += nav("landscape.html")
+    payload = json.dumps(dict(regs=regs, rows=rows, tiers=[t for t, _ in TIERS]), ensure_ascii=False)
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">3D data landscape</h2>
+            <p>The floor of the chart is a grid of years by registers, shaded by how many papers use each register in each year. Every paper floats above it as a layer: one line per register it uses, running from the first to the last year of its data. Papers are stacked by the year their data start, so the oldest data sit at the bottom.</p>
+            <p class="note">Drag to rotate, scroll to zoom, hover a line for the paper, click it to open the paper's entry. Click a legend item to hide a journal tier. {len(rows)} of {len(PAPERS)} papers are shown; {len(skipped)} are left out because their data period is not stated. The <a href="samples.html">Data &amp; samples</a> table lists the same information as text.</p>
+        </div>
+    </section>
+    <section class="section viz-section">
+        <div class="container">
+            <div id="landscape" class="viz" role="img" aria-label="3D chart of papers by data period and register"></div>
+        </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.35.3/plotly.min.js"></script>
+    <script>
+    (function () {{
+        var D = {payload};
+        var SERIES = ['#2a78d6', '#eb6834', '#1baf7a'];
+        var RAMP = [[0, '#f4f8fd'], [0.15, '#cde2fb'], [0.35, '#86b6ef'], [0.6, '#3987e5'], [0.8, '#1c5cab'], [1, '#0d366b']];
+        var regIndex = {{}};
+        D.regs.forEach(function (r, i) {{ regIndex[r] = i; }});
+
+        var traces = D.tiers.map(function (name, t) {{
+            return {{ type: 'scatter3d', mode: 'lines', name: name, x: [], y: [], z: [], text: [], customdata: [],
+                     line: {{ color: SERIES[t], width: 5 }}, hovertemplate: '%{{text}}<extra></extra>' }};
+        }});
+        D.rows.forEach(function (r) {{
+            var tr = traces[r.tier];
+            var label = '<b>' + r.cite + '</b><br>' + r.title + '<br>' + r.journal +
+                        '<br>Period: ' + r.period + '<br>Sample: ' + r.size;
+            r.regs.forEach(function (reg) {{
+                var y = regIndex[reg];
+                for (var yr = r.a; yr <= r.b; yr++) {{
+                    tr.x.push(yr); tr.y.push(y); tr.z.push(r.z);
+                    tr.text.push(label + '<br>Register: ' + reg); tr.customdata.push(r.id);
+                }}
+                tr.x.push(null); tr.y.push(null); tr.z.push(null); tr.text.push(null); tr.customdata.push(null);
+            }});
+        }});
+
+        var y0 = 9999, y1 = 0;
+        D.rows.forEach(function (r) {{ y0 = Math.min(y0, r.a); y1 = Math.max(y1, r.b); }});
+        var years = []; for (var y = y0; y <= y1; y++) years.push(y);
+        var counts = D.regs.map(function () {{ return years.map(function () {{ return 0; }}); }});
+        D.rows.forEach(function (r) {{
+            r.regs.forEach(function (reg) {{
+                for (var yr = r.a; yr <= r.b; yr++) counts[regIndex[reg]][yr - y0] += 1;
+            }});
+        }});
+        var base = {{
+            type: 'surface', name: 'Papers per year and register', showlegend: false,
+            x: years, y: D.regs.map(function (_, i) {{ return i; }}),
+            z: D.regs.map(function () {{ return years.map(function () {{ return 0; }}); }}),
+            surfacecolor: counts, colorscale: RAMP, cmin: 0,
+            colorbar: {{ title: {{ text: 'Papers using<br>register that year', font: {{ size: 12 }} }}, thickness: 12, len: 0.55, x: 1.0, tickfont: {{ size: 11 }} }},
+            customdata: counts.map(function (row, i) {{ return row.map(function () {{ return D.regs[i]; }}); }}),
+            hovertemplate: '%{{customdata}}<br>%{{x}}: %{{surfacecolor}} papers<extra></extra>',
+            contours: {{ x: {{ show: false }}, y: {{ show: false }}, z: {{ show: false }} }}
+        }};
+
+        var axis = {{ gridcolor: '#e1e0d9', zerolinecolor: '#c3c2b7', linecolor: '#c3c2b7', tickfont: {{ color: '#52514e', size: 11 }},
+                     titlefont: {{ color: '#52514e' }}, backgroundcolor: '#fcfcfb', showbackground: true }};
+        var layout = {{
+            paper_bgcolor: '#fcfcfb', margin: {{ l: 0, r: 0, t: 30, b: 0 }},
+            font: {{ family: 'system-ui, -apple-system, "Segoe UI", sans-serif', color: '#0b0b0b' }},
+            legend: {{ orientation: 'h', x: 0, y: 1.02, font: {{ size: 13 }} }},
+            hoverlabel: {{ bgcolor: '#ffffff', bordercolor: '#c3c2b7', font: {{ color: '#0b0b0b', size: 12 }}, align: 'left' }},
+            scene: {{
+                xaxis: Object.assign({{ title: {{ text: 'Year' }} }}, axis),
+                yaxis: Object.assign({{ title: {{ text: '' }}, tickvals: D.regs.map(function (_, i) {{ return i; }}), ticktext: D.regs }}, axis),
+                zaxis: Object.assign({{ title: {{ text: 'Papers, stacked by first data year' }} }}, axis),
+                aspectmode: 'manual', aspectratio: {{ x: 1.6, y: 1.25, z: 0.9 }},
+                camera: {{ eye: {{ x: 2.05, y: -1.8, z: 0.8 }}, center: {{ x: 0, y: 0.05, z: -0.16 }} }}
+            }}
+        }};
+        var el = document.getElementById('landscape');
+        Plotly.newPlot(el, [base].concat(traces), layout, {{ responsive: true, displaylogo: false,
+            modeBarButtonsToRemove: ['toImage', 'resetCameraLastSave3d'] }});
+        el.on('plotly_click', function (ev) {{
+            var pt = ev.points && ev.points[0];
+            if (pt && pt.data.type === 'scatter3d' && pt.customdata) window.location.href = 'index.html#' + pt.customdata;
+        }});
+    }})();
+    </script>
+"""
+    out += FOOTER
+    return out
+
+
 if __name__ == "__main__":
     (ROOT / "index.html").write_text(build_index())
     (ROOT / "themes.html").write_text(build_themes())
     (ROOT / "variables.html").write_text(build_variables())
     (ROOT / "samples.html").write_text(build_samples())
-    print(f"built 4 pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers")
+    (ROOT / "landscape.html").write_text(build_landscape())
+    print(f"built 5 pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers")
