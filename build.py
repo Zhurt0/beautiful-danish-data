@@ -415,12 +415,29 @@ TIERS = [("Top 5 and AER: Insights", {"top5", "aeri"}),
          ("JOLE and JPubE", {"jole", "jpube"})]
 
 
+DOMAINS = [
+    ("Population and family", ["BEF — Population register", "VNDS / Residence histories"]),
+    ("Income and wealth", ["IND — Income register", "FORM — Wealth register"]),
+    ("Jobs and earnings", ["IDA / IDAN / IDAP — Integrated labour market database", "AKM — Labour market classification", "BFL / eIndkomst — Monthly payroll"]),
+    ("Public transfers", ["DREAM — Public transfers (weekly)"]),
+    ("Education", ["UDDA — Education register"]),
+    ("Health, births and deaths", ["LPR — National Patient Register", "LMDB — Prescription register", "MFR — Medical Birth Register", "DOD — Death register"]),
+    ("Crime", ["KRAF / KRSI — Crime registers"]),
+    ("Firms and trade", ["FIRM / FIRE — Firm statistics and Accounts Statistics", "FIDA — Firm–employee link", "UHDI / UHDM — Foreign trade by firm", "VNDS / Moms — VAT-based turnover", "Company registers (CVR, ownership, management)", "Patents and R&D (external, linked by firm)"]),
+    ("Surveys and other data only", []),
+]
+YEAR_FLOOR = 1975
+
+
 def landscape_data():
-    regs = [REG_SHORT.get(r["register"], r["register"]) for r in VARS["individual"] + VARS["firm"]] + ["Other data only"]
+    reg_to_dom = {reg: d for d, regs in DOMAINS for reg in regs}
+    doms = [d for d, _ in DOMAINS]
     uses = {}
     for r in VARS["individual"] + VARS["firm"]:
+        d = reg_to_dom.get(r["register"])
         for pid in r["used_by"]:
-            uses.setdefault(pid, []).append(REG_SHORT.get(r["register"], r["register"]))
+            if d and d not in uses.setdefault(pid, []):
+                uses[pid].append(d)
     rows, skipped = [], []
     for p in PAPERS:
         yrs = [int(y) for y in re.findall(r"(?<!\d)(19[0-9]{2}|20[0-2][0-9])(?!\d)", p.get("period") or "")]
@@ -428,34 +445,45 @@ def landscape_data():
         if not yrs:
             skipped.append(p["id"]); continue
         tier = next(i for i, (_, g) in enumerate(TIERS) if p["group"] in g)
+        ds = sorted(uses.get(p["id"]) or ["Surveys and other data only"], key=doms.index)
         rows.append(dict(id=p["id"], cite=short_cite(p), title=p["title"], journal=p["journal"],
                          period=p["period"], size=p.get("sample_size") or "not stated",
-                         a=min(yrs), b=max(yrs), regs=uses.get(p["id"]) or ["Other data only"], tier=tier))
+                         a=min(yrs), b=max(yrs), doms=ds, tier=tier))
     rows.sort(key=lambda r: (r["a"], r["b"], r["cite"]))
-    for i, r in enumerate(rows):
-        r["z"] = i + 1
-    return regs, rows, skipped
+    return doms, rows, skipped
 
 
 def build_landscape():
-    regs, rows, skipped = landscape_data()
+    doms, rows, skipped = landscape_data()
+    early = sum(1 for r in rows if r["a"] < YEAR_FLOOR)
     out = head(
         "3D data landscape | Beautiful Danish Data",
-        "A 3D view of which Danish registers each paper uses and which years its data cover, with papers stacked above a year-by-register base.",
+        "A 3D view of which kinds of Danish register data each paper uses and which years its data cover, with a flat year-by-domain view underneath.",
         "landscape.html",
     )
     out += nav("landscape.html")
-    payload = json.dumps(dict(regs=regs, rows=rows, tiers=[t for t, _ in TIERS]), ensure_ascii=False)
+    payload = json.dumps(dict(doms=doms, rows=rows, tiers=[t for t, _ in TIERS], floor=YEAR_FLOOR), ensure_ascii=False)
+    chips = "".join(f'<button type="button" class="chip on" data-d="{i}">{e(d)}</button>' for i, d in enumerate(doms))
     out += f"""    <section class="section intro">
         <div class="container">
             <h2 class="section-title">3D data landscape</h2>
-            <p>The floor of the chart is a grid of years by registers, shaded by how many papers use each register in each year. Every paper floats above it as a layer: one line per register it uses, running from the first to the last year of its data. Papers are stacked by the year their data start, so the oldest data sit at the bottom.</p>
-            <p class="note">Drag to rotate, scroll to zoom, hover a line for the paper, click it to open the paper's entry. Click a legend item to hide a journal tier. {len(rows)} of {len(PAPERS)} papers are shown; {len(skipped)} are left out because their data period is not stated. The <a href="samples.html">Data &amp; samples</a> table lists the same information as text.</p>
+            <p>The floor is a grid of <strong>years</strong> by <strong>data domain</strong>, shaded by how many papers use that kind of data in that year. Each paper floats above the floor at its own height, with one line for every domain it uses, running over the years its data cover. Papers are stacked by the year their data start.</p>
+            <p class="note">The 20 registers are grouped into 9 domains; the <a href="variables.html">Variable map</a> lists the registers in each. {len(rows)} of {len(PAPERS)} papers have a stated data period and are shown. The time axis starts in {YEAR_FLOOR}; {early} papers with older data are drawn from {YEAR_FLOOR}, and their hover text gives the true period.</p>
         </div>
     </section>
     <section class="section viz-section">
         <div class="container">
-            <div id="landscape" class="viz" role="img" aria-label="3D chart of papers by data period and register"></div>
+            <div class="controls">
+                <div class="ctl-row"><span class="ctl-label">Show papers using</span>{chips}<button type="button" class="chip ghost" id="all">All</button><button type="button" class="chip ghost" id="none">None</button></div>
+                <div class="ctl-row"><span class="ctl-label">View</span><button type="button" class="chip view on" data-v="tilt">Oblique</button><button type="button" class="chip view" data-v="top">From above</button><button type="button" class="chip view" data-v="side">From the side</button></div>
+            </div>
+            <div id="landscape" class="viz" role="img" aria-label="3D chart of papers by data period and data domain"></div>
+            <p class="viz-help">Drag to rotate, scroll to zoom. Hover a line to see the paper; click it to open its entry. Click a journal tier in the legend to hide it.</p>
+
+            <h3 class="sub-title">Flat view: papers per year and domain</h3>
+            <p class="blurb">The same floor as a plain grid. Click a cell to list the papers whose data cover that domain in that year.</p>
+            <div id="flat" class="viz flat" role="img" aria-label="Heatmap of the number of papers by year and data domain"></div>
+            <div id="cell-list" class="cell-list" aria-live="polite"></div>
         </div>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.35.3/plotly.min.js"></script>
@@ -463,69 +491,151 @@ def build_landscape():
     (function () {{
         var D = {payload};
         var SERIES = ['#2a78d6', '#eb6834', '#1baf7a'];
-        var RAMP = [[0, '#f4f8fd'], [0.15, '#cde2fb'], [0.35, '#86b6ef'], [0.6, '#3987e5'], [0.8, '#1c5cab'], [1, '#0d366b']];
-        var regIndex = {{}};
-        D.regs.forEach(function (r, i) {{ regIndex[r] = i; }});
-
-        var traces = D.tiers.map(function (name, t) {{
-            return {{ type: 'scatter3d', mode: 'lines', name: name, x: [], y: [], z: [], text: [], customdata: [],
-                     line: {{ color: SERIES[t], width: 5 }}, hovertemplate: '%{{text}}<extra></extra>' }};
-        }});
-        D.rows.forEach(function (r) {{
-            var tr = traces[r.tier];
-            var label = '<b>' + r.cite + '</b><br>' + r.title + '<br>' + r.journal +
-                        '<br>Period: ' + r.period + '<br>Sample: ' + r.size;
-            r.regs.forEach(function (reg) {{
-                var y = regIndex[reg];
-                for (var yr = r.a; yr <= r.b; yr++) {{
-                    tr.x.push(yr); tr.y.push(y); tr.z.push(r.z);
-                    tr.text.push(label + '<br>Register: ' + reg); tr.customdata.push(r.id);
-                }}
-                tr.x.push(null); tr.y.push(null); tr.z.push(null); tr.text.push(null); tr.customdata.push(null);
-            }});
-        }});
-
-        var y0 = 9999, y1 = 0;
-        D.rows.forEach(function (r) {{ y0 = Math.min(y0, r.a); y1 = Math.max(y1, r.b); }});
+        var RAMP = [[0, '#f4f8fd'], [0.0001, '#cde2fb'], [0.3, '#86b6ef'], [0.6, '#3987e5'], [0.85, '#1c5cab'], [1, '#0d366b']];
+        var FONT = {{ family: 'system-ui, -apple-system, "Segoe UI", sans-serif', color: '#0b0b0b' }};
+        var HOVER = {{ bgcolor: '#ffffff', bordercolor: '#c3c2b7', font: {{ color: '#0b0b0b', size: 12 }}, align: 'left' }};
+        var on = D.doms.map(function () {{ return true; }});
+        var y1 = 0; D.rows.forEach(function (r) {{ y1 = Math.max(y1, r.b); }});
+        var y0 = D.floor;
         var years = []; for (var y = y0; y <= y1; y++) years.push(y);
-        var counts = D.regs.map(function () {{ return years.map(function () {{ return 0; }}); }});
-        D.rows.forEach(function (r) {{
-            r.regs.forEach(function (reg) {{
-                for (var yr = r.a; yr <= r.b; yr++) counts[regIndex[reg]][yr - y0] += 1;
-            }});
-        }});
-        var base = {{
-            type: 'surface', name: 'Papers per year and register', showlegend: false,
-            x: years, y: D.regs.map(function (_, i) {{ return i; }}),
-            z: D.regs.map(function () {{ return years.map(function () {{ return 0; }}); }}),
-            surfacecolor: counts, colorscale: RAMP, cmin: 0,
-            colorbar: {{ title: {{ text: 'Papers using<br>register that year', font: {{ size: 12 }} }}, thickness: 12, len: 0.55, x: 1.0, tickfont: {{ size: 11 }} }},
-            customdata: counts.map(function (row, i) {{ return row.map(function () {{ return D.regs[i]; }}); }}),
-            hovertemplate: '%{{customdata}}<br>%{{x}}: %{{surfacecolor}} papers<extra></extra>',
-            contours: {{ x: {{ show: false }}, y: {{ show: false }}, z: {{ show: false }} }}
-        }};
 
-        var axis = {{ gridcolor: '#e1e0d9', zerolinecolor: '#c3c2b7', linecolor: '#c3c2b7', tickfont: {{ color: '#52514e', size: 11 }},
-                     titlefont: {{ color: '#52514e' }}, backgroundcolor: '#fcfcfb', showbackground: true }};
-        var layout = {{
-            paper_bgcolor: '#fcfcfb', margin: {{ l: 0, r: 0, t: 30, b: 0 }},
-            font: {{ family: 'system-ui, -apple-system, "Segoe UI", sans-serif', color: '#0b0b0b' }},
-            legend: {{ orientation: 'h', x: 0, y: 1.02, font: {{ size: 13 }} }},
-            hoverlabel: {{ bgcolor: '#ffffff', bordercolor: '#c3c2b7', font: {{ color: '#0b0b0b', size: 12 }}, align: 'left' }},
-            scene: {{
-                xaxis: Object.assign({{ title: {{ text: 'Year' }} }}, axis),
-                yaxis: Object.assign({{ title: {{ text: '' }}, tickvals: D.regs.map(function (_, i) {{ return i; }}), ticktext: D.regs }}, axis),
-                zaxis: Object.assign({{ title: {{ text: 'Papers, stacked by first data year' }} }}, axis),
-                aspectmode: 'manual', aspectratio: {{ x: 1.6, y: 1.25, z: 0.9 }},
-                camera: {{ eye: {{ x: 2.05, y: -1.8, z: 0.8 }}, center: {{ x: 0, y: 0.05, z: -0.16 }} }}
-            }}
+        function visibleRows() {{
+            return D.rows.filter(function (r) {{ return r.doms.some(function (d) {{ return on[D.doms.indexOf(d)]; }}); }});
+        }}
+        function counts(rows) {{
+            var c = D.doms.map(function () {{ return years.map(function () {{ return 0; }}); }});
+            rows.forEach(function (r) {{
+                r.doms.forEach(function (d) {{
+                    var i = D.doms.indexOf(d);
+                    for (var yr = Math.max(r.a, y0); yr <= r.b; yr++) c[i][yr - y0] += 1;
+                }});
+            }});
+            return c;
+        }}
+
+        function floorTrace(c) {{
+            // blocky floor: each cell is a flat tile with a small gap between domains
+            var xs = [], ys = [], zs = [], sc = [];
+            years.forEach(function (yr) {{ xs.push(yr - 0.5, yr + 0.5); }});
+            D.doms.forEach(function (_, i) {{ ys.push(i - 0.42, i + 0.42); }});
+            ys.forEach(function (_, j) {{
+                var di = Math.floor(j / 2), zr = [], sr = [];
+                xs.forEach(function (_, k) {{ zr.push(0); sr.push(c[di][Math.floor(k / 2)]); }});
+                zs.push(zr); sc.push(sr);
+            }});
+            return {{ type: 'surface', x: xs, y: ys, z: zs, surfacecolor: sc, colorscale: RAMP, cmin: 0, showlegend: false,
+                     colorbar: {{ title: {{ text: 'Papers', font: {{ size: 12 }} }}, thickness: 12, len: 0.5, x: 1.0, tickfont: {{ size: 11 }} }},
+                     hoverinfo: 'skip', lighting: {{ ambient: 1, diffuse: 0, specular: 0 }},
+                     contours: {{ x: {{ show: false }}, y: {{ show: false }}, z: {{ show: false }} }} }};
+        }}
+
+        function paperTraces(rows) {{
+            var tr = D.tiers.map(function (name, t) {{
+                return {{ type: 'scatter3d', mode: 'lines', name: name, x: [], y: [], z: [], text: [], customdata: [],
+                         line: {{ color: SERIES[t], width: 6 }}, hovertemplate: '%{{text}}<extra></extra>' }};
+            }});
+            rows.forEach(function (r, k) {{
+                var t = tr[r.tier], z = k + 1;
+                var label = '<b>' + r.cite + '</b><br>' + r.title + '<br>' + r.journal +
+                            '<br>Data period: ' + r.period + '<br>Sample: ' + r.size;
+                r.doms.forEach(function (d) {{
+                    if (!on[D.doms.indexOf(d)]) return;
+                    var yi = D.doms.indexOf(d);
+                    for (var yr = Math.max(r.a, y0); yr <= r.b; yr++) {{
+                        t.x.push(yr); t.y.push(yi); t.z.push(z); t.text.push(label + '<br>Domain: ' + d); t.customdata.push(r.id);
+                    }}
+                    t.x.push(null); t.y.push(null); t.z.push(null); t.text.push(null); t.customdata.push(null);
+                }});
+            }});
+            return tr;
+        }}
+
+        var CAMS = {{
+            tilt: {{ eye: {{ x: 1.25, y: -1.55, z: 1.05 }}, center: {{ x: 0, y: 0, z: -0.15 }}, up: {{ x: 0, y: 0, z: 1 }} }},
+            top:  {{ eye: {{ x: 0, y: -0.0001, z: 2.4 }}, center: {{ x: 0, y: 0, z: 0 }}, up: {{ x: 0, y: 1, z: 0 }} }},
+            side: {{ eye: {{ x: 0, y: -2.4, z: 0.05 }}, center: {{ x: 0, y: 0, z: 0 }}, up: {{ x: 0, y: 0, z: 1 }} }}
         }};
+        var view = 'tilt';
+        function axis(extra) {{
+            return Object.assign({{ gridcolor: '#e1e0d9', zerolinecolor: '#c3c2b7', linecolor: '#c3c2b7', showbackground: true,
+                backgroundcolor: '#fcfcfb', tickfont: {{ color: '#52514e', size: 11 }}, title: {{ font: {{ color: '#52514e', size: 12 }} }} }}, extra);
+        }}
+        function layout(n) {{
+            var cam = JSON.parse(JSON.stringify(CAMS[view])); cam.projection = {{ type: 'orthographic' }};
+            return {{
+                paper_bgcolor: '#fcfcfb', font: FONT, hoverlabel: HOVER, margin: {{ l: 0, r: 0, t: 36, b: 0 }},
+                legend: {{ orientation: 'h', x: 0, y: 1.04, font: {{ size: 13 }} }},
+                uirevision: view,
+                scene: {{
+                    xaxis: axis({{ title: {{ text: 'Year' }}, range: [y0 - 0.5, y1 + 0.5], dtick: 5 }}),
+                    yaxis: axis({{ title: {{ text: '' }}, tickvals: D.doms.map(function (_, i) {{ return i; }}), ticktext: D.doms, range: [-0.6, D.doms.length - 0.4] }}),
+                    zaxis: axis({{ title: {{ text: 'Papers (stacked by first data year)' }}, range: [0, Math.max(n, 1) + 2] }}),
+                    aspectmode: 'manual', aspectratio: {{ x: 1.7, y: 1.1, z: 1.15 }},
+                    camera: cam
+                }}
+            }};
+        }}
+
         var el = document.getElementById('landscape');
-        Plotly.newPlot(el, [base].concat(traces), layout, {{ responsive: true, displaylogo: false,
-            modeBarButtonsToRemove: ['toImage', 'resetCameraLastSave3d'] }});
+        function draw() {{
+            var rows = visibleRows();
+            Plotly.react(el, [floorTrace(counts(rows))].concat(paperTraces(rows)), layout(rows.length),
+                {{ responsive: true, displaylogo: false, modeBarButtonsToRemove: ['toImage', 'resetCameraLastSave3d'] }});
+            drawFlat(rows);
+        }}
+
+        var flat = document.getElementById('flat');
+        var list = document.getElementById('cell-list');
+        var flatRows = [];
+        function drawFlat(rows) {{
+            flatRows = rows;
+            var c = counts(rows);
+            Plotly.react(flat, [{{
+                type: 'heatmap', x: years, y: D.doms, z: c, colorscale: RAMP, zmin: 0, xgap: 1, ygap: 3,
+                colorbar: {{ title: {{ text: 'Papers', font: {{ size: 12 }} }}, thickness: 12, tickfont: {{ size: 11 }} }},
+                hovertemplate: '%{{y}}, %{{x}}: %{{z}} papers<extra></extra>'
+            }}], {{
+                paper_bgcolor: '#fcfcfb', plot_bgcolor: '#fcfcfb', font: FONT, hoverlabel: HOVER,
+                margin: {{ l: 190, r: 10, t: 10, b: 40 }},
+                xaxis: {{ dtick: 5, tickfont: {{ color: '#52514e', size: 11 }}, showgrid: false }},
+                yaxis: {{ autorange: 'reversed', tickfont: {{ color: '#52514e', size: 12 }}, showgrid: false }}
+            }}, {{ responsive: true, displayModeBar: false }});
+        }}
+        function esc(s) {{ return String(s).replace(/[&<>"]/g, function (ch) {{ return {{ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }}[ch]; }}); }}
+
+        draw();
         el.on('plotly_click', function (ev) {{
             var pt = ev.points && ev.points[0];
             if (pt && pt.data.type === 'scatter3d' && pt.customdata) window.location.href = 'index.html#' + pt.customdata;
+        }});
+        flat.on('plotly_click', function (ev) {{
+            var pt = ev.points && ev.points[0]; if (!pt) return;
+            var yr = pt.x, dom = pt.y;
+            var hits = flatRows.filter(function (r) {{ return r.doms.indexOf(dom) !== -1 && r.a <= yr && r.b >= yr; }});
+            list.innerHTML = '<h4>' + esc(dom) + ', ' + yr + ': ' + hits.length + ' papers</h4><ul>' + hits.map(function (r) {{
+                return '<li><span class="sw" style="background:' + SERIES[r.tier] + '"></span><a href="index.html#' + r.id + '">' + esc(r.cite) + '</a> ' + esc(r.title) +
+                       ' <span class="muted">(' + esc(r.period) + ')</span></li>';
+            }}).join('') + '</ul>';
+        }});
+
+        Array.prototype.forEach.call(document.querySelectorAll('.chip[data-d]'), function (b) {{
+            b.addEventListener('click', function () {{
+                var i = +b.getAttribute('data-d'); on[i] = !on[i]; b.classList.toggle('on', on[i]); draw();
+            }});
+        }});
+        function setAll(v) {{
+            on = on.map(function () {{ return v; }});
+            Array.prototype.forEach.call(document.querySelectorAll('.chip[data-d]'), function (b) {{ b.classList.toggle('on', v); }});
+            draw();
+        }}
+        document.getElementById('all').addEventListener('click', function () {{ setAll(true); }});
+        document.getElementById('none').addEventListener('click', function () {{ setAll(false); }});
+        Array.prototype.forEach.call(document.querySelectorAll('.chip.view'), function (b) {{
+            b.addEventListener('click', function () {{
+                view = b.getAttribute('data-v');
+                Array.prototype.forEach.call(document.querySelectorAll('.chip.view'), function (x) {{ x.classList.toggle('on', x === b); }});
+                draw();
+            }});
         }});
     }})();
     </script>
