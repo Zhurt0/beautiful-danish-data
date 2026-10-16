@@ -7,8 +7,15 @@
     "group": "top5",
     "title": "Active vs. Passive Decisions and Crowd-Out in Retirement Savings Accounts: Evidence from Denmark",
     "summary": "Uses the universe of Danish savings records to show that tax subsidies for retirement accounts mostly shift saving between accounts: each krone of subsidy raises total saving by about one øre. Automatic employer contributions, by contrast, raise total saving almost one for one, because roughly 85 percent of individuals are passive savers who do not re-optimise.",
-    "themes": ["household-finance", "taxation"],
-    "data": ["Income tax records with pension contributions", "Third-party reported wealth (assets and liabilities)", "Employer links (IDA)"],
+    "themes": [
+      "household-finance",
+      "taxation"
+    ],
+    "data": [
+      "Income tax records with pension contributions",
+      "Third-party reported wealth (assets and liabilities)",
+      "Employer links (IDA)"
+    ],
     "level": "individual"
   },
   {
@@ -19,8 +26,15 @@
     "group": "top5",
     "title": "Migration and Wage Effects of Taxing Top Earners: Evidence from the Foreigners' Tax Scheme in Denmark",
     "summary": "The 1991 preferential tax scheme for high-earning foreigners roughly doubled the number of highly paid foreigners in Denmark. The implied elasticity of migration with respect to the net-of-tax rate is above one, far larger than domestic labour supply elasticities, and the scheme generated modest wage spillovers.",
-    "themes": ["taxation", "migration"],
-    "data": ["Full-population income tax records", "Migration and residence histories (BEF)", "Employer links (IDA)"],
+    "themes": [
+      "taxation",
+      "migration"
+    ],
+    "data": [
+      "Full-population income tax records",
+      "Migration and residence histories (BEF)",
+      "Employer links (IDA)"
+    ],
     "level": "individual"
   },
   {
@@ -31,8 +45,15 @@
     "group": "top5",
     "title": "Wealth Taxation and Wealth Accumulation: Theory and Evidence from Denmark",
     "summary": "Exploits the 1989 Danish wealth tax reform, which cut rates sharply for the wealthy, to estimate long-run effects of wealth taxes on wealth accumulation. Responses are sizable for the very wealthy (top one percent) and small for the moderately wealthy, with effects that keep growing over a decade.",
-    "themes": ["taxation", "inequality", "household-finance"],
-    "data": ["Wealth tax records 1980–1996 (third-party reported assets and debt)", "Income tax records"],
+    "themes": [
+      "taxation",
+      "inequality",
+      "household-finance"
+    ],
+    "data": [
+      "Wealth tax records 1980–1996 (third-party reported assets and debt)",
+      "Income tax records"
+    ],
     "level": "individual"
   },
   {
@@ -43,8 +64,15 @@
     "group": "top5",
     "title": "Inside the Family Firm: The Role of Families in Succession Decisions and Performance",
     "summary": "Uses the gender of a departing CEO's first-born child as an instrument for family succession in Danish firms. Family CEOs hurt performance: operating profitability falls by at least four percentage points relative to firms that hire outside CEOs, with the largest costs in fast-growing industries and large firms.",
-    "themes": ["firms", "labor"],
-    "data": ["Firm accounts (Accounts Statistics, FIRE)", "CEO identity from company registers", "Family links from the population register (BEF)"],
+    "themes": [
+      "firms",
+      "labor"
+    ],
+    "data": [
+      "Firm accounts (Accounts Statistics, FIRE)",
+      "CEO identity from company registers",
+      "Family links from the population register (BEF)"
+    ],
     "level": "both"
   },
   {
@@ -55,8 +83,14 @@
     "group": "top5",
     "title": "Unwilling or Unable to Cheat? Evidence from a Tax Audit Experiment in Denmark",
     "summary": "A randomised field experiment with the Danish tax authority on about 40,000 taxpayers. Evasion is close to zero for third-party reported income but substantial for self-reported income, and audit threat letters raise reported self-reported income. Information, not morality, is what makes modern tax systems work.",
-    "themes": ["taxation"],
-    "data": ["Individual tax returns", "Audit outcomes from the SKAT experiment", "Third-party information reports"],
+    "themes": [
+      "taxation"
+    ],
+    "data": [
+      "Individual tax returns",
+      "Audit outcomes from the SKAT experiment",
+      "Third-party information reports"
+    ],
     "level": "individual"
   },
   {
@@ -67,8 +101,13 @@
     "group": "top5",
     "title": "An Empirical Model of Growth Through Product Innovation",
     "summary": "Estimates a Schumpeterian model of firm growth through product innovation on a Danish firm panel. Reallocation of labour from less to more innovative firms accounts for roughly half of aggregate productivity growth, with the remainder coming from innovation within firms.",
-    "themes": ["firms", "innovation"],
-    "data": ["Firm panel from the Accounts Statistics (value added, employment, capital) 1992–1997"],
+    "themes": [
+      "firms",
+      "innovation"
+    ],
+    "data": [
+      "Firm panel from the Accounts Statistics (value added, employment, capital) 1992–1997"
+    ],
     "level": "firm"
   },
   {
@@ -79,8 +118,13 @@
     "group": "top5",
     "title": "The Anatomy of Sorting: Evidence from Danish Data",
     "summary": "Estimates a flexible model of worker and firm heterogeneity in wages and job mobility on Danish matched employer-employee data. Workers and firms sort positively, with sorting operating through both wages and non-wage amenities, and worker heterogeneity accounts for the bulk of wage dispersion.",
-    "themes": ["labor"],
-    "data": ["Matched employer-employee data (IDA)", "Annual earnings and job spells"],
+    "themes": [
+      "labor"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA)",
+      "Annual earnings and job spells"
+    ],
     "level": "both"
   },
   {
@@ -91,8 +135,13 @@
     "group": "top5",
     "title": "Tenure, Experience, Human Capital, and Wages: A Tractable Equilibrium Search Model of Wage Dynamics",
     "summary": "Builds and estimates an equilibrium search model with on-the-job search and human capital accumulation using Danish career histories. Human capital accumulation drives most early-career wage growth, while job-to-job mobility and employer competition explain the later part of wage profiles.",
-    "themes": ["labor"],
-    "data": ["Matched employer-employee data (IDA) for male workers 1985–2003", "Job spells and hourly wages"],
+    "themes": [
+      "labor"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA) for male workers 1985–2003",
+      "Job spells and hourly wages"
+    ],
     "level": "both"
   },
   {
@@ -103,8 +152,13 @@
     "group": "top5",
     "title": "An Empirical Model of Wage Dispersion with Sorting",
     "summary": "Estimates an equilibrium search model with endogenous search intensity and two-sided heterogeneity on Danish matched data. Finds positive assortative matching between worker and firm productivity, and quantifies how much of wage dispersion is due to sorting versus search frictions.",
-    "themes": ["labor"],
-    "data": ["Matched employer-employee data (IDA)", "Firm accounts (value added per worker)"],
+    "themes": [
+      "labor"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA)",
+      "Firm accounts (value added per worker)"
+    ],
     "level": "both"
   },
   {
@@ -115,8 +169,16 @@
     "group": "top5",
     "title": "The Wage Effects of Offshoring: Evidence from Danish Matched Worker-Firm Data",
     "summary": "Links product-level firm imports and exports to worker wages. Offshoring raises wages of high-skilled workers and lowers wages of low-skilled workers within job spells, while exporting raises wages for all. Tasks that are routine or easily offshored lose the most.",
-    "themes": ["trade", "labor", "firms"],
-    "data": ["Matched employer-employee data (IDA) 1995–2006", "Firm-level foreign trade by product and country (UHDI)", "Firm accounts"],
+    "themes": [
+      "trade",
+      "labor",
+      "firms"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA) 1995–2006",
+      "Firm-level foreign trade by product and country (UHDI)",
+      "Firm accounts"
+    ],
     "level": "both"
   },
   {
@@ -127,8 +189,14 @@
     "group": "top5",
     "title": "Intertemporal Consumption and Credit Constraints: Does Total Expenditure Respond to an Exogenous Shock to Credit?",
     "summary": "The 1992 reform that let Danish homeowners borrow against housing equity provides an exogenous credit shock. Total expenditure responded only modestly on average, with the response concentrated among young households with little liquid wealth, which indicates that credit constraints bind for a minority.",
-    "themes": ["household-finance"],
-    "data": ["Income and wealth tax records", "Consumption imputed from income minus change in wealth", "Property values"],
+    "themes": [
+      "household-finance"
+    ],
+    "data": [
+      "Income and wealth tax records",
+      "Consumption imputed from income minus change in wealth",
+      "Property values"
+    ],
     "level": "individual"
   },
   {
@@ -139,8 +207,14 @@
     "group": "top5",
     "title": "The Consumption Effects of the 2007–2008 Financial Crisis: Evidence from Households in Denmark",
     "summary": "Customers of banks that were hit hard by the crisis cut consumption more than customers of healthier banks. The channel is reduced credit availability: exposed households borrowed less and spent less, which shows how bank distress transmits to the real economy through households.",
-    "themes": ["household-finance"],
-    "data": ["Customer-bank links from tax reports on accounts and loans", "Bank balance sheets", "Imputed consumption from income and wealth registers"],
+    "themes": [
+      "household-finance"
+    ],
+    "data": [
+      "Customer-bank links from tax reports on accounts and loans",
+      "Bank balance sheets",
+      "Imputed consumption from income and wealth registers"
+    ],
     "level": "individual"
   },
   {
@@ -151,8 +225,13 @@
     "group": "top5",
     "title": "Sources of Inaction in Household Finance: Evidence from the Danish Mortgage Market",
     "summary": "Many Danish households fail to refinance fixed-rate mortgages when it is clearly profitable. A model with inattention and psychological refinancing costs fits the data, and both frictions are stronger for households with less education, income and financial wealth.",
-    "themes": ["household-finance"],
-    "data": ["Loan-level mortgage data from Danish mortgage banks", "Income, wealth, education and demographics from registers"],
+    "themes": [
+      "household-finance"
+    ],
+    "data": [
+      "Loan-level mortgage data from Danish mortgage banks",
+      "Income, wealth, education and demographics from registers"
+    ],
     "level": "individual"
   },
   {
@@ -163,8 +242,15 @@
     "group": "top5",
     "title": "Tax Evasion and Inequality",
     "summary": "Matches leaked offshore account data (HSBC Switzerland, Panama Papers) and tax amnesty records to Scandinavian wealth registers. Tax evasion rises steeply with wealth: the top 0.01 percent evade about a quarter of their taxes, which materially raises measured top wealth shares.",
-    "themes": ["taxation", "inequality"],
-    "data": ["Danish, Norwegian and Swedish wealth and income tax records", "Leaked offshore account lists", "Tax amnesty disclosures"],
+    "themes": [
+      "taxation",
+      "inequality"
+    ],
+    "data": [
+      "Danish, Norwegian and Swedish wealth and income tax records",
+      "Leaked offshore account lists",
+      "Tax amnesty disclosures"
+    ],
     "level": "individual"
   },
   {
@@ -175,8 +261,16 @@
     "group": "top5",
     "title": "Family Health Behaviors",
     "summary": "A severe health shock to one family member, such as a heart attack or stroke, makes spouses and adult children raise their own preventive behaviour: more check-ups, more preventive medication and lifestyle changes. Responses are sharp, immediate and persistent, and they reflect updating about one's own risk.",
-    "themes": ["health", "family"],
-    "data": ["National Patient Register (diagnoses)", "Prescription register (LMDB)", "Family links (BEF)", "GP visit records"],
+    "themes": [
+      "health",
+      "family"
+    ],
+    "data": [
+      "National Patient Register (diagnoses)",
+      "Prescription register (LMDB)",
+      "Family links (BEF)",
+      "GP visit records"
+    ],
     "level": "individual"
   },
   {
@@ -187,8 +281,16 @@
     "group": "top5",
     "title": "Does Growing Up in a High Crime Neighborhood Affect Youth Criminal Behavior?",
     "summary": "Refugees arriving between 1986 and 1998 were allocated to municipalities quasi-randomly. Boys placed in neighbourhoods with a higher share of youth criminals were later more likely to be convicted, especially for violent crime, which identifies a causal neighbourhood effect on criminal behaviour.",
-    "themes": ["migration", "crime", "children"],
-    "data": ["Refugee placement records from the Danish Refugee Council", "Crime registers (charges and convictions)", "Population register (BEF) with neighbourhood identifiers"],
+    "themes": [
+      "migration",
+      "crime",
+      "children"
+    ],
+    "data": [
+      "Refugee placement records from the Danish Refugee Council",
+      "Crime registers (charges and convictions)",
+      "Population register (BEF) with neighbourhood identifiers"
+    ],
     "level": "individual"
   },
   {
@@ -199,8 +301,14 @@
     "group": "top5",
     "title": "The Nurture of Nature and the Nature of Nurture: How Genes and Investments Interact in the Formation of Skills",
     "summary": "Combines polygenic scores with register and survey measures of parental investment in a dynamic skill-formation model. Genetic endowments and investments interact: investments respond to children's endowments, and part of the measured genetic effect on skills runs through parental behaviour rather than biology alone.",
-    "themes": ["children", "education"],
-    "data": ["Danish National Birth Cohort survey with genotype data", "Education and family registers"],
+    "themes": [
+      "children",
+      "education"
+    ],
+    "data": [
+      "Danish National Birth Cohort survey with genotype data",
+      "Education and family registers"
+    ],
     "level": "individual"
   },
   {
@@ -211,8 +319,15 @@
     "group": "top5",
     "title": "Refugee Migration and Electoral Outcomes",
     "summary": "Using the quasi-random refugee dispersal policy, refugee allocation raised vote shares for anti-immigration parties in rural municipalities and lowered them in the largest urban municipalities. Effects are strongest where refugees are few relative to natives and where crime rises after allocation.",
-    "themes": ["migration", "politics"],
-    "data": ["Refugee placement and residence histories", "Municipal and parliamentary election results", "Population register (BEF)"],
+    "themes": [
+      "migration",
+      "politics"
+    ],
+    "data": [
+      "Refugee placement and residence histories",
+      "Municipal and parliamentary election results",
+      "Population register (BEF)"
+    ],
     "level": "individual"
   },
   {
@@ -223,8 +338,14 @@
     "group": "top5",
     "title": "Social Positions and Fairness Views on Inequality",
     "summary": "Links a large survey to income registers to compare perceived and actual positions in the income distribution and within reference groups (co-workers, neighbours, schoolmates). People misperceive their rank, fairness views depend on the perceived gap to others, and showing people their true position changes their views.",
-    "themes": ["inequality"],
-    "data": ["Income registers (IND)", "Workplace, neighbourhood and education links (IDA, BEF, UDDA)", "Custom survey matched on personal identifiers"],
+    "themes": [
+      "inequality"
+    ],
+    "data": [
+      "Income registers (IND)",
+      "Workplace, neighbourhood and education links (IDA, BEF, UDDA)",
+      "Custom survey matched on personal identifiers"
+    ],
     "level": "individual"
   },
   {
@@ -235,8 +356,16 @@
     "group": "aej",
     "title": "Children and Gender Inequality: Evidence from Denmark",
     "summary": "Event studies around the birth of the first child show mothers' earnings fall about 20 percent relative to fathers' in the long run, through hours, participation and wage rates. These child penalties now account for most of the remaining gender earnings gap and are transmitted across generations through mothers' own upbringing.",
-    "themes": ["gender", "family", "labor"],
-    "data": ["Income and employment registers 1980–2013 (IDA, IND)", "Birth and family links (BEF)", "Hours and occupation"],
+    "themes": [
+      "gender",
+      "family",
+      "labor"
+    ],
+    "data": [
+      "Income and employment registers 1980–2013 (IDA, IND)",
+      "Birth and family links (BEF)",
+      "Hours and occupation"
+    ],
     "level": "individual"
   },
   {
@@ -247,8 +376,15 @@
     "group": "aej",
     "title": "Immigrants' Effect on Native Workers: New Analysis on Longitudinal Data",
     "summary": "Refugee-country immigration into Danish municipalities from 1991 to 2008 pushed less-educated native workers toward more complex, less manual occupations. Native wages and employment rose rather than fell, and effects were positive even for low-skilled natives who moved across firms.",
-    "themes": ["migration", "labor"],
-    "data": ["Matched employer-employee data (IDA) 1991–2008", "Municipality-level refugee allocation", "Occupation codes (DISCO)"],
+    "themes": [
+      "migration",
+      "labor"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA) 1991–2008",
+      "Municipality-level refugee allocation",
+      "Occupation codes (DISCO)"
+    ],
     "level": "individual"
   },
   {
@@ -259,8 +395,17 @@
     "group": "aej",
     "title": "Family Labor Supply Responses to Severe Health Shocks: Evidence from Danish Administrative Records",
     "summary": "Compares households hit by a fatal versus a non-fatal health shock at the same time. After a spouse's death the surviving spouse raises labour supply to self-insure, while after a non-fatal shock spouses reduce labour supply to care for the patient. Children of the household adjust less.",
-    "themes": ["health", "family", "labor"],
-    "data": ["National Patient Register (heart attacks, strokes)", "Death register", "Income and employment registers", "Family links (BEF)"],
+    "themes": [
+      "health",
+      "family",
+      "labor"
+    ],
+    "data": [
+      "National Patient Register (heart attacks, strokes)",
+      "Death register",
+      "Income and employment registers",
+      "Family links (BEF)"
+    ],
     "level": "individual"
   },
   {
@@ -271,8 +416,13 @@
     "group": "aej",
     "title": "Estimating Taxable Income Responses Using Danish Tax Reforms",
     "summary": "Uses a series of Danish tax reforms between 1984 and 2005 and full-population tax records to estimate the elasticity of taxable income. Elasticities are small for labour income (around 0.05) and larger for capital income and for top earners, and they are larger for big reforms than small ones.",
-    "themes": ["taxation"],
-    "data": ["Full-population income tax records 1984–2005", "Tax schedule parameters by year"],
+    "themes": [
+      "taxation"
+    ],
+    "data": [
+      "Full-population income tax records 1984–2005",
+      "Tax schedule parameters by year"
+    ],
     "level": "individual"
   },
   {
@@ -283,8 +433,14 @@
     "group": "aej",
     "title": "Tax Reforms and Intertemporal Shifting of Wage Income: Evidence from Danish Monthly Payroll Records",
     "summary": "The 2010 cut in the top marginal tax rate was announced in advance, and monthly payroll data show top earners shifting wage income from December 2009 into January 2010. Shifting is concentrated among managers and employees of small firms, and it inflates short-run elasticity estimates.",
-    "themes": ["taxation", "labor"],
-    "data": ["Monthly payroll records from eIndkomst 2008–2010", "Employer characteristics (firm size)"],
+    "themes": [
+      "taxation",
+      "labor"
+    ],
+    "data": [
+      "Monthly payroll records from eIndkomst 2008–2010",
+      "Employer characteristics (firm size)"
+    ],
     "level": "both"
   },
   {
@@ -295,8 +451,15 @@
     "group": "aej",
     "title": "Liquidity Constraint Tightness and Consumer Responses to Fiscal Stimulus Policy",
     "summary": "The 2009 payout of Special Pension savings worked as a fiscal stimulus. Measuring constraint tightness by the marginal interest rate households pay, the spending response is highest for households facing high marginal rates and otherwise small, which supports targeting stimulus at the credit constrained.",
-    "themes": ["household-finance", "taxation"],
-    "data": ["Tax records on interest payments and loans", "Survey of spending responses linked to registers", "Pension payout records"],
+    "themes": [
+      "household-finance",
+      "taxation"
+    ],
+    "data": [
+      "Tax records on interest payments and loans",
+      "Survey of spending responses linked to registers",
+      "Pension payout records"
+    ],
     "level": "individual"
   },
   {
@@ -307,8 +470,14 @@
     "group": "aej",
     "title": "Estimating the Effect of Student Aid on College Enrollment: Evidence from a Government Grant Policy Reform",
     "summary": "A 1988 reform raised Danish student grants for students from higher-income families. Roughly 1,000 dollars of extra aid raised enrolment by about 1.35 percentage points, a response that is consistent with modest credit constraints rather than binding ones.",
-    "themes": ["education"],
-    "data": ["Education registers (UDDA)", "Parental income from tax records", "Family links (BEF)"],
+    "themes": [
+      "education"
+    ],
+    "data": [
+      "Education registers (UDDA)",
+      "Parental income from tax records",
+      "Family links (BEF)"
+    ],
     "level": "individual"
   },
   {
@@ -319,8 +488,17 @@
     "group": "aej",
     "title": "Refugee Benefit Cuts",
     "summary": "A 2002 reform cut welfare benefits for newly arrived refugees by roughly half. Employment rose modestly in the short run and then faded, while disposable income fell sharply. The cut raised crime among adults and harmed children's school enrolment and outcomes.",
-    "themes": ["migration", "crime", "children"],
-    "data": ["Benefit and employment registers (DREAM, IDA)", "Crime registers", "Education registers", "Residence permit dates"],
+    "themes": [
+      "migration",
+      "crime",
+      "children"
+    ],
+    "data": [
+      "Benefit and employment registers (DREAM, IDA)",
+      "Crime registers",
+      "Education registers",
+      "Residence permit dates"
+    ],
     "level": "individual"
   },
   {
@@ -331,8 +509,15 @@
     "group": "restat",
     "title": "Long-Run Saving Dynamics: Evidence from Unexpected Inheritances",
     "summary": "Sudden parental deaths deliver unexpected inheritances. Heirs' wealth jumps and then declines over roughly a decade back toward its pre-inheritance path, which implies a moderate marginal propensity to consume out of wealth and informs the calibration of buffer-stock saving models.",
-    "themes": ["household-finance"],
-    "data": ["Wealth registers (FORM)", "Death register with cause of death", "Family links (BEF)", "Income registers"],
+    "themes": [
+      "household-finance"
+    ],
+    "data": [
+      "Wealth registers (FORM)",
+      "Death register with cause of death",
+      "Family links (BEF)",
+      "Income registers"
+    ],
     "level": "individual"
   },
   {
@@ -343,8 +528,14 @@
     "group": "restat",
     "title": "Correlation of Brothers' Earnings and Intergenerational Transmission",
     "summary": "Decomposes the earnings correlation between Danish brothers into the part explained by fathers' earnings and the part due to other shared family and community factors. Intergenerational transmission accounts for a larger share of sibling similarity than simple father-son elasticities suggest, once permanent earnings and life-cycle bias are handled.",
-    "themes": ["inequality", "children"],
-    "data": ["Income registers (IND) for fathers and sons", "Family links (BEF)"],
+    "themes": [
+      "inequality",
+      "children"
+    ],
+    "data": [
+      "Income registers (IND) for fathers and sons",
+      "Family links (BEF)"
+    ],
     "level": "individual"
   },
   {
@@ -355,8 +546,17 @@
     "group": "restat",
     "title": "Spillover Effects of Early-Life Medical Interventions",
     "summary": "Extra medical treatment for very-low-birth-weight newborns, identified from a birth weight threshold, improves not only the treated infant but also the outcomes of older siblings, who do better in school. Family resources and parental time respond to the child's health.",
-    "themes": ["health", "children", "education"],
-    "data": ["Medical Birth Register (birth weight)", "National Patient Register", "Education and test score registers", "Family links (BEF)"],
+    "themes": [
+      "health",
+      "children",
+      "education"
+    ],
+    "data": [
+      "Medical Birth Register (birth weight)",
+      "National Patient Register",
+      "Education and test score registers",
+      "Family links (BEF)"
+    ],
     "level": "individual"
   },
   {
@@ -367,8 +567,14 @@
     "group": "ej",
     "title": "Imputing Consumption from Income and Wealth Information",
     "summary": "Tests whether consumption can be imputed from register data as income minus the change in wealth, by comparing the imputation with expenditure survey responses for the same households. The imputation works well for most households but is noisy for those with housing transactions or large stock holdings.",
-    "themes": ["household-finance", "methods"],
-    "data": ["Income and wealth tax records", "Danish Expenditure Survey linked to registers"],
+    "themes": [
+      "household-finance",
+      "methods"
+    ],
+    "data": [
+      "Income and wealth tax records",
+      "Danish Expenditure Survey linked to registers"
+    ],
     "level": "individual"
   },
   {
@@ -379,8 +585,15 @@
     "group": "ej",
     "title": "Are Homeowners Really More Unemployed?",
     "summary": "Tests the Oswald hypothesis that home ownership raises unemployment. Danish homeowners are less geographically mobile, but they find local jobs faster, so their unemployment spells are shorter overall. Ownership does not raise aggregate unemployment.",
-    "themes": ["labor", "housing"],
-    "data": ["Unemployment spells from IDA and benefit registers", "Housing tenure and residence (BEF)", "Local labour market indicators"],
+    "themes": [
+      "labor",
+      "housing"
+    ],
+    "data": [
+      "Unemployment spells from IDA and benefit registers",
+      "Housing tenure and residence (BEF)",
+      "Local labour market indicators"
+    ],
     "level": "individual"
   },
   {
@@ -391,8 +604,16 @@
     "group": "ej",
     "title": "School Starting Age and the Crime-Age Profile",
     "summary": "Children born just after the school start cut-off begin school almost a year later. Starting school older lowers crime at young ages, especially for boys, by shifting the crime-age profile rather than permanently reducing crime, consistent with an incapacitation and maturity channel.",
-    "themes": ["children", "crime", "education"],
-    "data": ["Birth dates and family links (BEF)", "Crime registers (charges, convictions)", "Education registers"],
+    "themes": [
+      "children",
+      "crime",
+      "education"
+    ],
+    "data": [
+      "Birth dates and family links (BEF)",
+      "Crime registers (charges, convictions)",
+      "Education registers"
+    ],
     "level": "individual"
   },
   {
@@ -403,8 +624,16 @@
     "group": "ej",
     "title": "Born with a Silver Spoon? Danish Evidence on Wealth Inequality in Childhood",
     "summary": "Third-party reported wealth records of children show that wealth inequality is as high in childhood as among adults, with top shares driven by transfers from parents and grandparents. Wealth at age 18 predicts wealth in adulthood, and intergenerational wealth correlations are present from early ages.",
-    "themes": ["inequality", "household-finance", "children"],
-    "data": ["Wealth registers (FORM) for children and parents", "Family links (BEF)", "Income registers"],
+    "themes": [
+      "inequality",
+      "household-finance",
+      "children"
+    ],
+    "data": [
+      "Wealth registers (FORM) for children and parents",
+      "Family links (BEF)",
+      "Income registers"
+    ],
     "level": "individual"
   },
   {
@@ -415,8 +644,921 @@
     "group": "ej",
     "title": "Financial Trouble Across Generations: Evidence from the Universe of Personal Loans in Denmark",
     "summary": "Loan-level records on all personal loans show strong intergenerational persistence in financial trouble: children of parents who default are far more likely to default themselves, and the correlation is present already in early adulthood and is not explained by income or education.",
-    "themes": ["household-finance", "inequality", "children"],
-    "data": ["Universe of personal loans reported to the tax authority (loan-level, with default status)", "Family links (BEF)", "Income and education registers"],
+    "themes": [
+      "household-finance",
+      "inequality",
+      "children"
+    ],
+    "data": [
+      "Universe of personal loans reported to the tax authority (loan-level, with default status)",
+      "Family links (BEF)",
+      "Income and education registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "chetty2011",
+    "authors": "Raj Chetty, John N. Friedman, Tore Olsen and Luigi Pistaferri",
+    "year": 2011,
+    "journal": "Quarterly Journal of Economics",
+    "group": "top5",
+    "title": "Adjustment Costs, Firm Responses, and Micro vs. Macro Labor Supply Elasticities: Evidence from Danish Tax Records",
+    "summary": "Uses bunching at kinks in the Danish tax schedule to show that observed earnings responses are shaped by search costs and by firms coordinating hours around tax thresholds. Once adjustment frictions are accounted for, the structural labour supply elasticity is around 0.3, far above the small elasticities from individual-level micro studies, which helps reconcile micro and macro estimates.",
+    "themes": [
+      "taxation",
+      "labor"
+    ],
+    "data": [
+      "Full-population income tax records 1994–2001",
+      "Employer links (IDA) and occupation codes"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "traiberman2019",
+    "authors": "Sharon Traiberman",
+    "year": 2019,
+    "journal": "American Economic Review",
+    "group": "top5",
+    "title": "Occupations and Import Competition: Evidence from Denmark",
+    "summary": "Estimates a dynamic occupational choice model on Danish worker histories in which workers accumulate occupation-specific human capital that is lost when they switch. Occupations explain 57 percent of the dispersion in worker outcomes from trade, sectors only 16 percent, and rising import competition from 1995 to 2005 lowered lifetime earnings for about 5 percent of workers.",
+    "themes": [
+      "trade",
+      "labor"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA) with occupation codes 1995–2005",
+      "Firm-level imports by product (UHDI)"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "epper2020",
+    "authors": "Thomas Epper, Ernst Fehr, Helga Fehr-Duda, Claus Thustrup Kreiner, David Dreyer Lassen, Søren Leth-Petersen and Gregers Nytoft Rasmussen",
+    "year": 2020,
+    "journal": "American Economic Review",
+    "group": "top5",
+    "title": "Time Discounting and Wealth Inequality",
+    "summary": "Links incentivised time-discounting experiments to the wealth positions of a large sample of middle-aged Danes in the registers. Patient individuals sit markedly higher in the wealth distribution, and the association survives controls for education, income profiles, school grades, initial and parental wealth, credit constraints and risk preferences, which points to saving behaviour as the channel.",
+    "themes": [
+      "household-finance",
+      "inequality"
+    ],
+    "data": [
+      "Wealth registers (FORM)",
+      "Income, education and family registers",
+      "Incentivised online experiment linked on PNR"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "humlum2025",
+    "authors": "Anders Humlum, Jakob R. Munch and Pernille Plato",
+    "year": 2025,
+    "journal": "American Economic Review",
+    "group": "top5",
+    "title": "Changing Tracks: Human Capital Investment after Loss of Ability",
+    "summary": "Uses quasi-random work accidents in Danish administrative data to show that injured workers enrol in bachelor's programmes that build on their previous training. Exploiting differences in how stackable degrees are, higher education moves injured workers from disability benefits into full-time jobs paying 25 percent more than before injury, and reskilling subsidies pay for themselves four times over.",
+    "themes": [
+      "labor",
+      "education",
+      "health"
+    ],
+    "data": [
+      "Work accident records linked to the National Patient Register",
+      "Education enrolment registers (UDDA, KOTRE)",
+      "Income, employment and disability benefit registers (IND, IDA, DREAM)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "kleven2025",
+    "authors": "Henrik Kleven, Claus Thustrup Kreiner, Kristian Larsen and Jakob Egholt Søgaard",
+    "year": 2025,
+    "journal": "American Economic Review",
+    "group": "top5",
+    "title": "Micro versus Macro Labor Supply Elasticities: The Role of Dynamic Returns to Effort",
+    "summary": "Builds a model in which effort today raises earnings tomorrow, so responses to taxes are delayed and mediated by job switches. Danish administrative data confirm the model's life-cycle predictions for earnings and hours, and a quasi-experimental design based on job switchers finds a long-run earnings elasticity around 0.5, against a short-run elasticity of about 0.2.",
+    "themes": [
+      "taxation",
+      "labor"
+    ],
+    "data": [
+      "Income tax records (IND)",
+      "Hours and job spells from payroll data (BFL) and IDA"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "daysal2026",
+    "authors": "N. Meltem Daysal, Hui Ding, Maya Rossin-Slater and Hannes Schwandt",
+    "year": 2026,
+    "journal": "American Economic Review",
+    "group": "top5",
+    "title": "Germs in the Family: The Short- and Long-Term Consequences of Intrahousehold Disease Spread",
+    "summary": "Shows that infant younger siblings are hospitalised for respiratory conditions two to three times as often as their older siblings were, because preschool-aged children bring disease home. Combining birth order with local variation in respiratory disease prevalence, early-life exposure lowers younger siblings' later earnings and education and worsens chronic respiratory and mental health.",
+    "themes": [
+      "health",
+      "children",
+      "family"
+    ],
+    "data": [
+      "National Patient Register (respiratory diagnoses)",
+      "Medical Birth Register and family links (MFR, BEF)",
+      "Income and education registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "jorgensen2026",
+    "authors": "Thomas H. Jørgensen, Katrine Jakobsen and Hamish Low",
+    "year": 2026,
+    "journal": "American Economic Review (forthcoming)",
+    "group": "top5",
+    "title": "Fertility and Family Labor Supply",
+    "summary": "Uses the 2009 Danish tax reform to show that higher net-of-tax wages for women reduce fertility while higher wages for men raise it. A life-cycle model of couples choosing the timing and number of children, estimated on register data, implies that allowing fertility to adjust raises women's labour supply responsiveness substantially and that human capital depreciation around births drives much of the long-run gender wage gap.",
+    "themes": [
+      "gender",
+      "family",
+      "taxation",
+      "labor"
+    ],
+    "data": [
+      "Income tax records and tax reform variation",
+      "Birth and family links (BEF)",
+      "Employment and wages (IDA, BFL)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "dustmann2021",
+    "authors": "Christian Dustmann and Rasmus Landersø",
+    "year": 2021,
+    "journal": "Journal of Political Economy",
+    "group": "top5",
+    "title": "Child's Gender, Young Fathers' Crime, and Spillover Effects in Criminal Behavior",
+    "summary": "Uses the gender of a first-born child as a natural experiment for young fathers in Denmark. Having a son rather than a daughter lowers the father's subsequent criminal behaviour, and the reduction spills over to the father's peers and later to the child, which identifies both a direct parenting response and network effects in crime.",
+    "themes": [
+      "crime",
+      "family",
+      "children"
+    ],
+    "data": [
+      "Crime registers (charges and convictions)",
+      "Birth and family links (BEF)",
+      "Residence and peer networks"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "taber2020",
+    "authors": "Christopher Taber and Rune Vejlin",
+    "year": 2020,
+    "journal": "Econometrica",
+    "group": "top5",
+    "title": "Estimation of a Roy/Search/Compensating Differential Model of the Labor Market",
+    "summary": "Combines a Roy model, search frictions, compensating differentials and on-the-job human capital accumulation in one framework, establishes what is non-parametrically identified, and estimates it on Danish matched data. Pre-market skills account for most wage variation, while preferences for non-wage job attributes and search frictions matter greatly for turnover and for which jobs workers choose.",
+    "themes": [
+      "labor"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA)",
+      "Job spells and hourly wages"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "friedrich2021",
+    "authors": "Benjamin U. Friedrich and Martin B. Hackmann",
+    "year": 2021,
+    "journal": "Review of Economic Studies",
+    "group": "top5",
+    "title": "The Returns to Nursing: Evidence from a Parental-Leave Program",
+    "summary": "A Danish parental-leave programme offering up to a year off per child aged 0 to 8 induced a nurse shortage that hospitals and nursing homes could not replace. Nurse employment fell by 15 percent in hospitals and 10 percent in nursing homes, 30-day readmissions of heart attack patients rose, and nursing home mortality increased sharply.",
+    "themes": [
+      "health",
+      "labor"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA) for health workers",
+      "National Patient Register",
+      "Death register",
+      "Nursing home residence"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "caplin2026",
+    "authors": "Andrew Caplin, Victoria Gregory, Eungik Lee, Søren Leth-Petersen and Johan Sæverud",
+    "year": 2026,
+    "journal": "Review of Economic Studies",
+    "group": "top5",
+    "title": "Subjective Earnings Risk",
+    "summary": "Introduces a survey instrument for earnings risk that allows for quitting and being fired, fielded to Danish workers and linked to their register earnings histories. Job transitions drive subjective risk, which is many times smaller than traditional register-based estimates even after conditioning on demographics and job history, and helps explain why many hold few liquid assets.",
+    "themes": [
+      "labor",
+      "household-finance",
+      "methods"
+    ],
+    "data": [
+      "Income and employment registers (IND, IDA)",
+      "Wealth registers (FORM)",
+      "Custom survey matched on PNR"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "taubinsky2026",
+    "authors": "Dmitry Taubinsky, Luigi Butera, Matteo Saccarola and Chen Lian",
+    "year": 2026,
+    "journal": "Quarterly Journal of Economics",
+    "group": "top5",
+    "title": "Beliefs About the Economy Are Excessively Sensitive to Household-Level Shocks: Evidence from Linked Survey and Administrative Data",
+    "summary": "Links Statistics Denmark's consumer expectations survey to the registers to show that people's inflation forecasts and backcasts move strongly, and negatively, with their own recent and expected income changes, far more than actual inflation does. The pattern departs from Bayesian rational expectations and is consistent with affect-cued recall, where bad personal events cue pessimistic recollections.",
+    "themes": [
+      "macro",
+      "household-finance"
+    ],
+    "data": [
+      "Consumer expectations survey linked on PNR",
+      "Income registers (IND)",
+      "Health event records (LPR)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "andersen2026",
+    "authors": "Asger Lau Andersen, Kilian Huber, Niels Johannesen, Ludwig Straub and Emil Toft Vestergaard",
+    "year": 2026,
+    "journal": "Quarterly Journal of Economics",
+    "group": "top5",
+    "title": "Disaggregated Economic Accounts",
+    "summary": "Builds a system of national accounts broken down into bilateral money flows between region-by-industry consumer cells, producer cells, the government and the rest of the world, and implements it for Denmark using bank transaction data and registers. Spending is locally and urban biased, and fiscal transfers raise GDP more when targeted at cells whose spending reaches cells with high unemployment.",
+    "themes": [
+      "macro",
+      "firms"
+    ],
+    "data": [
+      "Geocoded transaction data from Danske Bank",
+      "Employment and residence registers (IDA, BEF)",
+      "Firm accounts and VAT data (FIRE, VNDS)",
+      "National accounts"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "agersnap2020",
+    "authors": "Ole Agersnap, Amalie Sofie Jensen and Henrik Kleven",
+    "year": 2020,
+    "journal": "AER: Insights",
+    "group": "aeri",
+    "title": "The Welfare Magnet Hypothesis: Evidence from an Immigrant Welfare Scheme in Denmark",
+    "summary": "The 2002 cut in benefits for non-EU immigrants, its repeal and its reintroduction provide repeated quasi-experiments on the welfare magnet hypothesis. The cut reduced net immigration by about 5,000 people a year and the repeal reversed it almost exactly, implying a migration elasticity with respect to benefits of 1.3.",
+    "themes": [
+      "migration",
+      "taxation"
+    ],
+    "data": [
+      "Population and migration registers (BEF)",
+      "Benefit registers (DREAM)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "kleven2021",
+    "authors": "Henrik Kleven, Camille Landais and Jakob Egholt Søgaard",
+    "year": 2021,
+    "journal": "AER: Insights",
+    "group": "aeri",
+    "title": "Does Biology Drive Child Penalties? Evidence from Biological and Adoptive Families",
+    "summary": "Compares event-study child penalties for biological and adoptive mothers using almost 40 years of Danish adoption data. Short-run penalties are slightly larger for biological mothers, but long-run penalties are virtually identical, so biology is not a key driver of child-related gender gaps.",
+    "themes": [
+      "gender",
+      "family",
+      "labor"
+    ],
+    "data": [
+      "Adoption records linked to BEF",
+      "Income and employment registers 1980–2017"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "andersen2024",
+    "authors": "Asger Lau Andersen, Niels Johannesen and Adam Sheridan",
+    "year": 2024,
+    "journal": "AER: Insights",
+    "group": "aeri",
+    "title": "Dynamic Spending Responses to Wealth Shocks: Evidence from Quasi Lotteries on the Stock Market",
+    "summary": "Uses lottery-like variation in stock market gains across investors with similar portfolios, observed in granular bank data, to trace spending responses. Responses are immediate and persistent, cumulating to a marginal propensity to consume of 4.4 percent over one year and 16 percent over three, consistent with the permanent income hypothesis with some inattention.",
+    "themes": [
+      "household-finance"
+    ],
+    "data": [
+      "Account-level spending and stock portfolios from Danske Bank",
+      "Register demographics and income"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "johannesen2026",
+    "authors": "Niels Johannesen, Johan Sæverud and Emmanuel Saez",
+    "year": 2026,
+    "journal": "AER: Insights",
+    "group": "aeri",
+    "title": "Taxing the Wealth of the Poor: Evidence from the Danish Old-Age Support Asset Test",
+    "summary": "The asset test for Danish old-age support creates diffuse but large excess mass in liquid assets just below the threshold among the eligible, relative to comparable ineligible groups. Cohort analysis suggests the test reduces liquid assets by about 20 percent near the threshold, and high-frequency bank data show the responses are permanent rather than timed around the test date.",
+    "themes": [
+      "taxation",
+      "household-finance"
+    ],
+    "data": [
+      "Wealth registers (FORM)",
+      "Pension and benefit records",
+      "High-frequency bank account data"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "fadlon2026",
+    "authors": "Itzik Fadlon, Astrid Sophie Fugleholm and Torben Heien Nielsen",
+    "year": 2026,
+    "journal": "AER: Insights",
+    "group": "aeri",
+    "title": "Survivors' Mental Health and the Protective Role of Income Stability",
+    "summary": "Documents the immediate, large and lingering rise in mental health medication after a spouse's death across the universe of Danish households. A large share of the spike is explained by the income loss the death imposes, so safety-net liquidity protects survivors' mental health.",
+    "themes": [
+      "health",
+      "family",
+      "household-finance"
+    ],
+    "data": [
+      "Prescription register (LMDB)",
+      "Death register",
+      "Income and pension registers",
+      "Family links (BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "humlum2026",
+    "authors": "Anders Humlum and Pernille Plato",
+    "year": 2026,
+    "journal": "AER: Insights (forthcoming)",
+    "group": "aeri",
+    "title": "Reskilling and Resilience",
+    "summary": "Studies how retraining shapes workers' resilience to labour market shocks in Danish administrative data, extending the authors' work on human capital investment after injury to the question of which workers reskill and how reskilling protects earnings when jobs disappear.",
+    "themes": [
+      "labor",
+      "education"
+    ],
+    "data": [
+      "Education and training registers",
+      "Employment and earnings registers (IDA, BFL, IND)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "utar2014",
+    "authors": "Hale Utar",
+    "year": 2014,
+    "journal": "AEJ: Applied Economics",
+    "group": "aej",
+    "title": "When the Floodgates Open: Northern Firms' Response to Removal of Trade Quotas on Chinese Goods",
+    "summary": "The dismantling of Multi-Fibre Arrangement quotas on Chinese textiles at WTO accession exposed Danish textile firms to low-wage competition. Within firms, employment, value added and intangible assets fell and the workforce shifted toward skilled workers, while firms refocused away from products where China's advantage grew.",
+    "themes": [
+      "trade",
+      "firms",
+      "labor"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA) 1995–2007",
+      "Firm accounts (FIRE)",
+      "Firm-level trade by product (UHDI)"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "fadlon2016",
+    "authors": "Itzik Fadlon, Jessica Laird and Torben Heien Nielsen",
+    "year": 2016,
+    "journal": "AEJ: Applied Economics",
+    "group": "aej",
+    "title": "Do Employer Pension Contributions Reflect Employee Preferences? Evidence from a Retirement Savings Reform in Denmark",
+    "summary": "A reform that cut the subsidy to capital pension accounts for top-bracket workers led employers to reduce contributions to those accounts immediately, by more the larger the share of affected employees, and to shift the money to annuity accounts. Employer contributions track employees' savings preferences.",
+    "themes": [
+      "household-finance",
+      "taxation",
+      "firms"
+    ],
+    "data": [
+      "Pension contribution records from tax data",
+      "Employer links (IDA)",
+      "Income tax records"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "hjort2017",
+    "authors": "Jonas Hjort, Mikkel Sølvsten and Miriam Wüst",
+    "year": 2017,
+    "journal": "AEJ: Applied Economics",
+    "group": "aej",
+    "title": "Universal Investment in Infants and Long-Run Health: Evidence from Denmark's 1937 Home Visiting Program",
+    "summary": "Uses the staggered municipal roll-out of the 1937 universal infant home visiting programme and follows treated cohorts into middle age in the registers. Treated individuals have higher survival between ages 45 and 64, fewer hospital nights and less cardiovascular disease, consistent with early nutrition and disease environment programming adult health.",
+    "themes": [
+      "health",
+      "children"
+    ],
+    "data": [
+      "Historical programme roll-out by municipality",
+      "National Patient Register",
+      "Death register",
+      "Population register (BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "rossinslater2020",
+    "authors": "Maya Rossin-Slater and Miriam Wüst",
+    "year": 2020,
+    "journal": "AEJ: Applied Economics",
+    "group": "aej",
+    "title": "What Is the Added Value of Preschool for Poor Children? Long-Term and Intergenerational Impacts and Interactions with an Infant Health Intervention",
+    "summary": "Access to preschool targeted at low-income children between 1933 and 1960 raised adult education, earnings and survival past 65, and the children of exposed women obtained more education by 25. Exposure to the nurse home visiting programme in infancy reduces preschool's added value, so the two programmes are partial substitutes.",
+    "themes": [
+      "education",
+      "children",
+      "health"
+    ],
+    "data": [
+      "Historical programme roll-out",
+      "Education and income registers",
+      "Death register",
+      "Family links (BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "anker2021",
+    "authors": "Anne Sofie Tegner Anker, Jennifer L. Doleac and Rasmus Landersø",
+    "year": 2021,
+    "journal": "AEJ: Applied Economics",
+    "group": "aej",
+    "title": "The Effects of DNA Databases on the Deterrence and Detection of Offenders",
+    "summary": "A large expansion of Denmark's DNA database cut recidivism within a year by up to 42 percent and raised the chance that re-offenders are caught, implying that a 1 percent higher detection probability lowers crime by more than 2 percent. Registered offenders also became more likely to work, study and live in stable families.",
+    "themes": [
+      "crime"
+    ],
+    "data": [
+      "Police DNA registration records",
+      "Crime registers (charges and convictions)",
+      "Employment, education and family registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "andersen2023",
+    "authors": "Asger Lau Andersen, Amalie Sofie Jensen, Niels Johannesen, Claus Thustrup Kreiner, Søren Leth-Petersen and Adam Sheridan",
+    "year": 2023,
+    "journal": "AEJ: Applied Economics",
+    "group": "aej",
+    "title": "How Do Households Respond to Job Loss? Lessons from Multiple High-Frequency Datasets",
+    "summary": "Combines bank transaction data with government registers to measure every margin of self-insurance after job loss. Over two years households cut spending by 30 percent of the income loss and cover about half of it by running down liquid balances; spousal labour supply, private transfers, home equity extraction and consumer credit contribute less.",
+    "themes": [
+      "household-finance",
+      "labor"
+    ],
+    "data": [
+      "Account-level spending, balances and loans from Danske Bank",
+      "Unemployment and income registers (DREAM, IND)",
+      "Family links (BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "dustmann2024app",
+    "authors": "Christian Dustmann, Rasmus Landersø and Lars Højsgaard Andersen",
+    "year": 2024,
+    "journal": "AEJ: Applied Economics",
+    "group": "aej",
+    "title": "Unintended Consequences of Welfare Cuts on Children and Adolescents",
+    "summary": "The 2002 benefit cut for newly arrived refugees reduced family disposable income by 30 percent over five years. Children exposed at preschool or school age obtained lower grades, less education and lower adult earnings, and teenagers at exposure saw large increases in convictions for violent and property crime.",
+    "themes": [
+      "migration",
+      "children",
+      "crime",
+      "education"
+    ],
+    "data": [
+      "Residence permit dates and benefit registers (DREAM)",
+      "School grades and education registers",
+      "Crime registers",
+      "Income registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "jensen2025",
+    "authors": "Mathias Fjællegaard Jensen and Alan Manning",
+    "year": 2025,
+    "journal": "AEJ: Applied Economics",
+    "group": "aej",
+    "title": "Background Matters, but Not Whether Parents Are Immigrants: Outcomes of Children Born in Denmark",
+    "summary": "Children born in Denmark to immigrant parents have lower earnings, more unemployment, less education, more transfers and more convictions than children of Danish-born parents. Conditional on parental socioeconomic characteristics, however, they do as well or slightly better, so the gaps reflect deprived backgrounds rather than immigrant parentage.",
+    "themes": [
+      "migration",
+      "children",
+      "inequality"
+    ],
+    "data": [
+      "Population register with origin and parent links (BEF)",
+      "Income, education, benefit and crime registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "gruber2021",
+    "authors": "Jonathan Gruber, Amalie Sofie Jensen and Henrik Kleven",
+    "year": 2021,
+    "journal": "AEJ: Economic Policy",
+    "group": "aej",
+    "title": "Do People Respond to the Mortgage Interest Deduction? Quasi-Experimental Evidence from Denmark",
+    "summary": "A major reform that scaled back the mortgage interest deduction for middle- and high-income households had a precisely estimated zero effect on home ownership. It did reduce the size and price of houses bought, lowered household indebtedness and pushed down equilibrium house prices.",
+    "themes": [
+      "taxation",
+      "housing",
+      "household-finance"
+    ],
+    "data": [
+      "Income tax records with interest deductions",
+      "Property registers and transaction prices",
+      "Mortgage debt from wealth registers (FORM)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "garciamiralles2024",
+    "authors": "Esteban García-Miralles and Jonathan M. Leganza",
+    "year": 2024,
+    "journal": "AEJ: Economic Policy",
+    "group": "aej",
+    "title": "Public Pensions and Private Savings",
+    "summary": "A Danish reform raising the social security eligibility age, studied with a regression discontinuity in administrative data, increased contributions to personal and employer pension accounts when later eligibility kept people working longer. Inertia in previous savings behaviour and firms' default contribution rates are the key mechanisms.",
+    "themes": [
+      "household-finance",
+      "taxation",
+      "labor"
+    ],
+    "data": [
+      "Pension contribution records",
+      "Income and employment registers",
+      "Wealth registers (FORM)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "daysal2025",
+    "authors": "N. Meltem Daysal, William N. Evans, Mikkel Hasse Pedersen and Mircea Trandafir",
+    "year": 2025,
+    "journal": "AEJ: Economic Policy",
+    "group": "aej",
+    "title": "Do Medical Treatments Work for Work? Evidence from Breast Cancer Patients",
+    "summary": "A Danish guideline change shifted which breast cancer patients received radiation therapy, giving quasi-experimental variation in treatment. Radiotherapy reproduces the survival gains found in trials and has economic returns: ten years after diagnosis it raises employment by 37 percent and earnings by 45 percent, undoing most of the post-diagnosis employment drop.",
+    "themes": [
+      "health",
+      "labor"
+    ],
+    "data": [
+      "Cancer registry and treatment records",
+      "National Patient Register",
+      "Income and employment registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "renkin2024",
+    "authors": "Tobias Renkin and Gabriel Züllig",
+    "year": 2024,
+    "journal": "AEJ: Macroeconomics",
+    "group": "aej",
+    "title": "Credit Supply Shocks and Prices: Evidence from Danish Firms",
+    "summary": "Combines loan-level data on Danish firm–bank relationships with survey producer prices and export unit values. Firms whose banks were exposed to the global financial crisis saw loans fall and rates rise, and they raised output prices by 3 to 5 percent to generate cash, with smaller increases where demand is more elastic.",
+    "themes": [
+      "firms",
+      "macro"
+    ],
+    "data": [
+      "Firm–bank loan data from the central bank",
+      "Producer price survey",
+      "Export unit values from foreign trade data (UHDI)",
+      "Firm accounts (FIRE)"
+    ],
+    "level": "firm"
+  },
+  {
+    "id": "utar2018",
+    "authors": "Hale Utar",
+    "year": 2018,
+    "journal": "Review of Economics and Statistics",
+    "group": "restat",
+    "title": "Workers beneath the Floodgates: Low-Wage Import Competition and Workers' Adjustment",
+    "summary": "Follows Danish textile and clothing workers for a decade after the removal of quotas on Chinese imports, using within-industry and within-occupation differences in exposure. Earnings and employment fall persistently, job instability in services is the main adjustment friction, and workers with manufacturing-specific education rebuild human capital through further schooling.",
+    "themes": [
+      "trade",
+      "labor"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA) 1999–2010",
+      "Firm-level imports by product (UHDI)",
+      "Education registers"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "kreiner2020restat",
+    "authors": "Claus Thustrup Kreiner, Daniel Reck and Peer Ebbesen Skov",
+    "year": 2020,
+    "journal": "Review of Economics and Statistics",
+    "group": "restat",
+    "title": "Do Lower Minimum Wages for Young Workers Raise Their Employment? Evidence from a Danish Discontinuity",
+    "summary": "Danish minimum wages jump by 40 percent at age 18. Monthly payroll records for the whole population show employment falling by 33 percent and hours by 45 percent at the discontinuity, leaving total wage payments almost unchanged, with an implied employment elasticity between 0.6 and 1.1.",
+    "themes": [
+      "labor"
+    ],
+    "data": [
+      "Monthly payroll records (BFL) with hours and wages",
+      "Population register (BEF) for exact birth dates"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "dahl2024",
+    "authors": "Gordon B. Dahl, Claus Thustrup Kreiner, Torben Heien Nielsen and Benjamin Ly Serena",
+    "year": 2024,
+    "journal": "Review of Economics and Statistics",
+    "group": "restat",
+    "title": "Understanding the Rise in Life Expectancy Inequality",
+    "summary": "Decomposes widening life expectancy gaps between rich and poor into changes in age-specific mortality and differences in survivability to each age. Lower survivability of the poor explains the entire rise in Danish life expectancy inequality; cardiovascular gains helped everyone, but lifestyle-related survivability diverged.",
+    "themes": [
+      "health",
+      "inequality"
+    ],
+    "data": [
+      "Death register",
+      "Income registers (IND)",
+      "Population register (BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "foged2024",
+    "authors": "Mette Foged, Linea Hasager, Giovanni Peri, Jacob Nielsen Arendt and Iben Bolvig",
+    "year": 2024,
+    "journal": "Review of Economics and Statistics",
+    "group": "restat",
+    "title": "Language Training and Refugees' Integration",
+    "summary": "A 1999 reform improved language training for newly recognised refugees. A regression discontinuity around the cut-off date shows a permanent, positive effect on earnings that emerges after classes are completed, together with more schooling and a higher probability of working in complex jobs.",
+    "themes": [
+      "migration",
+      "labor",
+      "education"
+    ],
+    "data": [
+      "Residence permit dates",
+      "Income and employment registers (IND, IDA)",
+      "Education registers",
+      "Occupation codes (DISCO)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "bargain2024",
+    "authors": "Olivier B. Bargain and Anders B. Jonassen",
+    "year": 2024,
+    "journal": "Review of Economics and Statistics",
+    "group": "restat",
+    "title": "New Evidence on Welfare's Disincentive for the Youth Using Administrative Panel Data",
+    "summary": "Maximum social assistance for childless unmarried Danes rose by 55 percent at age 25 between 2000 and 2006. Only the low-skilled respond: employment falls by 2 to 3 percent and benefit take-up rises by 10 to 14 percent, two thirds through moves from work to welfare, and crime shows no discontinuity.",
+    "themes": [
+      "labor",
+      "taxation"
+    ],
+    "data": [
+      "Benefit registers (DREAM)",
+      "Monthly employment and earnings",
+      "Education and crime registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "altindag2024",
+    "authors": "Onur Altındağ, Jane Greve and Erdal Tekin",
+    "year": 2024,
+    "journal": "Review of Economics and Statistics",
+    "group": "restat",
+    "title": "Public Health Policy at Scale: Impact of a Government-Sponsored Information Campaign on Infant Mortality in Denmark",
+    "summary": "A nationwide campaign against sudden infant death syndrome, delivered mainly through universal nurse home visits, cut infant mortality by 17 percent in a regression discontinuity on population birth data. Effects were 11 to 14 times larger for low-birthweight and preterm infants and concentrated among low-SES families.",
+    "themes": [
+      "health",
+      "children"
+    ],
+    "data": [
+      "Medical Birth Register (MFR)",
+      "Death register with causes",
+      "Parental income and education registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "kristiansen2025",
+    "authors": "Ida Lykke Kristiansen and Sophie Yanying Sheng",
+    "year": 2025,
+    "journal": "Review of Economics and Statistics",
+    "group": "restat",
+    "title": "The Physician-Patient Match and Health Inequality",
+    "summary": "Measures general practitioners' childhood socioeconomic status from their parents' education in the registers. Low-SES patients matched to a GP of similar background have substantially lower mortality, while high-SES patients are unaffected, cutting the SES mortality gradient by a quarter through more intensive care, better detection of chronic conditions and better adherence.",
+    "themes": [
+      "health",
+      "inequality"
+    ],
+    "data": [
+      "GP–patient assignment and primary care contacts",
+      "Physician family background from BEF and UDDA",
+      "National Patient Register and prescriptions",
+      "Death register"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "hansen2025",
+    "authors": "Anne Toft Hansen, Jonas Cuzulan Hirani and Miriam Wüst",
+    "year": 2025,
+    "journal": "Review of Economics and Statistics",
+    "group": "restat",
+    "title": "Depressed Peers in Early Parenthood",
+    "summary": "Municipal nurses assign new mothers to postnatal peer groups essentially arbitrarily conditional on a few characteristics. Exposure to a depressed peer raises a mother's own mental health care use by 11 percent two years after birth and worsens her self-reported mental health and labour market outcomes.",
+    "themes": [
+      "health",
+      "family",
+      "gender"
+    ],
+    "data": [
+      "Postnatal care group assignments from municipal nurse records",
+      "Prescription and patient registers",
+      "Employment and income registers"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "buus2025",
+    "authors": "Magnus T. Buus, Jakob R. Munch, Joel Rodrigue and Georg Schaur",
+    "year": 2025,
+    "journal": "Review of Economics and Statistics",
+    "group": "restat",
+    "title": "Do Export Support Programs Affect Prices, Quality, Markups, and Marginal Costs? Evidence From a Natural Policy Experiment",
+    "summary": "Uses a quasi-natural experiment in the Danish Trade Council's export support to firms. Support raises firm-level exports within destination markets but leaves prices, quality, markups and marginal costs unchanged, consistent with firms growing abroad by shifting demand rather than changing products.",
+    "themes": [
+      "trade",
+      "firms"
+    ],
+    "data": [
+      "Export support programme records",
+      "Firm-level exports by product and destination (UHDI)",
+      "Firm accounts (FIRE)"
+    ],
+    "level": "firm"
+  },
+  {
+    "id": "albaek1998",
+    "authors": "Karsten Albæk and Bent E. Sørensen",
+    "year": 1998,
+    "journal": "Economic Journal",
+    "group": "ej",
+    "title": "Worker Flows and Job Flows in Danish Manufacturing, 1980–91",
+    "summary": "One of the first uses of the IDA matched employer-employee data to measure job creation, job destruction and worker flows across Danish manufacturing plants. Worker turnover far exceeds job reallocation, and both are large and persistent at the plant level.",
+    "themes": [
+      "labor",
+      "firms"
+    ],
+    "data": [
+      "Matched employer-employee data (IDA) 1980–1991",
+      "Plant identifiers (ARBNR)"
+    ],
+    "level": "both"
+  },
+  {
+    "id": "geerdsen2006",
+    "authors": "Lars Pico Geerdsen",
+    "year": 2006,
+    "journal": "Economic Journal",
+    "group": "ej",
+    "title": "Is there a Threat Effect of Labour Market Programmes? A Study of ALMP in the Danish UI System",
+    "summary": "Exploits the timing rules for compulsory activation in the Danish unemployment insurance system to test whether the prospect of being activated speeds up exit from unemployment. Exit rates rise markedly as the activation deadline approaches, which identifies a sizeable threat effect of active labour market programmes.",
+    "themes": [
+      "labor"
+    ],
+    "data": [
+      "Unemployment spells from benefit registers",
+      "IDA worker characteristics"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "heinesen2009",
+    "authors": "Eskil Heinesen",
+    "year": 2010,
+    "journal": "Economic Journal",
+    "group": "ej",
+    "title": "Estimating Class-size Effects using Within-school Variation in Subject-specific Classes",
+    "summary": "Uses within-school variation over time in the size of French classes, which Danish seventh graders choose between French and German, as quasi-random variation in class size. Larger classes lower French exam marks, especially for weaker students and boys, and marks in subjects taught in the regular class serve as a check on selection.",
+    "themes": [
+      "education",
+      "children"
+    ],
+    "data": [
+      "School exam marks register",
+      "Class and school identifiers",
+      "Parental background from BEF and UDDA"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "browning2013",
+    "authors": "Martin Browning, Mette Gørtz and Søren Leth-Petersen",
+    "year": 2013,
+    "journal": "Economic Journal",
+    "group": "ej",
+    "title": "Housing Wealth and Consumption: A Micro Panel Study",
+    "summary": "Uses register-based imputed consumption and house price changes over the 1987 to 1996 boom and bust to test whether housing wealth drives spending. For most households consumption does not respond to unanticipated house price changes; the response is confined to young households, consistent with a collateral rather than a wealth effect.",
+    "themes": [
+      "household-finance",
+      "housing"
+    ],
+    "data": [
+      "Income and wealth tax records with property values",
+      "Consumption imputed from income and wealth changes"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "bagger2020",
+    "authors": "Jesper Bagger, Javier A. Birchenall, Hani Mansour and Sergio Urzúa",
+    "year": 2021,
+    "journal": "Economic Journal",
+    "group": "ej",
+    "title": "Education, Birth Order and Family Size",
+    "summary": "Develops a model of parental investment with birth order preferences and human capital cost differences that delivers a generalised quantity–quality trade-off. Danish administrative data confirm its predictions: at any given parity, children in smaller families have more education, and the average child's education falls with family size even after accounting for birth order.",
+    "themes": [
+      "children",
+      "education",
+      "family"
+    ],
+    "data": [
+      "Education registers (UDDA)",
+      "Sibling and parent links (BEF)",
+      "Parental income"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "baker2026",
+    "authors": "Jennifer L. Baker, Lise G. Bjerregaard, Christian M. Dahl, Torben S. D. Johansen, Emil N. Sørensen and Miriam Wüst",
+    "year": 2026,
+    "journal": "Economic Journal",
+    "group": "ej",
+    "title": "Universal Investments in Toddler Health: Learning from a Large Government Trial",
+    "summary": "A 1960s Copenhagen government trial of preventive health care for toddlers, documented from handwritten nurse records and linked to the registers, improved a good adult health index by five percent of a standard deviation. Gains are largest for initially disadvantaged children and girls and fade for later cohorts as the counterfactual policy environment improved.",
+    "themes": [
+      "health",
+      "children"
+    ],
+    "data": [
+      "Digitised nurse records from the trial",
+      "National Patient Register",
+      "Income and employment registers",
+      "Population register (BEF)"
+    ],
+    "level": "individual"
+  },
+  {
+    "id": "sander2026",
+    "authors": "Sarah Sander",
+    "year": 2026,
+    "journal": "Economic Journal",
+    "group": "ej",
+    "title": "Universal Daycare and Mothers' Working Lifetime",
+    "summary": "Exploits the roll-out of daycare centres across Danish municipalities to follow mothers over their working lives. Daycare availability raises participation, hours and earnings sixteen years after the first birth, with effects driven by low-educated mothers and mediated partly through fertility and separation.",
+    "themes": [
+      "gender",
+      "family",
+      "labor"
+    ],
+    "data": [
+      "Historical daycare roll-out by municipality",
+      "Employment and earnings registers (IDA, IND)",
+      "Birth and family links (BEF)"
+    ],
     "level": "individual"
   }
 ]

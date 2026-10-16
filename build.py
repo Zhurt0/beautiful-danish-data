@@ -17,7 +17,8 @@ HOME = "https://zhurt0.github.io/rentianzhu/"
 
 GROUPS = [
     ("top5", "Top 5", "American Economic Review, Quarterly Journal of Economics, Journal of Political Economy, Econometrica and Review of Economic Studies."),
-    ("aej", "AEJ: Applied and AEJ: Policy", "American Economic Journal: Applied Economics and American Economic Journal: Economic Policy."),
+    ("aeri", "AER: Insights", "American Economic Review: Insights, the AER's short-paper journal."),
+    ("aej", "American Economic Journals", "American Economic Journal: Applied Economics, Economic Policy and Macroeconomics."),
     ("restat", "Review of Economics and Statistics", ""),
     ("ej", "Economic Journal", ""),
 ]
@@ -37,6 +38,7 @@ THEMES = [
     ("education", "Education", "Student aid, school starting age and schooling outcomes."),
     ("inequality", "Inequality and fairness", "Top wealth, tax evasion, sibling correlations and what people believe about their own position."),
     ("politics", "Political economy", "Electoral responses to immigration."),
+    ("macro", "Macroeconomics and expectations", "Disaggregated accounts, expectations and firm pricing built from Danish micro data."),
     ("housing", "Housing", "Home ownership and labour market behaviour."),
     ("methods", "Measurement and methods", "How to build variables, such as consumption, from register data."),
     ("innovation", "Innovation", "Product innovation and growth at the firm level."),
@@ -138,7 +140,7 @@ def build_index():
         <div class="container">
             <h2 class="section-title">Why this page</h2>
             <p>Denmark links every resident, firm, hospital visit, tax return and job to a single identifier, and lets researchers work with the whole population from the 1980s onwards. This page is a reading list of the economics that has come out of that infrastructure in the top general-interest journals: what question each paper asks, what it finds, and which registers it is built from.</p>
-            <p>The list is curated, not exhaustive. It covers {len(PAPERS)} papers so far. The <a href="themes.html">Themes</a> page regroups the same papers by topic, and the <a href="variables.html">Variable map</a> lists the registers and variables they rely on, at the individual and the firm level. If a paper is missing or a summary is wrong, open an issue or a pull request on GitHub.</p>
+            <p>The list covers {len(PAPERS)} papers. It was assembled by searching Crossref for every article in these journals whose title or abstract mentions Denmark or Danish data, and by going through the publication lists of the main Danish research groups and authors, then checking each paper. It excludes <em>AEA Papers and Proceedings</em>, finance journals and papers that only use Danish data as one country among many. It will still miss papers whose abstracts do not name the country, so additions are welcome. The <a href="themes.html">Themes</a> page regroups the same papers by topic, and the <a href="variables.html">Variable map</a> lists the registers and variables they rely on, at the individual and the firm level. If a paper is missing or a summary is wrong, open an issue or a pull request on GitHub.</p>
             <ul class="counts">
 {"".join(f'                <li><a href="#{g}">{e(n)}</a><span>{counts[g]}</span></li>' + chr(10) for g, n, _ in GROUPS)}            </ul>
         </div>

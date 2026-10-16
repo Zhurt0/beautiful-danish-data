@@ -4,162 +4,470 @@
       "register": "BEF — Population register",
       "what": "One row per resident per year (or per month in BEF monthly). The spine for everything else.",
       "variables": [
-        ["PNR", "Personal identifier (anonymised). Links every register."],
-        ["KOEN", "Sex."],
-        ["FOED_DAG / ALDER", "Date of birth / age at reference date."],
-        ["IE_TYPE", "Origin type: Danish origin, immigrant, descendant."],
-        ["OPR_LAND", "Country of origin."],
-        ["KOM", "Municipality of residence."],
-        ["CIVST", "Marital status."],
-        ["FAMILIE_ID / FAMILIE_TYPE", "Family identifier and family type (couple, single, children)."],
-        ["MOR_PNR / FAR_PNR", "Mother's and father's PNR. Builds parent–child and sibling links."],
-        ["AEGTE_ID", "Spouse or partner PNR."]
+        [
+          "PNR",
+          "Personal identifier (anonymised). Links every register."
+        ],
+        [
+          "KOEN",
+          "Sex."
+        ],
+        [
+          "FOED_DAG / ALDER",
+          "Date of birth / age at reference date."
+        ],
+        [
+          "IE_TYPE",
+          "Origin type: Danish origin, immigrant, descendant."
+        ],
+        [
+          "OPR_LAND",
+          "Country of origin."
+        ],
+        [
+          "KOM",
+          "Municipality of residence."
+        ],
+        [
+          "CIVST",
+          "Marital status."
+        ],
+        [
+          "FAMILIE_ID / FAMILIE_TYPE",
+          "Family identifier and family type (couple, single, children)."
+        ],
+        [
+          "MOR_PNR / FAR_PNR",
+          "Mother's and father's PNR. Builds parent–child and sibling links."
+        ],
+        [
+          "AEGTE_ID",
+          "Spouse or partner PNR."
+        ]
       ],
-      "used_by": ["kleven2019", "damm2014", "fadlon2019", "druedahl2022", "boserup2018", "bingley2019", "landerso2017"]
+      "used_by": [
+        "kleven2019",
+        "damm2014",
+        "fadlon2019",
+        "druedahl2022",
+        "boserup2018",
+        "bingley2019",
+        "landerso2017",
+        "dustmann2021",
+        "jensen2025",
+        "kleven2021",
+        "daysal2026",
+        "heinesen2009"
+      ]
     },
     {
       "register": "IND — Income register",
       "what": "Annual income from tax returns, almost entirely third-party reported.",
       "variables": [
-        ["PERINDKIALT_13", "Total personal income before tax."],
-        ["LOENMV_13", "Wage income incl. fringe benefits."],
-        ["ERHVERVSINDK_13", "Earnings from employment and self-employment."],
-        ["NETOVSKUD_13", "Profit from self-employment."],
-        ["OVERFORSINDK_13", "Public transfers received."],
-        ["DISPON_13", "Disposable income after tax and interest."],
-        ["FORMUEINDK_BRUTTO", "Capital income (interest, dividends)."],
-        ["RENTUDGPR", "Interest expenses (basis for marginal-rate proxies)."],
-        ["SKATMVIALT_13", "Total taxes paid."]
+        [
+          "PERINDKIALT_13",
+          "Total personal income before tax."
+        ],
+        [
+          "LOENMV_13",
+          "Wage income incl. fringe benefits."
+        ],
+        [
+          "ERHVERVSINDK_13",
+          "Earnings from employment and self-employment."
+        ],
+        [
+          "NETOVSKUD_13",
+          "Profit from self-employment."
+        ],
+        [
+          "OVERFORSINDK_13",
+          "Public transfers received."
+        ],
+        [
+          "DISPON_13",
+          "Disposable income after tax and interest."
+        ],
+        [
+          "FORMUEINDK_BRUTTO",
+          "Capital income (interest, dividends)."
+        ],
+        [
+          "RENTUDGPR",
+          "Interest expenses (basis for marginal-rate proxies)."
+        ],
+        [
+          "SKATMVIALT_13",
+          "Total taxes paid."
+        ]
       ],
-      "used_by": ["kleven2014aej", "jakobsen2020", "hvidberg2023", "kleven2019", "bingley2019", "lethpetersen2010"]
+      "used_by": [
+        "kleven2014aej",
+        "jakobsen2020",
+        "hvidberg2023",
+        "kleven2019",
+        "bingley2019",
+        "lethpetersen2010",
+        "chetty2011",
+        "epper2020",
+        "kleven2025",
+        "dahl2024",
+        "taubinsky2026",
+        "foged2024",
+        "caplin2026"
+      ]
     },
     {
       "register": "FORM — Wealth register",
       "what": "Year-end assets and liabilities reported by banks, mortgage institutions and custodians. Universal wealth tax records until 1996, then asset and debt components.",
       "variables": [
-        ["FORMREST_NY05", "Net wealth excluding pension wealth."],
-        ["BANKAKT", "Bank deposits."],
-        ["AKTIER / OBLIGATIONER", "Stocks and bonds at market value."],
-        ["KOEJD", "Tax-assessed value of real estate."],
-        ["BANKGAELD / REALKREDIT", "Bank debt / mortgage debt."],
-        ["PENSFORM (from pension registers)", "Pension wealth, available for later years."]
+        [
+          "FORMREST_NY05",
+          "Net wealth excluding pension wealth."
+        ],
+        [
+          "BANKAKT",
+          "Bank deposits."
+        ],
+        [
+          "AKTIER / OBLIGATIONER",
+          "Stocks and bonds at market value."
+        ],
+        [
+          "KOEJD",
+          "Tax-assessed value of real estate."
+        ],
+        [
+          "BANKGAELD / REALKREDIT",
+          "Bank debt / mortgage debt."
+        ],
+        [
+          "PENSFORM (from pension registers)",
+          "Pension wealth, available for later years."
+        ]
       ],
-      "used_by": ["chetty2014", "jakobsen2020", "alstadsaeter2019", "lethpetersen2010", "jensen2017", "druedahl2022", "boserup2018"]
+      "used_by": [
+        "chetty2014",
+        "jakobsen2020",
+        "alstadsaeter2019",
+        "lethpetersen2010",
+        "jensen2017",
+        "druedahl2022",
+        "boserup2018",
+        "epper2020",
+        "johannesen2026",
+        "gruber2021",
+        "garciamiralles2024",
+        "browning2013"
+      ]
     },
     {
       "register": "IDA / IDAN / IDAP — Integrated labour market database",
       "what": "Person-level (IDAP) and job-level (IDAN) files that link every worker to employers and workplaces in November each year.",
       "variables": [
-        ["ARBGNR / CVRNR", "Employer (legal unit) identifier."],
-        ["ARBNR", "Workplace (establishment) identifier."],
-        ["TILKNYT", "Attachment type (primary job, secondary job)."],
-        ["TIMELON", "Hourly wage in the November job."],
-        ["STILL / DISCO", "Occupation (DISCO-08 from 2010)."],
-        ["ERHVER", "Labour market experience (years, from 1964)."],
-        ["ARLEDGR", "Degree of unemployment during the year."],
-        ["PSTILL / SOCIO13", "Socio-economic status (employed, unemployed, outside labour force)."]
+        [
+          "ARBGNR / CVRNR",
+          "Employer (legal unit) identifier."
+        ],
+        [
+          "ARBNR",
+          "Workplace (establishment) identifier."
+        ],
+        [
+          "TILKNYT",
+          "Attachment type (primary job, secondary job)."
+        ],
+        [
+          "TIMELON",
+          "Hourly wage in the November job."
+        ],
+        [
+          "STILL / DISCO",
+          "Occupation (DISCO-08 from 2010)."
+        ],
+        [
+          "ERHVER",
+          "Labour market experience (years, from 1964)."
+        ],
+        [
+          "ARLEDGR",
+          "Degree of unemployment during the year."
+        ],
+        [
+          "PSTILL / SOCIO13",
+          "Socio-economic status (employed, unemployed, outside labour force)."
+        ]
       ],
-      "used_by": ["lentz2023", "bagger2014", "bagger2019", "hummels2014", "foged2016", "kleven2019", "munch2006"]
+      "used_by": [
+        "lentz2023",
+        "bagger2014",
+        "bagger2019",
+        "hummels2014",
+        "foged2016",
+        "kleven2019",
+        "munch2006",
+        "taber2020",
+        "traiberman2019",
+        "utar2018",
+        "friedrich2021",
+        "albaek1998",
+        "sander2026"
+      ]
     },
     {
       "register": "AKM — Labour market classification",
       "what": "Annual socio-economic classification of the whole population.",
       "variables": [
-        ["SOCIO13", "Main socio-economic status in the year."],
-        ["BESKST13", "Employment status code."]
+        [
+          "SOCIO13",
+          "Main socio-economic status in the year."
+        ],
+        [
+          "BESKST13",
+          "Employment status code."
+        ]
       ],
-      "used_by": ["kleven2019", "fadlon2021"]
+      "used_by": [
+        "kleven2019",
+        "fadlon2021"
+      ]
     },
     {
       "register": "BFL / eIndkomst — Monthly payroll",
       "what": "Monthly employer-reported wages, hours and job spells for every employee since 2008. Replaces the November-only snapshot in IDA for recent years.",
       "variables": [
-        ["CVRNR / ARBNR", "Employer and workplace."],
-        ["AJO_SMAL_LOENBELOEB", "Narrow wage payment in the month."],
-        ["AJO_LOENTIMER", "Paid hours in the month."],
-        ["AJO_JOB_START_DATO / AJO_JOB_SLUT_DATO", "Job start and end dates."]
+        [
+          "CVRNR / ARBNR",
+          "Employer and workplace."
+        ],
+        [
+          "AJO_SMAL_LOENBELOEB",
+          "Narrow wage payment in the month."
+        ],
+        [
+          "AJO_LOENTIMER",
+          "Paid hours in the month."
+        ],
+        [
+          "AJO_JOB_START_DATO / AJO_JOB_SLUT_DATO",
+          "Job start and end dates."
+        ]
       ],
-      "used_by": ["kreiner2016"]
+      "used_by": [
+        "kreiner2016",
+        "kreiner2020restat",
+        "kleven2025"
+      ]
     },
     {
       "register": "DREAM — Public transfers (weekly)",
       "what": "Weekly codes for all public transfers (unemployment benefits, social assistance, sickness, parental leave, pensions) since 1991.",
       "variables": [
-        ["Y_<yyyy><ww>", "One variable per week with the benefit code received."],
-        ["BRANCHE", "Monthly industry of employment."]
+        [
+          "Y_<yyyy><ww>",
+          "One variable per week with the benefit code received."
+        ],
+        [
+          "BRANCHE",
+          "Monthly industry of employment."
+        ]
       ],
-      "used_by": ["dustmann2024", "munch2006"]
+      "used_by": [
+        "dustmann2024",
+        "munch2006",
+        "bargain2024",
+        "agersnap2020",
+        "andersen2023",
+        "dustmann2024app",
+        "geerdsen2006"
+      ]
     },
     {
       "register": "UDDA — Education register",
       "what": "Highest completed education and enrolment spells (KOTRE) for all residents.",
       "variables": [
-        ["HFAUDD", "Highest completed education (AUDD code)."],
-        ["HFPRIA", "Expected normal duration of the highest education (years)."],
-        ["HF_VFRA / HF_VTIL", "Start and completion dates."],
-        ["AUDD / ELEV3_VFRA (KOTRE)", "Enrolment spells by programme."]
+        [
+          "HFAUDD",
+          "Highest completed education (AUDD code)."
+        ],
+        [
+          "HFPRIA",
+          "Expected normal duration of the highest education (years)."
+        ],
+        [
+          "HF_VFRA / HF_VTIL",
+          "Start and completion dates."
+        ],
+        [
+          "AUDD / ELEV3_VFRA (KOTRE)",
+          "Enrolment spells by programme."
+        ]
       ],
-      "used_by": ["nielsen2010", "hvidberg2023", "landerso2017", "daysal2022", "houmark2024"]
+      "used_by": [
+        "nielsen2010",
+        "hvidberg2023",
+        "landerso2017",
+        "daysal2022",
+        "houmark2024",
+        "humlum2025",
+        "bagger2020",
+        "rossinslater2020",
+        "foged2024"
+      ]
     },
     {
       "register": "LPR — National Patient Register",
       "what": "All hospital contacts (inpatient, outpatient, emergency) with diagnoses, since 1977 (1995 for outpatient).",
       "variables": [
-        ["C_ADIAG", "Primary diagnosis (ICD-10)."],
-        ["C_DIAG / C_DIAGTYPE", "Secondary diagnoses and type."],
-        ["D_INDDTO / D_UDDTO", "Admission and discharge dates."],
-        ["C_PATTYPE", "Contact type (inpatient, outpatient, emergency)."]
+        [
+          "C_ADIAG",
+          "Primary diagnosis (ICD-10)."
+        ],
+        [
+          "C_DIAG / C_DIAGTYPE",
+          "Secondary diagnoses and type."
+        ],
+        [
+          "D_INDDTO / D_UDDTO",
+          "Admission and discharge dates."
+        ],
+        [
+          "C_PATTYPE",
+          "Contact type (inpatient, outpatient, emergency)."
+        ]
       ],
-      "used_by": ["fadlon2019", "fadlon2021", "daysal2022"]
+      "used_by": [
+        "fadlon2019",
+        "fadlon2021",
+        "daysal2022",
+        "daysal2026",
+        "hjort2017",
+        "friedrich2021",
+        "humlum2025",
+        "daysal2025",
+        "kristiansen2025"
+      ]
     },
     {
       "register": "LMDB — Prescription register",
       "what": "All prescriptions dispensed at Danish pharmacies since 1995.",
       "variables": [
-        ["ATC", "Drug classification code."],
-        ["EKSD", "Dispensing date."],
-        ["APK / VOLUME", "Number of packages and defined daily doses."]
+        [
+          "ATC",
+          "Drug classification code."
+        ],
+        [
+          "EKSD",
+          "Dispensing date."
+        ],
+        [
+          "APK / VOLUME",
+          "Number of packages and defined daily doses."
+        ]
       ],
-      "used_by": ["fadlon2019"]
+      "used_by": [
+        "fadlon2019",
+        "fadlon2026",
+        "hansen2025"
+      ]
     },
     {
       "register": "MFR — Medical Birth Register",
       "what": "Every birth in Denmark with mother, child and birth characteristics.",
       "variables": [
-        ["VAEGT", "Birth weight in grams."],
-        ["GESTATIONSALDER", "Gestational age."],
-        ["APGAR", "Apgar score."]
+        [
+          "VAEGT",
+          "Birth weight in grams."
+        ],
+        [
+          "GESTATIONSALDER",
+          "Gestational age."
+        ],
+        [
+          "APGAR",
+          "Apgar score."
+        ]
       ],
-      "used_by": ["daysal2022", "houmark2024"]
+      "used_by": [
+        "daysal2022",
+        "houmark2024",
+        "daysal2026",
+        "altindag2024"
+      ]
     },
     {
       "register": "DOD — Death register",
       "what": "Date and cause of death.",
       "variables": [
-        ["DODDATO", "Date of death."],
-        ["C_DOD1A–C_DOD1D", "Underlying and contributing causes (ICD-10)."]
+        [
+          "DODDATO",
+          "Date of death."
+        ],
+        [
+          "C_DOD1A–C_DOD1D",
+          "Underlying and contributing causes (ICD-10)."
+        ]
       ],
-      "used_by": ["fadlon2021", "druedahl2022"]
+      "used_by": [
+        "fadlon2021",
+        "druedahl2022",
+        "dahl2024",
+        "fadlon2026",
+        "altindag2024",
+        "hjort2017",
+        "kristiansen2025"
+      ]
     },
     {
       "register": "KRAF / KRSI — Crime registers",
       "what": "Charges (KRAF) and convictions / sentences (KRSI) with offence codes, since 1980.",
       "variables": [
-        ["AFG_GER7", "Offence code (7-digit)."],
-        ["AFG_AFGTYP", "Decision type (fine, prison, etc.)."],
-        ["AFG_GERDTO", "Date of offence."],
-        ["AFG_AFGDTO", "Date of decision."]
+        [
+          "AFG_GER7",
+          "Offence code (7-digit)."
+        ],
+        [
+          "AFG_AFGTYP",
+          "Decision type (fine, prison, etc.)."
+        ],
+        [
+          "AFG_GERDTO",
+          "Date of offence."
+        ],
+        [
+          "AFG_AFGDTO",
+          "Date of decision."
+        ]
       ],
-      "used_by": ["damm2014", "landerso2017", "dustmann2024"]
+      "used_by": [
+        "damm2014",
+        "landerso2017",
+        "dustmann2024",
+        "anker2021",
+        "dustmann2021",
+        "dustmann2024app",
+        "jensen2025"
+      ]
     },
     {
       "register": "VNDS / Residence histories",
       "what": "Full address histories with dates of moves, including municipality, parish and address identifiers.",
       "variables": [
-        ["ADRESSE_ID / BOP_VFRA", "Address identifier and move-in date."],
-        ["KOM / SOGNEKODE", "Municipality and parish."]
+        [
+          "ADRESSE_ID / BOP_VFRA",
+          "Address identifier and move-in date."
+        ],
+        [
+          "KOM / SOGNEKODE",
+          "Municipality and parish."
+        ]
       ],
-      "used_by": ["damm2014", "dustmann2019", "foged2016", "munch2006"]
+      "used_by": [
+        "damm2014",
+        "dustmann2019",
+        "foged2016",
+        "munch2006"
+      ]
     }
   ],
   "firm": [
@@ -167,72 +475,193 @@
       "register": "FIRM / FIRE — Firm statistics and Accounts Statistics",
       "what": "Annual accounts for private-sector firms. FIRM covers all firms (basic size variables); FIRE is the accounts survey with full income statement and balance sheet for a large sample, census for larger firms.",
       "variables": [
-        ["CVRNR", "Firm (legal unit) identifier, links to all firm registers and to workers via IDA/BFL."],
-        ["BRANCHE (DB07)", "Industry code (NACE rev. 2)."],
-        ["JUR_VIRK_FORM", "Legal form (sole proprietorship, limited company, etc.)."],
-        ["ANT_ANSATTE / AARSV", "Number of employees / full-time equivalents."],
-        ["OMS", "Turnover."],
-        ["EKSP", "Export value."],
-        ["VTV", "Value added."],
-        ["KAPI / AKTIVER", "Capital stock / total assets."],
-        ["RESULT / RESULT_FOER_SKAT", "Profit (after/before tax)."],
-        ["LOENOMK", "Wage costs."]
+        [
+          "CVRNR",
+          "Firm (legal unit) identifier, links to all firm registers and to workers via IDA/BFL."
+        ],
+        [
+          "BRANCHE (DB07)",
+          "Industry code (NACE rev. 2)."
+        ],
+        [
+          "JUR_VIRK_FORM",
+          "Legal form (sole proprietorship, limited company, etc.)."
+        ],
+        [
+          "ANT_ANSATTE / AARSV",
+          "Number of employees / full-time equivalents."
+        ],
+        [
+          "OMS",
+          "Turnover."
+        ],
+        [
+          "EKSP",
+          "Export value."
+        ],
+        [
+          "VTV",
+          "Value added."
+        ],
+        [
+          "KAPI / AKTIVER",
+          "Capital stock / total assets."
+        ],
+        [
+          "RESULT / RESULT_FOER_SKAT",
+          "Profit (after/before tax)."
+        ],
+        [
+          "LOENOMK",
+          "Wage costs."
+        ]
       ],
-      "used_by": ["bennedsen2007", "lentz2008", "bagger2019", "hummels2014"]
+      "used_by": [
+        "bennedsen2007",
+        "lentz2008",
+        "bagger2019",
+        "hummels2014",
+        "utar2014",
+        "renkin2024",
+        "buus2025",
+        "andersen2026"
+      ]
     },
     {
       "register": "FIDA — Firm–employee link",
       "what": "Annual file linking every employee (PNR) to firm (CVRNR) and workplace (ARBNR). The bridge between the individual and the firm side.",
       "variables": [
-        ["PNR", "Worker."],
-        ["CVRNR", "Firm."],
-        ["ARBNR", "Workplace."],
-        ["ANSAT_TYPE", "Employee attachment (primary, secondary)."]
+        [
+          "PNR",
+          "Worker."
+        ],
+        [
+          "CVRNR",
+          "Firm."
+        ],
+        [
+          "ARBNR",
+          "Workplace."
+        ],
+        [
+          "ANSAT_TYPE",
+          "Employee attachment (primary, secondary)."
+        ]
       ],
-      "used_by": ["lentz2023", "bagger2014", "bagger2019", "hummels2014", "foged2016", "kreiner2016"]
+      "used_by": [
+        "lentz2023",
+        "bagger2014",
+        "bagger2019",
+        "hummels2014",
+        "foged2016",
+        "kreiner2016",
+        "traiberman2019",
+        "taber2020",
+        "utar2014",
+        "utar2018",
+        "chetty2011"
+      ]
     },
     {
       "register": "UHDI / UHDM — Foreign trade by firm",
       "what": "Imports and exports by firm, product (CN8) and partner country, from customs (extra-EU) and Intrastat (intra-EU).",
       "variables": [
-        ["CVRNR", "Firm."],
-        ["VARE (CN8)", "Product code."],
-        ["LAND", "Partner country."],
-        ["VAERDI / MAENGDE", "Value in DKK / quantity."],
-        ["IMPEKS", "Import or export flag."]
+        [
+          "CVRNR",
+          "Firm."
+        ],
+        [
+          "VARE (CN8)",
+          "Product code."
+        ],
+        [
+          "LAND",
+          "Partner country."
+        ],
+        [
+          "VAERDI / MAENGDE",
+          "Value in DKK / quantity."
+        ],
+        [
+          "IMPEKS",
+          "Import or export flag."
+        ]
       ],
-      "used_by": ["hummels2014"]
+      "used_by": [
+        "hummels2014",
+        "traiberman2019",
+        "utar2014",
+        "utar2018",
+        "buus2025",
+        "renkin2024"
+      ]
     },
     {
       "register": "VNDS / Moms — VAT-based turnover",
       "what": "Monthly or quarterly VAT returns giving domestic sales and purchases for all VAT-registered firms. Useful for high-frequency firm activity.",
       "variables": [
-        ["CVRNR", "Firm."],
-        ["SALG / KOEB", "Sales / purchases subject to VAT."],
-        ["PERIODE", "Reporting period."]
+        [
+          "CVRNR",
+          "Firm."
+        ],
+        [
+          "SALG / KOEB",
+          "Sales / purchases subject to VAT."
+        ],
+        [
+          "PERIODE",
+          "Reporting period."
+        ]
       ],
-      "used_by": []
+      "used_by": [
+        "andersen2026"
+      ]
     },
     {
       "register": "Company registers (CVR, ownership, management)",
       "what": "Owners, board members and CEOs of limited companies, with personal identifiers for Danish residents. Used to link managers and owners to their families and careers.",
       "variables": [
-        ["CVRNR", "Firm."],
-        ["PNR", "Owner / CEO / board member."],
-        ["ROLLE", "Role (CEO, chair, board member, owner)."],
-        ["EJERANDEL", "Ownership share."]
+        [
+          "CVRNR",
+          "Firm."
+        ],
+        [
+          "PNR",
+          "Owner / CEO / board member."
+        ],
+        [
+          "ROLLE",
+          "Role (CEO, chair, board member, owner)."
+        ],
+        [
+          "EJERANDEL",
+          "Ownership share."
+        ]
       ],
-      "used_by": ["bennedsen2007"]
+      "used_by": [
+        "bennedsen2007"
+      ]
     },
     {
       "register": "Patents and R&D (external, linked by firm)",
       "what": "PATSTAT or DKPTO patent records and the R&D survey (FUI), linked to CVRNR by name or by Statistics Denmark's matching.",
       "variables": [
-        ["appln_id / publn_nr", "Patent application and publication identifiers."],
-        ["IPC / CPC", "Technology class."],
-        ["FUI: FOUUDG", "In-house R&D expenditure."]
+        [
+          "appln_id / publn_nr",
+          "Patent application and publication identifiers."
+        ],
+        [
+          "IPC / CPC",
+          "Technology class."
+        ],
+        [
+          "FUI: FOUUDG",
+          "In-house R&D expenditure."
+        ]
       ],
-      "used_by": ["lentz2008"]
+      "used_by": [
+        "lentz2008"
+      ]
     }
   ]
 }
