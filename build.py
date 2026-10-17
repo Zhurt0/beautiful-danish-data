@@ -785,13 +785,14 @@ def build_survey():
     )
     out += nav("survey.html")
     by_id = {p["id"]: p for p in PAPERS}
-    n_docs = sum(1 for sv in SURVEYS for d in sv.get("documents", []) if d.get("type") in ("questionnaire", "appendix with questions", "codebook"))
-    with_q = sum(1 for sv in SURVEYS if any(d.get("type") in ("questionnaire", "appendix with questions", "codebook") for d in sv.get("documents", [])))
+    QT = ("questionnaire", "appendix with questions", "codebook", "questions quoted in paper")
+    n_docs = sum(1 for sv in SURVEYS for d in sv.get("documents", []) if d.get("type") in QT)
+    with_q = sum(1 for sv in SURVEYS if any(d.get("type") in QT for d in sv.get("documents", [])))
     out += f"""    <section class="section intro">
         <div class="container">
             <h2 class="section-title">Survey</h2>
             <p>Many papers link register data to a survey through the personal identifier: the Labour Force Survey for hours and occupations, the Expenditure Survey to validate imputed consumption, children's cohort surveys, election studies, or a survey the authors fielded themselves. This page collects the questionnaires behind those surveys, so you can see exactly what respondents were asked.</p>
-            <p class="note">{len(SURVEYS)} surveys used by {len({pid for sv in SURVEYS for pid in sv.get("papers", [])})} papers; {with_q} have at least one questionnaire, codebook or question appendix found online ({n_docs} documents). Every document was opened and checked before it was listed. Links point to the original publisher, so the files stay with their owners and their reuse terms; the microdata themselves are confidential and accessed through Statistics Denmark or the survey owner.</p>
+            <p class="note">{len(SURVEYS)} surveys used by {len({pid for sv in SURVEYS for pid in sv.get("papers", [])})} papers; {with_q} have question wording online: a full questionnaire, a codebook with the questions, an appendix listing them, or at least the questions quoted in the paper ({n_docs} documents in all). Every document was opened and checked before it was listed. Links point to the original publisher, so the files stay with their owners and their reuse terms; the microdata themselves are confidential and accessed through Statistics Denmark or the survey owner.</p>
         </div>
     </section>
     <section class="section">
@@ -800,7 +801,7 @@ def build_survey():
 """
     groups = [("Official and academic surveys", [sv for sv in SURVEYS if not sv.get("custom")]),
               ("Surveys and experiments fielded by the authors", [sv for sv in SURVEYS if sv.get("custom")])]
-    TYPE_LABEL = {"questionnaire": "Questionnaire", "codebook": "Codebook", "appendix with questions": "Questions in appendix", "documentation": "Documentation"}
+    TYPE_LABEL = {"questionnaire": "Questionnaire", "codebook": "Codebook", "appendix with questions": "Questions in appendix", "questions quoted in paper": "Questions quoted in paper", "documentation": "Documentation"}
     for gname, items in groups:
         if not items:
             continue

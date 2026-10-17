@@ -1,0 +1,1029 @@
+[
+  {
+    "key": "fire_survey",
+    "short": "Accounts Statistics survey",
+    "name": "Accounts Statistics for the Non-Agricultural Private Sector (Regnskabsstatistik for private byerhverv), firm accounts survey",
+    "owner": "Statistics Denmark (Danmarks Statistik)",
+    "description": "Annual mandatory survey of a sample of firms in the non-agricultural private sector (all large firms plus a size-stratified sample of smaller ones, roughly 8,000-9,000 firms around 1999-2003) reporting detailed income statement, balance sheet, investment and employment/hours items; combined with tax-register data for non-sampled firms.",
+    "landing_page": "https://www.dst.dk/en/Statistik/dokumentation/documentationofstatistics/accounts-statistics-for-non-agricultural-private-sector",
+    "documents": [
+      {
+        "title": "Regnskabsstatistik 2025 - kladde (draft of the full online reporting form: all questions)",
+        "url": "https://www.dst.dk/ext/vejledninger/REGN-kladde--pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "2025",
+        "pages": 10,
+        "location": null,
+        "licence": null
+      }
+    ],
+    "access": "Firm-level microdata (FIRE/REGN registers) via Statistics Denmark researcher access (forskeradgang), linkable to IDA/employer-employee data.",
+    "notes": "Only the current (2025) reporting form is online; no questionnaire for the 1999-2003 waves used by Bagger et al. (2014) was found. The 2025 draft's question text is embedded as vector graphics (not extractable text) but was confirmed visually (e.g. p.3: Resultatopgørelse items 1-6). Reporter page with XBRL template: https://www.dst.dk/da/Indberet/oplysningssider/regnskabsstatistik. Bagger et al. describe the data in Section 4 and Appendix B (sampling scheme) of the UCL working-paper version.",
+    "papers": [
+      "bagger2014"
+    ],
+    "waves_used": "1999–2003",
+    "custom": false
+  },
+  {
+    "key": "cyd",
+    "short": "Children and Youth in Denmark",
+    "name": "Children and Youth in Denmark (CYD) / Børn og unge i Danmark - velfærd og trivsel",
+    "owner": "SFI - Danish National Centre for Social Research, now VIVE (funded by Bikubenfonden)",
+    "description": "Repeated cross-section of random samples of Danish children aged about 3, 7, 11, 15 and 19 (2009 and 2013; later rounds 2017/2018); parents of the 3- and 7-year-olds and the older children themselves answer by web with telephone follow-up (11-year-olds by personal interview), linked to Statistics Denmark registers.",
+    "landing_page": "https://vive.dk/da/udgivelser/boern-og-unge-i-danmark-velfaerd-og-trivsel-2014-5272",
+    "documents": [
+      {
+        "title": "Børn og unge i Danmark - velfærd og trivsel 2010 (SFI report on the 2009 survey)",
+        "url": "https://vive.dk/media/pure/4318/272804",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "2009",
+        "pages": 258,
+        "location": "Appendix Bilag 1, pp. 248-253: list of indicators by domain and age group (indicator descriptions, not full question wording)",
+        "licence": null
+      },
+      {
+        "title": "Børn og unge i Danmark - velfærd og trivsel 2014 (SFI report on the 2013 survey)",
+        "url": "https://vive.dk/media/pure/5272/277216",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "2013",
+        "pages": 247,
+        "location": "Introduction 'Undersøgelsens datagrund og metoder' (pp. ~21-27) describes the questionnaire design and modes; Bilag 1 (methods)",
+        "licence": null
+      }
+    ],
+    "access": "Survey microdata are held by VIVE; researchers gain access through a VIVE agreement and analyse them linked to registers on Statistics Denmark's research servers.",
+    "notes": "Rossin-Slater and Wüst use the 2009 CYD wave (custody arrangements), pooled with DALSC 2007 (Appendix C). No questionnaire PDF or codebook found online for 2009 or 2013. The paper's source link (sfi.dk/children_and_young_people_in_denmark-7395.aspx) is defunct and the Wayback Machine could not be reached. No Danish Data Archive study page found.",
+    "papers": [
+      "rossinslater2018"
+    ],
+    "waves_used": "as used by Rossin-Slater and Wüst (2018)",
+    "custom": false
+  },
+  {
+    "key": "clp",
+    "short": "Copenhagen Life Panel",
+    "name": "Copenhagen Life Panel (CLP)",
+    "owner": "Copenhagen Life Panel research team, Department of Economics / CEBI, University of Copenhagen",
+    "description": "Online panel survey of a random sample of adults drawn from the Danish population register, fielded every January since 2020 and linkable to Statistics Denmark administrative registers; the January 2021 wave carried the conditional earnings-expectations instrument of Caplin et al.",
+    "landing_page": null,
+    "documents": [
+      {
+        "title": "Online Appendix for 'Subjective Earnings Risk' (Caplin, Gregory, Lee, Leth-Petersen, Sæverud), Appendix A: Survey questions (CLP January 2021 earnings-expectations module, with variable names and routing)",
+        "url": "https://fraser.stlouisfed.org/files/docs/publications/frbsl_wp/2023-003_appendix.pdf",
+        "type": "appendix with questions",
+        "language": "English",
+        "wave": "January 2021",
+        "pages": 25,
+        "location": "Appendix A, pp. 1-6",
+        "licence": null
+      },
+      {
+        "title": "Subjective Earnings Risk, ReStud accepted manuscript (Section 2 describes the instrument and the CLP; Figure 1 instrument overview; states questionnaire is in Online Appendix A)",
+        "url": "https://www.restud.com/wp-content/uploads/2026/06/MS34520manuscript.pdf",
+        "type": "documentation",
+        "language": "English",
+        "wave": "January 2021",
+        "pages": 44,
+        "location": "Section 2, pp. 5-10",
+        "licence": null
+      }
+    ],
+    "access": "Survey data are held by the CLP team on Statistics Denmark's research servers and linked to registers; access by arrangement with the CLP researchers via a DST Research Service project.",
+    "notes": "No public CLP project website, full-panel questionnaire or codebook was found; only the earnings-risk module (in the St. Louis Fed WP 2023-003 online appendix, dated April 2025) is documented. The ReStud online appendix itself was not located; the restud.com paper page links no supplementary files.",
+    "papers": [
+      "caplin2026"
+    ],
+    "waves_used": "January 2021 wave",
+    "custom": false
+  },
+  {
+    "key": "dces",
+    "short": "Consumer Expectations Survey",
+    "name": "Danish Consumer Expectations Survey / Consumer Confidence Survey (Forbrugerforventningsundersøgelsen, Forbrugerforventninger; part of Statistics Denmark's Omnibus survey)",
+    "owner": "Statistics Denmark (Danmarks Statistik), within the EU Joint Harmonised Programme of Business and Consumer Surveys (European Commission DG ECFIN)",
+    "description": "Monthly repeated cross-section of about 1,500 residents aged 16-74 drawn from the CPR register, interviewed by telephone/web as the first module of Statistics Denmark's Omnibus survey; questions are harmonised with the European Commission's consumer survey and include quantitative inflation perceptions and expectations.",
+    "landing_page": "https://www.dst.dk/da/Statistik/dokumentation/statistikdokumentation/forbrugerforventninger/indhold",
+    "documents": [
+      {
+        "title": "The Joint Harmonised EU Programme of Business and Consumer Surveys: User Guide (Jan 2023), Annex 3.1 Consumer survey - Questionnaire",
+        "url": "https://economy-finance.ec.europa.eu/system/files/2023-02/bcs_user_guide.pdf",
+        "type": "questionnaire",
+        "language": "English",
+        "wave": "harmonised source questionnaire (2023 edition)",
+        "pages": 53,
+        "location": "Annex, section 3.1, printed pp. 39-42 (PDF pp. 42-45)",
+        "licence": null
+      },
+      {
+        "title": "Taubinsky, Butera, Saccarola and Lian, 'Beliefs About the Economy Are Excessively Sensitive to Household-Level Shocks' (NBER WP 32664), Appendix A.3 'Danish Survey of Consumers Expectations: Questionnaire'",
+        "url": "https://www.nber.org/system/files/working_papers/w32664/w32664.pdf",
+        "type": "appendix with questions",
+        "language": "English",
+        "wave": "2008-2020 (questions asked in all months)",
+        "pages": 140,
+        "location": "Appendix A.3, printed pp. 62-65 (PDF pp. 64-67)",
+        "licence": null
+      },
+      {
+        "title": "Taubinsky et al. (NBER WP 32664), Appendix A.4 'Additional Surveys: Questionnaire' (authors' own Epinion survey in Denmark and Prolific survey in the US)",
+        "url": "https://www.nber.org/system/files/working_papers/w32664/w32664.pdf",
+        "type": "appendix with questions",
+        "language": "English",
+        "wave": "authors' supplementary survey",
+        "pages": 140,
+        "location": "Appendix A.4, printed pp. 65-81 (PDF pp. 67-83)",
+        "licence": null
+      }
+    ],
+    "access": "Microdata linked to registers via Statistics Denmark researcher access (forskeradgang); aggregate series in Statistikbanken (FORV1 etc.).",
+    "notes": "No Danish-language DST questionnaire PDF found online: the DST documentation page lists the 12 indicator questions by topic only, and the European Commission national-questionnaires page has Danish business-survey questionnaires but no Danish consumer questionnaire.",
+    "papers": [
+      "taubinsky2026"
+    ],
+    "waves_used": "as used by Taubinsky et al.",
+    "custom": false
+  },
+  {
+    "key": "des",
+    "short": "Expenditure Survey",
+    "name": "Danish Expenditure Survey / Household Budget Survey (Forbrugsundersøgelsen)",
+    "owner": "Statistics Denmark (Danmarks Statistik)",
+    "description": "Annual (since 1994) sample survey of private households combining a face-to-face/CAPI interview on fixed and large expenditures over the past 12 months with a 14-day expenditure diary (regnskabshæfte), supplemented with register data; results are usually published as pooled three-year samples.",
+    "landing_page": "https://www.dst.dk/da/Statistik/dokumentation/statistikdokumentation/forbrugsundersoegelsen",
+    "documents": [
+      {
+        "title": "Forbrugsundersøgelsen - Metodebeskrivelse: Fra dataindsamling til offentliggørelse (Danmarks Statistik 1999; describes the post-1994 design, interview topics, diaries, coding and weighting; Bilag lists fieldwork materials)",
+        "url": "https://dst.dk/pubfile/4797/hele",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "1994 onwards (1995-1997 data)",
+        "pages": 84,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Statistikdokumentation: Forbrugsundersøgelsen (current documentation; yearly PDFs for 2013-2024)",
+        "url": "https://www.dst.dk/da/Statistik/dokumentation/statistikdokumentation/forbrugsundersoegelsen",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "2013-2024",
+        "pages": null,
+        "location": null,
+        "licence": null
+      }
+    ],
+    "access": "Microdata via Statistics Denmark's Research Service (register-linkable household files); no public-use file.",
+    "notes": "No interview questionnaire (interviewskema) or expenditure diary for 1994-1996, or for any later year, was found online at dst.dk, nor a DDA/Rigsarkivet study page; the 1999 method description describes the interview content but does not reproduce question wording. The papers using it do not reproduce questions.",
+    "papers": [
+      "browning2003",
+      "degiorgi2019",
+      "lethpetersen2010",
+      "eshaghnia2025"
+    ],
+    "waves_used": "1994–1996",
+    "custom": false
+  },
+  {
+    "key": "dnhis",
+    "short": "Health Interview Survey 2000",
+    "name": "Danish Health and Morbidity Survey 2000 / Danish National Health Interview Survey (Sundheds- og sygelighedsundersøgelsen 2000, SUSY 2000)",
+    "owner": "National Institute of Public Health (Statens Institut for Folkesundhed, SIF; now part of University of Southern Denmark)",
+    "description": "Nationally representative health survey of adults in Denmark combining a personal (face-to-face) interview by Statistics Denmark field staff and a self-administered questionnaire; run in 1987, 1994, 2000, 2005, then as self-administered surveys 2010 onward. The 2000 wave had about 22,500 sampled persons (national, follow-up and county supplementary samples).",
+    "landing_page": "https://www.sdu.dk/da/sif/forskning/projekter/sundheds_og_sygelighedsundersoegelserne/sporgeskema",
+    "documents": [
+      {
+        "title": "SUSY 2000 - Interviewskema med svarfordelinger (samlet interviewskema)",
+        "url": "https://www.sdu.dk/-/media/images/sif/projekter/projekter_dokumenter/susy/susy_2000_personligt_interviewskema_med_svarfordeling.pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "2000",
+        "pages": 75,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "SUSY 2000 - Selvadministreret spørgeskema (med svarfordeling)",
+        "url": "https://www.sdu.dk/-/media/images/sif/projekter/projekter_dokumenter/susy/susy_2000_selvadministreret_spoergeskema_med_svarfordeling.pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "2000",
+        "pages": 61,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "The Danish Health and Morbidity Survey 2000 - Questionnaire for personal interview with response frequencies (joint questionnaire)",
+        "url": "https://www.sdu.dk/-/media/images/sif/projekter/projekter_dokumenter/susy/susy_2000_questionnaire_for_personal_interview_with_response_frequencies.pdf",
+        "type": "questionnaire",
+        "language": "English",
+        "wave": "2000",
+        "pages": 74,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "The Danish Health and Morbidity Survey 2000 - Self-administered questionnaire with response frequencies",
+        "url": "https://www.sdu.dk/-/media/images/sif/projekter/projekter_dokumenter/susy/susy_2000_self-administrated_questionnaires_with_response_frequencies.pdf",
+        "type": "questionnaire",
+        "language": "English",
+        "wave": "2000",
+        "pages": 62,
+        "location": null,
+        "licence": null
+      }
+    ],
+    "access": "Microdata via SIF/SDU application (data linked to registers are accessed through Statistics Denmark or the Danish Health Data Authority research servers).",
+    "notes": "Health insurance (supplerende sundhedsforsikring) questions appear in the personal interview (around pp. 71-72 of both interview versions). Older 1987/1994 and later 2005+ questionnaires are also on the landing page.",
+    "papers": [
+      "simonsen2021jpube"
+    ],
+    "waves_used": "2000",
+    "custom": false
+  },
+  {
+    "key": "aku",
+    "short": "Labour Force Survey (AKU)",
+    "name": "Danish Labour Force Survey (Arbejdskraftundersøgelsen, AKU / LFS)",
+    "owner": "Statistics Denmark (Danmarks Statistik)",
+    "description": "Quarterly rotating-panel sample survey of persons aged 15-89 (earlier 15-74) resident in Denmark, the Danish part of the EU-LFS; interviews by telephone (CATI) and, since 2016, also web (CAWI), about labour market status in a fixed reference week.",
+    "landing_page": "https://www.dst.dk/da/Statistik/dokumentation/statistikdokumentation/arbejdskraftundersoegelsen--aku-",
+    "documents": [
+      {
+        "title": "Kerneskema 4. kvartal 2018 (AKU core questionnaire, version 30-8-2018), linked from the AKU statistical documentation for 2018 Q4",
+        "url": "http://www.dst.dk/Site/Dst/SingleFiles/kvaldeklbilag.aspx?filename=6a7dc700-f941-4939-b01a-cb5bc6a26097",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "2018 Q4",
+        "pages": 127,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Hovedskemaet i Arbejdskraftundersøgelsen (AKU_2025K3)",
+        "url": "https://www.dst.dk/Site/Dst/SingleFiles/GetArchiveFile.aspx?fi=2232910152386&fo=0&ext=kvaldel",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "2025 Q3",
+        "pages": 89,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Hovedskemaet i Arbejdskraftundersøgelsen (AKU_2025K4)",
+        "url": "https://www.dst.dk/Site/Dst/SingleFiles/GetArchiveFile.aspx?fi=6090311760559&fo=0&ext=kvaldel",
+        "type": "questionnaire",
+        "language": "Danish (with English-version text)",
+        "wave": "2025 Q4",
+        "pages": 96,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Spørgeskema: Hovedskemaet i Arbejdskraftundersøgelsen (AKU_2026K2)",
+        "url": "https://www.dst.dk/Site/Dst/SingleFiles/kvaldeklbilag.aspx?filename=0ee39db2-a689-4a10-9644-859ae057e4f2Spørgeskema.pdf&ext=.pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "2026 Q2 (current)",
+        "pages": 94,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Questionnaire: Hovedskemaet i Arbejdskraftundersøgelsen (AKU_2026K2), English-wording version",
+        "url": "https://www.dst.dk/Site/Dst/SingleFiles/kvaldeklbilag.aspx?filename=fd2cfa32-7d82-48ef-a4db-653460d2f3d0Questionnaire.pdf&ext=.pdf",
+        "type": "questionnaire",
+        "language": "English (question text; routing/field labels in Danish)",
+        "wave": "2026 Q2 (current)",
+        "pages": 92,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Statistikdokumentation for Arbejdskraftundersøgelsen 2018 4. kvartal",
+        "url": "https://www.dst.dk/Site/Dst/SingleFiles/kvaldeklbilag.aspx?filename=8cead1b6-4c62-4d75-bb1d-817072785c19Arbejdskraftundersøgelsen_2018_4._kvartal&ext=.pdf",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "2018 Q4",
+        "pages": 24,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "AKU - Arbejdskraftundersøgelsen: method page (codification/variable list, EU ad hoc modules 1999-2025, weighting notes)",
+        "url": "https://www.dst.dk/da/Statistik/dokumentation/metode/aku-arbejdskraftundersoegelsen",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "all",
+        "pages": null,
+        "location": null,
+        "licence": null
+      }
+    ],
+    "access": "Microdata via Statistics Denmark's Research Service (Forskningsservice) remote access for authorised institutions; linkable to registers by person ID.",
+    "notes": "Quarterly statistical documentation PDFs are online for 2014 Q3 onwards; the only pre-2025 questionnaire found is the 2018 Q4 core schema. Questionnaires for 2000-2017 (the bulk of the waves used) were not found online; the older link dst.dk/ext/5123632308/0/arbe/AKU-spoergeskemaet--pdf now returns a not-found page.",
+    "papers": [
+      "almar2026",
+      "frederiksen2026"
+    ],
+    "waves_used": "2000–2018",
+    "custom": false
+  },
+  {
+    "key": "dalsc",
+    "short": "DALSC",
+    "name": "Danish Longitudinal Survey of Children (DALSC) / Børneforløbsundersøgelsen (Forløbsundersøgelsen af børn født i 1995, 'Årgang 95')",
+    "owner": "SFI - Danish National Centre for Social Research, now VIVE",
+    "description": "Panel of about 6,000 children born in autumn 1995 to mothers with Danish citizenship; mothers (and in early waves fathers) were interviewed at child ages ~0.5, 3, 7, 11, 15 and 18 (1996, 1999, 2003, 2007, 2011, 2014), and the children themselves from age 11.",
+    "landing_page": "https://atlaslongitudinaldatasets.ac.uk/datasets/dalsc",
+    "documents": [
+      {
+        "title": "SDQ and Quasi-SDQ for children in the Danish Longitudinal Survey of Children (DALSC), SFI working paper (Andersen, Deding & Lausten 2010)",
+        "url": "https://www.vive.dk/media/pure/yvry9rzb/272912",
+        "type": "appendix with questions",
+        "language": "English and Danish",
+        "wave": "1996, 1999, 2003",
+        "pages": 24,
+        "location": "Appendix A, p. 20 (the 25 SDQ items in the 2003 mother questionnaire); Appendix B, pp. 21-23 (Danish wording of 1999 mother-questionnaire item 11 on child behaviour); Tables 3 and 6, pp. 12 and 15 (English translations of selected 1999 and 1996 items)",
+        "licence": null
+      },
+      {
+        "title": "Spædbarnsfamilien. Rapport nr. 1 fra forløbsundersøgelsen af børn født i efteråret 1995 (SFI 97:25)",
+        "url": "https://www.vive.dk/media/pure/5957/332002",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "1996",
+        "pages": 254,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "15-åriges hverdagsliv og udfordringer. Rapport fra femte dataindsamling af forløbsundersøgelsen af børn født i 1995 (SFI 12:30)",
+        "url": "https://www.vive.dk/media/pure/4767/274883",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "2011",
+        "pages": 346,
+        "location": null,
+        "licence": "SFI's publications may be freely quoted with clear source attribution"
+      },
+      {
+        "title": "Unge i Danmark - 18 år og på vej til voksenlivet. Årgang 95 (SFI 16:18)",
+        "url": "https://www.vive.dk/media/pure/6512/490422",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "2014",
+        "pages": 279,
+        "location": null,
+        "licence": "SFI's publications may be freely quoted with clear source attribution"
+      }
+    ],
+    "access": "Microdata are held by VIVE and can be accessed by approved researchers via a VIVE project agreement on Statistics Denmark's research servers, linkable to registers.",
+    "notes": "No full questionnaire PDF for any wave found online. SFI reports refer to documentation at www.sfi.dk/dalsc, which is no longer online (could not reach the Wayback Machine). The 1998 wave-1 report's appendix has only analysis tables, no questionnaire. No Danish Data Archive (DDA) study page found.",
+    "papers": [
+      "dattagupta2010",
+      "eshaghnia2025",
+      "rossinslater2018"
+    ],
+    "waves_used": "waves 1996, 1999, 2003 (and later)",
+    "custom": false
+  },
+  {
+    "key": "dnes",
+    "short": "National Election Study",
+    "name": "Danish National Election Study (DNES) / Valgundersøgelsen (Det danske Valgprojekt)",
+    "owner": "Danish Election Programme (Det danske Valgprojekt; Ole Borre, Jørgen Goul Andersen, Hans Jørgen Nielsen et al.), archived by the Danish National Archives (Rigsarkivet, formerly Danish Data Archive)",
+    "description": "Post-election face-to-face interview survey of about 1,000-2,000 Danish voters fielded after each Folketing election since 1971 (fieldwork by Gallup / ACNielsen AIM), covering issue priorities, party choice and political attitudes.",
+    "landing_page": "https://www.valgprojektet.dk/pages/page.asp?pid=308&l=dk",
+    "documents": [
+      {
+        "title": "Valgundersøgelsen 1990: Gallup omnibus questionnaire 'Valgundersøgelse omnibus 1, 1991' (bus1_91.pdf, scanned, with marginal percentages)",
+        "url": "https://digidata.rigsarkivet.dk/aflevering/36263/bus1_91.pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "1990 (fielded 1991)",
+        "pages": 26,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Valgundersøgelsen 1994: questionnaire (bus1.pdf)",
+        "url": "https://digidata.rigsarkivet.dk/aflevering/36578/bus1.pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "1994",
+        "pages": 40,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Valg 1998, ACNielsen AIM job nr. 14532: interview questionnaire (jnr14532.pdf)",
+        "url": "https://digidata.rigsarkivet.dk/aflevering/36680/jnr14532.pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "1998",
+        "pages": 30,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Valgundersøgelsen 1990, DDA-1564: codebook (kodebog, scanned; question numbers, short wording, frequencies)",
+        "url": "https://digidata.rigsarkivet.dk/aflevering/36263/kodebog.pdf",
+        "type": "codebook",
+        "language": "Danish",
+        "wave": "1990",
+        "pages": 72,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Valgundersøgelsen 1994, DDA-2210: codebook with full question wording and frequencies",
+        "url": "https://digidata.rigsarkivet.dk/aflevering/36578/kodebog.pdf",
+        "type": "codebook",
+        "language": "Danish",
+        "wave": "1994",
+        "pages": 139,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Danish Election Study 1994, DDA-2210: English codebook (scanned frequency tables with English labels)",
+        "url": "https://digidata.rigsarkivet.dk/aflevering/36578/engkodbg.pdf",
+        "type": "codebook",
+        "language": "English",
+        "wave": "1994",
+        "pages": 38,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Valgundersøgelsen 1998, DDA-4189: codebook with full question wording and frequencies",
+        "url": "https://digidata.rigsarkivet.dk/aflevering/36680/kodebog.pdf",
+        "type": "codebook",
+        "language": "Danish",
+        "wave": "1998",
+        "pages": 100,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Danish Election Study 1998, DDA-4189: English codebook (scanned frequency tables with English labels)",
+        "url": "https://digidata.rigsarkivet.dk/aflevering/36680/engkodbg.pdf",
+        "type": "codebook",
+        "language": "English",
+        "wave": "1998",
+        "pages": 33,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Valgundersøgelsen 1998: teknisk rapport (Goul Andersen et al., Arbejdspapirer fra Det danske Valgprojekt #9, Dec. 1999)",
+        "url": "https://digidata.rigsarkivet.dk/aflevering/36680/tekrap.pdf",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "1998",
+        "pages": 58,
+        "location": null,
+        "licence": null
+      }
+    ],
+    "access": "Microdata for 1971-2019 are available from the Danish National Archives (Rigsarkivet, digidata.rigsarkivet.dk study pages, DOIs 10.5279/dk-sa-dda-1564, -2210, -4189) on application. Documentation PDFs are freely downloadable.",
+    "notes": "Study pages: 1990 https://digidata.rigsarkivet.dk/aflevering/36263, 1994 https://digidata.rigsarkivet.dk/aflevering/36578, 1998 https://digidata.rigsarkivet.dk/aflevering/36680. The supplementary surveys (1994 suppl. https://digidata.rigsarkivet.dk/aflevering/36639, DDA-3132; 1998 suppl. https://digidata.rigsarkivet.dk/aflevering/36752, DDA-6301) have codebooks only. The 1994 'bus2.pdf' was not opened. The 1990 omnibus questionnaire and the codebook are scanned images (no text layer). The old dda.dk codebook links on valgprojektet.dk now redirect to rigsarkivet.dk.",
+    "papers": [
+      "dustmann2019"
+    ],
+    "waves_used": "1990, 1994, 1998",
+    "custom": false
+  },
+  {
+    "key": "dtus",
+    "short": "Time Use Survey 2001",
+    "name": "Danish Time Use Survey 2001 (DTUS; Danish: Tidsanvendelsesundersøgelsen 2001 / Danskernes tidsanvendelse 2001)",
+    "owner": "SFI - Danish National Institute of Social Research (now VIVE), with Rockwool Foundation Research Unit; fieldwork by SFI-Survey",
+    "description": "Nationally representative survey of 2,739 Danes aged 16-74 (2001; split sample spring/autumn): CAPI home interview with a questionnaire on background, normal weekly paid and household work hours, personal expenditures and well-being, plus self-completed 10-minute time diaries for one weekday and one weekend day by respondent and partner (6,624 diaries); linked to Statistics Denmark registers. Repeat of the 1987 survey; followed by the 2008/09 Danish Time Use and Consumption Survey.",
+    "landing_page": "https://www.vive.dk/media/pure/yzekepzk/322388",
+    "documents": [
+      {
+        "title": "Browning & Gørtz (2006), Spending Time and Money within the Household, Oxford Economics Discussion Paper 288 (the data description Foerster cites, fn. 18): quotes the DTUS 2001 personal-expenditure questions and describes the normal-hours housework/market-work questions",
+        "url": "https://ora.ox.ac.uk/objects/uuid:147a1fc2-016d-47ab-85cc-4802b0dfe02e/files/mf456609eee3c997f19706a30ba4eab8b",
+        "type": "questions quoted in paper",
+        "language": "English",
+        "wave": "2001",
+        "pages": 43,
+        "location": "Section 2.2 'Time use' (PDF p. 6, housework/market-work hours question described) and Section 2.3 'Personal expenditures' (PDF p. 9, printed p. 8: expenditure question wording quoted with item list and footnotes 5-6)",
+        "licence": null
+      },
+      {
+        "title": "Bonke (2002), Paid work and unpaid work: diary information versus questionnaire information, SFI Working Paper 26:2002 - describes the DTUS 2001 questionnaire items on paid work and the 9 household-work tasks and the diary design",
+        "url": "https://www.vive.dk/media/pure/3x8m81zo/325182",
+        "type": "documentation",
+        "language": "English",
+        "wave": "2001",
+        "pages": 21,
+        "location": "Tables 1-2 and text, PDF pp. 6-8",
+        "licence": null
+      },
+      {
+        "title": "Bonke (2002), Tid og velfærd, SFI rapport 02:26 - main report; Kapitel 6 'Data og bortfald' lists questionnaire and diary contents, sampling and non-response",
+        "url": "https://www.vive.dk/media/pure/yzekepzk/322388",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "2001",
+        "pages": 112,
+        "location": "Section 1.4 'Undersøgelsesmetode' (PDF pp. 18-19) and Kapitel 6 (PDF pp. 87-92)",
+        "licence": null
+      }
+    ],
+    "access": "Microdata held by VIVE (formerly SFI) / Rockwool Foundation; researchers access linked survey-register data via a Statistics Denmark research project (no public download found; not located in the DDA catalogue).",
+    "notes": "The original DTUS 2001 CAPI questionnaire and diary form were not found online (searched VIVE/SFI, Rockwool Foundation, MTUS - which lists Denmark 2001 only as a harmonised simple file with no documentation - and Danish National Archives). Only partial verbatim question wording is available via Browning & Gørtz (2006); Bonke WP 26:2002 describes but does not quote the household-work items. The 1987 questionnaire documentation (MTUS readme) was not checked.",
+    "papers": [
+      "foerster2024"
+    ],
+    "waves_used": "2001",
+    "custom": false
+  },
+  {
+    "key": "dwecs",
+    "short": "Work Environment Cohort Study",
+    "name": "Danish Work Environment Cohort Study (DWECS) / Den Nationale Arbejdsmiljøkohorte (NAK)",
+    "owner": "National Research Centre for the Working Environment (NFA; formerly Arbejdsmiljøinstituttet, AMI)",
+    "description": "Panel/split-panel survey of a representative sample of the Danish workforce (employees and self-employed, initially aged 18-59), interviewed by Statistics Denmark (phone/personal interview, later questionnaire) about every five years from 1990 to 2010; responses are linkable to registers.",
+    "landing_page": "https://nfa.dk/arbejdsmiljoedata/nfas-forskningsdata",
+    "documents": [],
+    "access": "Via NFA (contact nfa@nfa.dk) and Statistics Denmark researcher access (forskeradgang) for register-linked versions; project-specific approval.",
+    "notes": "No questionnaire for the 1995 or 2000 waves found online (searched nfa.dk, arbejdsmiljoforskning.dk, DDA, Eurofound). Taber & Vejlin (2020) Appendix B describes the data but does not reproduce the question on who initiated job termination. The NFA research-data page only lists NAK2005 data on request. Burr et al. (2003, SJWEH 29(4):270-279) describe the 1990-2000 waves.",
+    "papers": [
+      "taber2020"
+    ],
+    "waves_used": "1995 and 2000",
+    "custom": false
+  },
+  {
+    "key": "echp",
+    "short": "ECHP",
+    "name": "European Community Household Panel (ECHP); Danish part sometimes called Det Europæiske Husstandspanel",
+    "owner": "Eurostat, fielded in Denmark by the Danish National Institute of Social Research (SFI, now VIVE)",
+    "description": "Harmonised annual household panel run in the EU member states 1994-2001 (eight waves), with a household questionnaire and a personal questionnaire for every member aged 16+, covering income, employment, job satisfaction, health, housing and social relations; the Danish sample was drawn from the CPR register and can be linked to IDA/registers.",
+    "landing_page": "https://ec.europa.eu/eurostat/web/microdata/european-community-household-panel",
+    "documents": [
+      {
+        "title": "Clark, Kristensen and Westergård-Nielsen, 'Job Satisfaction and Co-worker Wages: Status or Signal?', IZA DP 3073 - quotes the ECHP overall job-satisfaction item used ('How satisfied are you with your work or other main activity?', 1-6 scale)",
+        "url": "https://docs.iza.org/dp3073.pdf",
+        "type": "questions quoted in paper",
+        "language": "English",
+        "wave": "1994-2001 (Danish ECHP)",
+        "pages": 30,
+        "location": "Section 3.1 'The Data', p. 10 (single question quoted in text; not a full questionnaire)",
+        "licence": null
+      },
+      {
+        "title": "The EC Household Panel Newsletter (01/02), Eurostat 2003 (sample sizes by wave and country)",
+        "url": "https://ec.europa.eu/eurostat/documents/3859598/5874365/KS-BF-03-001-EN.PDF/46948391-a396-44b7-86af-70bee7fd2080",
+        "type": "documentation",
+        "language": "English",
+        "wave": "1994-1999",
+        "pages": 11,
+        "location": null,
+        "licence": "© European Communities, 2003"
+      }
+    ],
+    "access": "Anonymised ECHP UDB microdata via Eurostat's microdata access procedure for research entities; the register-linked Danish file is held by VIVE/Statistics Denmark and used on DST research servers.",
+    "notes": "No ECHP questionnaire (household/personal, generic or Danish) was found online. The Eurostat ECHP library (CIRCABC 'echpanel' Library, PAN documents) now requires EU Login; the EPUNet ECHP user guide site (epunet.essex.ac.uk) no longer resolves and the Wayback Machine is unreachable from this environment. No DDA/Rigsarkivet study page for the Danish ECHP was found.",
+    "papers": [
+      "clark2009"
+    ],
+    "waves_used": "1994–2001 (eight waves)",
+    "custom": false
+  },
+  {
+    "key": "issp2002",
+    "short": "ISSP 2002",
+    "name": "International Social Survey Programme 2002: Family and Changing Gender Roles III (ISSP 2002, GESIS ZA3880; Danish component 'ISSP Family 2002')",
+    "owner": "ISSP Research Group; archived by GESIS (ZA3880). Danish component run by the Danish ISSP programme (Aalborg University, Jørgen Goul Andersen)",
+    "description": "Cross-national attitude module on women's employment, family, childcare and division of housework fielded in 34 countries in 2002-03. In Denmark: simple random sample of 2,100 from the CPR register, postal self-completion survey with telephone follow-up, 21 Nov 2002 - 28 Feb 2003, 1,379 respondents (66.2% response). ISSP modules repeat roughly every 10 years (1988, 1994, 2002, 2012).",
+    "landing_page": "https://www.gesis.org/en/issp/data-and-documentation/family-and-changing-gender-roles/2002",
+    "documents": [
+      {
+        "title": "ZA Study 3880 Codebook: ISSP 2002 Family and Changing Gender Roles III (GESIS Zentralarchiv, 2004) - includes per-country study descriptions and full English source question wording for every item",
+        "url": "https://study.sagepub.in/system/files/issp_codebook.pdf",
+        "type": "codebook",
+        "language": "English",
+        "wave": "2002",
+        "pages": 440,
+        "location": "Study Description: Denmark on pp. I-40 to I-42 (PDF pp. 42-44); item-level question wording starts at Q.1 on PDF p. 131",
+        "licence": null
+      }
+    ],
+    "access": "Integrated data file (ZA3880, doi:10.4232/1.11564) downloadable free from GESIS after registration; Danish national file also at the Danish National Archives (DDA).",
+    "notes": "GESIS pages (gesis.org, search.gesis.org) return Cloudflare 403 from this environment, so the official Source Questionnaire (ZA3880_bq.pdf) and the Danish country questionnaire on the GESIS ZA3880 page could not be opened or verified; the landing page URL was taken from search results, not opened. The verified codebook is the official GESIS codebook but is hosted on a third-party (SAGE companion) site. No Danish-language questionnaire found.",
+    "papers": [
+      "kleven2019"
+    ],
+    "waves_used": "2002",
+    "custom": false
+  },
+  {
+    "key": "trivsel",
+    "short": "School well-being survey",
+    "name": "National school well-being survey / Den nationale trivselsmåling (folkeskolen)",
+    "owner": "Danish Ministry of Children and Education (Børne- og Undervisningsministeriet; administered by Styrelsen for It og Læring / STUK)",
+    "description": "Mandatory annual online questionnaire answered in class by all public-school pupils in grades 0-9 since the 2014/15 school year (about 40 items for grades 4-9, 20 for grades 0-3), covering social and school well-being, learning environment, support, and peace and order.",
+    "landing_page": "https://uvm.dk/grundskole/folkeskolen/skoleudvikling/trivselsmaaling/",
+    "documents": [
+      {
+        "title": "Den nationale trivselsmåling - Spørgeskema til elev i 4.-9. klasse (revised version, Nov. 2019)",
+        "url": "https://uvm.dk/media/yd2luyp1/191120-spoergeskema-til-trivselsmaaling-4-9-klasse-ua.pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "2019 revision (in use from 2020)",
+        "pages": 5,
+        "location": "Items 6 ('Hvor tit kan du finde en løsning på problemer, bare du prøver hårdt nok?'), 7 ('Hvor tit kan du klare det, du sætter dig for?') and 10 ('Hvor tit har du ondt i maven?') are the three items used by Dustmann, Landersø and Andersen (2024)",
+        "licence": null
+      },
+      {
+        "title": "Den nationale trivselsmåling - Spørgeskema til elev i 0.-3. klasse (revised version, Nov. 2019)",
+        "url": "https://uvm.dk/media/tjajku35/191120-spoergeskema-til-trivselsmaaling-0-3-klasse-ua.pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "2019 revision (in use from 2020)",
+        "pages": 3,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Information om trivselsmålingen til elever i 4.-9. klasse (lærerversion), 2026 talking points",
+        "url": "https://uvm.dk/media/c3qhhlpo/information-om-trivselsmaalingen-til-elever-i-4-til-9-klasse-laererversion.pdf",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "2026",
+        "pages": 3,
+        "location": null,
+        "licence": null
+      }
+    ],
+    "access": "Pupil-level responses are available to researchers via Statistics Denmark research access (or the Ministry's data service, uddannelsesstatistik.dk 'forskerudlevering'), linkable to registers by pupil ID.",
+    "notes": "The paper uses responses from 2015 onward (8th-9th grade) on items 6, 7 and 10 of the 4-9 questionnaire, all of which are in the verified 2019 revision. The original 2015-2019 question framework (uvm.dk 160624-trivselsspoergeramme-til-mellemtrin-og-udskoling-2.pdf) now returns 404, so earlier wording could not be checked. Research data documentation 'DVH_Grundskole_Trivselsdata.pdf' on uddannelsesstatistik.dk could not be downloaded (connection reset), so it was not verified.",
+    "papers": [
+      "dustmann2024app"
+    ],
+    "waves_used": "as used by Dustmann, Landersø and Andersen (2024)",
+    "custom": false
+  },
+  {
+    "key": "ppi",
+    "short": "Producer Price survey",
+    "name": "Producer and Import Price Index for Commodities (Producent- og importprisindeks for varer, PPI) - monthly price survey of firms",
+    "owner": "Statistics Denmark (Danmarks Statistik)",
+    "description": "Mandatory monthly business survey in which sampled Danish producers and importers report actual prices (typically for 3-5 representative products per product group, price around the 15th of the month, excl. VAT) for goods sold on the home market, exported, or imported; reported electronically via Virk.dk.",
+    "landing_page": "https://www.dst.dk/en/Statistik/dokumentation/documentationofstatistics/producer-and-import-price-index-for-commodities",
+    "documents": [
+      {
+        "title": "Vejledning til indberetninger - Eksempel på elektronisk skema (field-by-field guide to the PPI electronic reporting form)",
+        "url": "https://www.dst.dk/ext/vejledninger/PPI-vejl--pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "current (undated, c. 2020s)",
+        "pages": 5,
+        "location": "Screenshot of reporting form (p.1) with numbered field explanations 0-9 (p.5)",
+        "licence": null
+      },
+      {
+        "title": "Priser på danske varer til hjemmemarked (instruction letter to sampled firms, home-market prices)",
+        "url": "https://www.dst.dk/ext/vejledninger/PPI-vejl-hjem--pdf",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "current (undated, c. 2020s)",
+        "pages": 1,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Priser på danske varer til eksport (instruction letter to sampled firms, export prices)",
+        "url": "https://www.dst.dk/ext/vejledninger/PPI-vejl-eks--pdf",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "current (undated, c. 2020s)",
+        "pages": 2,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Priser på importerede varer (instruction letter to sampled firms, import prices)",
+        "url": "https://www.dst.dk/ext/vejledninger/PPI-vejl-imp--pdf",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "current (undated, c. 2020s)",
+        "pages": 1,
+        "location": null,
+        "licence": null
+      }
+    ],
+    "access": "Firm-product-level price microdata via Statistics Denmark researcher access (forskeradgang), linkable to firm registers.",
+    "notes": "The reporting instrument is a pre-filled electronic price form rather than a questionnaire; the field guide is the current version and no archived form for the years used by Renkin and Züllig was found. Reporter page: https://www.dst.dk/da/Indberet/oplysningssider/producent-og-importpriser-for-varer",
+    "papers": [
+      "renkin2024"
+    ],
+    "waves_used": "as used by Renkin and Züllig (2024)",
+    "custom": false
+  },
+  {
+    "key": "share",
+    "short": "SHARE",
+    "name": "Survey of Health, Ageing and Retirement in Europe (SHARE), Danish sample (Danish fieldwork title: 'Levevilkår for nutidens og fremtidens ældre')",
+    "owner": "SHARE-ERIC (Danish part fielded by SFI, now VIVE)",
+    "description": "Biennial cross-national panel of persons aged 50+ and their partners, interviewed face to face by CAPI with a paper drop-off questionnaire; Denmark has participated since wave 1 (2004). Bingley and Martinello (2017) use wave 1 (2004) for Denmark, linked to registers.",
+    "landing_page": "https://share-eric.eu/data/data-documentation/questionnaires/wave-1",
+    "documents": [
+      {
+        "title": "SHARE 2004 (wave 1) main CAPI questionnaire, Danish country version (version 10)",
+        "url": "https://share-eric.eu/fileadmin/user_upload/Questionnaires/Q-Wave_1/w1_dk_capi_main.pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "Wave 1 (2004)",
+        "pages": 164,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "SHARE 2004 (wave 1) coverscreen, Danish country version",
+        "url": "https://share-eric.eu/fileadmin/user_upload/Questionnaires/Q-Wave_1/w1_dk_capi_cov.pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "Wave 1 (2004)",
+        "pages": 10,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "SHARE 2004 Danish drop-off (self-completion) questionnaire 'Levevilkår for nutidens og fremtidens ældre' (Us. 5619-3)",
+        "url": "https://share-eric.eu/fileadmin/user_upload/Questionnaires/Q-Wave_1/w1_dk_dropoff_ques.pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "Wave 1 (2004)",
+        "pages": 16,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "SHARE 2004 Danish showcards",
+        "url": "https://share-eric.eu/fileadmin/user_upload/Questionnaires/Q-Wave_1/w1_dk_showcards.pdf",
+        "type": "questionnaire",
+        "language": "Danish",
+        "wave": "Wave 1 (2004)",
+        "pages": 38,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "SHARE 2004 generic main questionnaire, version 10 (manually edited April 2005)",
+        "url": "https://share-eric.eu/fileadmin/user_upload/Questionnaires/Q-Wave_1/w1_en_capi_main-Generic.pdf",
+        "type": "questionnaire",
+        "language": "English",
+        "wave": "Wave 1 (2004)",
+        "pages": 132,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Bingley and Martinello, 'Measurement error in the Survey of Health, Ageing and Retirement in Europe: A validation study with administrative data for education level, income and employment', SHARE Working Paper 16-2014, Appendix A: Survey questions (Danish and English wording of DN010/DN012 education items, EP005 labour status, income components)",
+        "url": "https://www.vive.dk/media/pure/5219/387674",
+        "type": "appendix with questions",
+        "language": "English (with Danish answer wording)",
+        "wave": "Wave 1 (2004)",
+        "pages": 33,
+        "location": "Appendix A (Tables 6-7), PDF pp. 29-32 (printed pp. 28-31)",
+        "licence": null
+      }
+    ],
+    "access": "SHARE scientific-use files are free after registration with the SHARE Research Data Center; the register-linked Danish data (REGLINK-SHAREDK) are available only on Statistics Denmark's research servers.",
+    "notes": "Questionnaires for later waves are on the same site (share-eric.eu/data/data-documentation/questionnaires/wave-N) but were not needed: the JOLE 2017 paper uses Denmark wave 1.",
+    "papers": [
+      "bingley2017"
+    ],
+    "waves_used": "waves used by Bingley and Martinello (2017)",
+    "custom": false
+  },
+  {
+    "key": "foreign_edu",
+    "short": "Foreign-education survey",
+    "name": "Survey of immigrants' education brought from abroad (Spørgeskemaundersøgelse om indvandrernes medbragte uddannelse), feeding the education register (HFAUDD/UDDA source 'survey')",
+    "owner": "Statistics Denmark (Danmarks Statistik)",
+    "description": "Postal Danish-language questionnaire (with instructions in 12 languages) sent in September 1999 to about 159,000 immigrants aged 18-59 who arrived 1970-1998 without a Danish qualifying education, asking about schooling, vocational/higher education and work experience abroad; repeated for later arrival cohorts (to 2004, then from 2016/2017 via language schools, e-Boks web surveys and STAR CV data), with imputation for non-respondents.",
+    "landing_page": "https://www.dst.dk/pubomtale/3232",
+    "documents": [
+      {
+        "title": "Indvandrernes uddannelse (Henrik Mørkeberg, Danmarks Statistik 2000): results of the 1999 survey; Ch. 8 'Undersøgelsens tilrettelæggelse' describes the questionnaire content (8.4 Spørgeskema, 8.5 Vejledninger), data collection and coding",
+        "url": "https://dst.dk/pubfile/3232/indvUdd",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "1999",
+        "pages": 99,
+        "location": "Chapter 8, from printed p. 71 (PDF p. 65); 8.4 Spørgeskema and 8.5 Vejledninger on printed pp. 73-74 (PDF pp. 67-68)",
+        "licence": null
+      },
+      {
+        "title": "Indvandrernes medbragte uddannelse (Danmarks Statistik method note, 19 June 2018)",
+        "url": "https://www.dst.dk/ext/8605464468/0/uddannelse/Indvandrernes-medbragte-uddannelse--pdf",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "1999-2017",
+        "pages": 12,
+        "location": null,
+        "licence": null
+      },
+      {
+        "title": "Indvandrernes medbragte uddannelse (Danmarks Statistik method note, 11 February 2020): overview of all surveys 1999-2020, collection methods and imputation",
+        "url": "https://www.dst.dk/ext/formid/medbragt-udd--pdf",
+        "type": "documentation",
+        "language": "Danish",
+        "wave": "1999-2020",
+        "pages": 16,
+        "location": null,
+        "licence": null
+      }
+    ],
+    "access": "Survey-based foreign education is embedded in Statistics Denmark's education register (UDDA/UDDF, variable HFAUDD with source codes), accessed through DST's Research Service.",
+    "notes": "The questionnaire form itself (1999 or later rounds) and the 12-language instruction sheets are not reproduced in any document found; the 2000 publication describes the questions (highest schooling, vocational/higher education, year completed, practical vs theoretical, work abroad) but does not print the form.",
+    "papers": [
+      "damm2009",
+      "dustmann2023ej",
+      "jensen2025"
+    ],
+    "waves_used": "1999 survey and later updates",
+    "custom": false
+  },
+  {
+    "key": "fluchtmann_aux",
+    "short": "UI recipient survey",
+    "name": "Auxiliary survey of unemployment insurance recipients on application coverage",
+    "owner": "Authors (Fluchtmann, Glenny, Harmon, Maibom)",
+    "description": null,
+    "landing_page": null,
+    "documents": [],
+    "access": null,
+    "notes": null,
+    "papers": [
+      "fluchtmann2024jole"
+    ],
+    "waves_used": "as fielded for the paper",
+    "custom": true
+  },
+  {
+    "key": "hks",
+    "short": "Fairness-views survey",
+    "name": "Custom online survey on social positions and fairness views (Hvidberg, Kreiner and Stantcheva)",
+    "owner": "Authors (Hvidberg, Kreiner, Stantcheva), CEBI, University of Copenhagen; invitations sent via Statistics Denmark",
+    "description": "Online Qualtrics survey of Danes born 1969-1973 drawn from the population register and invited via Statistics Denmark (Feb-Mar 2019); elicits perceived income positions in several reference groups, fairness views, and includes a randomised information treatment on true positions. One-off survey, linked to register data.",
+    "landing_page": "https://www.nber.org/papers/w28099",
+    "documents": [
+      {
+        "title": "Social Positions and Fairness Views on Inequality, NBER WP 28099 (rev. Nov 2021), Appendix A: Survey (A.1 survey link and questions in English; A.2 instruction video script; A.3 screenshots)",
+        "url": "https://conference.nber.org/conf_papers/f163325/f163325.pdf",
+        "type": "appendix with questions",
+        "language": "English",
+        "wave": "February-March 2019",
+        "pages": 108,
+        "location": "Appendix A.1 'Survey link and questions in English', pp. A-2 to A-7 (PDF pp. 47-53); A.2 instruction video script pp. A-8 to A-9; A.3 survey screenshots pp. A-10 to A-12",
+        "licence": null
+      }
+    ],
+    "access": "Survey responses are linked to Danish register data and held on Statistics Denmark servers; access via a Statistics Denmark research project (authors' replication package for RES).",
+    "notes": "Questions are reproduced in English translation; the original Danish-language Qualtrics instrument was not found online. The published RES online supplementary appendix (doi:10.1093/restud/rdad019) was not checked (OUP site); the NBER revision's Appendix A is the verified source.",
+    "papers": [
+      "hvidberg2023"
+    ],
+    "waves_used": "February–March 2019",
+    "custom": true
+  },
+  {
+    "key": "epper",
+    "short": "Time-discounting experiment",
+    "name": "Incentivised online time-discounting experiment and survey (Epper, Fehr, Fehr-Duda, Kreiner, Lassen, Leth-Petersen and Rasmussen)",
+    "owner": "Authors (CEBI, University of Copenhagen / University of Zurich)",
+    "description": "Online experiment run in 2015 with a random sample of middle-aged Danes (3,620 completers) invited by letter. It elicits time, risk and social preferences with real payouts to NemKonto and is linked to administrative wealth registers. A 2015 follow-up with 2,096 respondents and a 2018 study with 4,151 Danes born 1967-1986 also asked the 1973 DLSY preferred-income-profile question.",
+    "landing_page": "https://www.aeaweb.org/articles?id=10.1257/aer.20181096",
+    "documents": [
+      {
+        "title": "Time Discounting and Wealth Inequality - Online Appendix (AER 2020)",
+        "url": "https://www.aeaweb.org/articles/materials/12349",
+        "type": "appendix with questions",
+        "language": "English (with Danish invitation letter facsimile)",
+        "wave": "2015 (and 2018 follow-up)",
+        "pages": 31,
+        "location": "Online Appendix B.1, pp. 3-4 (invitation letter in Danish, with English translation); B.2, p. 5 (Table A1: all 15 intertemporal choice situations); D.1, pp. 22-24 (comparison with the DLSY survey question)",
+        "licence": null
+      },
+      {
+        "title": "Time Discounting and Wealth Inequality, CEBI Working Paper 08/19 (with appendices)",
+        "url": "https://www.econ.ku.dk/cebi/publikationer/working-papers/CEBI_WP_08-19.pdf",
+        "type": "questions quoted in paper",
+        "language": "English",
+        "wave": "2015",
+        "pages": 67,
+        "location": "Section 2, pp. 10-11 (task description and Figure 1 screenshot of the allocation screen); Section 4.1, p. 26 (verbatim wording of the 1973 DLSY job/income-profile question, re-asked to the experiment subsample)",
+        "licence": null
+      }
+    ],
+    "access": "Experimental data are linked to Danish administrative registers on Statistics Denmark's servers and are not public; access is through CEBI / Statistics Denmark research agreements (openICPSR project 115221 holds code only).",
+    "notes": "The appendix has no full screen-by-screen instructions, no video-instruction scripts and no risk- or social-preference task screens. The paper says each task had video instructions and comprehension questions, but these are not reproduced. The AEA zip (materials/12350) holds only disclosure statements.",
+    "papers": [
+      "epper2020"
+    ],
+    "waves_used": "as fielded for the paper",
+    "custom": true
+  },
+  {
+    "key": "kll2019",
+    "short": "Special Pension survey",
+    "name": "Telephone survey of Special Pension (SP) account holders on use of the 2009 SP payout",
+    "owner": "Authors (Kreiner, Lassen, Leth-Petersen); fielded by Epinion",
+    "description": "Telephone survey (weeks 4-7 of 2010, about 6,000 completed interviews, 40 questions, 10-12 minutes) of a random sample of SP account holders, asking how the 2009 SP payout was allocated plus financial situation and expectations; merged with register data. One-off.",
+    "landing_page": "https://www.aeaweb.org/articles?id=10.1257/pol.20140313",
+    "documents": [
+      {
+        "title": "Liquidity Constraint Tightness and Consumer Responses to Fiscal Stimulus Policy (working-paper version v61): Section 4.1 quoting the SP allocation question",
+        "url": "https://web2.econ.ku.dk/ctk/Papers/SP_v61.pdf",
+        "type": "questions quoted in paper",
+        "language": "English",
+        "wave": "January 2010",
+        "pages": 34,
+        "location": "Main text, Section 4.1 'Survey data and the spending response to the stimulus policy', PDF p. 12 (printed p. 11): full wording of the payout-allocation question; other questions only described",
+        "licence": null
+      },
+      {
+        "title": "Measuring the Accuracy of Survey Responses using Administrative Register Data: Evidence from Denmark (NBER WP 19539): Section 5.1 quoting the income recall question from the same January 2010 survey",
+        "url": "https://www.nber.org/system/files/working_papers/w19539/w19539.pdf",
+        "type": "questions quoted in paper",
+        "language": "English",
+        "wave": "January 2010",
+        "pages": 23,
+        "location": "Section 5.1 'Data', PDF p. 11 (gross 2009 income recall question quoted)",
+        "licence": null
+      }
+    ],
+    "access": "Survey responses merged with register data at Statistics Denmark; access only via a Statistics Denmark research project.",
+    "notes": "The full 40-question Epinion questionnaire is not published; only the payout-allocation question (KLL 2019) and the income question (NBER w19539) are quoted verbatim. The AEA online appendix (https://www.aeaweb.org/articles/materials/10252) has tables only, no questions.",
+    "papers": [
+      "kreiner2019"
+    ],
+    "waves_used": "January 2010",
+    "custom": true
+  },
+  {
+    "key": "kls2016",
+    "short": "Income-shifting survey",
+    "name": "Telephone survey on awareness of the income-shifting opportunity (Capacent Epinion omnibus, January 2011)",
+    "owner": "Authors (Kreiner, Leth-Petersen, Skov); fielded by Capacent Epinion",
+    "description": "Two questions included in a telephone survey of a random sample of the Danish adult population in January 2011 (response rate 67%), merged to the eIncome payroll register (878 taxpayers in the analysis sample). One-off.",
+    "landing_page": "https://www.aeaweb.org/articles?id=10.1257/pol.20140233",
+    "documents": [
+      {
+        "title": "Tax Reforms and Intertemporal Shifting of Wage Income (working-paper version v18): Section III.C 'Survey Results' reproducing both survey questions (own translation)",
+        "url": "https://web2.econ.ku.dk/ctk/Papers/Incomeshifting_AEJpol_v18.pdf",
+        "type": "questions quoted in paper",
+        "language": "English",
+        "wave": "January 2011",
+        "pages": 19,
+        "location": "Main text, Section III.C 'Survey Results', pp. 12-13 (both question wordings quoted in full; answer distribution in Table 4)",
+        "licence": null
+      }
+    ],
+    "access": "Survey linked to SKAT eIncome register at Statistics Denmark; access only via a Statistics Denmark research project.",
+    "notes": "No standalone questionnaire exists online; the AEA online appendix (https://www.aeaweb.org/articles/materials/5892) only shows results for survey respondents (Fig. A2/A3) and does not reproduce the questions. The survey consisted of only the two questions quoted in the paper (embedded in an Epinion omnibus).",
+    "papers": [
+      "kreiner2016"
+    ],
+    "waves_used": "January 2011",
+    "custom": true
+  },
+  {
+    "key": "klw2020",
+    "short": "Preferences survey 2014",
+    "name": "Telephone survey on risk willingness, patience and impulsivity of respondents and their parents (January 2014)",
+    "owner": "Authors (Kreiner, Leth-Petersen, Willerslev-Olsen)",
+    "description": "Telephone survey of 1,748 individuals in January 2014 asking respondents to rate themselves and each parent on 1-10 scales for risk willingness, patience and impulsivity; linked to loan and population registers. One-off.",
+    "landing_page": "https://doi.org/10.1093/ej/uez046",
+    "documents": [
+      {
+        "title": "Financial Trouble Across Generations (CEBI Working Paper 01/17): section on elicited preference parameters quoting the three survey questions",
+        "url": "https://www.econ.ku.dk/cebi/publikationer/working-papers/cebi-working-papers/CEBI_WP_01-17.pdf",
+        "type": "questions quoted in paper",
+        "language": "English",
+        "wave": "January 2014",
+        "pages": 51,
+        "location": "Main text, subsection 'Correlation between elicited preference parameters and financial trouble', PDF pp. 29-31 (printed pp. 27-29): three questions quoted, 1-10 scale, parents rated on same dimensions",
+        "licence": null
+      }
+    ],
+    "access": "Survey linked to SKAT loan register and population registers at Statistics Denmark; access only via a Statistics Denmark research project.",
+    "notes": "No standalone questionnaire published; the three self-assessment items (adapted from SOEP-style questions) are quoted in the paper. Survey fielder not named in the paper. Economic Journal online appendix not checked (OUP).",
+    "papers": [
+      "kreiner2020"
+    ],
+    "waves_used": "2014",
+    "custom": true
+  }
+]

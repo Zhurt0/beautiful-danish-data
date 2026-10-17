@@ -184,3 +184,5 @@ ul.docs { list-style: none; display: grid; gap: 5px; margin: 8px 0; font-size: 0
 .dtype.t-questionnaire { border-color: #2a78d6; color: #1c5cab; }
 .dtype.t-appendix-with-questions { border-color: #1baf7a; color: #0c7a52; }
 .muted { color: var(--muted); }
+.dtype.t-codebook { border-color: #6250d6; color: #4a3aa7; }
+.dtype.t-questions-quoted-in-paper { border-color: #eda100; color: #8a5d00; }
