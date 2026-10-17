@@ -84,7 +84,7 @@ def head(title, description, canonical):
 
 
 def nav(active):
-    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("landscape.html", "3D data landscape"), ("variables.html", "Variable map")]
+    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("landscape.html", "3D data landscape"), ("codebook.html", "Codebook"), ("variables.html", "Variable map")]
     lis = ""
     for href, label in items:
         cls = ' class="active"' if href == active else ""
@@ -144,6 +144,44 @@ def facts(p):
     ) + "                    </dl>\n"
 
 
+CONCEPTS = ["Earnings and income", "Wealth, debt and consumption", "Employment and labour force status", "Hours worked",
+            "Unemployment and benefits", "Retirement and pensions", "Sector and industry", "Occupation and job hierarchy",
+            "Firm characteristics and productivity", "Trade and offshoring", "Education and test scores",
+            "Family links, fertility and household", "Immigration and origin", "Health care use",
+            "Health outcomes, diagnoses and mortality", "Crime", "Geography and neighbourhood", "Taxes and tax rates",
+            "Sample definition and timing", "Other"]
+SRC_LABEL = {"replication code": "replication code", "online appendix": "online appendix", "paper": "paper", "working paper": "working paper"}
+
+
+def slug(t):
+    return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
+
+
+def def_source(d):
+    loc = f" &middot; {e(d['source_location'])}" if d.get("source_location") else ""
+    lab = SRC_LABEL.get(d.get("source_type"), d.get("source_type") or "source")
+    if d.get("source_url"):
+        return f'<a class="src" href="{e(d["source_url"])}" target="_blank" rel="noopener">{e(lab)}</a>{loc}'
+    return f"{e(lab)}{loc}"
+
+
+def defs_block(p):
+    defs = p.get("definitions") or []
+    if not defs:
+        return ""
+    items = ""
+    for d in defs:
+        codes = f'<div class="codes"><span>Codes:</span> <code>{e(d["codes"])}</code></div>' if d.get("codes") else ""
+        regs = f'<div class="regs"><span>Registers:</span> {e(", ".join(d["registers"]))}</div>' if d.get("registers") else ""
+        items += (f'                        <li><strong>{e(d["variable"])}</strong> <span class="concept">{e(d["concept"])}</span>'
+                  f'<div>{e(d["definition"])}</div>{regs}{codes}<div class="dsrc">{def_source(d)}</div></li>\n')
+    rep = ""
+    if p.get("replication_package"):
+        rep = f'                    <p class="rep"><a href="{e(p["replication_package"])}" target="_blank" rel="noopener">Replication package</a></p>\n'
+    return (f'                    <details class="defs"><summary>How variables are defined ({len(defs)})</summary>\n'
+            f'                    <ul>\n{items}                    </ul>\n{rep}                    </details>\n')
+
+
 def paper_card(p, show_themes=True):
     themes = ""
     if show_themes:
@@ -154,7 +192,7 @@ def paper_card(p, show_themes=True):
                     <h4><a href="{scholar(p['title'])}" target="_blank" rel="noopener">{e(p['title'])}</a></h4>
                     <p class="meta">{e(p['authors'])} &middot; <em>{e(p['journal'])}</em>, {p['year']} &middot; <span class="level">{LEVEL_LABEL[p['level']]}</span></p>
                     <p class="summary">{e(p['summary'])}</p>
-{facts(p)}{themes}
+{facts(p)}{defs_block(p)}{themes}
                 </article>
 """
 
@@ -644,10 +682,98 @@ def build_landscape():
     return out
 
 
+def build_codebook():
+    out = head(
+        "Codebook | Beautiful Danish Data",
+        "How papers using Danish register data define their variables: GP visits, public-sector employment, earnings, hours, mass layoffs and more, with register variable names, codes and sources.",
+        "codebook.html",
+    )
+    out += nav("codebook.html")
+    entries = []
+    for p in PAPERS:
+        for d in p.get("definitions") or []:
+            entries.append((d, p))
+    n_papers = sum(1 for p in PAPERS if p.get("definitions"))
+    by_src = {}
+    for d, _ in entries:
+        by_src[d.get("source_type")] = by_src.get(d.get("source_type"), 0) + 1
+    present = [c for c in CONCEPTS if any(d["concept"] == c for d, _ in entries)]
+    chips = "".join(f'<button type="button" class="chip" data-c="{slug(c)}">{e(c)}</button>' for c in present)
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">Codebook</h2>
+            <p>How each paper builds the variables it uses: the rule, the threshold, the register and, where the authors state them, the exact register variable names and code values. Definitions come from replication code where it is public, otherwise from online appendices, working-paper appendices or the paper itself, and each one links to its source.</p>
+            <p class="note">{len(entries)} definitions from {n_papers} papers. By source: {", ".join(f"{v} from {k}" for k, v in sorted(by_src.items(), key=lambda kv: -kv[1]))}. Register variable names and codes change between years and projects, so check the current Statistics Denmark documentation before reusing a code list. AEA replication packages sit on openICPSR, which could not be read for this page, so AEA papers rely on their appendices.</p>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <input id="cfilter" class="filter" type="search" placeholder="Search variables, codes or registers, e.g. GP, SOCIO13, public sector" aria-label="Search the codebook">
+            <div class="ctl-row cb-chips"><span class="ctl-label">Concept</span>{chips}<button type="button" class="chip ghost" id="call">All</button></div>
+"""
+    for c in present:
+        rows = sorted([(d, p) for d, p in entries if d["concept"] == c], key=lambda dp: (dp[0]["variable"].lower(), -dp[1]["year"]))
+        out += f"""            <div class="cb-group" data-c="{slug(c)}">
+            <h3 class="cb-title" id="{slug(c)}">{e(c)} <span>{len(rows)}</span></h3>
+            <div class="table-wrap">
+            <table class="codebook">
+                <thead><tr><th>Variable</th><th>Paper</th><th>Definition</th><th>Registers and codes</th><th>Source</th></tr></thead>
+                <tbody>
+"""
+        for d, p in rows:
+            regs = e(", ".join(d.get("registers") or []))
+            codes = f'<br><code>{e(d["codes"])}</code>' if d.get("codes") else ""
+            out += (f'                    <tr><td data-label="Variable"><strong>{e(d["variable"])}</strong></td>'
+                    f'<td data-label="Paper"><a href="index.html#{p["id"]}">{e(short_cite(p))}</a></td>'
+                    f'<td data-label="Definition">{e(d["definition"])}</td>'
+                    f'<td data-label="Registers and codes">{regs}{codes}</td>'
+                    f'<td data-label="Source">{def_source(d)}</td></tr>\n')
+        out += """                </tbody>
+            </table>
+            </div>
+            </div>
+"""
+    out += """        </div>
+    </section>
+    <script>
+    (function () {
+        var groups = Array.prototype.slice.call(document.querySelectorAll('.cb-group'));
+        var chips = Array.prototype.slice.call(document.querySelectorAll('.cb-chips .chip[data-c]'));
+        var active = null;
+        function apply() {
+            var q = document.getElementById('cfilter').value.toLowerCase();
+            groups.forEach(function (g) {
+                var show = !active || g.getAttribute('data-c') === active, n = 0;
+                Array.prototype.forEach.call(g.querySelectorAll('tbody tr'), function (r) {
+                    var hit = show && (!q || r.innerText.toLowerCase().indexOf(q) !== -1);
+                    r.style.display = hit ? '' : 'none'; if (hit) n++;
+                });
+                g.style.display = n ? '' : 'none';
+            });
+        }
+        chips.forEach(function (b) {
+            b.addEventListener('click', function () {
+                active = active === b.getAttribute('data-c') ? null : b.getAttribute('data-c');
+                chips.forEach(function (x) { x.classList.toggle('on', x.getAttribute('data-c') === active); });
+                apply();
+            });
+        });
+        document.getElementById('call').addEventListener('click', function () {
+            active = null; chips.forEach(function (x) { x.classList.remove('on'); }); apply();
+        });
+        document.getElementById('cfilter').addEventListener('input', apply);
+    })();
+    </script>
+"""
+    out += FOOTER
+    return out
+
+
 if __name__ == "__main__":
     (ROOT / "index.html").write_text(build_index())
     (ROOT / "themes.html").write_text(build_themes())
     (ROOT / "variables.html").write_text(build_variables())
     (ROOT / "samples.html").write_text(build_samples())
     (ROOT / "landscape.html").write_text(build_landscape())
-    print(f"built 5 pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers")
+    (ROOT / "codebook.html").write_text(build_codebook())
+    print(f"built 6 pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers")

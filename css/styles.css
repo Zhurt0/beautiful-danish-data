@@ -145,3 +145,31 @@ footer { border-top: 1px solid var(--border-color); padding: 24px 0 40px; margin
 .cell-list ul { list-style: none; display: grid; gap: 4px; }
 .cell-list .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: baseline; }
 .cell-list .muted { color: var(--muted); }
+
+/* Variable definitions */
+details.defs { margin: 2px 0 10px; font-size: 0.9rem; max-width: 80ch; }
+details.defs summary { cursor: pointer; color: var(--accent-color); font-weight: 700; }
+details.defs ul { list-style: none; margin-top: 8px; display: grid; gap: 10px; }
+details.defs li { border-left: 2px solid var(--border-color); padding-left: 10px; color: var(--secondary-color); }
+details.defs li strong { color: var(--primary-color); }
+.concept { font-size: 0.75rem; color: var(--muted); border: 1px solid var(--border-color); border-radius: 3px; padding: 0 5px; margin-left: 4px; }
+.regs span, .codes span { color: var(--muted); }
+code { white-space: normal; word-break: normal; overflow-wrap: break-word; }
+.dsrc { font-size: 0.8rem; color: var(--muted); }
+.rep { font-size: 0.85rem; margin-top: 6px; }
+.cb-chips { margin-bottom: 18px; }
+.cb-title { font-size: 1.15rem; margin: 26px 0 8px; color: var(--primary-color); }
+.cb-title span { font-size: 0.85rem; color: var(--muted); font-weight: 400; }
+table.codebook td { font-size: 0.86rem; }
+table.codebook td:first-child { white-space: normal; min-width: 9em; }
+table.codebook td:nth-child(3) { min-width: 20em; }
+table.codebook td:nth-child(4) { min-width: 15em; color: var(--secondary-color); }
+table.codebook td:last-child { min-width: 9em; max-width: 15em; overflow-wrap: anywhere; font-size: 0.8rem; }
+.dsrc { overflow-wrap: anywhere; }
+@media (max-width: 860px) {
+    table.codebook thead { display: none; }
+    table.codebook, table.codebook tbody, table.codebook tr, table.codebook td { display: block; width: 100%; min-width: 0 !important; }
+    table.codebook tr { border-bottom: 2px solid var(--border-color); padding: 8px 0; }
+    table.codebook td { border: 0; padding: 3px 0; }
+    table.codebook td::before { content: attr(data-label); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+}
