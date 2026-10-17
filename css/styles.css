@@ -173,3 +173,14 @@ table.codebook td:last-child { min-width: 9em; max-width: 15em; overflow-wrap: a
     table.codebook td { border: 0; padding: 3px 0; }
     table.codebook td::before { content: attr(data-label); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
 }
+
+/* Survey page */
+article.survey { margin-bottom: 26px; padding-left: 16px; border-left: 2px solid var(--accent-color); }
+article.survey h4 { font-size: 1.12rem; color: var(--primary-color); margin-bottom: 2px; }
+article.survey .meta { font-size: 0.9rem; color: var(--muted); margin-bottom: 6px; }
+.sv-meta { font-size: 0.9rem; color: var(--secondary-color); margin: 4px 0; max-width: 80ch; }
+ul.docs { list-style: none; display: grid; gap: 5px; margin: 8px 0; font-size: 0.92rem; }
+.dtype { display: inline-block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.03em; padding: 0 6px; border-radius: 3px; border: 1px solid var(--border-color); color: var(--secondary-color); margin-right: 4px; }
+.dtype.t-questionnaire { border-color: #2a78d6; color: #1c5cab; }
+.dtype.t-appendix-with-questions { border-color: #1baf7a; color: #0c7a52; }
+.muted { color: var(--muted); }

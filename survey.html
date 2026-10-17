@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey | Beautiful Danish Data</title>
+    <meta name="description" content="Questionnaires behind the surveys that papers in Beautiful Danish Data link to Danish registers: Labour Force Survey, Expenditure Survey, DALSC, SHARE, election studies and the authors&#x27; own surveys.">
+    <meta name="author" content="Rentian Zhu">
+    <link rel="canonical" href="https://zhurt0.github.io/beautiful-danish-data/survey.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Beautiful Danish Data">
+    <meta property="og:title" content="Survey | Beautiful Danish Data">
+    <meta property="og:description" content="Questionnaires behind the surveys that papers in Beautiful Danish Data link to Danish registers: Labour Force Survey, Expenditure Survey, DALSC, SHARE, election studies and the authors&#x27; own surveys.">
+    <meta property="og:url" content="https://zhurt0.github.io/beautiful-danish-data/survey.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <p class="eyebrow"><a href="https://zhurt0.github.io/rentianzhu/">Rentian Zhu</a> &rsaquo; Useful links</p>
+            <h1><a href="index.html">Beautiful Danish Data</a></h1>
+            <p class="tagline">A field guide to economics published with Danish administrative data</p>
+        </div>
+    </header>
+    <nav>
+        <div class="container">
+            <ul><li><a href="index.html">Summary</a></li><li><a href="themes.html">Themes</a></li><li><a href="samples.html">Data & samples</a></li><li><a href="landscape.html">3D data landscape</a></li><li><a href="codebook.html">Codebook</a></li><li><a href="survey.html" class="active">Survey</a></li><li><a href="variables.html">Variable map</a></li><li><a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a></li></ul>
+        </div>
+    </nav>
+    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">Survey</h2>
+            <p>Many papers link register data to a survey through the personal identifier: the Labour Force Survey for hours and occupations, the Expenditure Survey to validate imputed consumption, children's cohort surveys, election studies, or a survey the authors fielded themselves. This page collects the questionnaires behind those surveys, so you can see exactly what respondents were asked.</p>
+            <p class="note">0 surveys used by 0 papers; 0 have at least one questionnaire, codebook or question appendix found online (0 documents). Every document was opened and checked before it was listed. Links point to the original publisher, so the files stay with their owners and their reuse terms; the microdata themselves are confidential and accessed through Statistics Denmark or the survey owner.</p>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <input id="sfilter" class="filter" type="search" placeholder="Filter surveys, e.g. labour force, children, SHARE, Kreiner" aria-label="Filter surveys">
+        </div>
+    </section>
+    <script>
+    document.getElementById('sfilter').addEventListener('input', function () {
+        var q = this.value.toLowerCase();
+        Array.prototype.forEach.call(document.querySelectorAll('article.survey'), function (a) {
+            a.style.display = a.innerText.toLowerCase().indexOf(q) === -1 ? 'none' : '';
+        });
+    });
+    </script>
+    <footer>
+        <div class="container">
+            <p>Maintained by <a href="https://zhurt0.github.io/rentianzhu/">Rentian Zhu</a>, Copenhagen Business School. Summaries are my own reading of each paper. Corrections and additions are welcome as pull requests on <a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a>.</p>
+        </div>
+    </footer>
+</body>
+</html>

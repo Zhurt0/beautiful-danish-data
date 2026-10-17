@@ -12,6 +12,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 PAPERS = json.loads((ROOT / "data" / "papers.json").read_text())
 VARS = json.loads((ROOT / "data" / "variables.json").read_text())
+_SV = ROOT / "data" / "surveys.json"
+SURVEYS = json.loads(_SV.read_text()) if _SV.exists() else []
+SURVEYS_BY_PAPER = {}
+for _s in SURVEYS:
+    for _pid in _s.get("papers", []):
+        SURVEYS_BY_PAPER.setdefault(_pid, []).append(_s)
 
 SITE = "https://zhurt0.github.io/beautiful-danish-data/"
 HOME = "https://zhurt0.github.io/rentianzhu/"
@@ -84,7 +90,7 @@ def head(title, description, canonical):
 
 
 def nav(active):
-    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("landscape.html", "3D data landscape"), ("codebook.html", "Codebook"), ("variables.html", "Variable map")]
+    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("landscape.html", "3D data landscape"), ("codebook.html", "Codebook"), ("survey.html", "Survey"), ("variables.html", "Variable map")]
     lis = ""
     for href, label in items:
         cls = ' class="active"' if href == active else ""
@@ -139,6 +145,8 @@ def facts(p):
         tag = " (abstract)" if p.get("sample_confidence") == "abstract" else ""
         src = f' <a class="src" href="{e(p["sample_source"])}" target="_blank" rel="noopener">source{tag}</a>'
     rows.append(("Sample", size + desc + src))
+    if SURVEYS_BY_PAPER.get(p["id"]):
+        rows.append(("Surveys", ", ".join(f'<a href="survey.html#{sv["key"]}">{e(sv["short"])}</a>' for sv in SURVEYS_BY_PAPER[p["id"]])))
     return '                    <dl class="facts">\n' + "".join(
         f'                        <div><dt>{k}</dt><dd>{v}</dd></div>\n' for k, v in rows
     ) + "                    </dl>\n"
@@ -769,6 +777,73 @@ def build_codebook():
     return out
 
 
+def build_survey():
+    out = head(
+        "Survey | Beautiful Danish Data",
+        "Questionnaires behind the surveys that papers in Beautiful Danish Data link to Danish registers: Labour Force Survey, Expenditure Survey, DALSC, SHARE, election studies and the authors' own surveys.",
+        "survey.html",
+    )
+    out += nav("survey.html")
+    by_id = {p["id"]: p for p in PAPERS}
+    n_docs = sum(1 for sv in SURVEYS for d in sv.get("documents", []) if d.get("type") in ("questionnaire", "appendix with questions", "codebook"))
+    with_q = sum(1 for sv in SURVEYS if any(d.get("type") in ("questionnaire", "appendix with questions", "codebook") for d in sv.get("documents", [])))
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">Survey</h2>
+            <p>Many papers link register data to a survey through the personal identifier: the Labour Force Survey for hours and occupations, the Expenditure Survey to validate imputed consumption, children's cohort surveys, election studies, or a survey the authors fielded themselves. This page collects the questionnaires behind those surveys, so you can see exactly what respondents were asked.</p>
+            <p class="note">{len(SURVEYS)} surveys used by {len({pid for sv in SURVEYS for pid in sv.get("papers", [])})} papers; {with_q} have at least one questionnaire, codebook or question appendix found online ({n_docs} documents). Every document was opened and checked before it was listed. Links point to the original publisher, so the files stay with their owners and their reuse terms; the microdata themselves are confidential and accessed through Statistics Denmark or the survey owner.</p>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <input id="sfilter" class="filter" type="search" placeholder="Filter surveys, e.g. labour force, children, SHARE, Kreiner" aria-label="Filter surveys">
+"""
+    groups = [("Official and academic surveys", [sv for sv in SURVEYS if not sv.get("custom")]),
+              ("Surveys and experiments fielded by the authors", [sv for sv in SURVEYS if sv.get("custom")])]
+    TYPE_LABEL = {"questionnaire": "Questionnaire", "codebook": "Codebook", "appendix with questions": "Questions in appendix", "documentation": "Documentation"}
+    for gname, items in groups:
+        if not items:
+            continue
+        out += f'            <h3 class="cb-title">{e(gname)} <span>{len(items)}</span></h3>\n'
+        for sv in items:
+            papers = ", ".join(f'<a href="index.html#{pid}">{e(short_cite(by_id[pid]))}</a>' for pid in sv.get("papers", []) if pid in by_id)
+            docs = ""
+            for d in sv.get("documents", []):
+                meta = " &middot; ".join(e(str(x)) for x in [d.get("language"), d.get("wave"), (f'{d["pages"]} pages' if d.get("pages") else None), d.get("location")] if x)
+                docs += (f'<li><span class="dtype t-{slug(d.get("type") or "doc")}">{e(TYPE_LABEL.get(d.get("type"), d.get("type") or "Document"))}</span> '
+                         f'<a href="{e(d["url"])}" target="_blank" rel="noopener">{e(d["title"])}</a>'
+                         f'{" <span class=muted>" + meta + "</span>" if meta else ""}</li>')
+            docs_html = f"<ul class=\"docs\">{docs}</ul>" if docs else '<p class="na">No questionnaire found online.</p>'
+            landing = f' &middot; <a href="{e(sv["landing_page"])}" target="_blank" rel="noopener">Survey home page</a>' if sv.get("landing_page") else ""
+            extra = ""
+            if sv.get("access"):
+                extra += f'<p class="sv-meta"><strong>Access:</strong> {e(sv["access"])}</p>'
+            if sv.get("notes"):
+                extra += f'<p class="sv-meta muted">{e(sv["notes"])}</p>'
+            out += f"""            <article class="survey" id="{e(sv['key'])}">
+                <h4>{e(sv['name'])}</h4>
+                <p class="meta">{e(sv.get('owner') or '')}{landing}</p>
+                <p class="summary">{e(sv.get('description') or '')}</p>
+                <p class="sv-meta"><strong>Used by:</strong> {papers} &middot; <strong>Waves used:</strong> {e(sv.get('waves_used') or 'not stated')}</p>
+                {docs_html}
+                {extra}
+            </article>
+"""
+    out += """        </div>
+    </section>
+    <script>
+    document.getElementById('sfilter').addEventListener('input', function () {
+        var q = this.value.toLowerCase();
+        Array.prototype.forEach.call(document.querySelectorAll('article.survey'), function (a) {
+            a.style.display = a.innerText.toLowerCase().indexOf(q) === -1 ? 'none' : '';
+        });
+    });
+    </script>
+"""
+    out += FOOTER
+    return out
+
+
 if __name__ == "__main__":
     (ROOT / "index.html").write_text(build_index())
     (ROOT / "themes.html").write_text(build_themes())
@@ -776,4 +851,5 @@ if __name__ == "__main__":
     (ROOT / "samples.html").write_text(build_samples())
     (ROOT / "landscape.html").write_text(build_landscape())
     (ROOT / "codebook.html").write_text(build_codebook())
-    print(f"built 6 pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers")
+    (ROOT / "survey.html").write_text(build_survey())
+    print(f"built 7 pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers")
