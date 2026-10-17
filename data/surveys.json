@@ -856,22 +856,6 @@
     "custom": false
   },
   {
-    "key": "fluchtmann_aux",
-    "short": "UI recipient survey",
-    "name": "Auxiliary survey of unemployment insurance recipients on application coverage",
-    "owner": "Authors (Fluchtmann, Glenny, Harmon, Maibom)",
-    "description": null,
-    "landing_page": null,
-    "documents": [],
-    "access": null,
-    "notes": null,
-    "papers": [
-      "fluchtmann2024jole"
-    ],
-    "waves_used": "as fielded for the paper",
-    "custom": true
-  },
-  {
     "key": "hks",
     "short": "Fairness-views survey",
     "name": "Custom online survey on social positions and fairness views (Hvidberg, Kreiner and Stantcheva)",
@@ -931,6 +915,43 @@
     "notes": "The appendix has no full screen-by-screen instructions, no video-instruction scripts and no risk- or social-preference task screens. The paper says each task had video instructions and comprehension questions, but these are not reproduced. The AEA zip (materials/12350) holds only disclosure statements.",
     "papers": [
       "epper2020"
+    ],
+    "waves_used": "as fielded for the paper",
+    "custom": true
+  },
+  {
+    "key": "fluchtmann_aux",
+    "short": "UI recipient survey",
+    "name": "Online survey of Danish UI benefit recipients, March 2018 (Altmann, Cairo, Mahlstedt and Sebald), used as auxiliary data on Joblog application coverage",
+    "owner": "Steffen Altmann, Sofie Cairo, Robert Mahlstedt, Alexander Sebald (University of Copenhagen), fielded via the Danish public employment service; data shared with Fluchtmann, Glenny, Harmon and Maibom",
+    "description": "One-off online survey (lottery incentive) of a random sample of Danish UI recipients in March 2018, alongside an RCT on information about UI rules. It covered job-search behaviour, logging of applications in the Joblog system and knowledge of benefit rules, and was linked to Joblog and register data (about 1,236 respondents to the Joblog item).",
+    "landing_page": "https://docs.iza.org/dp17048.pdf",
+    "documents": [
+      {
+        "title": "Fluchtmann, Glenny, Harmon and Maibom, 'Unemployed Job Search across People and over Time', IZA DP 17048, Online Appendix B.6.1",
+        "url": "https://docs.iza.org/dp17048.pdf",
+        "type": "appendix with questions",
+        "language": "English",
+        "wave": "March 2018",
+        "pages": 77,
+        "location": "Appendix B.6.1, pp. 50-51 (PDF pp. 52-53): Table 10 gives the verbatim question 'Which of these statements best describes your use of Joblog?' with its four answer options; Table 11 and the text describe the items on the number of applications sent last month and the number not registered in Joblog (paraphrased, not verbatim)",
+        "licence": null
+      },
+      {
+        "title": "Altmann, Cairo, Mahlstedt and Sebald, 'Do Job Seekers Understand the UI Benefit System (And Does It Matter)?', IZA DP 15747, Appendix A",
+        "url": "https://docs.iza.org/dp15747.pdf",
+        "type": "appendix with questions",
+        "language": "English (translation)",
+        "wave": "March 2018 pre-intervention survey and post-intervention survey",
+        "pages": 66,
+        "location": "Appendix A.1, pp. 40-41 (survey implementation); A.2, pp. 41-42 (English translation of knowledge questions Q1-Q7 on UI benefit rules)",
+        "licence": null
+      }
+    ],
+    "access": "Not publicly available. The survey was run by the Altmann et al. team and linked to Joblog/register data on Statistics Denmark's research servers; access is via the original authors.",
+    "notes": "No full questionnaire (Danish original or complete English version) is online. The Joblog-coverage items are reproduced only in Fluchtmann et al. Appendix B.6.1, and DP 15747 reproduces only the benefit-knowledge items. Fluchtmann et al. cite the source as Altmann, Cairo, Mahlstedt and Sebald (2019), 'Complexity and the Effectiveness of Public Policy' (also called Mahlstedt et al. 2019), which is the earlier title of IZA DP 15747. The extended abstract (conference.iza.org/DATA_2018/mahlstedt_r7298.pdf) returned 503.",
+    "papers": [
+      "fluchtmann2024jole"
     ],
     "waves_used": "as fielded for the paper",
     "custom": true
