@@ -186,3 +186,6 @@ ul.docs { list-style: none; display: grid; gap: 5px; margin: 8px 0; font-size: 0
 .muted { color: var(--muted); }
 .dtype.t-codebook { border-color: #6250d6; color: #4a3aa7; }
 .dtype.t-questions-quoted-in-paper { border-color: #eda100; color: #8a5d00; }
+.mirror { font-size: 0.82rem; color: var(--muted); margin: 2px 0 2px 2px; }
+.mirror a[download] { font-weight: 700; }
+.sha { font-family: "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.75rem; }

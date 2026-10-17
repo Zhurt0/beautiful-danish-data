@@ -15,7 +15,16 @@
         "wave": "2025",
         "pages": 10,
         "location": null,
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/fire_survey/regnskabsstatistik-2025-kladde-draft-of-the-full-o-b7b19e25.pdf",
+          "sha256": "3605209f3d4f6628e2bf382638ac381dca30001117cd796c2882cc418a410071",
+          "bytes": 1110351,
+          "pages": 10,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       }
     ],
     "access": "Firm-level microdata (FIRE/REGN registers) via Statistics Denmark researcher access (forskeradgang), linkable to IDA/employer-employee data.",
@@ -163,7 +172,16 @@
         "wave": "1994 onwards (1995-1997 data)",
         "pages": 84,
         "location": null,
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/des/forbrugsunders-gelsen-metodebeskrivelse-fra-datain-a002dedb.pdf",
+          "sha256": "8b7a1f149a793d910ac8286bf18a3e290706062def0edf08092e5ae064720687",
+          "bytes": 602215,
+          "pages": 84,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       },
       {
         "title": "Statistikdokumentation: Forbrugsundersøgelsen (current documentation; yearly PDFs for 2013-2024)",
@@ -260,7 +278,16 @@
         "wave": "2018 Q4",
         "pages": 127,
         "location": null,
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/aku/kerneskema-4-kvartal-2018-aku-core-questionnaire-v-a90d9b72.pdf",
+          "sha256": "76034b7863c0ab542e062b2af5778e7566ff20eb409338fa7a3c4e127dd079ca",
+          "bytes": 2340529,
+          "pages": 127,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       },
       {
         "title": "Hovedskemaet i Arbejdskraftundersøgelsen (AKU_2025K3)",
@@ -270,7 +297,16 @@
         "wave": "2025 Q3",
         "pages": 89,
         "location": null,
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/aku/hovedskemaet-i-arbejdskraftunders-gelsen-aku-2025k-6ed7288b.pdf",
+          "sha256": "c7970368a3a478c706eaf25e0bc5894f1c4d3c1973b911bc098680c46ebe7053",
+          "bytes": 297829,
+          "pages": 89,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       },
       {
         "title": "Hovedskemaet i Arbejdskraftundersøgelsen (AKU_2025K4)",
@@ -280,7 +316,16 @@
         "wave": "2025 Q4",
         "pages": 96,
         "location": null,
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/aku/hovedskemaet-i-arbejdskraftunders-gelsen-aku-2025k-a0611e42.pdf",
+          "sha256": "e0038b25fceec0cd70b8e8630202db1032ae9889e0bc2441b38711b0baebe97b",
+          "bytes": 315561,
+          "pages": 96,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       },
       {
         "title": "Spørgeskema: Hovedskemaet i Arbejdskraftundersøgelsen (AKU_2026K2)",
@@ -290,7 +335,16 @@
         "wave": "2026 Q2 (current)",
         "pages": 94,
         "location": null,
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/aku/sp-rgeskema-hovedskemaet-i-arbejdskraftunders-gels-0ca9dda9.pdf",
+          "sha256": "22006778348677961f09b6a556115ead5f4829c2cd366ebbdd90e8f208b587b6",
+          "bytes": 309418,
+          "pages": 94,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       },
       {
         "title": "Questionnaire: Hovedskemaet i Arbejdskraftundersøgelsen (AKU_2026K2), English-wording version",
@@ -300,7 +354,16 @@
         "wave": "2026 Q2 (current)",
         "pages": 92,
         "location": null,
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/aku/questionnaire-hovedskemaet-i-arbejdskraftunders-ge-a4471f0c.pdf",
+          "sha256": "ff7f414de540725aa6002bf8b7017081cc5c8f8adf7111d9ae1c76d5497a4635",
+          "bytes": 314382,
+          "pages": 92,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       },
       {
         "title": "Statistikdokumentation for Arbejdskraftundersøgelsen 2018 4. kvartal",
@@ -310,7 +373,16 @@
         "wave": "2018 Q4",
         "pages": 24,
         "location": null,
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/aku/statistikdokumentation-for-arbejdskraftunders-gels-f3b56990.pdf",
+          "sha256": "28be099cae5c3d021e9c22b7c9d1f9e68fb755cc738b0f8299de3956abbdbd10",
+          "bytes": 486506,
+          "pages": 24,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       },
       {
         "title": "AKU - Arbejdskraftundersøgelsen: method page (codification/variable list, EU ad hoc modules 1999-2025, weighting notes)",
@@ -688,7 +760,16 @@
         "wave": "current (undated, c. 2020s)",
         "pages": 5,
         "location": "Screenshot of reporting form (p.1) with numbered field explanations 0-9 (p.5)",
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/ppi/vejledning-til-indberetninger-eksempel-p-elektroni-740fb2ba.pdf",
+          "sha256": "e33f6073384403b28c6003dd8bde4feacfa2d30eea0814c0b35cf7397c407328",
+          "bytes": 1361506,
+          "pages": 5,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       },
       {
         "title": "Priser på danske varer til hjemmemarked (instruction letter to sampled firms, home-market prices)",
@@ -698,7 +779,16 @@
         "wave": "current (undated, c. 2020s)",
         "pages": 1,
         "location": null,
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/ppi/priser-p-danske-varer-til-hjemmemarked-instruction-193bfc6d.pdf",
+          "sha256": "d42801d1dcd543f5deddcbc18386a7101c9405fb6d96a56687d17442c3255653",
+          "bytes": 143940,
+          "pages": 1,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       },
       {
         "title": "Priser på danske varer til eksport (instruction letter to sampled firms, export prices)",
@@ -708,7 +798,16 @@
         "wave": "current (undated, c. 2020s)",
         "pages": 2,
         "location": null,
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/ppi/priser-p-danske-varer-til-eksport-instruction-lett-ee110902.pdf",
+          "sha256": "346f4356a01f31d0bbc783c9115431364db7a51b96047e74ce685fc2c6ac5b98",
+          "bytes": 144744,
+          "pages": 2,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       },
       {
         "title": "Priser på importerede varer (instruction letter to sampled firms, import prices)",
@@ -718,7 +817,16 @@
         "wave": "current (undated, c. 2020s)",
         "pages": 1,
         "location": null,
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/ppi/priser-p-importerede-varer-instruction-letter-to-s-7febdb05.pdf",
+          "sha256": "27a4fb1f9d1899d43c97ad390def7d0ad3ae8ac1a01730f29ae69cb4805fcd66",
+          "bytes": 141005,
+          "pages": 1,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       }
     ],
     "access": "Firm-product-level price microdata via Statistics Denmark researcher access (forskeradgang), linkable to firm registers.",
@@ -822,7 +930,16 @@
         "wave": "1999",
         "pages": 99,
         "location": "Chapter 8, from printed p. 71 (PDF p. 65); 8.4 Spørgeskema and 8.5 Vejledninger on printed pp. 73-74 (PDF pp. 67-68)",
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/foreign_edu/indvandrernes-uddannelse-henrik-m-rkeberg-danmarks-5c5bf319.pdf",
+          "sha256": "a512c9864206b3aa987a4e34981f388ecddcaecd613bab6e363fc717a72d722e",
+          "bytes": 1030810,
+          "pages": 99,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       },
       {
         "title": "Indvandrernes medbragte uddannelse (Danmarks Statistik method note, 19 June 2018)",
@@ -832,7 +949,16 @@
         "wave": "1999-2017",
         "pages": 12,
         "location": null,
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/foreign_edu/indvandrernes-medbragte-uddannelse-danmarks-statis-4a5be067.pdf",
+          "sha256": "211822f4bfd0c6314e9205cd715d555d7d7d9ddc77e3844e76668427caa6dcac",
+          "bytes": 531823,
+          "pages": 12,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       },
       {
         "title": "Indvandrernes medbragte uddannelse (Danmarks Statistik method note, 11 February 2020): overview of all surveys 1999-2020, collection methods and imputation",
@@ -842,7 +968,16 @@
         "wave": "1999-2020",
         "pages": 16,
         "location": null,
-        "licence": null
+        "licence": null,
+        "mirror": {
+          "path": "files/surveys/foreign_edu/indvandrernes-medbragte-uddannelse-danmarks-statis-6654bace.pdf",
+          "sha256": "37e5c1195c332e9d5f76cf4e6d745c0070cb8ada7e2b1b50adf2eb01908d2ae1",
+          "bytes": 376101,
+          "pages": 16,
+          "retrieved": "2026-10-17",
+          "source": "Danmarks Statistik (Statistics Denmark)",
+          "terms": "https://www.dst.dk/da/presse/kildeangivelse"
+        }
       }
     ],
     "access": "Survey-based foreign education is embedded in Statistics Denmark's education register (UDDA/UDDF, variable HFAUDD with source codes), accessed through DST's Research Service.",

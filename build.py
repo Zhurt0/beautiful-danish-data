@@ -792,7 +792,7 @@ def build_survey():
         <div class="container">
             <h2 class="section-title">Survey</h2>
             <p>Many papers link register data to a survey through the personal identifier: the Labour Force Survey for hours and occupations, the Expenditure Survey to validate imputed consumption, children's cohort surveys, election studies, or a survey the authors fielded themselves. This page collects the questionnaires behind those surveys, so you can see exactly what respondents were asked.</p>
-            <p class="note">{len(SURVEYS)} surveys used by {len({pid for sv in SURVEYS for pid in sv.get("papers", [])})} papers; {with_q} have question wording online: a full questionnaire, a codebook with the questions, an appendix listing them, or at least the questions quoted in the paper ({n_docs} documents in all). Every document was opened and checked before it was listed. Links point to the original publisher, so the files stay with their owners and their reuse terms; the microdata themselves are confidential and accessed through Statistics Denmark or the survey owner.</p>
+            <p class="note">{len(SURVEYS)} surveys used by {len({pid for sv in SURVEYS for pid in sv.get("papers", [])})} papers; {with_q} have question wording online: a full questionnaire, a codebook with the questions, an appendix listing them, or at least the questions quoted in the paper ({n_docs} documents in all). Every document was opened and checked before it was listed. Statistics Denmark documents are also mirrored here, because its <a href="https://www.dst.dk/da/presse/kildeangivelse" target="_blank" rel="noopener">terms</a> allow free copying with the source credited. Each copy was checked before mirroring (a genuine PDF served from dst.dk, no embedded files, scripts or forms) and shows its SHA-256 checksum. SHARE questionnaires are linked rather than copied, because SHARE-ERIC holds the rights and its conditions of use grant no right to republish them; other documents link to their publishers. The microdata themselves are confidential and accessed through Statistics Denmark or the survey owner.</p>
         </div>
     </section>
     <section class="section">
@@ -811,9 +811,15 @@ def build_survey():
             docs = ""
             for d in sv.get("documents", []):
                 meta = " &middot; ".join(e(str(x)) for x in [d.get("language"), d.get("wave"), (f'{d["pages"]} pages' if d.get("pages") else None), d.get("location")] if x)
+                mirror = ""
+                if d.get("mirror"):
+                    m = d["mirror"]
+                    mirror = (f'<div class="mirror"><a href="{e(m["path"])}" download>Download copy (PDF, {m["pages"]} pages, {m["bytes"] / 1e6:.1f} MB)</a>'
+                              f' &middot; Source: {e(m["source"])}, <a href="{e(d["url"])}" target="_blank" rel="noopener">original</a>, retrieved {e(m["retrieved"])}'
+                              f' &middot; <span class="sha" title="SHA-256 {e(m["sha256"])}">sha256 {e(m["sha256"][:12])}&hellip;</span></div>')
                 docs += (f'<li><span class="dtype t-{slug(d.get("type") or "doc")}">{e(TYPE_LABEL.get(d.get("type"), d.get("type") or "Document"))}</span> '
                          f'<a href="{e(d["url"])}" target="_blank" rel="noopener">{e(d["title"])}</a>'
-                         f'{" <span class=muted>" + meta + "</span>" if meta else ""}</li>')
+                         f'{" <span class=muted>" + meta + "</span>" if meta else ""}{mirror}</li>')
             docs_html = f"<ul class=\"docs\">{docs}</ul>" if docs else '<p class="na">No questionnaire found online.</p>'
             landing = f' &middot; <a href="{e(sv["landing_page"])}" target="_blank" rel="noopener">Survey home page</a>' if sv.get("landing_page") else ""
             extra = ""
