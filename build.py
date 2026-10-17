@@ -90,7 +90,7 @@ def head(title, description, canonical):
 
 
 def nav(active):
-    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("landscape.html", "3D data landscape"), ("codebook.html", "Codebook"), ("survey.html", "Survey"), ("variables.html", "Variable map")]
+    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("landscape.html", "3D data landscape"), ("codebook.html", "Codebook"), ("survey.html", "Survey"), ("variables.html", "Variable map"), ("network.html", "Author network")]
     lis = ""
     for href, label in items:
         cls = ' class="active"' if href == active else ""
@@ -851,6 +851,294 @@ def build_survey():
     return out
 
 
+_NW = ROOT / "data" / "network.json"
+NETWORK = json.loads(_NW.read_text()) if _NW.exists() else None
+NET_GROUPS = [("Danish universities", "#2a78d6"), ("Other Danish institutions", "#eb6834"),
+              ("Institutions abroad", "#1baf7a"), ("Not listed", "#a9a8a0")]
+
+NETWORK_JS = r"""
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+    <script>
+    (function () {
+        var D = __DATA__;
+        var COLOR = {}; D.groups.forEach(function (g) { COLOR[g[0]] = g[1]; });
+        var nodes = D.nodes.map(function (n, i) { return Object.assign({ i: i }, n); });
+        var links = D.links.map(function (l) { return { source: l[0], target: l[1], w: l[2], p: l[3] }; });
+        var adj = nodes.map(function () { return []; });
+        links.forEach(function (l) { adj[l.source].push([l.target, l.w, l.p]); adj[l.target].push([l.source, l.w, l.p]); });
+        function r(n) { return 3 + 2.4 * Math.sqrt(n.papers.length); }
+
+        var sim = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).distance(function (l) { return 30 + 14 / l.w; }).strength(0.6))
+            .force('charge', d3.forceManyBody().strength(-70))
+            .force('collide', d3.forceCollide(function (n) { return r(n) + 1.5; }))
+            .force('x', d3.forceX(0).strength(0.07))
+            .force('y', d3.forceY(0).strength(0.07))
+            .stop();
+        for (var t = 0; t < 420; t++) sim.tick();
+
+        var box = document.getElementById('net');
+        var W = box.clientWidth, H = box.clientHeight;
+        var svg = d3.select(box).append('svg').attr('width', W).attr('height', H).attr('viewBox', [0, 0, W, H]);
+        var g = svg.append('g');
+        var link = g.append('g').attr('stroke', '#c3c2b7').attr('stroke-linecap', 'round').selectAll('line').data(links).join('line')
+            .attr('x1', function (l) { return l.source.x; }).attr('y1', function (l) { return l.source.y; })
+            .attr('x2', function (l) { return l.target.x; }).attr('y2', function (l) { return l.target.y; })
+            .attr('stroke-width', function (l) { return 0.8 + 1.1 * (l.w - 1); }).attr('stroke-opacity', 0.75);
+        var node = g.append('g').selectAll('circle').data(nodes).join('circle')
+            .attr('cx', function (n) { return n.x; }).attr('cy', function (n) { return n.y; }).attr('r', r)
+            .attr('fill', function (n) { return COLOR[n.group]; }).attr('stroke', '#fcfcfb').attr('stroke-width', 1)
+            .style('cursor', 'pointer');
+        var labelG = g.append('g').attr('class', 'net-labels');
+        var kc = 1, near = null, focusI = null;
+        // name authors at a constant on-screen size, most prolific first, skipping any label that would overlap one already placed
+        function labels() {
+            var cand = near ? nodes.filter(function (n) { return near[n.i]; }) : nodes.filter(function (n) { return n.papers.length >= 3; });
+            cand.sort(function (a, b) { return (b.i === focusI) - (a.i === focusI) || b.papers.length - a.papers.length || adj[b.i].length - adj[a.i].length; });
+            var placed = [], fs = 11 / kc;
+            var keep = cand.filter(function (n) {
+                var x = n.x + r(n) + 2 / kc, bx = [x, n.y - 0.6 * fs, x + 0.58 * fs * n.name.length, n.y + 0.6 * fs];
+                var hit = placed.some(function (q) { return bx[0] < q[2] && bx[2] > q[0] && bx[1] < q[3] && bx[3] > q[1]; });
+                if (!hit) placed.push(bx);
+                return !hit;
+            });
+            labelG.style('font-size', fs + 'px').style('stroke-width', (3 / kc) + 'px');
+            labelG.selectAll('text').data(keep, function (n) { return n.i; }).join('text')
+                .attr('x', function (n) { return n.x + r(n) + 2 / kc; }).attr('y', function (n) { return n.y + 0.35 * fs; })
+                .attr('font-weight', function (n) { return n.i === focusI ? 700 : 400; })
+                .text(function (n) { return n.name; });
+        }
+
+        var zoom = d3.zoom().scaleExtent([0.3, 8])
+            .on('zoom', function (ev) {
+                g.attr('transform', ev.transform);
+                labelG.style('font-size', (11 / ev.transform.k) + 'px').style('stroke-width', (3 / ev.transform.k) + 'px');
+            })
+            .on('end', function (ev) { kc = ev.transform.k; labels(); });
+        function fit(list, ms) {
+            // leave room on the right for the names
+            var a0 = d3.min(list, function (n) { return n.x - r(n); }), a1 = d3.max(list, function (n) { return n.x + r(n); });
+            var b0 = d3.min(list, function (n) { return n.y - r(n); }), b1 = d3.max(list, function (n) { return n.y + r(n); });
+            var pad = Math.min(130, W * 0.25);
+            var s = Math.min(2.4, Math.min((W - pad - 20) / Math.max(a1 - a0, 1), (H - 30) / Math.max(b1 - b0, 1)));
+            var tr = d3.zoomIdentity.translate((W - pad) / 2, H / 2).scale(s).translate(-(a0 + a1) / 2, -(b0 + b1) / 2);
+            if (ms) svg.transition().duration(ms).call(zoom.transform, tr); else svg.call(zoom.transform, tr);
+        }
+        svg.call(zoom);
+        fit(nodes, 0);
+
+        var tip = d3.select(box).append('div').attr('class', 'net-tip').style('display', 'none');
+        var selected = null, inst = '';
+        function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+        function paint(focus) {
+            near = null; focusI = focus;
+            if (focus !== null) { near = {}; near[focus] = 1; adj[focus].forEach(function (a) { near[a[0]] = 1; }); }
+            node.attr('opacity', function (n) {
+                if (near) return near[n.i] ? 1 : 0.12;
+                if (inst) return n.institutions.indexOf(inst) >= 0 ? 1 : 0.12;
+                return 1;
+            }).attr('stroke', function (n) { return n.i === focus ? '#0b0b0b' : '#fcfcfb'; }).attr('stroke-width', function (n) { return n.i === focus ? 2 : 1; });
+            link.attr('stroke-opacity', function (l) {
+                if (near) return (l.source.i === focus || l.target.i === focus) ? 0.95 : 0.06;
+                if (inst) return (l.source.institutions.indexOf(inst) >= 0 && l.target.institutions.indexOf(inst) >= 0) ? 0.9 : 0.06;
+                return 0.75;
+            }).attr('stroke', function (l) { return near && (l.source.i === focus || l.target.i === focus) ? '#52514e' : '#c3c2b7'; });
+            labels();
+            labelG.selectAll('text').attr('opacity', function (n) { return inst && !near && n.institutions.indexOf(inst) < 0 ? 0.15 : 1; });
+        }
+        function show(i, zoomTo) {
+            selected = i;
+            paint(i);
+            if (zoomTo) fit(nodes.filter(function (n) { return near[n.i]; }), 500);
+            var n = nodes[i], panel = document.getElementById('net-panel');
+            var co = adj[i].slice().sort(function (a, b) { return b[1] - a[1] || nodes[a[0]].name.localeCompare(nodes[b[0]].name); });
+            var h = '<h3>' + esc(n.name) + '</h3>';
+            h += '<p class="np-aff"><span class="sw" style="background:' + COLOR[n.group] + '"></span>' + (n.primary.length ? esc(n.primary.join('; ')) : 'Affiliation not listed') + '</p>';
+            if (n.institutions.length > n.primary.length) h += '<p class="np-sub">All affiliations on these papers: ' + esc(n.institutions.join('; ')) + '</p>';
+            h += '<h4>' + n.papers.length + (n.papers.length === 1 ? ' paper' : ' papers') + '</h4><ul>';
+            n.papers.forEach(function (pid) { var p = D.papers[pid]; h += '<li><a href="index.html#' + pid + '">' + esc(p.cite) + '</a>, <em>' + esc(p.title) + '</em></li>'; });
+            h += '</ul><h4>' + co.length + (co.length === 1 ? ' co-author' : ' co-authors') + '</h4>';
+            if (co.length) {
+                h += '<ul class="np-co">';
+                co.forEach(function (a) { h += '<li><button type="button" class="linkish" data-i="' + a[0] + '">' + esc(nodes[a[0]].name) + '</button>' + (a[1] > 1 ? ' <span class="muted">(' + a[1] + ' papers)</span>' : '') + '</li>'; });
+                h += '</ul>';
+            } else h += '<p class="muted">Sole author of every paper listed here.</p>';
+            h += '<p class="np-sub"><a href="' + n.openalex + '" target="_blank" rel="noopener">OpenAlex profile</a></p>';
+            panel.innerHTML = h;
+        }
+        function clear() {
+            selected = null; paint(null);
+            document.getElementById('net-panel').innerHTML = document.getElementById('net-panel-default').innerHTML;
+        }
+        node.on('mouseenter', function (ev, n) {
+            if (selected === null) paint(n.i);
+            tip.style('display', 'block').html('<strong>' + esc(n.name) + '</strong><br>' + (n.primary.length ? esc(n.primary[0]) : 'Affiliation not listed') + '<br>' + n.papers.length + (n.papers.length === 1 ? ' paper' : ' papers') + ', ' + adj[n.i].length + ' co-authors');
+        }).on('mousemove', function (ev) {
+            var p = d3.pointer(ev, box);
+            tip.style('left', Math.min(p[0] + 14, W - 240) + 'px').style('top', (p[1] + 14) + 'px');
+        }).on('mouseleave', function () {
+            tip.style('display', 'none');
+            if (selected === null) paint(null);
+        }).on('click', function (ev, n) { ev.stopPropagation(); show(n.i); });
+        svg.on('click', function () { if (selected !== null) clear(); });
+
+        document.addEventListener('click', function (ev) {
+            var b = ev.target.closest('[data-i]');
+            if (!b) return;
+            ev.preventDefault();
+            show(+b.getAttribute('data-i'), true);
+            if (!b.closest('#net-panel')) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+        var search = document.getElementById('net-search');
+        search.addEventListener('change', function () {
+            var q = search.value.trim().toLowerCase();
+            var hit = nodes.filter(function (n) { return n.name.toLowerCase() === q; })[0] || nodes.filter(function (n) { return n.name.toLowerCase().indexOf(q) >= 0; })[0];
+            if (q && hit) show(hit.i, true);
+        });
+        var sel = document.getElementById('net-inst');
+        sel.addEventListener('change', function () { inst = sel.value; if (selected !== null) clear(); else paint(null); });
+        document.getElementById('net-reset').addEventListener('click', function () {
+            inst = ''; sel.value = ''; search.value = ''; clear();
+            fit(nodes, 400);
+        });
+
+        clear();
+
+        document.querySelectorAll('table.net-sort').forEach(function (table) {
+            var body = table.tBodies[0], rows = Array.prototype.slice.call(body.rows), dir = {};
+            Array.prototype.forEach.call(table.tHead.rows[0].cells, function (th, c) {
+                th.addEventListener('click', function () {
+                    dir[c] = !dir[c];
+                    rows.sort(function (a, b) {
+                        var ka = a.cells[c].getAttribute('data-v') || a.cells[c].innerText.trim().toLowerCase();
+                        var kb = b.cells[c].getAttribute('data-v') || b.cells[c].innerText.trim().toLowerCase();
+                        if (!isNaN(ka) && !isNaN(kb)) { ka = +ka; kb = +kb; }
+                        return (ka < kb ? -1 : ka > kb ? 1 : 0) * (dir[c] ? 1 : -1);
+                    });
+                    rows.forEach(function (row) { body.appendChild(row); });
+                });
+            });
+        });
+    })();
+    </script>
+"""
+
+
+def build_network():
+    nw = NETWORK
+    idx = {n["id"]: i for i, n in enumerate(nw["nodes"])}
+    nodes = nw["nodes"]
+    deg = [0] * len(nodes)
+    for l in nw["links"]:
+        deg[idx[l["source"]]] += 1
+        deg[idx[l["target"]]] += 1
+    cnt = {g: sum(1 for n in nodes if n["group"] == g) for g, _ in NET_GROUPS}
+    # institutions: authors who list it on any paper, and the papers they wrote while listing it
+    inst = {}
+    for i, n in enumerate(nodes):
+        for name in n["institutions"]:
+            inst.setdefault(name, set()).add(i)
+    inst_papers = {k: {pid for i in v for pid in nodes[i]["papers"]} for k, v in inst.items()}
+    inst_rows = sorted(inst, key=lambda k: (-len(inst[k]), -len(inst_papers[k]), k))
+    # connected components
+    parent = list(range(len(nodes)))
+
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+    for l in nw["links"]:
+        parent[find(idx[l["source"]])] = find(idx[l["target"]])
+    comp = {}
+    for i in range(len(nodes)):
+        comp[find(i)] = comp.get(find(i), 0) + 1
+    biggest = max(comp.values())
+    solo = sum(1 for d in deg if d == 0)
+
+    out = head(
+        "Author network | Beautiful Danish Data",
+        "Who has written with whom among the authors of papers using Danish administrative data, and where they were based.",
+        "network.html",
+    )
+    out += nav("network.html")
+    legend = "".join(f'<span class="lg"><span class="sw" style="background:{c}"></span>{e(g)} <span class="muted">({cnt[g]})</span></span>' for g, c in NET_GROUPS)
+    opts = "".join(f'<option value="{e(k)}">{e(k)} ({len(inst[k])})</option>' for k in inst_rows if len(inst[k]) >= 2)
+    names = "".join(f'<option value="{e(n["name"])}"></option>' for n in sorted(nodes, key=lambda n: n["name"]))
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">Author network</h2>
+            <p>Every author of the {len(PAPERS)} papers, linked to everyone they wrote one of these papers with. {len(nodes)} authors and {len(nw["links"])} co-author pairs. {biggest} authors are joined in one connected group; {solo} wrote all their papers here alone.</p>
+            <p class="note">Affiliations are those printed on each paper, taken from OpenAlex. Colour shows where an author was based on most of their papers here. Research networks such as NBER, CEPR, IZA and CESifo are left out, since nearly everyone lists one. Names were matched by OpenAlex author ID and checked by hand for duplicates.</p>
+        </div>
+    </section>
+    <section class="section viz-section">
+        <div class="container">
+            <div class="controls">
+                <div class="ctl-row net-legend">{legend}</div>
+                <div class="ctl-row"><span class="ctl-label">Find an author</span><input id="net-search" class="net-input" list="net-names" placeholder="Type a name" aria-label="Find an author"><datalist id="net-names">{names}</datalist>
+                <span class="ctl-label">Highlight an institution</span><select id="net-inst" class="net-input" aria-label="Highlight an institution"><option value="">All institutions</option>{opts}</select>
+                <button type="button" class="chip ghost" id="net-reset">Reset</button></div>
+            </div>
+            <div class="net-wrap">
+                <div id="net" class="viz net" role="img" aria-label="Network of co-authors. The tables below list the same authors, institutions and pairs."></div>
+                <aside id="net-panel" class="net-panel" aria-live="polite"></aside>
+            </div>
+            <template id="net-panel-default"><h3>Click an author</h3><p class="muted">Circle size is the number of papers; line width is the number of papers a pair wrote together. Most authors with three or more papers are named; the rest show their name on hover. Hover to see an author's co-authors, click to list their papers and affiliations, drag to pan and scroll to zoom.</p></template>
+            <p class="viz-help">The same information is in the tables below.</p>
+
+            <h3 class="sub-title">Pairs who wrote the most papers together</h3>
+            <div class="table-wrap"><table class="net-sort">
+                <thead><tr><th>Authors</th><th>Joint papers</th><th>Papers</th></tr></thead>
+                <tbody>
+"""
+    pairs = sorted(nw["links"], key=lambda l: (-l["weight"], nodes[idx[l["source"]]]["name"]))
+    for l in [x for x in pairs if x["weight"] >= 2]:
+        a, b = idx[l["source"]], idx[l["target"]]
+        ps = "; ".join(f'<a href="index.html#{pid}">{e(nw["papers"][pid]["cite"])}</a>' for pid in l["papers"])
+        out += (f'                    <tr><td><a href="#net" data-i="{a}">{e(nodes[a]["name"])}</a> &amp; <a href="#net" data-i="{b}">{e(nodes[b]["name"])}</a></td>'
+                f'<td data-v="{l["weight"]}">{l["weight"]}</td><td>{ps}</td></tr>\n')
+    out += f"""                </tbody>
+            </table></div>
+
+            <h3 class="sub-title">Institutions</h3>
+            <p class="blurb">Institutions listed by at least two authors, with the number of authors who list them and the papers those authors wrote. Click a column to sort.</p>
+            <div class="table-wrap"><table class="net-sort">
+                <thead><tr><th>Institution</th><th>Authors</th><th>Papers</th></tr></thead>
+                <tbody>
+"""
+    for k in [x for x in inst_rows if len(inst[x]) >= 2]:
+        out += f'                    <tr><td>{e(k)}</td><td data-v="{len(inst[k])}">{len(inst[k])}</td><td data-v="{len(inst_papers[k])}">{len(inst_papers[k])}</td></tr>\n'
+    out += f"""                </tbody>
+            </table></div>
+
+            <details class="net-all">
+                <summary>All {len(nodes)} authors</summary>
+                <div class="table-wrap"><table class="net-sort">
+                    <thead><tr><th>Author</th><th>Papers</th><th>Co-authors</th><th>Affiliations</th></tr></thead>
+                    <tbody>
+"""
+    order = sorted(range(len(nodes)), key=lambda i: (-len(nodes[i]["papers"]), -deg[i], nodes[i]["name"]))
+    for i in order:
+        n = nodes[i]
+        aff = e("; ".join(n["institutions"])) if n["institutions"] else '<span class="muted">Not listed</span>'
+        out += (f'                        <tr><td><a href="#net" data-i="{i}">{e(n["name"])}</a></td><td data-v="{len(n["papers"])}">{len(n["papers"])}</td>'
+                f'<td data-v="{deg[i]}">{deg[i]}</td><td>{aff}</td></tr>\n')
+    out += """                    </tbody>
+                </table></div>
+            </details>
+        </div>
+    </section>
+"""
+    payload = dict(groups=NET_GROUPS, papers=nw["papers"],
+                   nodes=[dict(name=n["name"], papers=n["papers"], primary=n["primary"], group=n["group"],
+                               institutions=n["institutions"], openalex=n["openalex"]) for n in nodes],
+                   links=[[idx[l["source"]], idx[l["target"]], l["weight"], l["papers"]] for l in nw["links"]])
+    out += NETWORK_JS.replace("__DATA__", json.dumps(payload, ensure_ascii=False).replace("</", "<\\/"))
+    out += FOOTER
+    return out
+
+
 if __name__ == "__main__":
     (ROOT / "index.html").write_text(build_index())
     (ROOT / "themes.html").write_text(build_themes())
@@ -859,4 +1147,8 @@ if __name__ == "__main__":
     (ROOT / "landscape.html").write_text(build_landscape())
     (ROOT / "codebook.html").write_text(build_codebook())
     (ROOT / "survey.html").write_text(build_survey())
-    print(f"built 7 pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers")
+    pages = 7
+    if NETWORK:
+        (ROOT / "network.html").write_text(build_network())
+        pages += 1
+    print(f"built {pages} pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers")
