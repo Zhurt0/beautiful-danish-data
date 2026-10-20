@@ -130,7 +130,7 @@ footer { border-top: 1px solid var(--border-color); padding: 24px 0 40px; margin
     table { font-size: 0.88rem; }
 }
 
-/* Landscape controls */
+/* Controls */
 .controls { margin-bottom: 12px; display: grid; gap: 8px; }
 .ctl-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .ctl-label { font-size: 0.85rem; color: var(--muted); margin-right: 4px; }
@@ -139,12 +139,6 @@ footer { border-top: 1px solid var(--border-color); padding: 24px 0 40px; margin
 .chip.ghost { border-style: dashed; }
 .viz-help { font-size: 0.85rem; color: var(--muted); margin: 6px 0 28px; }
 .sub-title { font-size: 1.2rem; margin-bottom: 4px; color: var(--primary-color); }
-.viz.flat { height: 380px; }
-.cell-list { margin-top: 12px; font-size: 0.92rem; }
-.cell-list h4 { font-size: 1rem; margin-bottom: 6px; }
-.cell-list ul { list-style: none; display: grid; gap: 4px; }
-.cell-list .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: baseline; }
-.cell-list .muted { color: var(--muted); }
 
 /* Variable definitions */
 details.defs { margin: 2px 0 10px; font-size: 0.9rem; max-width: 80ch; }
@@ -217,4 +211,30 @@ details.net-all summary { cursor: pointer; font-weight: 700; color: var(--accent
     .net-wrap { grid-template-columns: 1fr; }
     .viz.net { height: 520px; }
     .net-panel { max-height: none; border-left: 0; border-top: 2px solid var(--border-color); padding: 10px 0 0; }
+}
+
+/* Life course */
+.lc-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.85rem; color: var(--secondary-color); margin-bottom: 8px; }
+.lc-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.lc-scroll { overflow-x: auto; border: 1px solid var(--border-color); border-radius: 4px; background: #fcfcfb; }
+.lc-chart { position: relative; min-width: 760px; padding: 8px 6px 4px; }
+.lc-chart svg { display: block; }
+.lc-ev, .lc-lane { cursor: pointer; outline: none; }
+.lc-ev:focus-visible circle, .lc-lane:focus-visible rect:first-child { stroke: #2a78d6; stroke-width: 2; }
+.lc-panel { min-height: 120px; padding: 10px 14px; border-left: 2px solid #2a78d6; margin: 0 0 30px; font-size: 0.92rem; }
+.lc-panel h3 { font-size: 1.1rem; color: var(--primary-color); margin-bottom: 4px; }
+.lc-panel h3 .muted { font-size: 0.85rem; font-weight: 400; }
+.lc-panel ul { list-style: none; display: grid; gap: 5px; margin-top: 6px; }
+table.lc-table td { font-size: 0.88rem; }
+table.lc-table td:first-child { white-space: nowrap; color: var(--muted); }
+table.lc-table td:nth-child(2) { min-width: 13em; }
+table.lc-table td:nth-child(3) { white-space: nowrap; }
+table.lc-table ul { list-style: none; display: grid; gap: 3px; }
+table.lc-table .t { color: var(--muted); font-size: 0.82rem; }
+@media (max-width: 860px) {
+    table.lc-table thead { display: none; }
+    table.lc-table, table.lc-table tbody, table.lc-table tr, table.lc-table td { display: block; width: 100%; min-width: 0 !important; }
+    table.lc-table tr { border-bottom: 2px solid var(--border-color); padding: 8px 0; }
+    table.lc-table td { border: 0; padding: 3px 0; white-space: normal !important; }
+    table.lc-table td::before { content: attr(data-label); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
 }

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life course | Beautiful Danish Data</title>
+    <meta name="description" content="The main events in a person&#x27;s life, from birth to death, and the Danish registers that record each one.">
+    <meta name="author" content="Rentian Zhu">
+    <link rel="canonical" href="https://zhurt0.github.io/beautiful-danish-data/lifecycle.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Beautiful Danish Data">
+    <meta property="og:title" content="Life course | Beautiful Danish Data">
+    <meta property="og:description" content="The main events in a person&#x27;s life, from birth to death, and the Danish registers that record each one.">
+    <meta property="og:url" content="https://zhurt0.github.io/beautiful-danish-data/lifecycle.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <p class="eyebrow"><a href="https://zhurt0.github.io/rentianzhu/">Rentian Zhu</a> &rsaquo; Useful links</p>
+            <h1><a href="index.html">Beautiful Danish Data</a></h1>
+            <p class="tagline">A field guide to economics published with Danish administrative data</p>
+        </div>
+    </header>
+    <nav>
+        <div class="container">
+            <ul><li><a href="index.html">Summary</a></li><li><a href="themes.html">Themes</a></li><li><a href="samples.html">Data & samples</a></li><li><a href="lifecycle.html" class="active">Life course</a></li><li><a href="codebook.html">Codebook</a></li><li><a href="survey.html">Survey</a></li><li><a href="variables.html">Variable map</a></li><li><a href="network.html">Author network</a></li><li><a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a></li></ul>
+        </div>
+    </nav>
+    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">Life course in the registers</h2>
+            <p>A person living in Denmark leaves a trace in the registers at almost every turn of life. The chart follows one life from birth to death: the numbered events along the top are the main things that happen to people, and each row below is a register. A grey bar shows the ages over which a register follows a person, and a dot marks an event that the register records.</p>
+            <p class="note">Ages are typical ages, for illustration. What exists also depends on the calendar year: monthly payroll (BFL) starts in 2008, prescriptions (LMDB) in 1995, weekly transfers (DREAM) in 1991, hospital records (LPR) in 1977 with outpatients from 1995, and the crime registers in 1980. Paper counts refer to the 155 papers on this site. Income (IND), wealth (FORM) and labour-market status (AKM) are also updated every year whether or not anything happens.</p>
+        </div>
+    </section>
+    <section class="section viz-section">
+        <div class="container">
+            <div class="lc-legend"><span><svg width="34" height="10" aria-hidden="true"><rect x="1" y="2" width="32" height="6" rx="3" fill="#c3c2b7"/></svg> The register follows the person over these ages</span><span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="4.5" fill="#52514e" stroke="#fcfcfb" stroke-width="2"/></svg> The register records this event</span><span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></svg> Selected</span></div>
+            <div class="lc-scroll"><div id="lc" class="lc-chart" role="img" aria-label="Life-course chart: 22 life events by age, and the 15 registers that record them. The table below gives the same information."></div></div>
+            <p class="viz-help">Hover or click an event number to see which registers record it and the range of ages it usually happens at; hover or click a register to see its events. On a phone, scroll the chart sideways.</p>
+            <div id="lc-panel" class="lc-panel" aria-live="polite"></div>
+
+            <h3 class="sub-title">Events and the registers that record them</h3>
+            <div class="table-wrap"><table class="lc-table">
+                <thead><tr><th>#</th><th>Event</th><th>Typical ages</th><th>Registers and what they record</th></tr></thead>
+                <tbody>
+                    <tr id="ev-1"><td data-label="#">1</td><td data-label="Event"><strong>Birth</strong><br><span class="t">A person enters the registers the day they are born in Denmark.</span></td><td data-label="Typical ages">0</td><td data-label="Registers"><ul><li><a href="variables.html#reg-mfr-medical-birth-register">Births (MFR)</a>: Birth weight, gestational age and Apgar score, linked to the mother</li><li><a href="variables.html#reg-bef-population-register">Population (BEF)</a>: A personal number (PNR) is created, with mother&#x27;s and father&#x27;s PNR and municipality</li><li><a href="variables.html#reg-lpr-national-patient-register">Hospital (LPR)</a>: The birth stay and any neonatal admissions</li><li><a href="variables.html#reg-vnds-residence-histories">Migration and addresses</a>: First address</li></ul></td></tr>
+                    <tr id="ev-2"><td data-label="#">2</td><td data-label="Event"><strong>Childhood health care</strong><br><span class="t">Hospital visits and medicines from the first years of life.</span></td><td data-label="Typical ages">0&ndash;15</td><td data-label="Registers"><ul><li><a href="variables.html#reg-lpr-national-patient-register">Hospital (LPR)</a>: Every hospital contact with diagnoses (ICD-10) and dates</li><li><a href="variables.html#reg-lmdb-prescription-register">Prescriptions (LMDB)</a>: Every prescription filled at a pharmacy (ATC code, date, amount)</li></ul></td></tr>
+                    <tr id="ev-3"><td data-label="#">3</td><td data-label="Event"><strong>Starting school</strong><br><span class="t">School enrolment starts the education record.</span></td><td data-label="Typical ages">5&ndash;7</td><td data-label="Registers"><ul><li><a href="variables.html#reg-udda-education-register">Education (UDDA)</a>: Enrolment spells by programme (KOTRE) from the first school year</li></ul></td></tr>
+                    <tr id="ev-4"><td data-label="#">4</td><td data-label="Event"><strong>Parents separate or the family moves</strong><br><span class="t">Changes in the household while growing up.</span></td><td data-label="Typical ages">0&ndash;17</td><td data-label="Registers"><ul><li><a href="variables.html#reg-bef-population-register">Population (BEF)</a>: Family ID and family type change; parents&#x27; marital status</li><li><a href="variables.html#reg-vnds-residence-histories">Migration and addresses</a>: Each move, with date, municipality and parish</li></ul></td></tr>
+                    <tr id="ev-5"><td data-label="#">5</td><td data-label="Event"><strong>End of compulsory school</strong><br><span class="t">Lower secondary school is completed.</span></td><td data-label="Typical ages">15&ndash;17</td><td data-label="Registers"><ul><li><a href="variables.html#reg-udda-education-register">Education (UDDA)</a>: Primary and lower secondary becomes the highest completed education (HFAUDD)</li></ul></td></tr>
+                    <tr id="ev-6"><td data-label="#">6</td><td data-label="Event"><strong>First job</strong><br><span class="t">Student jobs and the first regular job link the person to an employer.</span></td><td data-label="Typical ages">15&ndash;25</td><td data-label="Registers"><ul><li><a href="variables.html#reg-ida-idan-idap-integrated-labour-market-database">Labour market (IDA)</a>: Employer (CVRNR), workplace, occupation (DISCO) and hourly wage for the November job</li><li><a href="variables.html#reg-bfl-eindkomst-monthly-payroll">Monthly payroll (BFL)</a>: Monthly pay, paid hours and job start date (from 2008)</li><li><a href="variables.html#reg-akm-labour-market-classification">Labour status (AKM/RAS)</a>: Socio-economic status changes to employed</li><li><a href="variables.html#reg-ind-income-register">Income (IND)</a>: Wage income for the year</li><li><a href="variables.html#firm">Employer&#x27;s firm registers</a>: The employer&#x27;s industry, size, accounts and trade, through the firm-worker link</li></ul></td></tr>
+                    <tr id="ev-7"><td data-label="#">7</td><td data-label="Event"><strong>Upper secondary or vocational school</strong><br><span class="t">Gymnasium or a vocational programme.</span></td><td data-label="Typical ages">16&ndash;20</td><td data-label="Registers"><ul><li><a href="variables.html#reg-udda-education-register">Education (UDDA)</a>: Programme spells, start and completion dates</li></ul></td></tr>
+                    <tr id="ev-8"><td data-label="#">8</td><td data-label="Event"><strong>Contact with the police</strong><br><span class="t">Danish criminal responsibility starts at 15; charges peak in the late teens and twenties.</span></td><td data-label="Typical ages">15&ndash;30</td><td data-label="Registers"><ul><li><a href="variables.html#reg-kraf-krsi-crime-registers">Crime (KRAF/KRSI)</a>: Charges and convictions with offence code, decision type and dates</li></ul></td></tr>
+                    <tr id="ev-9"><td data-label="#">9</td><td data-label="Event"><strong>Leaving home</strong><br><span class="t">Moving out of the parents&#x27; household.</span></td><td data-label="Typical ages">18&ndash;24</td><td data-label="Registers"><ul><li><a href="variables.html#reg-bef-population-register">Population (BEF)</a>: A new family ID, no longer counted in the parents&#x27; family</li><li><a href="variables.html#reg-vnds-residence-histories">Migration and addresses</a>: New address and move date</li></ul></td></tr>
+                    <tr id="ev-10"><td data-label="#">10</td><td data-label="Event"><strong>Higher education</strong><br><span class="t">University or professional degree.</span></td><td data-label="Typical ages">19&ndash;28</td><td data-label="Registers"><ul><li><a href="variables.html#reg-udda-education-register">Education (UDDA)</a>: Programme, start and completion dates, new highest education</li><li><a href="variables.html#reg-dream-public-transfers-weekly">Transfers (DREAM)</a>: Weeks on the state study grant (SU)</li></ul></td></tr>
+                    <tr id="ev-11"><td data-label="#">11</td><td data-label="Event"><strong>Arriving in Denmark</strong><br><span class="t">For immigrants, the record starts on arrival rather than at birth.</span></td><td data-label="Typical ages">0&ndash;60</td><td data-label="Registers"><ul><li><a href="variables.html#reg-bef-population-register">Population (BEF)</a>: Origin type (immigrant, descendant) and country of origin</li><li><a href="variables.html#reg-vnds-residence-histories">Migration and addresses</a>: Immigration date and first address</li><li><a href="variables.html#reg-udda-education-register">Education (UDDA)</a>: Foreign qualifications are only partly covered; Statistics Denmark filled gaps with a survey (see the Survey page)</li></ul></td></tr>
+                    <tr id="ev-12"><td data-label="#">12</td><td data-label="Event"><strong>Moving in together or marrying</strong><br><span class="t">Forming a couple.</span></td><td data-label="Typical ages">24&ndash;35</td><td data-label="Registers"><ul><li><a href="variables.html#reg-bef-population-register">Population (BEF)</a>: Partner&#x27;s PNR, marital status and a shared family ID</li><li><a href="variables.html#reg-vnds-residence-histories">Migration and addresses</a>: Shared address</li></ul></td></tr>
+                    <tr id="ev-13"><td data-label="#">13</td><td data-label="Event"><strong>Having children</strong><br><span class="t">The person now appears as a parent, and the child&#x27;s records link back to them.</span></td><td data-label="Typical ages">25&ndash;40</td><td data-label="Registers"><ul><li><a href="variables.html#reg-mfr-medical-birth-register">Births (MFR)</a>: Recorded as the mother or father; the child&#x27;s birth outcomes</li><li><a href="variables.html#reg-bef-population-register">Population (BEF)</a>: The child is linked through MOR_PNR / FAR_PNR</li><li><a href="variables.html#reg-lpr-national-patient-register">Hospital (LPR)</a>: Pregnancy and birth admissions for the mother</li><li><a href="variables.html#reg-dream-public-transfers-weekly">Transfers (DREAM)</a>: Weeks of parental leave benefit</li><li><a href="variables.html#reg-bfl-eindkomst-monthly-payroll">Monthly payroll (BFL)</a>: Monthly hours and pay around the birth</li></ul></td></tr>
+                    <tr id="ev-14"><td data-label="#">14</td><td data-label="Event"><strong>Buying a home</strong><br><span class="t">Becoming a home owner.</span></td><td data-label="Typical ages">25&ndash;40</td><td data-label="Registers"><ul><li><a href="variables.html#reg-form-wealth-register">Wealth (FORM)</a>: Property value, mortgage and bank debt at year end</li><li><a href="variables.html#reg-ind-income-register">Income (IND)</a>: Interest expenses</li><li><a href="variables.html#reg-vnds-residence-histories">Migration and addresses</a>: Move date and new address</li></ul></td></tr>
+                    <tr id="ev-15"><td data-label="#">15</td><td data-label="Event"><strong>Changing job or being promoted</strong><br><span class="t">Moving between employers or up the hierarchy.</span></td><td data-label="Typical ages">20&ndash;60</td><td data-label="Registers"><ul><li><a href="variables.html#reg-ida-idan-idap-integrated-labour-market-database">Labour market (IDA)</a>: New employer and workplace, occupation (DISCO), tenure</li><li><a href="variables.html#reg-bfl-eindkomst-monthly-payroll">Monthly payroll (BFL)</a>: Exact start and end dates of each job</li><li><a href="variables.html#firm">Employer&#x27;s firm registers</a>: The new employer&#x27;s characteristics</li><li><a href="variables.html#reg-ind-income-register">Income (IND)</a>: Change in earnings</li></ul></td></tr>
+                    <tr id="ev-16"><td data-label="#">16</td><td data-label="Event"><strong>Separation or divorce</strong><br><span class="t">A couple splits up.</span></td><td data-label="Typical ages">30&ndash;55</td><td data-label="Registers"><ul><li><a href="variables.html#reg-bef-population-register">Population (BEF)</a>: Marital status and family ID change; the partner link ends</li><li><a href="variables.html#reg-vnds-residence-histories">Migration and addresses</a>: One partner moves out</li><li><a href="variables.html#reg-form-wealth-register">Wealth (FORM)</a>: Assets and debts now recorded separately</li></ul></td></tr>
+                    <tr id="ev-17"><td data-label="#">17</td><td data-label="Event"><strong>Job loss and unemployment</strong><br><span class="t">Losing a job and searching for a new one.</span></td><td data-label="Typical ages">20&ndash;64</td><td data-label="Registers"><ul><li><a href="variables.html#reg-bfl-eindkomst-monthly-payroll">Monthly payroll (BFL)</a>: Job end date; monthly pay stops</li><li><a href="variables.html#reg-dream-public-transfers-weekly">Transfers (DREAM)</a>: Weeks on unemployment insurance or social assistance</li><li><a href="variables.html#reg-ida-idan-idap-integrated-labour-market-database">Labour market (IDA)</a>: Degree of unemployment over the year</li><li><a href="variables.html#reg-akm-labour-market-classification">Labour status (AKM/RAS)</a>: Status changes to unemployed</li><li><a href="variables.html#reg-ind-income-register">Income (IND)</a>: Public transfers received</li></ul></td></tr>
+                    <tr id="ev-18"><td data-label="#">18</td><td data-label="Event"><strong>Illness and sick leave</strong><br><span class="t">A health shock during working life.</span></td><td data-label="Typical ages">20&ndash;65</td><td data-label="Registers"><ul><li><a href="variables.html#reg-lpr-national-patient-register">Hospital (LPR)</a>: Diagnoses and admission dates</li><li><a href="variables.html#reg-lmdb-prescription-register">Prescriptions (LMDB)</a>: Prescriptions filled</li><li><a href="variables.html#reg-dream-public-transfers-weekly">Transfers (DREAM)</a>: Weeks on sickness benefit</li><li><a href="variables.html#reg-bfl-eindkomst-monthly-payroll">Monthly payroll (BFL)</a>: Hours and pay during and after the illness</li></ul></td></tr>
+                    <tr id="ev-19"><td data-label="#">19</td><td data-label="Event"><strong>Disability pension or early retirement</strong><br><span class="t">Leaving the labour market before pension age.</span></td><td data-label="Typical ages">50&ndash;64</td><td data-label="Registers"><ul><li><a href="variables.html#reg-dream-public-transfers-weekly">Transfers (DREAM)</a>: Weeks on disability pension or voluntary early retirement</li><li><a href="variables.html#reg-akm-labour-market-classification">Labour status (AKM/RAS)</a>: Status changes to outside the labour force</li><li><a href="variables.html#reg-ind-income-register">Income (IND)</a>: Transfer income</li></ul></td></tr>
+                    <tr id="ev-20"><td data-label="#">20</td><td data-label="Event"><strong>Retirement</strong><br><span class="t">Reaching pension age.</span></td><td data-label="Typical ages">62&ndash;70</td><td data-label="Registers"><ul><li><a href="variables.html#reg-dream-public-transfers-weekly">Transfers (DREAM)</a>: Public old-age pension</li><li><a href="variables.html#reg-ind-income-register">Income (IND)</a>: Pension income</li><li><a href="variables.html#reg-form-wealth-register">Wealth (FORM)</a>: Pension wealth (later years)</li><li><a href="variables.html#reg-akm-labour-market-classification">Labour status (AKM/RAS)</a>: Status changes to retired</li><li><a href="variables.html#reg-bfl-eindkomst-monthly-payroll">Monthly payroll (BFL)</a>: The last month of pay</li></ul></td></tr>
+                    <tr id="ev-21"><td data-label="#">21</td><td data-label="Event"><strong>Health care in old age</strong><br><span class="t">Hospital use and medicines rise steeply.</span></td><td data-label="Typical ages">70&ndash;90</td><td data-label="Registers"><ul><li><a href="variables.html#reg-lpr-national-patient-register">Hospital (LPR)</a>: Hospital contacts and diagnoses</li><li><a href="variables.html#reg-lmdb-prescription-register">Prescriptions (LMDB)</a>: Prescriptions filled</li></ul></td></tr>
+                    <tr id="ev-22"><td data-label="#">22</td><td data-label="Event"><strong>Death</strong><br><span class="t">The record ends.</span></td><td data-label="Typical ages">60&ndash;95</td><td data-label="Registers"><ul><li><a href="variables.html#reg-dod-death-register">Deaths (DOD)</a>: Date of death and underlying and contributing causes (ICD-10)</li><li><a href="variables.html#reg-bef-population-register">Population (BEF)</a>: The person leaves the population</li><li><a href="variables.html#reg-lpr-national-patient-register">Hospital (LPR)</a>: The last hospital contacts</li></ul></td></tr>
+                </tbody>
+            </table></div>
+        </div>
+    </section>
+    <script>
+    (function () {
+        var D = {"lanes": [{"group": "Who you are and where you live", "regs": [{"k": "BEF", "spans": [[0, 95]]}, {"k": "VNDS", "spans": [[0, 95]]}]}, {"group": "Health", "regs": [{"k": "MFR", "spans": [[0, 0.6], [20, 45]]}, {"k": "LPR", "spans": [[0, 95]]}, {"k": "LMDB", "spans": [[0, 95]]}, {"k": "DOD", "spans": []}]}, {"group": "Education", "regs": [{"k": "UDDA", "spans": [[5, 30]]}]}, {"group": "Work", "regs": [{"k": "IDA", "spans": [[15, 74]]}, {"k": "AKM", "spans": [[15, 95]]}, {"k": "BFL", "spans": [[15, 70]]}, {"k": "FIRMS", "spans": [[16, 67]]}]}, {"group": "Money", "regs": [{"k": "IND", "spans": [[15, 95]]}, {"k": "FORM", "spans": [[18, 95]]}, {"k": "DREAM", "spans": [[16, 95]]}]}, {"group": "Crime", "regs": [{"k": "KRAF", "spans": [[15, 95]]}]}], "info": {"BEF": {"name": "Population (BEF)", "full": "BEF — Population register", "n": 75, "href": "variables.html#reg-bef-population-register"}, "VNDS": {"name": "Migration and addresses", "full": "VNDS / Residence histories", "n": 6, "href": "variables.html#reg-vnds-residence-histories"}, "MFR": {"name": "Births (MFR)", "full": "MFR — Medical Birth Register", "n": 12, "href": "variables.html#reg-mfr-medical-birth-register"}, "LPR": {"name": "Hospital (LPR)", "full": "LPR — National Patient Register", "n": 22, "href": "variables.html#reg-lpr-national-patient-register"}, "LMDB": {"name": "Prescriptions (LMDB)", "full": "LMDB — Prescription register", "n": 10, "href": "variables.html#reg-lmdb-prescription-register"}, "DOD": {"name": "Deaths (DOD)", "full": "DOD — Death register", "n": 13, "href": "variables.html#reg-dod-death-register"}, "UDDA": {"name": "Education (UDDA)", "full": "UDDA — Education register", "n": 38, "href": "variables.html#reg-udda-education-register"}, "IDA": {"name": "Labour market (IDA)", "full": "IDA / IDAN / IDAP — Integrated labour market database", "n": 47, "href": "variables.html#reg-ida-idan-idap-integrated-labour-market-database"}, "AKM": {"name": "Labour status (AKM/RAS)", "full": "AKM — Labour market classification", "n": 16, "href": "variables.html#reg-akm-labour-market-classification"}, "BFL": {"name": "Monthly payroll (BFL)", "full": "BFL / eIndkomst — Monthly payroll", "n": 15, "href": "variables.html#reg-bfl-eindkomst-monthly-payroll"}, "IND": {"name": "Income (IND)", "full": "IND — Income register", "n": 63, "href": "variables.html#reg-ind-income-register"}, "FORM": {"name": "Wealth (FORM)", "full": "FORM — Wealth register", "n": 23, "href": "variables.html#reg-form-wealth-register"}, "DREAM": {"name": "Transfers (DREAM)", "full": "DREAM — Public transfers (weekly)", "n": 7, "href": "variables.html#reg-dream-public-transfers-weekly"}, "KRAF": {"name": "Crime (KRAF/KRSI)", "full": "KRAF / KRSI — Crime registers", "n": 17, "href": "variables.html#reg-kraf-krsi-crime-registers"}, "FIRMS": {"name": "Employer's firm registers", "full": "FIDA, FIRM/FIRE, foreign trade, VAT and company registers", "n": 18, "href": "variables.html#firm"}}, "events": [{"name": "Birth", "age": 0, "lo": 0, "hi": 0, "desc": "A person enters the registers the day they are born in Denmark.", "regs": [{"k": "MFR", "what": "Birth weight, gestational age and Apgar score, linked to the mother"}, {"k": "BEF", "what": "A personal number (PNR) is created, with mother's and father's PNR and municipality"}, {"k": "LPR", "what": "The birth stay and any neonatal admissions"}, {"k": "VNDS", "what": "First address"}]}, {"name": "Childhood health care", "age": 5, "lo": 0, "hi": 15, "desc": "Hospital visits and medicines from the first years of life.", "regs": [{"k": "LPR", "what": "Every hospital contact with diagnoses (ICD-10) and dates"}, {"k": "LMDB", "what": "Every prescription filled at a pharmacy (ATC code, date, amount)"}]}, {"name": "Starting school", "age": 6, "lo": 5, "hi": 7, "desc": "School enrolment starts the education record.", "regs": [{"k": "UDDA", "what": "Enrolment spells by programme (KOTRE) from the first school year"}]}, {"name": "Parents separate or the family moves", "age": 9, "lo": 0, "hi": 17, "desc": "Changes in the household while growing up.", "regs": [{"k": "BEF", "what": "Family ID and family type change; parents' marital status"}, {"k": "VNDS", "what": "Each move, with date, municipality and parish"}]}, {"name": "End of compulsory school", "age": 16, "lo": 15, "hi": 17, "desc": "Lower secondary school is completed.", "regs": [{"k": "UDDA", "what": "Primary and lower secondary becomes the highest completed education (HFAUDD)"}]}, {"name": "First job", "age": 18, "lo": 15, "hi": 25, "desc": "Student jobs and the first regular job link the person to an employer.", "regs": [{"k": "IDA", "what": "Employer (CVRNR), workplace, occupation (DISCO) and hourly wage for the November job"}, {"k": "BFL", "what": "Monthly pay, paid hours and job start date (from 2008)"}, {"k": "AKM", "what": "Socio-economic status changes to employed"}, {"k": "IND", "what": "Wage income for the year"}, {"k": "FIRMS", "what": "The employer's industry, size, accounts and trade, through the firm-worker link"}]}, {"name": "Upper secondary or vocational school", "age": 18, "lo": 16, "hi": 20, "desc": "Gymnasium or a vocational programme.", "regs": [{"k": "UDDA", "what": "Programme spells, start and completion dates"}]}, {"name": "Contact with the police", "age": 19, "lo": 15, "hi": 30, "desc": "Danish criminal responsibility starts at 15; charges peak in the late teens and twenties.", "regs": [{"k": "KRAF", "what": "Charges and convictions with offence code, decision type and dates"}]}, {"name": "Leaving home", "age": 20, "lo": 18, "hi": 24, "desc": "Moving out of the parents' household.", "regs": [{"k": "BEF", "what": "A new family ID, no longer counted in the parents' family"}, {"k": "VNDS", "what": "New address and move date"}]}, {"name": "Higher education", "age": 22, "lo": 19, "hi": 28, "desc": "University or professional degree.", "regs": [{"k": "UDDA", "what": "Programme, start and completion dates, new highest education"}, {"k": "DREAM", "what": "Weeks on the state study grant (SU)"}]}, {"name": "Arriving in Denmark", "age": 27, "lo": 0, "hi": 60, "desc": "For immigrants, the record starts on arrival rather than at birth.", "regs": [{"k": "BEF", "what": "Origin type (immigrant, descendant) and country of origin"}, {"k": "VNDS", "what": "Immigration date and first address"}, {"k": "UDDA", "what": "Foreign qualifications are only partly covered; Statistics Denmark filled gaps with a survey (see the Survey page)"}]}, {"name": "Moving in together or marrying", "age": 29, "lo": 24, "hi": 35, "desc": "Forming a couple.", "regs": [{"k": "BEF", "what": "Partner's PNR, marital status and a shared family ID"}, {"k": "VNDS", "what": "Shared address"}]}, {"name": "Having children", "age": 31, "lo": 25, "hi": 40, "desc": "The person now appears as a parent, and the child's records link back to them.", "regs": [{"k": "MFR", "what": "Recorded as the mother or father; the child's birth outcomes"}, {"k": "BEF", "what": "The child is linked through MOR_PNR / FAR_PNR"}, {"k": "LPR", "what": "Pregnancy and birth admissions for the mother"}, {"k": "DREAM", "what": "Weeks of parental leave benefit"}, {"k": "BFL", "what": "Monthly hours and pay around the birth"}]}, {"name": "Buying a home", "age": 32, "lo": 25, "hi": 40, "desc": "Becoming a home owner.", "regs": [{"k": "FORM", "what": "Property value, mortgage and bank debt at year end"}, {"k": "IND", "what": "Interest expenses"}, {"k": "VNDS", "what": "Move date and new address"}]}, {"name": "Changing job or being promoted", "age": 38, "lo": 20, "hi": 60, "desc": "Moving between employers or up the hierarchy.", "regs": [{"k": "IDA", "what": "New employer and workplace, occupation (DISCO), tenure"}, {"k": "BFL", "what": "Exact start and end dates of each job"}, {"k": "FIRMS", "what": "The new employer's characteristics"}, {"k": "IND", "what": "Change in earnings"}]}, {"name": "Separation or divorce", "age": 42, "lo": 30, "hi": 55, "desc": "A couple splits up.", "regs": [{"k": "BEF", "what": "Marital status and family ID change; the partner link ends"}, {"k": "VNDS", "what": "One partner moves out"}, {"k": "FORM", "what": "Assets and debts now recorded separately"}]}, {"name": "Job loss and unemployment", "age": 45, "lo": 20, "hi": 64, "desc": "Losing a job and searching for a new one.", "regs": [{"k": "BFL", "what": "Job end date; monthly pay stops"}, {"k": "DREAM", "what": "Weeks on unemployment insurance or social assistance"}, {"k": "IDA", "what": "Degree of unemployment over the year"}, {"k": "AKM", "what": "Status changes to unemployed"}, {"k": "IND", "what": "Public transfers received"}]}, {"name": "Illness and sick leave", "age": 50, "lo": 20, "hi": 65, "desc": "A health shock during working life.", "regs": [{"k": "LPR", "what": "Diagnoses and admission dates"}, {"k": "LMDB", "what": "Prescriptions filled"}, {"k": "DREAM", "what": "Weeks on sickness benefit"}, {"k": "BFL", "what": "Hours and pay during and after the illness"}]}, {"name": "Disability pension or early retirement", "age": 60, "lo": 50, "hi": 64, "desc": "Leaving the labour market before pension age.", "regs": [{"k": "DREAM", "what": "Weeks on disability pension or voluntary early retirement"}, {"k": "AKM", "what": "Status changes to outside the labour force"}, {"k": "IND", "what": "Transfer income"}]}, {"name": "Retirement", "age": 67, "lo": 62, "hi": 70, "desc": "Reaching pension age.", "regs": [{"k": "DREAM", "what": "Public old-age pension"}, {"k": "IND", "what": "Pension income"}, {"k": "FORM", "what": "Pension wealth (later years)"}, {"k": "AKM", "what": "Status changes to retired"}, {"k": "BFL", "what": "The last month of pay"}]}, {"name": "Health care in old age", "age": 78, "lo": 70, "hi": 90, "desc": "Hospital use and medicines rise steeply.", "regs": [{"k": "LPR", "what": "Hospital contacts and diagnoses"}, {"k": "LMDB", "what": "Prescriptions filled"}]}, {"name": "Death", "age": 82, "lo": 60, "hi": 95, "desc": "The record ends.", "regs": [{"k": "DOD", "what": "Date of death and underlying and contributing causes (ICD-10)"}, {"k": "BEF", "what": "The person leaves the population"}, {"k": "LPR", "what": "The last hospital contacts"}]}]};
+        var NS = 'http://www.w3.org/2000/svg';
+        var ACC = '#2a78d6', INK = '#0b0b0b', INK2 = '#52514e', MUTED = '#8a8980', GRID = '#e1e0d9', BAR = '#c3c2b7', SURF = '#fcfcfb';
+        var W = 1000, LW = 250, X0 = LW + 12, X1 = W - 20, AMAX = 95;
+        function x(a) { return X0 + (X1 - X0) * a / AMAX; }
+        function el(tag, attrs, parent) {
+            var n = document.createElementNS(NS, tag);
+            for (var k in attrs) n.setAttribute(k, attrs[k]);
+            if (parent) parent.appendChild(n);
+            return n;
+        }
+        function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+        // stack event markers into rows so that numbered circles never overlap
+        var rowsEnd = [], ER = 11;
+        D.events.forEach(function (ev, i) {
+            ev.i = i; ev.num = i + 1;
+            var px = x(ev.age), r = 0;
+            while (rowsEnd[r] !== undefined && rowsEnd[r] > px - 2 * ER - 4) r++;
+            rowsEnd[r] = px; ev.row = r;
+        });
+        var nRows = rowsEnd.length, TOP = 18, RH = 28, evH = TOP + nRows * RH;
+        var AXIS = evH + 20;
+        var y = AXIS + 14, laneY = {}, layout = [];
+        D.lanes.forEach(function (g) {
+            layout.push({ type: 'group', label: g.group, y: y + 12 }); y += 22;
+            g.regs.forEach(function (r) { laneY[r.k] = y + 13; layout.push({ type: 'lane', k: r.k, spans: r.spans, y: y + 13 }); y += 27; });
+            y += 4;
+        });
+        var H = y + 6;
+        var box = document.getElementById('lc');
+        var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, width: '100%', 'font-family': 'system-ui, -apple-system, "Segoe UI", sans-serif' }, box);
+
+        // highlight band (behind everything)
+        var band = el('rect', { x: 0, y: evH - 4, width: 0, height: H - evH, fill: ACC, 'fill-opacity': 0.07, visibility: 'hidden' }, svg);
+        var bandLine = el('line', { y1: evH - 4, y2: H, stroke: ACC, 'stroke-width': 1, 'stroke-dasharray': '3 3', visibility: 'hidden' }, svg);
+
+        // age axis and grid
+        for (var a = 0; a <= 90; a += 10) {
+            el('line', { x1: x(a), x2: x(a), y1: AXIS + 4, y2: H, stroke: GRID, 'stroke-width': 1 }, svg);
+            var t = el('text', { x: x(a), y: AXIS, 'text-anchor': 'middle', 'font-size': 12, fill: INK2 }, svg); t.textContent = a;
+        }
+        var at = el('text', { x: LW, y: AXIS, 'text-anchor': 'end', 'font-size': 12, fill: INK2 }, svg); at.textContent = 'Age';
+
+        // lanes
+        var laneEls = {};
+        layout.forEach(function (L) {
+            if (L.type === 'group') {
+                var gt = el('text', { x: 0, y: L.y, 'font-size': 11, 'font-weight': 700, fill: INK2, 'letter-spacing': '0.04em' }, svg);
+                gt.textContent = L.label.toUpperCase();
+                return;
+            }
+            var info = D.info[L.k];
+            var g = el('g', { 'class': 'lc-lane', 'data-k': L.k, tabindex: 0, role: 'button', 'aria-label': info.name }, svg);
+            el('rect', { x: 0, y: L.y - 13, width: W, height: 26, fill: 'transparent' }, g);
+            var lt = el('text', { x: 8, y: L.y + 4, 'font-size': 13, fill: INK }, g); lt.textContent = info.name;
+            var nt = el('text', { x: LW, y: L.y + 4, 'font-size': 11, 'text-anchor': 'end', fill: MUTED }, g); nt.textContent = info.n + (info.n === 1 ? ' paper' : ' papers');
+            L.spans.forEach(function (s) {
+                el('rect', { x: x(s[0]), y: L.y - 3, width: Math.max(x(s[1]) - x(s[0]), 6), height: 6, rx: 3, fill: BAR }, g);
+            });
+            laneEls[L.k] = g;
+        });
+
+        // dots: one per (event, register)
+        var dots = [];
+        D.events.forEach(function (ev) {
+            ev.regs.forEach(function (r) {
+                var c = el('circle', { cx: x(ev.age), cy: laneY[r.k], r: 4.5, fill: INK2, stroke: SURF, 'stroke-width': 2, 'class': 'lc-dot' }, svg);
+                c.__d = { ev: ev, r: r }; dots.push(c);
+            });
+        });
+
+        // event markers
+        var evEls = [];
+        D.events.forEach(function (ev) {
+            var cy = TOP + ev.row * RH + 4;
+            var g = el('g', { 'class': 'lc-ev', tabindex: 0, role: 'button', 'aria-label': ev.num + '. ' + ev.name }, svg);
+            el('circle', { cx: x(ev.age), cy: cy, r: ER + 6, fill: 'transparent' }, g);
+            var c = el('circle', { cx: x(ev.age), cy: cy, r: ER, fill: SURF, stroke: INK2, 'stroke-width': 1.5 }, g);
+            var tx = el('text', { x: x(ev.age), y: cy + 4, 'text-anchor': 'middle', 'font-size': 11, 'font-weight': 700, fill: INK }, g);
+            tx.textContent = ev.num;
+            g.__ev = ev; g.__c = c; g.__t = tx; evEls.push(g);
+        });
+
+        var tip = document.createElement('div'); tip.className = 'net-tip'; tip.style.display = 'none'; box.appendChild(tip);
+        var panel = document.getElementById('lc-panel'), sticky = null;
+
+        function paint(sel) {
+            var evSel = sel && sel.type === 'ev' ? sel.ev : null, kSel = sel && sel.type === 'reg' ? sel.k : null;
+            var involved = {};
+            if (evSel) evSel.regs.forEach(function (r) { involved[r.k] = 1; });
+            dots.forEach(function (c) {
+                var on = (evSel && c.__d.ev === evSel) || (kSel && c.__d.r.k === kSel);
+                c.setAttribute('fill', on ? ACC : INK2); c.setAttribute('r', on ? 6 : 4.5);
+                c.setAttribute('opacity', sel && !on ? 0.25 : 1);
+            });
+            evEls.forEach(function (g) {
+                var on = (evSel && g.__ev === evSel) || (kSel && g.__ev.regs.some(function (r) { return r.k === kSel; }));
+                g.__c.setAttribute('fill', on ? ACC : SURF); g.__c.setAttribute('stroke', on ? ACC : INK2);
+                g.__t.setAttribute('fill', on ? '#ffffff' : INK); g.setAttribute('opacity', sel && !on ? 0.35 : 1);
+            });
+            Object.keys(laneEls).forEach(function (k) {
+                var on = (evSel && involved[k]) || kSel === k;
+                laneEls[k].setAttribute('opacity', sel && !on ? 0.35 : 1);
+                laneEls[k].querySelector('text').setAttribute('font-weight', on ? 700 : 400);
+            });
+            if (evSel) {
+                band.setAttribute('x', x(evSel.lo) - 6); band.setAttribute('width', x(evSel.hi) - x(evSel.lo) + 12); band.setAttribute('visibility', 'visible');
+                bandLine.setAttribute('x1', x(evSel.age)); bandLine.setAttribute('x2', x(evSel.age)); bandLine.setAttribute('visibility', 'visible');
+            } else { band.setAttribute('visibility', 'hidden'); bandLine.setAttribute('visibility', 'hidden'); }
+        }
+        function ages(ev) { return ev.hi > ev.lo ? ev.lo + '–' + ev.hi : String(ev.lo); }
+        function describe(sel) {
+            if (!sel) {
+                panel.innerHTML = '<p class="muted">Select an event number or a register in the chart. ' + D.events.length + ' events, ' + Object.keys(D.info).length + ' registers.</p>';
+                return;
+            }
+            var h;
+            if (sel.type === 'ev') {
+                var ev = sel.ev;
+                h = '<h3>' + ev.num + '. ' + esc(ev.name) + ' <span class="muted">(typical ages ' + ages(ev) + ')</span></h3><p>' + esc(ev.desc) + '</p><ul>';
+                ev.regs.forEach(function (r) { var i = D.info[r.k]; h += '<li><a href="' + i.href + '"><strong>' + esc(i.name) + '</strong></a> <span class="muted">(' + i.n + ' papers)</span>: ' + esc(r.what) + '</li>'; });
+                h += '</ul>';
+            } else {
+                var i = D.info[sel.k], evs = D.events.filter(function (ev) { return ev.regs.some(function (r) { return r.k === sel.k; }); });
+                h = '<h3><a href="' + i.href + '">' + esc(i.name) + '</a> <span class="muted">' + esc(i.full) + ', used by ' + i.n + ' papers</span></h3>';
+                h += evs.length ? '<ul>' : '<p class="muted">Follows the person every year; no single event.</p>';
+                evs.forEach(function (ev) { var r = ev.regs.filter(function (r) { return r.k === sel.k; })[0]; h += '<li><strong>' + ev.num + '. ' + esc(ev.name) + '</strong> <span class="muted">(' + ages(ev) + ')</span>: ' + esc(r.what) + '</li>'; });
+                if (evs.length) h += '</ul>';
+            }
+            panel.innerHTML = h;
+        }
+        function show(sel, isSticky) { if (isSticky) sticky = sel; paint(sel); describe(sel); }
+        function release() { paint(sticky); describe(sticky); }
+        function place(ev, html) {
+            var r = box.getBoundingClientRect();
+            tip.innerHTML = html; tip.style.display = 'block';
+            var left = ev.clientX - r.left + 14; if (left > r.width - 250) left = ev.clientX - r.left - 250;
+            tip.style.left = left + 'px'; tip.style.top = (ev.clientY - r.top + 14) + 'px';
+        }
+        evEls.forEach(function (g) {
+            var sel = { type: 'ev', ev: g.__ev };
+            g.addEventListener('mouseenter', function () { paint(sel); describe(sel); });
+            g.addEventListener('mousemove', function (e) { place(e, '<strong>' + g.__ev.num + '. ' + esc(g.__ev.name) + '</strong><br>Typical ages ' + ages(g.__ev) + '<br>' + g.__ev.regs.length + ' registers'); });
+            g.addEventListener('mouseleave', function () { tip.style.display = 'none'; release(); });
+            g.addEventListener('click', function (e) { e.stopPropagation(); show(sel, true); });
+            g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(sel, true); } });
+        });
+        Object.keys(laneEls).forEach(function (k) {
+            var g = laneEls[k], sel = { type: 'reg', k: k };
+            g.addEventListener('mouseenter', function () { paint(sel); describe(sel); });
+            g.addEventListener('mouseleave', release);
+            g.addEventListener('click', function (e) { e.stopPropagation(); show(sel, true); });
+            g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(sel, true); } });
+        });
+        dots.forEach(function (c) {
+            c.addEventListener('mousemove', function (e) { var d = c.__d; place(e, '<strong>' + esc(D.info[d.r.k].name) + '</strong><br>' + d.ev.num + '. ' + esc(d.ev.name) + '<br>' + esc(d.r.what)); });
+            c.addEventListener('mouseleave', function () { tip.style.display = 'none'; });
+            c.addEventListener('click', function (e) { e.stopPropagation(); show({ type: 'ev', ev: c.__d.ev }, true); });
+        });
+        svg.addEventListener('click', function () { show(null, true); });
+        describe(null);
+    })();
+    </script>
+    <footer>
+        <div class="container">
+            <p>Maintained by <a href="https://zhurt0.github.io/rentianzhu/">Rentian Zhu</a>, Copenhagen Business School. Summaries are my own reading of each paper. Corrections and additions are welcome as pull requests on <a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a>.</p>
+        </div>
+    </footer>
+</body>
+</html>

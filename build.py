@@ -90,7 +90,7 @@ def head(title, description, canonical):
 
 
 def nav(active):
-    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("landscape.html", "3D data landscape"), ("codebook.html", "Codebook"), ("survey.html", "Survey"), ("variables.html", "Variable map"), ("network.html", "Author network")]
+    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("lifecycle.html", "Life course"), ("codebook.html", "Codebook"), ("survey.html", "Survey"), ("variables.html", "Variable map"), ("network.html", "Author network")]
     lis = ""
     for href, label in items:
         cls = ' class="active"' if href == active else ""
@@ -289,7 +289,7 @@ def register_block(r):
             for pid in r["used_by"] if pid in PAPER_BY_ID
         )
         used = f'                <p class="used-by"><strong>Used by:</strong> {links}</p>\n'
-    return f"""            <div class="register">
+    return f"""            <div class="register" id="reg-{slug(r['register'])}">
                 <h3>{e(r['register'])}</h3>
                 <p class="what">{e(r['what'])}</p>
                 <table>
@@ -456,240 +456,6 @@ REG_SHORT = {
     "Company registers (CVR, ownership, management)": "Company registers (CVR)",
     "Patents and R&D (external, linked by firm)": "Patents and R&D",
 }
-TIERS = [("Top 5 and AER: Insights", {"top5", "aeri"}),
-         ("AEJ, ReStat and Economic Journal", {"aej", "restat", "ej"}),
-         ("JOLE and JPubE", {"jole", "jpube"})]
-
-
-DOMAINS = [
-    ("Population and family", ["BEF — Population register", "VNDS / Residence histories"]),
-    ("Income and wealth", ["IND — Income register", "FORM — Wealth register"]),
-    ("Jobs and earnings", ["IDA / IDAN / IDAP — Integrated labour market database", "AKM — Labour market classification", "BFL / eIndkomst — Monthly payroll"]),
-    ("Public transfers", ["DREAM — Public transfers (weekly)"]),
-    ("Education", ["UDDA — Education register"]),
-    ("Health, births and deaths", ["LPR — National Patient Register", "LMDB — Prescription register", "MFR — Medical Birth Register", "DOD — Death register"]),
-    ("Crime", ["KRAF / KRSI — Crime registers"]),
-    ("Firms and trade", ["FIRM / FIRE — Firm statistics and Accounts Statistics", "FIDA — Firm–employee link", "UHDI / UHDM — Foreign trade by firm", "VNDS / Moms — VAT-based turnover", "Company registers (CVR, ownership, management)", "Patents and R&D (external, linked by firm)"]),
-    ("Surveys and other data only", []),
-]
-YEAR_FLOOR = 1975
-
-
-def landscape_data():
-    reg_to_dom = {reg: d for d, regs in DOMAINS for reg in regs}
-    doms = [d for d, _ in DOMAINS]
-    uses = {}
-    for r in VARS["individual"] + VARS["firm"]:
-        d = reg_to_dom.get(r["register"])
-        for pid in r["used_by"]:
-            if d and d not in uses.setdefault(pid, []):
-                uses[pid].append(d)
-    rows, skipped = [], []
-    for p in PAPERS:
-        yrs = [int(y) for y in re.findall(r"(?<!\d)(19[0-9]{2}|20[0-2][0-9])(?!\d)", p.get("period") or "")]
-        yrs = [y for y in yrs if 1900 <= y <= 2026]
-        if not yrs:
-            skipped.append(p["id"]); continue
-        tier = next(i for i, (_, g) in enumerate(TIERS) if p["group"] in g)
-        ds = sorted(uses.get(p["id"]) or ["Surveys and other data only"], key=doms.index)
-        rows.append(dict(id=p["id"], cite=short_cite(p), title=p["title"], journal=p["journal"],
-                         period=p["period"], size=p.get("sample_size") or "not stated",
-                         a=min(yrs), b=max(yrs), doms=ds, tier=tier))
-    rows.sort(key=lambda r: (r["a"], r["b"], r["cite"]))
-    return doms, rows, skipped
-
-
-def build_landscape():
-    doms, rows, skipped = landscape_data()
-    early = sum(1 for r in rows if r["a"] < YEAR_FLOOR)
-    out = head(
-        "3D data landscape | Beautiful Danish Data",
-        "A 3D view of which kinds of Danish register data each paper uses and which years its data cover, with a flat year-by-domain view underneath.",
-        "landscape.html",
-    )
-    out += nav("landscape.html")
-    payload = json.dumps(dict(doms=doms, rows=rows, tiers=[t for t, _ in TIERS], floor=YEAR_FLOOR), ensure_ascii=False)
-    chips = "".join(f'<button type="button" class="chip on" data-d="{i}">{e(d)}</button>' for i, d in enumerate(doms))
-    out += f"""    <section class="section intro">
-        <div class="container">
-            <h2 class="section-title">3D data landscape</h2>
-            <p>The floor is a grid of <strong>years</strong> by <strong>data domain</strong>, shaded by how many papers use that kind of data in that year. Each paper floats above the floor at its own height, with one line for every domain it uses, running over the years its data cover. Papers are stacked by the year their data start.</p>
-            <p class="note">The 20 registers are grouped into 9 domains; the <a href="variables.html">Variable map</a> lists the registers in each. {len(rows)} of {len(PAPERS)} papers have a stated data period and are shown. The time axis starts in {YEAR_FLOOR}; {early} papers with older data are drawn from {YEAR_FLOOR}, and their hover text gives the true period.</p>
-        </div>
-    </section>
-    <section class="section viz-section">
-        <div class="container">
-            <div class="controls">
-                <div class="ctl-row"><span class="ctl-label">Show papers using</span>{chips}<button type="button" class="chip ghost" id="all">All</button><button type="button" class="chip ghost" id="none">None</button></div>
-                <div class="ctl-row"><span class="ctl-label">View</span><button type="button" class="chip view on" data-v="tilt">Oblique</button><button type="button" class="chip view" data-v="top">From above</button><button type="button" class="chip view" data-v="side">From the side</button></div>
-            </div>
-            <div id="landscape" class="viz" role="img" aria-label="3D chart of papers by data period and data domain"></div>
-            <p class="viz-help">Drag to rotate, scroll to zoom. Hover a line to see the paper; click it to open its entry. Click a journal tier in the legend to hide it.</p>
-
-            <h3 class="sub-title">Flat view: papers per year and domain</h3>
-            <p class="blurb">The same floor as a plain grid. Click a cell to list the papers whose data cover that domain in that year.</p>
-            <div id="flat" class="viz flat" role="img" aria-label="Heatmap of the number of papers by year and data domain"></div>
-            <div id="cell-list" class="cell-list" aria-live="polite"></div>
-        </div>
-    </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.35.3/plotly.min.js"></script>
-    <script>
-    (function () {{
-        var D = {payload};
-        var SERIES = ['#2a78d6', '#eb6834', '#1baf7a'];
-        var RAMP = [[0, '#f4f8fd'], [0.0001, '#cde2fb'], [0.3, '#86b6ef'], [0.6, '#3987e5'], [0.85, '#1c5cab'], [1, '#0d366b']];
-        var FONT = {{ family: 'system-ui, -apple-system, "Segoe UI", sans-serif', color: '#0b0b0b' }};
-        var HOVER = {{ bgcolor: '#ffffff', bordercolor: '#c3c2b7', font: {{ color: '#0b0b0b', size: 12 }}, align: 'left' }};
-        var on = D.doms.map(function () {{ return true; }});
-        var y1 = 0; D.rows.forEach(function (r) {{ y1 = Math.max(y1, r.b); }});
-        var y0 = D.floor;
-        var years = []; for (var y = y0; y <= y1; y++) years.push(y);
-
-        function visibleRows() {{
-            return D.rows.filter(function (r) {{ return r.doms.some(function (d) {{ return on[D.doms.indexOf(d)]; }}); }});
-        }}
-        function counts(rows) {{
-            var c = D.doms.map(function () {{ return years.map(function () {{ return 0; }}); }});
-            rows.forEach(function (r) {{
-                r.doms.forEach(function (d) {{
-                    var i = D.doms.indexOf(d);
-                    for (var yr = Math.max(r.a, y0); yr <= r.b; yr++) c[i][yr - y0] += 1;
-                }});
-            }});
-            return c;
-        }}
-
-        function floorTrace(c) {{
-            // blocky floor: each cell is a flat tile with a small gap between domains
-            var xs = [], ys = [], zs = [], sc = [];
-            years.forEach(function (yr) {{ xs.push(yr - 0.5, yr + 0.5); }});
-            D.doms.forEach(function (_, i) {{ ys.push(i - 0.42, i + 0.42); }});
-            ys.forEach(function (_, j) {{
-                var di = Math.floor(j / 2), zr = [], sr = [];
-                xs.forEach(function (_, k) {{ zr.push(0); sr.push(c[di][Math.floor(k / 2)]); }});
-                zs.push(zr); sc.push(sr);
-            }});
-            return {{ type: 'surface', x: xs, y: ys, z: zs, surfacecolor: sc, colorscale: RAMP, cmin: 0, showlegend: false,
-                     colorbar: {{ title: {{ text: 'Papers', font: {{ size: 12 }} }}, thickness: 12, len: 0.5, x: 1.0, tickfont: {{ size: 11 }} }},
-                     hoverinfo: 'skip', lighting: {{ ambient: 1, diffuse: 0, specular: 0 }},
-                     contours: {{ x: {{ show: false }}, y: {{ show: false }}, z: {{ show: false }} }} }};
-        }}
-
-        function paperTraces(rows) {{
-            var tr = D.tiers.map(function (name, t) {{
-                return {{ type: 'scatter3d', mode: 'lines', name: name, x: [], y: [], z: [], text: [], customdata: [],
-                         line: {{ color: SERIES[t], width: 6 }}, hovertemplate: '%{{text}}<extra></extra>' }};
-            }});
-            rows.forEach(function (r, k) {{
-                var t = tr[r.tier], z = k + 1;
-                var label = '<b>' + r.cite + '</b><br>' + r.title + '<br>' + r.journal +
-                            '<br>Data period: ' + r.period + '<br>Sample: ' + r.size;
-                r.doms.forEach(function (d) {{
-                    if (!on[D.doms.indexOf(d)]) return;
-                    var yi = D.doms.indexOf(d);
-                    for (var yr = Math.max(r.a, y0); yr <= r.b; yr++) {{
-                        t.x.push(yr); t.y.push(yi); t.z.push(z); t.text.push(label + '<br>Domain: ' + d); t.customdata.push(r.id);
-                    }}
-                    t.x.push(null); t.y.push(null); t.z.push(null); t.text.push(null); t.customdata.push(null);
-                }});
-            }});
-            return tr;
-        }}
-
-        var CAMS = {{
-            tilt: {{ eye: {{ x: 1.25, y: -1.55, z: 1.05 }}, center: {{ x: 0, y: 0, z: -0.15 }}, up: {{ x: 0, y: 0, z: 1 }} }},
-            top:  {{ eye: {{ x: 0, y: -0.0001, z: 2.4 }}, center: {{ x: 0, y: 0, z: 0 }}, up: {{ x: 0, y: 1, z: 0 }} }},
-            side: {{ eye: {{ x: 0, y: -2.4, z: 0.05 }}, center: {{ x: 0, y: 0, z: 0 }}, up: {{ x: 0, y: 0, z: 1 }} }}
-        }};
-        var view = 'tilt';
-        function axis(extra) {{
-            return Object.assign({{ gridcolor: '#e1e0d9', zerolinecolor: '#c3c2b7', linecolor: '#c3c2b7', showbackground: true,
-                backgroundcolor: '#fcfcfb', tickfont: {{ color: '#52514e', size: 11 }}, title: {{ font: {{ color: '#52514e', size: 12 }} }} }}, extra);
-        }}
-        function layout(n) {{
-            var cam = JSON.parse(JSON.stringify(CAMS[view])); cam.projection = {{ type: 'orthographic' }};
-            return {{
-                paper_bgcolor: '#fcfcfb', font: FONT, hoverlabel: HOVER, margin: {{ l: 0, r: 0, t: 36, b: 0 }},
-                legend: {{ orientation: 'h', x: 0, y: 1.04, font: {{ size: 13 }} }},
-                uirevision: view,
-                scene: {{
-                    xaxis: axis({{ title: {{ text: 'Year' }}, range: [y0 - 0.5, y1 + 0.5], dtick: 5 }}),
-                    yaxis: axis({{ title: {{ text: '' }}, tickvals: D.doms.map(function (_, i) {{ return i; }}), ticktext: D.doms, range: [-0.6, D.doms.length - 0.4] }}),
-                    zaxis: axis({{ title: {{ text: 'Papers (stacked by first data year)' }}, range: [0, Math.max(n, 1) + 2] }}),
-                    aspectmode: 'manual', aspectratio: {{ x: 1.7, y: 1.1, z: 1.15 }},
-                    camera: cam
-                }}
-            }};
-        }}
-
-        var el = document.getElementById('landscape');
-        function draw() {{
-            var rows = visibleRows();
-            Plotly.react(el, [floorTrace(counts(rows))].concat(paperTraces(rows)), layout(rows.length),
-                {{ responsive: true, displaylogo: false, modeBarButtonsToRemove: ['toImage', 'resetCameraLastSave3d'] }});
-            drawFlat(rows);
-        }}
-
-        var flat = document.getElementById('flat');
-        var list = document.getElementById('cell-list');
-        var flatRows = [];
-        function drawFlat(rows) {{
-            flatRows = rows;
-            var c = counts(rows);
-            Plotly.react(flat, [{{
-                type: 'heatmap', x: years, y: D.doms, z: c, colorscale: RAMP, zmin: 0, xgap: 1, ygap: 3,
-                colorbar: {{ title: {{ text: 'Papers', font: {{ size: 12 }} }}, thickness: 12, tickfont: {{ size: 11 }} }},
-                hovertemplate: '%{{y}}, %{{x}}: %{{z}} papers<extra></extra>'
-            }}], {{
-                paper_bgcolor: '#fcfcfb', plot_bgcolor: '#fcfcfb', font: FONT, hoverlabel: HOVER,
-                margin: {{ l: 190, r: 10, t: 10, b: 40 }},
-                xaxis: {{ dtick: 5, tickfont: {{ color: '#52514e', size: 11 }}, showgrid: false }},
-                yaxis: {{ autorange: 'reversed', tickfont: {{ color: '#52514e', size: 12 }}, showgrid: false }}
-            }}, {{ responsive: true, displayModeBar: false }});
-        }}
-        function esc(s) {{ return String(s).replace(/[&<>"]/g, function (ch) {{ return {{ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }}[ch]; }}); }}
-
-        draw();
-        el.on('plotly_click', function (ev) {{
-            var pt = ev.points && ev.points[0];
-            if (pt && pt.data.type === 'scatter3d' && pt.customdata) window.location.href = 'index.html#' + pt.customdata;
-        }});
-        flat.on('plotly_click', function (ev) {{
-            var pt = ev.points && ev.points[0]; if (!pt) return;
-            var yr = pt.x, dom = pt.y;
-            var hits = flatRows.filter(function (r) {{ return r.doms.indexOf(dom) !== -1 && r.a <= yr && r.b >= yr; }});
-            list.innerHTML = '<h4>' + esc(dom) + ', ' + yr + ': ' + hits.length + ' papers</h4><ul>' + hits.map(function (r) {{
-                return '<li><span class="sw" style="background:' + SERIES[r.tier] + '"></span><a href="index.html#' + r.id + '">' + esc(r.cite) + '</a> ' + esc(r.title) +
-                       ' <span class="muted">(' + esc(r.period) + ')</span></li>';
-            }}).join('') + '</ul>';
-        }});
-
-        Array.prototype.forEach.call(document.querySelectorAll('.chip[data-d]'), function (b) {{
-            b.addEventListener('click', function () {{
-                var i = +b.getAttribute('data-d'); on[i] = !on[i]; b.classList.toggle('on', on[i]); draw();
-            }});
-        }});
-        function setAll(v) {{
-            on = on.map(function () {{ return v; }});
-            Array.prototype.forEach.call(document.querySelectorAll('.chip[data-d]'), function (b) {{ b.classList.toggle('on', v); }});
-            draw();
-        }}
-        document.getElementById('all').addEventListener('click', function () {{ setAll(true); }});
-        document.getElementById('none').addEventListener('click', function () {{ setAll(false); }});
-        Array.prototype.forEach.call(document.querySelectorAll('.chip.view'), function (b) {{
-            b.addEventListener('click', function () {{
-                view = b.getAttribute('data-v');
-                Array.prototype.forEach.call(document.querySelectorAll('.chip.view'), function (x) {{ x.classList.toggle('on', x === b); }});
-                draw();
-            }});
-        }});
-    }})();
-    </script>
-"""
-    out += FOOTER
-    return out
-
-
 def build_codebook():
     out = head(
         "Codebook | Beautiful Danish Data",
@@ -849,6 +615,336 @@ def build_survey():
 """
     out += FOOTER
     return out
+
+
+LC_REG = {
+    "BEF": "BEF — Population register", "VNDS": "VNDS / Residence histories", "MFR": "MFR — Medical Birth Register",
+    "LPR": "LPR — National Patient Register", "LMDB": "LMDB — Prescription register", "DOD": "DOD — Death register",
+    "UDDA": "UDDA — Education register", "IDA": "IDA / IDAN / IDAP — Integrated labour market database",
+    "AKM": "AKM — Labour market classification", "BFL": "BFL / eIndkomst — Monthly payroll",
+    "IND": "IND — Income register", "FORM": "FORM — Wealth register", "DREAM": "DREAM — Public transfers (weekly)",
+    "KRAF": "KRAF / KRSI — Crime registers",
+}
+# lanes of the chart: group, then (key, ages at which the register follows a person)
+LC_LANES = [
+    ("Who you are and where you live", [("BEF", [(0, 95)]), ("VNDS", [(0, 95)])]),
+    ("Health", [("MFR", [(0, 0.6), (20, 45)]), ("LPR", [(0, 95)]), ("LMDB", [(0, 95)]), ("DOD", [])]),
+    ("Education", [("UDDA", [(5, 30)])]),
+    ("Work", [("IDA", [(15, 74)]), ("AKM", [(15, 95)]), ("BFL", [(15, 70)]), ("FIRMS", [(16, 67)])]),
+    ("Money", [("IND", [(15, 95)]), ("FORM", [(18, 95)]), ("DREAM", [(16, 95)])]),
+    ("Crime", [("KRAF", [(15, 95)])]),
+]
+LC_EVENTS = [
+    ("Birth", 0, 0, 0, "A person enters the registers the day they are born in Denmark.",
+     [("MFR", "Birth weight, gestational age and Apgar score, linked to the mother"),
+      ("BEF", "A personal number (PNR) is created, with mother's and father's PNR and municipality"),
+      ("LPR", "The birth stay and any neonatal admissions"),
+      ("VNDS", "First address")]),
+    ("Childhood health care", 5, 0, 15, "Hospital visits and medicines from the first years of life.",
+     [("LPR", "Every hospital contact with diagnoses (ICD-10) and dates"),
+      ("LMDB", "Every prescription filled at a pharmacy (ATC code, date, amount)")]),
+    ("Starting school", 6, 5, 7, "School enrolment starts the education record.",
+     [("UDDA", "Enrolment spells by programme (KOTRE) from the first school year")]),
+    ("Parents separate or the family moves", 9, 0, 17, "Changes in the household while growing up.",
+     [("BEF", "Family ID and family type change; parents' marital status"),
+      ("VNDS", "Each move, with date, municipality and parish")]),
+    ("End of compulsory school", 16, 15, 17, "Lower secondary school is completed.",
+     [("UDDA", "Primary and lower secondary becomes the highest completed education (HFAUDD)")]),
+    ("Contact with the police", 19, 15, 30, "Danish criminal responsibility starts at 15; charges peak in the late teens and twenties.",
+     [("KRAF", "Charges and convictions with offence code, decision type and dates")]),
+    ("First job", 18, 15, 25, "Student jobs and the first regular job link the person to an employer.",
+     [("IDA", "Employer (CVRNR), workplace, occupation (DISCO) and hourly wage for the November job"),
+      ("BFL", "Monthly pay, paid hours and job start date (from 2008)"),
+      ("AKM", "Socio-economic status changes to employed"),
+      ("IND", "Wage income for the year"),
+      ("FIRMS", "The employer's industry, size, accounts and trade, through the firm-worker link")]),
+    ("Upper secondary or vocational school", 18, 16, 20, "Gymnasium or a vocational programme.",
+     [("UDDA", "Programme spells, start and completion dates")]),
+    ("Leaving home", 20, 18, 24, "Moving out of the parents' household.",
+     [("BEF", "A new family ID, no longer counted in the parents' family"),
+      ("VNDS", "New address and move date")]),
+    ("Higher education", 22, 19, 28, "University or professional degree.",
+     [("UDDA", "Programme, start and completion dates, new highest education"),
+      ("DREAM", "Weeks on the state study grant (SU)")]),
+    ("Arriving in Denmark", 27, 0, 60, "For immigrants, the record starts on arrival rather than at birth.",
+     [("BEF", "Origin type (immigrant, descendant) and country of origin"),
+      ("VNDS", "Immigration date and first address"),
+      ("UDDA", "Foreign qualifications are only partly covered; Statistics Denmark filled gaps with a survey (see the Survey page)")]),
+    ("Moving in together or marrying", 29, 24, 35, "Forming a couple.",
+     [("BEF", "Partner's PNR, marital status and a shared family ID"),
+      ("VNDS", "Shared address")]),
+    ("Having children", 31, 25, 40, "The person now appears as a parent, and the child's records link back to them.",
+     [("MFR", "Recorded as the mother or father; the child's birth outcomes"),
+      ("BEF", "The child is linked through MOR_PNR / FAR_PNR"),
+      ("LPR", "Pregnancy and birth admissions for the mother"),
+      ("DREAM", "Weeks of parental leave benefit"),
+      ("BFL", "Monthly hours and pay around the birth")]),
+    ("Buying a home", 32, 25, 40, "Becoming a home owner.",
+     [("FORM", "Property value, mortgage and bank debt at year end"),
+      ("IND", "Interest expenses"),
+      ("VNDS", "Move date and new address")]),
+    ("Changing job or being promoted", 38, 20, 60, "Moving between employers or up the hierarchy.",
+     [("IDA", "New employer and workplace, occupation (DISCO), tenure"),
+      ("BFL", "Exact start and end dates of each job"),
+      ("FIRMS", "The new employer's characteristics"),
+      ("IND", "Change in earnings")]),
+    ("Separation or divorce", 42, 30, 55, "A couple splits up.",
+     [("BEF", "Marital status and family ID change; the partner link ends"),
+      ("VNDS", "One partner moves out"),
+      ("FORM", "Assets and debts now recorded separately")]),
+    ("Job loss and unemployment", 45, 20, 64, "Losing a job and searching for a new one.",
+     [("BFL", "Job end date; monthly pay stops"),
+      ("DREAM", "Weeks on unemployment insurance or social assistance"),
+      ("IDA", "Degree of unemployment over the year"),
+      ("AKM", "Status changes to unemployed"),
+      ("IND", "Public transfers received")]),
+    ("Illness and sick leave", 50, 20, 65, "A health shock during working life.",
+     [("LPR", "Diagnoses and admission dates"),
+      ("LMDB", "Prescriptions filled"),
+      ("DREAM", "Weeks on sickness benefit"),
+      ("BFL", "Hours and pay during and after the illness")]),
+    ("Disability pension or early retirement", 60, 50, 64, "Leaving the labour market before pension age.",
+     [("DREAM", "Weeks on disability pension or voluntary early retirement"),
+      ("AKM", "Status changes to outside the labour force"),
+      ("IND", "Transfer income")]),
+    ("Retirement", 67, 62, 70, "Reaching pension age.",
+     [("DREAM", "Public old-age pension"),
+      ("IND", "Pension income"),
+      ("FORM", "Pension wealth (later years)"),
+      ("AKM", "Status changes to retired"),
+      ("BFL", "The last month of pay")]),
+    ("Health care in old age", 78, 70, 90, "Hospital use and medicines rise steeply.",
+     [("LPR", "Hospital contacts and diagnoses"),
+      ("LMDB", "Prescriptions filled")]),
+    ("Death", 82, 60, 95, "The record ends.",
+     [("DOD", "Date of death and underlying and contributing causes (ICD-10)"),
+      ("BEF", "The person leaves the population"),
+      ("LPR", "The last hospital contacts")]),
+]
+
+
+def build_lifecycle():
+    regs = {r["register"]: r for r in VARS["individual"] + VARS["firm"]}
+    firm_used = sorted({pid for r in VARS["firm"] for pid in r["used_by"]})
+    lanes, info = [], {}
+    for k, full in LC_REG.items():
+        info[k] = dict(name=REG_SHORT[full], full=full, n=len(regs[full]["used_by"]), href="variables.html#reg-" + slug(full))
+    info["FIRMS"] = dict(name="Employer's firm registers", full="FIDA, FIRM/FIRE, foreign trade, VAT and company registers",
+                         n=len(firm_used), href="variables.html#firm")
+    for g, ls in LC_LANES:
+        lanes.append(dict(group=g, regs=[dict(k=k, spans=sp) for k, sp in ls]))
+    events = sorted(LC_EVENTS, key=lambda x: (x[1], x[2]))
+    ev = [dict(name=n, age=a, lo=lo, hi=hi, desc=d, regs=[dict(k=k, what=w) for k, w in rs]) for n, a, lo, hi, d, rs in events]
+    n_reg = len(info)
+
+    out = head(
+        "Life course | Beautiful Danish Data",
+        "The main events in a person's life, from birth to death, and the Danish registers that record each one.",
+        "lifecycle.html",
+    )
+    out += nav("lifecycle.html")
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">Life course in the registers</h2>
+            <p>A person living in Denmark leaves a trace in the registers at almost every turn of life. The chart follows one life from birth to death: the numbered events along the top are the main things that happen to people, and each row below is a register. A grey bar shows the ages over which a register follows a person, and a dot marks an event that the register records.</p>
+            <p class="note">Ages are typical ages, for illustration. What exists also depends on the calendar year: monthly payroll (BFL) starts in 2008, prescriptions (LMDB) in 1995, weekly transfers (DREAM) in 1991, hospital records (LPR) in 1977 with outpatients from 1995, and the crime registers in 1980. Paper counts refer to the {len(PAPERS)} papers on this site. Income (IND), wealth (FORM) and labour-market status (AKM) are also updated every year whether or not anything happens.</p>
+        </div>
+    </section>
+    <section class="section viz-section">
+        <div class="container">
+            <div class="lc-legend"><span><svg width="34" height="10" aria-hidden="true"><rect x="1" y="2" width="32" height="6" rx="3" fill="#c3c2b7"/></svg> The register follows the person over these ages</span><span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="4.5" fill="#52514e" stroke="#fcfcfb" stroke-width="2"/></svg> The register records this event</span><span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></svg> Selected</span></div>
+            <div class="lc-scroll"><div id="lc" class="lc-chart" role="img" aria-label="Life-course chart: {len(ev)} life events by age, and the {n_reg} registers that record them. The table below gives the same information."></div></div>
+            <p class="viz-help">Hover or click an event number to see which registers record it and the range of ages it usually happens at; hover or click a register to see its events. On a phone, scroll the chart sideways.</p>
+            <div id="lc-panel" class="lc-panel" aria-live="polite"></div>
+
+            <h3 class="sub-title">Events and the registers that record them</h3>
+            <div class="table-wrap"><table class="lc-table">
+                <thead><tr><th>#</th><th>Event</th><th>Typical ages</th><th>Registers and what they record</th></tr></thead>
+                <tbody>
+"""
+    for i, x in enumerate(ev, 1):
+        ages = f'{x["lo"]}&ndash;{x["hi"]}' if x["hi"] > x["lo"] else str(x["lo"])
+        items = "".join(f'<li><a href="{info[r["k"]]["href"]}">{e(info[r["k"]]["name"])}</a>: {e(r["what"])}</li>' for r in x["regs"])
+        out += (f'                    <tr id="ev-{i}"><td data-label="#">{i}</td><td data-label="Event"><strong>{e(x["name"])}</strong><br><span class="t">{e(x["desc"])}</span></td>'
+                f'<td data-label="Typical ages">{ages}</td><td data-label="Registers"><ul>{items}</ul></td></tr>\n')
+    out += """                </tbody>
+            </table></div>
+        </div>
+    </section>
+"""
+    payload = json.dumps(dict(lanes=lanes, info=info, events=ev), ensure_ascii=False).replace("</", "<\\/")
+    out += LIFECYCLE_JS.replace("__DATA__", payload)
+    out += FOOTER
+    return out
+
+
+LIFECYCLE_JS = r"""    <script>
+    (function () {
+        var D = __DATA__;
+        var NS = 'http://www.w3.org/2000/svg';
+        var ACC = '#2a78d6', INK = '#0b0b0b', INK2 = '#52514e', MUTED = '#8a8980', GRID = '#e1e0d9', BAR = '#c3c2b7', SURF = '#fcfcfb';
+        var W = 1000, LW = 250, X0 = LW + 12, X1 = W - 20, AMAX = 95;
+        function x(a) { return X0 + (X1 - X0) * a / AMAX; }
+        function el(tag, attrs, parent) {
+            var n = document.createElementNS(NS, tag);
+            for (var k in attrs) n.setAttribute(k, attrs[k]);
+            if (parent) parent.appendChild(n);
+            return n;
+        }
+        function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+        // stack event markers into rows so that numbered circles never overlap
+        var rowsEnd = [], ER = 11;
+        D.events.forEach(function (ev, i) {
+            ev.i = i; ev.num = i + 1;
+            var px = x(ev.age), r = 0;
+            while (rowsEnd[r] !== undefined && rowsEnd[r] > px - 2 * ER - 4) r++;
+            rowsEnd[r] = px; ev.row = r;
+        });
+        var nRows = rowsEnd.length, TOP = 18, RH = 28, evH = TOP + nRows * RH;
+        var AXIS = evH + 20;
+        var y = AXIS + 14, laneY = {}, layout = [];
+        D.lanes.forEach(function (g) {
+            layout.push({ type: 'group', label: g.group, y: y + 12 }); y += 22;
+            g.regs.forEach(function (r) { laneY[r.k] = y + 13; layout.push({ type: 'lane', k: r.k, spans: r.spans, y: y + 13 }); y += 27; });
+            y += 4;
+        });
+        var H = y + 6;
+        var box = document.getElementById('lc');
+        var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, width: '100%', 'font-family': 'system-ui, -apple-system, "Segoe UI", sans-serif' }, box);
+
+        // highlight band (behind everything)
+        var band = el('rect', { x: 0, y: evH - 4, width: 0, height: H - evH, fill: ACC, 'fill-opacity': 0.07, visibility: 'hidden' }, svg);
+        var bandLine = el('line', { y1: evH - 4, y2: H, stroke: ACC, 'stroke-width': 1, 'stroke-dasharray': '3 3', visibility: 'hidden' }, svg);
+
+        // age axis and grid
+        for (var a = 0; a <= 90; a += 10) {
+            el('line', { x1: x(a), x2: x(a), y1: AXIS + 4, y2: H, stroke: GRID, 'stroke-width': 1 }, svg);
+            var t = el('text', { x: x(a), y: AXIS, 'text-anchor': 'middle', 'font-size': 12, fill: INK2 }, svg); t.textContent = a;
+        }
+        var at = el('text', { x: LW, y: AXIS, 'text-anchor': 'end', 'font-size': 12, fill: INK2 }, svg); at.textContent = 'Age';
+
+        // lanes
+        var laneEls = {};
+        layout.forEach(function (L) {
+            if (L.type === 'group') {
+                var gt = el('text', { x: 0, y: L.y, 'font-size': 11, 'font-weight': 700, fill: INK2, 'letter-spacing': '0.04em' }, svg);
+                gt.textContent = L.label.toUpperCase();
+                return;
+            }
+            var info = D.info[L.k];
+            var g = el('g', { 'class': 'lc-lane', 'data-k': L.k, tabindex: 0, role: 'button', 'aria-label': info.name }, svg);
+            el('rect', { x: 0, y: L.y - 13, width: W, height: 26, fill: 'transparent' }, g);
+            var lt = el('text', { x: 8, y: L.y + 4, 'font-size': 13, fill: INK }, g); lt.textContent = info.name;
+            var nt = el('text', { x: LW, y: L.y + 4, 'font-size': 11, 'text-anchor': 'end', fill: MUTED }, g); nt.textContent = info.n + (info.n === 1 ? ' paper' : ' papers');
+            L.spans.forEach(function (s) {
+                el('rect', { x: x(s[0]), y: L.y - 3, width: Math.max(x(s[1]) - x(s[0]), 6), height: 6, rx: 3, fill: BAR }, g);
+            });
+            laneEls[L.k] = g;
+        });
+
+        // dots: one per (event, register)
+        var dots = [];
+        D.events.forEach(function (ev) {
+            ev.regs.forEach(function (r) {
+                var c = el('circle', { cx: x(ev.age), cy: laneY[r.k], r: 4.5, fill: INK2, stroke: SURF, 'stroke-width': 2, 'class': 'lc-dot' }, svg);
+                c.__d = { ev: ev, r: r }; dots.push(c);
+            });
+        });
+
+        // event markers
+        var evEls = [];
+        D.events.forEach(function (ev) {
+            var cy = TOP + ev.row * RH + 4;
+            var g = el('g', { 'class': 'lc-ev', tabindex: 0, role: 'button', 'aria-label': ev.num + '. ' + ev.name }, svg);
+            el('circle', { cx: x(ev.age), cy: cy, r: ER + 6, fill: 'transparent' }, g);
+            var c = el('circle', { cx: x(ev.age), cy: cy, r: ER, fill: SURF, stroke: INK2, 'stroke-width': 1.5 }, g);
+            var tx = el('text', { x: x(ev.age), y: cy + 4, 'text-anchor': 'middle', 'font-size': 11, 'font-weight': 700, fill: INK }, g);
+            tx.textContent = ev.num;
+            g.__ev = ev; g.__c = c; g.__t = tx; evEls.push(g);
+        });
+
+        var tip = document.createElement('div'); tip.className = 'net-tip'; tip.style.display = 'none'; box.appendChild(tip);
+        var panel = document.getElementById('lc-panel'), sticky = null;
+
+        function paint(sel) {
+            var evSel = sel && sel.type === 'ev' ? sel.ev : null, kSel = sel && sel.type === 'reg' ? sel.k : null;
+            var involved = {};
+            if (evSel) evSel.regs.forEach(function (r) { involved[r.k] = 1; });
+            dots.forEach(function (c) {
+                var on = (evSel && c.__d.ev === evSel) || (kSel && c.__d.r.k === kSel);
+                c.setAttribute('fill', on ? ACC : INK2); c.setAttribute('r', on ? 6 : 4.5);
+                c.setAttribute('opacity', sel && !on ? 0.25 : 1);
+            });
+            evEls.forEach(function (g) {
+                var on = (evSel && g.__ev === evSel) || (kSel && g.__ev.regs.some(function (r) { return r.k === kSel; }));
+                g.__c.setAttribute('fill', on ? ACC : SURF); g.__c.setAttribute('stroke', on ? ACC : INK2);
+                g.__t.setAttribute('fill', on ? '#ffffff' : INK); g.setAttribute('opacity', sel && !on ? 0.35 : 1);
+            });
+            Object.keys(laneEls).forEach(function (k) {
+                var on = (evSel && involved[k]) || kSel === k;
+                laneEls[k].setAttribute('opacity', sel && !on ? 0.35 : 1);
+                laneEls[k].querySelector('text').setAttribute('font-weight', on ? 700 : 400);
+            });
+            if (evSel) {
+                band.setAttribute('x', x(evSel.lo) - 6); band.setAttribute('width', x(evSel.hi) - x(evSel.lo) + 12); band.setAttribute('visibility', 'visible');
+                bandLine.setAttribute('x1', x(evSel.age)); bandLine.setAttribute('x2', x(evSel.age)); bandLine.setAttribute('visibility', 'visible');
+            } else { band.setAttribute('visibility', 'hidden'); bandLine.setAttribute('visibility', 'hidden'); }
+        }
+        function ages(ev) { return ev.hi > ev.lo ? ev.lo + '–' + ev.hi : String(ev.lo); }
+        function describe(sel) {
+            if (!sel) {
+                panel.innerHTML = '<p class="muted">Select an event number or a register in the chart. ' + D.events.length + ' events, ' + Object.keys(D.info).length + ' registers.</p>';
+                return;
+            }
+            var h;
+            if (sel.type === 'ev') {
+                var ev = sel.ev;
+                h = '<h3>' + ev.num + '. ' + esc(ev.name) + ' <span class="muted">(typical ages ' + ages(ev) + ')</span></h3><p>' + esc(ev.desc) + '</p><ul>';
+                ev.regs.forEach(function (r) { var i = D.info[r.k]; h += '<li><a href="' + i.href + '"><strong>' + esc(i.name) + '</strong></a> <span class="muted">(' + i.n + ' papers)</span>: ' + esc(r.what) + '</li>'; });
+                h += '</ul>';
+            } else {
+                var i = D.info[sel.k], evs = D.events.filter(function (ev) { return ev.regs.some(function (r) { return r.k === sel.k; }); });
+                h = '<h3><a href="' + i.href + '">' + esc(i.name) + '</a> <span class="muted">' + esc(i.full) + ', used by ' + i.n + ' papers</span></h3>';
+                h += evs.length ? '<ul>' : '<p class="muted">Follows the person every year; no single event.</p>';
+                evs.forEach(function (ev) { var r = ev.regs.filter(function (r) { return r.k === sel.k; })[0]; h += '<li><strong>' + ev.num + '. ' + esc(ev.name) + '</strong> <span class="muted">(' + ages(ev) + ')</span>: ' + esc(r.what) + '</li>'; });
+                if (evs.length) h += '</ul>';
+            }
+            panel.innerHTML = h;
+        }
+        function show(sel, isSticky) { if (isSticky) sticky = sel; paint(sel); describe(sel); }
+        function release() { paint(sticky); describe(sticky); }
+        function place(ev, html) {
+            var r = box.getBoundingClientRect();
+            tip.innerHTML = html; tip.style.display = 'block';
+            var left = ev.clientX - r.left + 14; if (left > r.width - 250) left = ev.clientX - r.left - 250;
+            tip.style.left = left + 'px'; tip.style.top = (ev.clientY - r.top + 14) + 'px';
+        }
+        evEls.forEach(function (g) {
+            var sel = { type: 'ev', ev: g.__ev };
+            g.addEventListener('mouseenter', function () { paint(sel); describe(sel); });
+            g.addEventListener('mousemove', function (e) { place(e, '<strong>' + g.__ev.num + '. ' + esc(g.__ev.name) + '</strong><br>Typical ages ' + ages(g.__ev) + '<br>' + g.__ev.regs.length + ' registers'); });
+            g.addEventListener('mouseleave', function () { tip.style.display = 'none'; release(); });
+            g.addEventListener('click', function (e) { e.stopPropagation(); show(sel, true); });
+            g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(sel, true); } });
+        });
+        Object.keys(laneEls).forEach(function (k) {
+            var g = laneEls[k], sel = { type: 'reg', k: k };
+            g.addEventListener('mouseenter', function () { paint(sel); describe(sel); });
+            g.addEventListener('mouseleave', release);
+            g.addEventListener('click', function (e) { e.stopPropagation(); show(sel, true); });
+            g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(sel, true); } });
+        });
+        dots.forEach(function (c) {
+            c.addEventListener('mousemove', function (e) { var d = c.__d; place(e, '<strong>' + esc(D.info[d.r.k].name) + '</strong><br>' + d.ev.num + '. ' + esc(d.ev.name) + '<br>' + esc(d.r.what)); });
+            c.addEventListener('mouseleave', function () { tip.style.display = 'none'; });
+            c.addEventListener('click', function (e) { e.stopPropagation(); show({ type: 'ev', ev: c.__d.ev }, true); });
+        });
+        svg.addEventListener('click', function () { show(null, true); });
+        describe(null);
+    })();
+    </script>
+"""
 
 
 _NW = ROOT / "data" / "network.json"
@@ -1144,7 +1240,7 @@ if __name__ == "__main__":
     (ROOT / "themes.html").write_text(build_themes())
     (ROOT / "variables.html").write_text(build_variables())
     (ROOT / "samples.html").write_text(build_samples())
-    (ROOT / "landscape.html").write_text(build_landscape())
+    (ROOT / "lifecycle.html").write_text(build_lifecycle())
     (ROOT / "codebook.html").write_text(build_codebook())
     (ROOT / "survey.html").write_text(build_survey())
     pages = 7

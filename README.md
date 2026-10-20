@@ -9,7 +9,7 @@ Eight pages:
 1. **Summary** (`index.html`): one-paragraph summaries of papers in the Top 5 journals, the *American Economic Journals* (Applied and Policy), the *Review of Economics and Statistics*, the *Economic Journal*, the *Journal of Labor Economics* and the *Journal of Public Economics* that are built on Danish registers, grouped by journal.
 2. **Themes** (`themes.html`): the same papers regrouped by topic (taxation, household finance, labour, trade, family, health, migration, crime, children, inequality).
 3. **Data & samples** (`samples.html`): one sortable table with each paper's data period, sample size, level and datasets.
-4. **3D data landscape** (`landscape.html`): an interactive 3D chart with years and registers on the floor and every paper floating above it as one line per register over its data period.
+4. **Life course** (`lifecycle.html`): the main events in a person's life from birth to death, by typical age, and the registers that record each one, with what they record and how many papers use them.
 5. **Codebook** (`codebook.html`): how each paper defines its key variables, with register names and codes, taken from the paper, its online appendix or its replication code.
 6. **Survey** (`survey.html`): the surveys linked to the registers in these papers, with questionnaires and codebooks. Statistics Denmark questionnaires are mirrored under `files/surveys/` with their SHA-256; other owners' documents are linked, not copied.
 7. **Variable map** (`variables.html`): the Statistics Denmark registers and variables behind those papers, at the individual level and at the firm level, with a short guide to linking the two sides.
