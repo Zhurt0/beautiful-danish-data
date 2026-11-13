@@ -1206,7 +1206,7 @@ def build_network():
         "network.html",
     )
     out += nav("network.html")
-    legend = "".join(f'<span class="lg"><span class="sw" style="background:{c}"></span>{e(g)} <span class="muted">({cnt[g]})</span></span>' for g, c in NET_GROUPS)
+    legend = "".join(f'<span class="lg"><span class="sw" style="background:{c}"></span>{e(g)} <span class="muted">({cnt[g]})</span></span>' for g, c in NET_GROUPS if cnt[g])
     opts = "".join(f'<option value="{e(k)}">{e(k)} ({len(inst[k])})</option>' for k in inst_rows if len(inst[k]) >= 2)
     names = "".join(f'<option value="{e(n["name"])}"></option>' for n in sorted(nodes, key=lambda n: n["name"]))
     out += f"""    <section class="section intro">

@@ -120,7 +120,12 @@
         "chetty2011",
         "clark2009",
         "damm2009",
-        "bennedsen2007"
+        "bennedsen2007",
+        "andersen2018restat",
+        "bratu2020",
+        "chan2025",
+        "eriksen2026",
+        "faccini2026"
       ]
     },
     {
@@ -228,7 +233,10 @@
         "lethpetersen2010",
         "nielsen2010",
         "browning2003",
-        "groes2015"
+        "groes2015",
+        "andersen2018restat",
+        "eriksen2026",
+        "faccini2026"
       ]
     },
     {
@@ -283,7 +291,9 @@
         "browning2013",
         "lethpetersen2010",
         "nielsen2010",
-        "browning2003"
+        "browning2003",
+        "andersen2018restat",
+        "faccini2026"
       ]
     },
     {
@@ -371,7 +381,10 @@
         "chetty2011",
         "clark2009",
         "christensen2005",
-        "groes2015"
+        "groes2015",
+        "buhai2014",
+        "chan2025",
+        "jensen2014restat"
       ]
     },
     {
@@ -528,7 +541,8 @@
         "joensen2016",
         "bruze2015",
         "nielsen2010",
-        "groes2015"
+        "groes2015",
+        "eriksen2026"
       ]
     },
     {
@@ -574,7 +588,8 @@
         "bingley2020",
         "breining2020",
         "fadlon2019",
-        "hjort2017"
+        "hjort2017",
+        "eriksen2026"
       ]
     },
     {
@@ -728,7 +743,8 @@
         "foged2024",
         "foged2024jole",
         "dustmann2023ej",
-        "bingley2021"
+        "bingley2021",
+        "bratu2020"
       ]
     }
   ],
@@ -790,7 +806,9 @@
         "bagger2014",
         "hummels2014",
         "utar2014",
-        "lentz2008"
+        "lentz2008",
+        "chan2025",
+        "cristea2016"
       ]
     },
     {
@@ -859,7 +877,9 @@
         "olney2021",
         "traiberman2019",
         "hummels2014",
-        "utar2014"
+        "utar2014",
+        "chan2025",
+        "cristea2016"
       ]
     },
     {
