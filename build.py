@@ -98,7 +98,7 @@ def nav(active):
     return f"""    <header>
         <div class="container">
             <p class="eyebrow"><a href="{HOME}">Rentian Zhu</a> &rsaquo; Useful links</p>
-            <h1><a href="index.html">Beautiful Danish Data</a></h1>
+            <h1><a href="index.html">Beautiful Danish Data</a> <span class="beta" title="Beta version: the list is still being checked and extended">Beta</span></h1>
             <p class="tagline">A field guide to economics published with Danish administrative data</p>
         </div>
     </header>
@@ -112,6 +112,7 @@ def nav(active):
 
 FOOTER = f"""    <footer>
         <div class="container">
+            <p class="beta-note"><span class="beta">Beta</span> This is a beta version: the list of papers is still being checked and extended, so entries can be missing or change.</p>
             <p>Maintained by <a href="{HOME}">Rentian Zhu</a>, Copenhagen Business School. Summaries are my own reading of each paper. Corrections and additions are welcome as pull requests on <a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a>.</p>
         </div>
     </footer>

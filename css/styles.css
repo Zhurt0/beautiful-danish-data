@@ -247,3 +247,9 @@ table.lc-table .t { color: var(--muted); font-size: 0.82rem; }
 .selection dt { font-weight: 700; color: var(--primary-color); }
 .selection dd { margin: 0; color: var(--secondary-color); }
 @media (max-width: 600px) { .selection dl > div { grid-template-columns: 1fr; gap: 0; } }
+
+/* Beta label */
+.beta { display: inline-block; vertical-align: middle; font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 0.72rem; font-weight: 700; font-style: normal; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-color); border: 1px solid var(--accent-color); border-radius: 999px; padding: 2px 9px; line-height: 1.4; }
+header h1 .beta { position: relative; top: -0.5em; margin-left: 4px; }
+.beta-note { margin-bottom: 8px; }
+.beta-note .beta { margin-right: 6px; }
