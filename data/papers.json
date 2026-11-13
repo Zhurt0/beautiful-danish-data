@@ -16743,6 +16743,282 @@
     "replication_package": "https://zenodo.org/records/15223629"
   },
   {
+    "id": "ashournia2018",
+    "authors": "Damoun Ashournia",
+    "year": 2018,
+    "journal": "Economic Journal",
+    "group": "ej",
+    "title": "Labour Market Effects of International Trade When Mobility is Costly",
+    "summary": "Builds a dynamic structural model in which heterogeneous workers choose among five sectors, accumulate work experience that is only partly transferable across sectors, and pay a utility cost when they switch. Estimated by simulated minimum distance on Danish matched worker-firm register data, the utility costs are 10% to 19% of average annual wages, and they rise roughly tenfold when permanent unobserved heterogeneity is removed. Counterfactual simulations show that both the lost human capital and the utility costs slow the labour market's adjustment to shocks.",
+    "themes": [
+      "trade",
+      "labor"
+    ],
+    "data": [
+      "Integrated Database for Labour Market Research (IDA), entire Danish population aged 15-74",
+      "Firm Statistics Register (FirmStat), universe of Danish firms with NACE Rev. 2 industry",
+      "Firm-Integrated Database for Labour Market Research (FIDA), worker-firm link",
+      "Statistics Denmark aggregate series (Statistikbanken: CPI from PRIS8, sectoral value added and income shares from NATE101/NATE102, capital stocks from NAT09N) and 2008 input-output tables"
+    ],
+    "level": "individual",
+    "variables": [
+      "Outcome: yearly sector of employment (five sectors) or unemployment, and transitions between them",
+      "Outcome: log hourly wage by sector",
+      "State variables: age, gender, college education, work experience, UI fund membership / UI eligibility",
+      "Estimated: utility costs of switching sectors and share of experience transferable across sectors",
+      "Counterfactuals: unemployment and trade-liberalisation shocks to manufacturing"
+    ],
+    "period": "1996–2008 (1995 used for initial conditions)",
+    "sample_size": "20,373,918 worker-year observations in the sectoral-choice and transition regressions; 19,564,785 in the five sectoral log-wage regressions combined (Appendix D, Tables D.1-D.2 of the 2015 discussion-paper version)",
+    "sample": "All Danish workers aged 30 to 65, employed in one of five aggregated sectors or unemployed, followed annually in the matched worker-firm registers.",
+    "sample_source": "https://ora.ox.ac.uk/objects/uuid:c3a36588-35b4-4102-b75b-30808ebe6d61/files/sd217qp989",
+    "sample_confidence": "paper",
+    "definitions": [
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Matched worker-firm panel of workers aged 30-65",
+        "definition": "Worker data for each year are taken from IDA, which covers the entire Danish population aged 15-74; firms are taken from FirmStat and linked to workers through FIDA. The author extracts age, gender, labour market status (employed or unemployed), UI fund membership, work experience and hourly wages for workers aged 30 to 65; the entry age of 30 is chosen because almost all workers have completed their education by then. Workers and firms can be matched only from 1995 onwards, so 1995 is used to construct initial conditions.",
+        "registers": [
+          "IDA",
+          "FIDA",
+          "FirmStat"
+        ],
+        "codes": "Age 30-65; sample years 1996-2008; 1995 = initial conditions",
+        "source_type": "working paper",
+        "source_url": "https://ora.ox.ac.uk/objects/uuid:c3a36588-35b4-4102-b75b-30808ebe6d61/files/sd217qp989",
+        "source_location": "Section 3.1 (Worker Data)"
+      },
+      {
+        "concept": "Sector and industry",
+        "variable": "Five productive sectors plus unemployment",
+        "definition": "Each firm is assigned to one of five productive sectors defined from the NACE Rev. 2 classification: (1) Agriculture/Mining, (2) Manufacturing, (3) Construction, (4) Trade/Utilities/Transportation/Communication, (5) Services. Unemployment is treated as a sixth, unproductive sector (0).",
+        "registers": [
+          "FirmStat",
+          "FIDA"
+        ],
+        "codes": "NACE Rev. 2 divisions: Agriculture/Mining 01, 02, 03, 06, 08, 09; Manufacturing 10-33; Construction 41-43; Trade/Utilities/Transportation/Communication 35-38, 45-47, 49-53, 58-63; Services 55, 56, 64-66, 68-75, 77-82, 84-88, 90-97",
+        "source_type": "working paper",
+        "source_url": "https://ora.ox.ac.uk/objects/uuid:c3a36588-35b4-4102-b75b-30808ebe6d61/files/sd217qp989",
+        "source_location": "Section 3.1 and Appendix B, Table B.1"
+      },
+      {
+        "concept": "Education and test scores",
+        "variable": "Educ (college indicator)",
+        "definition": "Indicator for whether the worker has completed college education; enters the human capital function, the utility cost of switching, the type probabilities and the unemployment probabilities.",
+        "registers": [
+          "IDA"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://ora.ox.ac.uk/objects/uuid:c3a36588-35b4-4102-b75b-30808ebe6d61/files/sd217qp989",
+        "source_location": "Section 2.2.1, equation (6)"
+      },
+      {
+        "concept": "Unemployment and benefits",
+        "variable": "Unemployment benefit and UI eligibility",
+        "definition": "For the employed the data give hourly wage rates; for the unemployed they give unemployment benefits, split into UI benefits for those eligible and welfare assistance for others. In the model a worker is eligible for UI if he is a member of a UI fund and has not received UI benefits for more than 4 years; the benefit is min(k x last wage, UI) if eligible and WA otherwise. Unemployment probabilities are set to the empirical frequencies by gender, education, age and previous sector.",
+        "registers": [
+          "IDA"
+        ],
+        "codes": "k = 0.90; UI = 101 and WA = 75 (hourly, 2000 DKK; annual figures divided by 1,702 work hours); 864 unemployment probabilities",
+        "source_type": "working paper",
+        "source_url": "https://ora.ox.ac.uk/objects/uuid:c3a36588-35b4-4102-b75b-30808ebe6d61/files/sd217qp989",
+        "source_location": "Section 2.2.2, equation (8); Section 3.1; Table 4.1"
+      }
+    ]
+  },
+  {
+    "id": "borjas2019",
+    "authors": "George J. Borjas, Ilpo Kauppinen and Panu Poutvaara",
+    "year": 2019,
+    "journal": "Economic Journal",
+    "group": "ej",
+    "title": "Self-selection of Emigrants: Theory and Evidence on Stochastic Dominance in Observable and Unobservable Characteristics",
+    "summary": "Shows that the Roy model predicts not only a difference in mean earnings between migrants and stayers but a stochastic dominance ordering of their earnings distributions. Comparing the pre-emigration earnings of Danes who leave for at least five years with those of stayers in full-population register data, the emigrants' earnings distribution almost stochastically dominates that of non-migrants. Most of this positive selection comes from unobserved characteristics (residuals from earnings regressions) rather than from education and other observables.",
+    "themes": [
+      "migration",
+      "labor"
+    ],
+    "data": [
+      "Statistics Denmark administrative registers for the entire Danish population, 1995–2010, merged by personal identification number",
+      "Tax records: annual gross labour income and freelance income",
+      "Migration register 1995–2010 (date of emigration, destination country, date of return)",
+      "Population registers 1980–2010 (parents, citizenship and immigrant background)",
+      "Register information on education, marital status, number of children and work experience gained during the year"
+    ],
+    "level": "individual",
+    "variables": [
+      "Group: long-term emigrant (abroad at least five years) to Nordic or other destinations vs non-migrant",
+      "Outcome: pre-emigration annual gross earnings, standardised by age, gender and year",
+      "Outcome: residuals from Mincerian earnings regressions (unobserved characteristics)",
+      "Controls: age, education, marital status, number of children, year",
+      "Tests: Kolmogorov-Smirnov and stochastic dominance tests on the cumulative distributions"
+    ],
+    "period": "1995–2010 (cross-sections 1995–2004; emigration 1996–2005 followed to 2010)",
+    "sample_size": "6,450,665 male and 5,163,129 female non-migrant person-year observations; 7,323 male and 3,436 female long-term migrants (Table 1)",
+    "sample": "Danish citizens without immigrant background, aged 25–54, resident in Denmark for the full calendar year and working full time, in annual cross-sections 1995–2004; migrants are those who leave in the following year and stay abroad at least five years.",
+    "sample_source": "https://www.nber.org/system/files/working_papers/w21649/w21649.pdf",
+    "sample_confidence": "paper",
+    "definitions": [
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Full-time workers aged 25-54",
+        "definition": "For each year 1995-2004, all Danish citizens aged 25-54 (age measured as of January 1st of the year after the reference year) who lived in Denmark during the entire calendar year and worked full time. Full time is defined from a register variable measuring work experience gained during the calendar year (maximum 1,000), computed as the current value minus the previous year's value; the sample keeps workers with a value of 900 or above, roughly those who worked full time at least 90 percent of the year. Persons with a missing value in either year are dropped.",
+        "registers": [
+          "Statistics Denmark administrative registers (work experience variable; register not named)"
+        ],
+        "codes": "Age 25-54; work experience gained >= 900 of a maximum 1,000; cross-sections 1995-2004",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w21649/w21649.pdf",
+        "source_location": "Section 3 (Data), footnotes 12-13"
+      },
+      {
+        "concept": "Immigration and origin",
+        "variable": "Long-term emigrant",
+        "definition": "An individual found in one of the 1995-2004 cross-sections who emigrates from Denmark during the following year to a destination outside Greenland or the Faroe Islands and stays abroad for at least five years, with return migration tracked in the migration register through 2010. Individuals who emigrated for less than five years are removed, and the rest of the population is classified as non-migrants.",
+        "registers": [
+          "Migration register"
+        ],
+        "codes": "Migration spell of 1,825 days or longer; destinations exclude Greenland and the Faroe Islands",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w21649/w21649.pdf",
+        "source_location": "Section 3 (Data), footnotes 15-17"
+      },
+      {
+        "concept": "Immigration and origin",
+        "variable": "No immigrant background",
+        "definition": "Migrants and non-migrants are restricted to Danish citizens without an immigration background: Statistics Denmark defines a person to have no immigrant background if at least one of the parents was born in Denmark and the person is/was a Danish citizen. The authors searched the population registers from 1980 to 2010 for the parents of sample persons, and a parent who was found was required to be a Dane with no immigrant background as well.",
+        "registers": [
+          "Population registers"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w21649/w21649.pdf",
+        "source_location": "Section 3 (Data), footnote 18"
+      },
+      {
+        "concept": "Earnings and income",
+        "variable": "Annual earnings and standardized earnings",
+        "definition": "Annual income is the worker's annual gross labor income plus positive values of freelance income, taken from the tax records for each calendar year. Standardized earnings are the ratio of a worker's annual gross earnings to the mean gross earnings of workers of the same age and gender during the calendar year (migrants, non-migrants and shorter-term migrants are all included in the means).",
+        "registers": [
+          "Tax records (income register)"
+        ],
+        "codes": "Negative freelance income excluded; summary statistics in 2010 euros",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w21649/w21649.pdf",
+        "source_location": "Section 3 (Data), footnotes 14 and 19; Table 1"
+      },
+      {
+        "concept": "Earnings and income",
+        "variable": "Earnings residual (unobserved characteristics)",
+        "definition": "Residual from OLS regressions of log annual (non-standardized) earnings, estimated separately for men and women on the whole population of prime-aged full-time workers pooled over 1995-2004, with age fixed effects, educational attainment dummies (high school, vocational school, advanced vocational, Bachelor, Master's, PhD), marital status, number of children and year dummies.",
+        "registers": [
+          "Tax records (income register)",
+          "Statistics Denmark administrative registers (education, family)"
+        ],
+        "codes": "N = 6,470,720 (men) and 5,173,706 (women)",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w21649/w21649.pdf",
+        "source_location": "Section 5, footnote 30; Table 5"
+      }
+    ]
+  },
+  {
+    "id": "mulalic2014",
+    "authors": "Ismir Mulalic, Jos N. van Ommeren and Ninette Pilegaard",
+    "year": 2014,
+    "journal": "Economic Journal",
+    "group": "ej",
+    "title": "Wages and Commuting: Quasi-natural Experiments' Evidence from Firms that Relocate",
+    "summary": "Asks whether workers are paid more when their commute gets longer. Uses the change in commuting distance that arises when a worker's firm moves to a new address, comparing workers of the same relocating firm who keep both their employer and their home. A 1 km longer commute raises the wage by almost nothing in the year after the relocation and by about 0.15% three years later, which the authors read as evidence of job search frictions.",
+    "themes": [
+      "labor",
+      "firms"
+    ],
+    "data": [
+      "Annual register data from Statistics Denmark covering the full population of workers and firms, matched worker to establishment (2003–2005 in the working-paper version)",
+      "Residence and establishment (workplace) addresses on 31 December each year; commuting distance computed as the shortest route between the exact addresses",
+      "Annual net wages derived from workers' pay slips as observed by the Danish Tax Authorities",
+      "Labour market register occupation code RASDISCO (4-digit job function)",
+      "Firm units identified by SE number (tax authorities' register of enterprises liable to VAT)"
+    ],
+    "level": "both",
+    "variables": [
+      "Treatment: change in one-way commuting distance (km) caused by the firm's change of address",
+      "Outcome: change in log annual net wage",
+      "Controls: firm fixed effects, change in worker's job function (promotion proxy)",
+      "Heterogeneity: commute bands of the Danish commuting tax deduction (12.5–50 km, above 50 km)",
+      "Selection checks: Heckman models for staying with the employer and not moving residence"
+    ],
+    "period": "2003–2005 in the 2010 working paper (firm relocations in 2004); the published version follows wages up to three years after the relocation, exact years not verified",
+    "sample_size": "6,165 workers in 1,144 relocating firms in the main sample; 8,601 workers in 1,333 firms in the full sample (2010 working paper, Section 3.2 and Table A1)",
+    "sample": "Full-time workers with a single job at firms that changed address during 2004, who stayed with the firm and did not change residence between January 2003 and December 2005 (working-paper version; the published sample may differ).",
+    "sample_source": "https://papers.tinbergen.nl/10093.pdf",
+    "sample_confidence": "paper",
+    "definitions": [
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Workers of relocating firms (main and full samples)",
+        "definition": "From the full population of 321,337 firms and 2,710,462 workers, firms that changed address between January 2004 and December 2004 are selected (11,314 firms; 64,643 workers). Dropped: records with missing information, workers with more than one job, part-time workers, address changes that imply no change in commuting distance, and outliers (commuting distance above 100 km, change in commuting distance above 50 km, absolute change in log wage above 0.5). This leaves a full sample of 8,601 workers in 1,333 firms; the main sample keeps workers who stayed with their firm and did not change residence from January 2003 to December 2005 (6,165 workers; 1,144 firms). Wages are compared between 2003 and 2005, the years in which commuting distance is constant.",
+        "registers": [
+          "Statistics Denmark annual register data on workers and firms"
+        ],
+        "codes": "Address change Jan 2004-Dec 2004; commuting distance > 100 km excluded; change in commuting distance > 50 km excluded; |change in log(wage)| > 0.5 excluded; full-time job lasting at least 1 year continuously",
+        "source_type": "working paper",
+        "source_url": "https://papers.tinbergen.nl/10093.pdf",
+        "source_location": "Section 3.2 and Appendix A, Table A1"
+      },
+      {
+        "concept": "Geography and neighbourhood",
+        "variable": "Commuting distance and its change",
+        "definition": "One-way commuting distance in kilometres between the worker's residence and the establishment workplace, both observed on 31 December each year, calculated as the shortest route between the exact residence and workplace addresses. The treatment is the change in this distance caused by the firm's change of address. Interaction dummies mark commutes between 12.5 and 50 km (D12.5) and above 50 km (D50), the ranges in which the Danish commuting tax deduction applies.",
+        "registers": [
+          "Statistics Denmark annual register data (residence and workplace addresses)"
+        ],
+        "codes": "D12.5 = one-way commute between 12.5 and 50 km; D50 = one-way commute above 50 km",
+        "source_type": "working paper",
+        "source_url": "https://papers.tinbergen.nl/10093.pdf",
+        "source_location": "Section 3.1; Table 2 notes"
+      },
+      {
+        "concept": "Earnings and income",
+        "variable": "Change in log wage",
+        "definition": "Annual net wages, derived from workers' pay slips as observed by the Danish Tax Authorities. The dependent variable is log(wage 2005) minus log(wage 2003).",
+        "registers": [
+          "Tax-authority pay slip records (via Statistics Denmark)"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://papers.tinbergen.nl/10093.pdf",
+        "source_location": "Section 3.1, footnote 9; Table 1"
+      },
+      {
+        "concept": "Occupation and job hierarchy",
+        "variable": "Change in worker's function",
+        "definition": "Indicator for a change in the worker's job function between 2003 and 2005, used to control for promotions. Computed from the labour market administrative register variable RASDISCO, a 4-digit function code with more than a thousand function descriptions.",
+        "registers": [
+          "RAS"
+        ],
+        "codes": "RASDISCO (4-digit)",
+        "source_type": "working paper",
+        "source_url": "https://papers.tinbergen.nl/10093.pdf",
+        "source_location": "Section 3.2, footnote 12"
+      },
+      {
+        "concept": "Firm characteristics and productivity",
+        "variable": "Firm unit (SE number)",
+        "definition": "The statistical unit of firms is an administrative unit in the tax authorities' register of enterprises liable to VAT, identified by its SE number. It usually equals the legal unit (the enterprise), but an enterprise may split its registration into several SE numbers; each SE number is treated as a separate firm. Workplace location is measured at the establishment, and the paper refers to establishments as firms.",
+        "registers": [
+          "Tax authorities' register of enterprises liable to VAT (SE numbers)"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://papers.tinbergen.nl/10093.pdf",
+        "source_location": "Section 3.1; Section 3.2, footnote 10"
+      }
+    ]
+  },
+  {
     "id": "christensen2005",
     "authors": "Bent Jesper Christensen, Rasmus Lentz, Dale T. Mortensen, George R. Neumann and Axel Werwatz",
     "year": 2005,
