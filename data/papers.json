@@ -11993,6 +11993,88 @@
     ]
   },
   {
+    "id": "jakobsen2026",
+    "authors": "Katrine Jakobsen, Henrik Kleven, Jonas Kolsrud, Camille Landais and Mathilde Muñoz",
+    "year": 2026,
+    "journal": "American Economic Review",
+    "group": "top5",
+    "title": "Taxing Top Wealth: Migration Responses and Their Aggregate Economic Implications",
+    "summary": "Estimates how international migration of the wealthy responds to wealth taxes, mainly from the 2007 repeal of the Swedish wealth tax, with two Danish wealth-tax reforms (1989 and 1997) used to validate the out-migration elasticity and to estimate in-migration responses. A one percentage point higher top wealth tax rate lowers the stock of wealthy taxpayers by about 2 percent. Swedish event studies show that firms shrink when a wealthy owner emigrates, but the aggregate effects on employment, investment and value added are small.",
+    "themes": [
+      "taxation",
+      "migration",
+      "firms"
+    ],
+    "data": [
+      "Denmark (validation and in-migration analysis only): wealth and income registers based on Danish Tax Agency (SKAT) tax returns, with year-end third-party and self-reported wealth components",
+      "Denmark: CPR-based citizenship and migration records with daily dates of entry and exit",
+      "Denmark: longitudinal register data on earnings, transfers and demographics, 1989–2006",
+      "Sweden (main analysis, not Danish): wealth tax register (Förmögenhetsregistret) 1993–2007, LISA, RAMS employer-employee data, K10 closely-held firm ownership files, firm financial accounts and migration registers"
+    ],
+    "level": "individual",
+    "variables": [
+      "Outcome: out-migration and in-migration rates by wealth rank",
+      "Treatment (Denmark): 1989 cut of the wealth tax rate from 2.2% to 1% and 1997 abolition; top 1% vs top 5–2.5% of wealth",
+      "Treatment (Sweden): 2007 repeal of the wealth tax",
+      "Estimand: semi-elasticity of migration rates with respect to the net-of-tax rate on wealth",
+      "Outcome (Sweden only): employment, investment, value added and taxes of firms owned by emigrating wealthy owners"
+    ],
+    "period": "Denmark: out-migration series 1980–2006, wealth-tax years 1989–1996; Sweden: wealth register 1993–2007 linked to registers running up to 2017–2019",
+    "sample": "For Denmark, taxpayers in the top 1% of the wealth distribution (treated) and between the top 5% and top 2.5% (controls) around the 1989 and 1997 wealth-tax reforms; the main sample is the universe of Swedish households, with a focus on the top 2% of wealth.",
+    "sample_source": "https://www.nber.org/system/files/working_papers/w32153/w32153.pdf",
+    "sample_confidence": "paper",
+    "definitions": [
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Danish wealth-tax reforms: treatment and control groups",
+        "definition": "Out-of-sample validation of the Swedish estimates. In 1989 the marginal tax rate on wealth above the exemption threshold was reduced from 2.2% to 1%, phased in over three years; in 1997 the wealth tax was abolished. Individuals in the top 1% of the wealth distribution form the treatment group and individuals between the top 5% and top 2.5% form the control group; out-migration rates of the two groups are compared over 1980-2006 and semi-elasticities are estimated with the same specification (4) as for Sweden.",
+        "registers": [
+          "Wealth tax register (SKAT tax returns)",
+          "CPR migration records"
+        ],
+        "codes": "Treated: top 1% of wealth; controls: top 5% to top 2.5%; reforms 1989 and 1997",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w32153/w32153.pdf",
+        "source_location": "Section 5.3 and footnote 32; Appendix V.2 and Figure V.6"
+      },
+      {
+        "concept": "Wealth, debt and consumption",
+        "variable": "Danish wealth data",
+        "definition": "Wealth and income registries are based on tax return data from the Danish Tax Agency (SKAT), stated at the end of the year. Most components are third-party reported (cash value of real estate, deposits, bonds, shares). Until 1997 self-reported components subject to auditing are also observed: value of listed and non-listed stocks, durables (cars, boats, caravans), share certificates for housing cooperatives, premium bonds and cash holdings. Liabilities include debt in financial institutions, mortgage credit debt, credit and debit card debt, student debt and other liabilities. After 1997 the asset statement is based solely on third-party reporting. Closely-held businesses and unlisted shares are not observed, so firm outcomes of migrants cannot be tracked in Denmark.",
+        "registers": [
+          "Wealth tax register (SKAT tax returns)"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w32153/w32153.pdf",
+        "source_location": "Appendix II.3 and Appendix Table II.1; footnote 24"
+      },
+      {
+        "concept": "Immigration and origin",
+        "variable": "Out-migration and in-migration rates by wealth",
+        "definition": "Citizenship and migration information with daily dates of entry and exit comes from the CPR; individuals must register their move to the CPR office to stop paying taxes in Denmark. For out-migration rates, individuals are ranked by household net wealth in year t and the fraction who out-migrate in t+1 is computed for each wealth fractile; for in-migration rates, individuals are ranked by household net wealth in year t and the fraction who in-migrated in t-1 is computed. Descriptive statistics for Denmark cover 1989-1996, when the wealth tax was still in place. Wealth of arrivals is measured consistently before and after the reforms, which is why in-migration elasticities are estimated on Danish data.",
+        "registers": [
+          "CPR migration records",
+          "Wealth tax register (SKAT tax returns)"
+        ],
+        "codes": "Denmark: 1989-1996",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w32153/w32153.pdf",
+        "source_location": "Section 3.2 and notes to Figure 2; Section 5.4; Appendix II.3"
+      },
+      {
+        "concept": "Taxes and tax rates",
+        "variable": "Danish wealth tax",
+        "definition": "Annual progressive wealth tax levied from 1903 to 1997 on Danish tax residents with net taxable wealth above an exemption threshold, which was always above the 98th percentile of the wealth distribution in the study period. Taxable wealth was total household net wealth excluding pension wealth: cash, deposits, bonds, equities, housing, large durables and business assets, net of debts. Wealth above the threshold was taxed at a flat 2.2% until the rate was cut to 1% after 1989; the tax was repealed in 1997. Unlike in Sweden, business assets were included in the base (with valuation reliefs for physical business assets), and a tax ceiling capped the wealth tax as a fraction of taxable income.",
+        "registers": [],
+        "codes": "2.2% above the exemption threshold; 1% after 1989; repealed 1997",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w32153/w32153.pdf",
+        "source_location": "Section 2.2; Appendix I.2 and Appendix Table II.1"
+      }
+    ]
+  },
+  {
     "id": "gillingham2022",
     "authors": "Kenneth Gillingham, Fedor Iskhakov, Anders Munk-Nielsen, John Rust and Bertel Schjerning",
     "year": 2022,
@@ -15382,6 +15464,82 @@
         "source_type": "working paper",
         "source_url": "https://www.vive.dk/media/pure/2z1gjjzj/272189",
         "source_location": "Figure 1 notes"
+      }
+    ]
+  },
+  {
+    "id": "harrison2020",
+    "authors": "Glenn W. Harrison, Morten I. Lau and Hong Il Yoo",
+    "year": 2020,
+    "journal": "Review of Economics and Statistics",
+    "group": "restat",
+    "title": "Risk Attitudes, Sample Selection, and Attrition in a Longitudinal Field Experiment",
+    "summary": "Tests whether risk preferences are stable over time in a two-wave field experiment with a sample of adult Danes drawn from the Civil Registry. Because the registry gives basic demographics for people who declined the invitation, and the recruitment fee was randomised, the authors can estimate risky choices jointly with selection into the first wave and attrition before the second. Ignoring selection and attrition changes the estimated risk attitudes; after correcting for them the evidence is consistent with stable risk preferences.",
+    "themes": [
+      "methods",
+      "household-finance"
+    ],
+    "data": [
+      "Danish Civil Registration Office (CPR) random sample of 50,000 adults aged 18–75, with sex, age, residential location, marital status and immigrant status; 1,996 of them invited",
+      "Artefactual field experiment on risk attitudes: wave 1 in September–October 2009, wave 2 in April–October 2010 (collected by the authors)",
+      "Post-experiment questionnaire for participants (self-reported household income)"
+    ],
+    "level": "individual",
+    "variables": [
+      "Outcome: 40 binary lottery choices per subject and wave, used to estimate risk preferences under EUT and RDU",
+      "Selection equation: participation in wave 1 among all invitees, with registry age and sex, home-to-hotel distance and recruitment fee",
+      "Attrition equation: participation in wave 2, with age, sex, self-reported income and earnings in wave 1",
+      "Exclusion restriction: randomised fixed recruitment fee of 300 or 500 kroner"
+    ],
+    "period": "Sample representative of the adult population as of 1 January 2009; experiments 28 September–22 October 2009 and April–October 2010",
+    "sample_size": "1,996 invitees in wave 1 (413 participants, 1,583 non-participants); 354 re-invited in wave 2 (182 participants, 172 non-participants); 25,555 choice observations (Table 1 and Table 2 notes)",
+    "sample": "Danes aged 18–75 randomly drawn from the Civil Registration Office and stratified by geographic area, invited to a lottery-choice experiment; the estimation sample is all invitees, whether or not they took part.",
+    "sample_source": "https://research-api.cbs.dk/ws/portalfiles/portal/58520261/Working_paper_2_2019.pdf",
+    "sample_confidence": "paper",
+    "definitions": [
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Invited sample from the Civil Registration Office",
+        "definition": "A random sample of 50,000 Danes aged between 18 and 75, inclusive, was obtained from the Danish Civil Registration Office, with information on sex, age, residential location, marital status and whether the individual is an immigrant; the sample was drawn to be representative of the adult population as of 1 January 2009. It was stratified by geographic area and 1,996 invitations were sent; 413 took part between 28 September and 22 October 2009. The estimation sample is all 1,996 invitees. The authors note that the list of characteristics could be extended by merging at Statistics Denmark, which they did not do.",
+        "registers": [
+          "Danish Civil Registration Office (CPR) extract"
+        ],
+        "codes": "Age 18-75 inclusive; 50,000 drawn, 1,996 invited",
+        "source_type": "working paper",
+        "source_url": "https://research-api.cbs.dk/ws/portalfiles/portal/58520261/Working_paper_2_2019.pdf",
+        "source_location": "Section 2.A (Field Sampling Procedures) and footnote 14; Section 3.B (estimation sample)"
+      },
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Selection and attrition equation covariates",
+        "definition": "The selection equation for wave 1 includes the recruitment fee indicator, home-to-hotel distance in miles and its square, and the subject's age and gender. The attrition equation for wave 2 includes actual earnings from the first experiment, age and gender, and self-reported income, which is only available for those who took part in the first experiment. Age groups: young = aged less than 30, middle = aged between 40 and 50, old = aged over 50; the omitted group is 30-39.",
+        "registers": [
+          "Danish Civil Registration Office (CPR) extract"
+        ],
+        "codes": "young < 30; middle 40-50; old > 50; omitted 30-39",
+        "source_type": "working paper",
+        "source_url": "https://research-api.cbs.dk/ws/portalfiles/portal/58520261/Working_paper_2_2019.pdf",
+        "source_location": "Section 3.B (discussion of Xn1 and Xn2); Table 1 panel B and notes; Table 2"
+      },
+      {
+        "concept": "Geography and neighbourhood",
+        "variable": "Home-to-hotel distance",
+        "definition": "Distance in miles between the invitee's home and the hotel meeting room where the wave 1 session was held, computed from geographical coordinates downloaded from Google Maps with a Stata command that measures the shortest curve between two locations on the earth's surface. Average distance was 10.2 miles for the 1,583 non-participants and 8.1 miles for the 413 participants.",
+        "registers": [],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://research-api.cbs.dk/ws/portalfiles/portal/58520261/Working_paper_2_2019.pdf",
+        "source_location": "Section 2.A and footnote 16"
+      },
+      {
+        "concept": "Earnings and income",
+        "variable": "Income groups (self-reported, participants only)",
+        "definition": "IncLow = household income in 2008 below 300,000 kroner; IncHigh = household income of 500,000 kroner or more. Self-reported in the experiment's questionnaire, not taken from registers.",
+        "registers": [],
+        "codes": "IncLow: < 300,000 DKK; IncHigh: >= 500,000 DKK (household income, 2008)",
+        "source_type": "working paper",
+        "source_url": "https://research-api.cbs.dk/ws/portalfiles/portal/58520261/Working_paper_2_2019.pdf",
+        "source_location": "Table 1 notes; Section 3.B"
       }
     ]
   },

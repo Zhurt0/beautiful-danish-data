@@ -211,9 +211,10 @@ SELECTION_AS_OF = "November 2026"
 SELECTION_EXTRA = ("The list was then checked twice. The <em>Review of Economic Studies</em> for 2005&ndash;2018 was screened article by article "
                    "(titles and abstracts of all 710 articles in volumes 72&ndash;85), which added one paper, "
                    "Groes, Kircher and Manovskii (2015). In November 2026 every article listed for these journals on RePEc for "
-                   "1998&ndash;2026 (about 23,500 articles) was screened by title and by author name, and by abstract for the Top 5, "
-                   "<em>AER: Insights</em>, <em>AEJ: Applied Economics</em> and the <em>Journal of Labor Economics</em>; the abstracts of "
-                   "the other journals are still being read. This second check has added 13 papers so far.")
+                   "1998&ndash;2026 (about 23,300 articles) was screened by title, by author name and, where RePEc holds one, by abstract. "
+                   "About 3,750 mostly older articles have no abstract there and were screened by title and author only, and the abstracts of "
+                   "about 1,200 articles are still being read. This second check has added 15 papers so far, two of which use Danish registers "
+                   "next to another country&rsquo;s data or an experiment.")
 JOURNAL_ORDER = [
     "American Economic Review", "Quarterly Journal of Economics", "Journal of Political Economy", "Econometrica",
     "Review of Economic Studies", "AER: Insights", "AEJ: Applied Economics", "AEJ: Economic Policy",
