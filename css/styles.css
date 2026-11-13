@@ -238,3 +238,12 @@ table.lc-table .t { color: var(--muted); font-size: 0.82rem; }
     table.lc-table td { border: 0; padding: 3px 0; white-space: normal !important; }
     table.lc-table td::before { content: attr(data-label); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
 }
+
+/* Selection note on the Summary page */
+.selection { border: 1px solid var(--border-color); border-left: 3px solid var(--accent-color); border-radius: 4px; padding: 14px 18px; margin: 18px 0; max-width: 84ch; }
+.selection h3 { font-size: 1rem; margin: 0 0 8px; }
+.selection dl { display: grid; gap: 6px; margin: 0; font-size: 0.93rem; }
+.selection dl > div { display: grid; grid-template-columns: 6.5em 1fr; gap: 12px; }
+.selection dt { font-weight: 700; color: var(--primary-color); }
+.selection dd { margin: 0; color: var(--secondary-color); }
+@media (max-width: 600px) { .selection dl > div { grid-template-columns: 1fr; gap: 0; } }

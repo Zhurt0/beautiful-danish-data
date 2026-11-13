@@ -205,6 +205,43 @@ def paper_card(p, show_themes=True):
 """
 
 
+# ---------- selection note on the Summary page ----------
+SELECTION_AS_OF = "November 2026"
+SELECTION_EXTRA = ("The <em>Review of Economic Studies</em> for 2005&ndash;2018 was also screened article by article "
+                   "(titles and abstracts of all 710 articles in volumes 72&ndash;85), which added one paper, "
+                   "Groes, Kircher and Manovskii (2015).")
+JOURNAL_ORDER = [
+    "American Economic Review", "Quarterly Journal of Economics", "Journal of Political Economy", "Econometrica",
+    "Review of Economic Studies", "AER: Insights", "AEJ: Applied Economics", "AEJ: Economic Policy",
+    "AEJ: Macroeconomics", "Review of Economics and Statistics", "Economic Journal", "Journal of Labor Economics",
+    "Journal of Public Economics",
+]
+
+
+def selection_journals():
+    """The selected journals with the number of papers found in each."""
+    counts = {}
+    for p in PAPERS:
+        j = p["journal"].replace(" (forthcoming)", "")
+        counts[j] = counts.get(j, 0) + 1
+    unknown = sorted(set(counts) - set(JOURNAL_ORDER))
+    assert not unknown, f"journal not in JOURNAL_ORDER: {unknown}"
+    return ", ".join(f"<em>{e(j)}</em> ({counts.get(j, 0)})" for j in JOURNAL_ORDER) + "."
+
+
+def selection_by_period():
+    """Papers per period, so the thinner early coverage is visible."""
+    bins = [(None, 2004), (2005, 2009), (2010, 2014), (2015, 2019), (2020, 2024), (2025, None)]
+    parts = []
+    for lo, hi in bins:
+        n = sum(1 for p in PAPERS if (lo is None or p["year"] >= lo) and (hi is None or p["year"] <= hi))
+        if not n:
+            continue
+        label = f"up to {hi}" if lo is None else (f"{lo} onwards" if hi is None else f"{lo}&ndash;{hi}")
+        parts.append(f"{label}: {n}")
+    return "Papers by publication year: " + "; ".join(parts) + "."
+
+
 def build_index():
     counts = {g: sum(1 for p in PAPERS if p["group"] == g) for g, _, _ in GROUPS}
     out = head(
@@ -217,7 +254,17 @@ def build_index():
         <div class="container">
             <h2 class="section-title">Why this page</h2>
             <p>Denmark links every resident, firm, hospital visit, tax return and job to a single identifier, and lets researchers work with the whole population from the 1980s onwards. This page is a reading list of the economics that has come out of that infrastructure in the top general-interest journals and in the two leading field journals for labour and public economics: what question each paper asks, what it finds, and which registers it is built from.</p>
-            <p>The list covers {len(PAPERS)} papers. It was assembled by searching Crossref for every article in these journals whose title or abstract mentions Denmark or Danish data, and by going through the publication lists of the main Danish research groups and authors, then checking each paper. It excludes <em>AEA Papers and Proceedings</em>, finance journals and papers that only use Danish data as one country among many. It will still miss papers whose abstracts do not name the country, so additions are welcome. Each paper lists its datasets, key variables, data period and sample size, and the <a href="samples.html">Data &amp; samples</a> page puts these in one sortable table. The <a href="themes.html">Themes</a> page regroups the same papers by topic, and the <a href="variables.html">Variable map</a> lists the registers and variables they rely on, at the individual and the firm level. If a paper is missing or a summary is wrong, open an issue or a pull request on GitHub.</p>
+            <div class="selection">
+                <h3>How the papers were selected</h3>
+                <dl>
+                    <div><dt>Journals</dt><dd>{selection_journals()}</dd></div>
+                    <div><dt>Period</dt><dd>Articles published from {min(p["year"] for p in PAPERS)} to {max(p["year"] for p in PAPERS)}, including articles accepted and forthcoming as of {SELECTION_AS_OF}. The earliest paper found is from {min(p["year"] for p in PAPERS)}. {selection_by_period()}</dd></div>
+                    <div><dt>Search</dt><dd>A Crossref search of every article in these journals whose title or abstract mentions Denmark or Danish data, plus the publication lists of the main Danish research groups and authors, with each paper then checked by hand. {SELECTION_EXTRA}</dd></div>
+                    <div><dt>Included</dt><dd>Papers whose main analysis is built on Danish administrative register data.</dd></div>
+                    <div><dt>Excluded</dt><dd><em>AEA Papers and Proceedings</em>, finance journals, and papers that use Danish data only as one country among many.</dd></div>
+                </dl>
+            </div>
+            <p>The list covers {len(PAPERS)} papers. It will still miss papers whose title and abstract do not name the country, especially older ones whose abstracts are not in Crossref, so additions are welcome. Each paper lists its datasets, key variables, data period and sample size, and the <a href="samples.html">Data &amp; samples</a> page puts these in one sortable table. The <a href="themes.html">Themes</a> page regroups the same papers by topic, and the <a href="variables.html">Variable map</a> lists the registers and variables they rely on, at the individual and the firm level. If a paper is missing or a summary is wrong, open an issue or a pull request on GitHub.</p>
             <ul class="counts">
 {"".join(f'                <li><a href="#{g}">{e(n)}</a><span>{counts[g]}</span></li>' + chr(10) for g, n, _ in GROUPS)}            </ul>
         </div>

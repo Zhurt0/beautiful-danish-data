@@ -37,6 +37,8 @@ Theme keys and names are defined in `build.py`.
 
 ## Contributing
 
+The Summary page states how the papers were selected (journals, period, search, inclusion rules); the journal counts and year range in that box are computed from `data/papers.json`, and the wording lives in `build.py`.
+
 The list is curated and far from complete. Pull requests that add a paper, fix a summary or correct a variable name are welcome. Please keep summaries to a few sentences and name the registers the paper actually uses.
 
 ## Deployment

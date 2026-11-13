@@ -12759,6 +12759,103 @@
     "replication_package": "https://zenodo.org/records/22044170"
   },
   {
+    "id": "groes2015",
+    "authors": "Fane Groes, Philipp Kircher and Iourii Manovskii",
+    "year": 2015,
+    "journal": "Review of Economic Studies",
+    "group": "top5",
+    "title": "The U-Shapes of Occupational Mobility",
+    "summary": "Asks which workers leave their occupation and where they go, using each worker's position in the wage distribution of his own occupation. Switching is U-shaped: both the lowest- and the highest-paid workers in an occupation are the most likely to leave, with low earners moving to occupations that pay less on average and high earners to occupations that pay more. In occupations with fast-rising wages mainly the low-paid leave, and in declining ones mainly the high-paid. The authors explain the patterns with a model of vertical sorting across occupations in which workers learn about their ability.",
+    "themes": [
+      "labor"
+    ],
+    "data": [
+      "Integrated Database for Labour Market Research (IDA): socioeconomic variables, sector, industry and occupation (DISCO)",
+      "Income registers: hourly wage in the job held in the last week of November, from labour income and mandatory pension contributions reported to the tax authorities",
+      "Education register (UDDA): completed education and graduation date",
+      "Firm–employee link (FIDA): employer identifiers"
+    ],
+    "level": "individual",
+    "variables": [
+      "Outcome: switching 4-digit occupation (DISCO) between year t and t+1",
+      "Outcome: direction of the switch, to an occupation with a higher or lower average wage",
+      "Key variable: percentile rank of the worker's hourly wage within his occupation and year (raw and residual wages)",
+      "Heterogeneity: occupations split by growth of the average wage of stayers (bottom 10%, middle 80%, top 10%)",
+      "Method: descriptive; kernel-smoothed local linear regressions and occupation-by-occupation probits on a quadratic in the wage percentile"
+    ],
+    "period": "1995–2002 (registers from 1980 used to build tenure and experience)",
+    "sample_size": "402,136 worker-year observations in 229 occupations (Small Sample A, main results); 1,292,932 observations in 324 occupations (Large Sample A). Working-paper version, August 2010",
+    "sample": "Male employees who completed their education in or after 1980 and are in the data at least until 1995, with a valid occupation code in the following year. The Small Sample keeps full-time private-sector workers and truncates each history at the first part-time, public-sector or self-employment spell, at the first missing wage, firm or occupation code, and 15 years after graduation. The Large Sample adds public-sector workers and spells of part-time work and non-employment.",
+    "sample_source": "https://typeset.io/pdf/the-u-shapes-of-occupational-mobility-1x8dzglekd.pdf",
+    "sample_confidence": "paper",
+    "definitions": [
+      {
+        "concept": "Occupation and job hierarchy",
+        "variable": "Occupation (4-digit DISCO)",
+        "definition": "Occupational affiliation is the DISCO code, the Danish version of ISCO-88, used at the 4-digit level. Robustness checks use 1-, 2- and 3-digit codes. In the code, occupation is unknown if discok equals 0 or 9999 or is below 1000.",
+        "registers": [
+          "IDA"
+        ],
+        "codes": "discok",
+        "source_type": "working paper",
+        "source_url": "https://typeset.io/pdf/the-u-shapes-of-occupational-mobility-1x8dzglekd.pdf",
+        "source_location": "Section 2.1 (Data); supplementary Stata programs"
+      },
+      {
+        "concept": "Occupation and job hierarchy",
+        "variable": "Occupational switch",
+        "definition": "A worker switches occupation in year t if his 4-digit occupation code in t+1 differs from the one in t, for workers employed in both years from 1995 on. Firm and industry switches are defined in the same way. A measurement-error check requires the same occupation in t-1 and t and again in t+1 and t+2.",
+        "registers": [
+          "IDA",
+          "FIDA"
+        ],
+        "codes": "occ_switch = 1 if discok differs between t and t+1",
+        "source_type": "replication code",
+        "source_url": "https://academic.oup.com/restud/article/82/2/659/1585946",
+        "source_location": "Supplementary data, select_data_9small_men.do"
+      },
+      {
+        "concept": "Earnings and income",
+        "variable": "Hourly wage",
+        "definition": "Total labour income plus mandatory pension fund payments of the job held in the last week of November, divided by the hours worked in that job; deflated to the 1995 level with Statistics Denmark's consumer price index. No wage is available for workers not employed in the last week of November. The working paper trims wages at the 1st and 99th percentile in each year; a comment in the 2014 replication code says the top and bottom 0.1% are deleted.",
+        "registers": [
+          "Income registers",
+          "IDA"
+        ],
+        "codes": "timelon_pens = timelon + pension per hour (pension = sum of arbpen10–arbpen15)",
+        "source_type": "working paper",
+        "source_url": "https://typeset.io/pdf/the-u-shapes-of-occupational-mobility-1x8dzglekd.pdf",
+        "source_location": "Section 2.1 (Data); supplementary gen_vars_7small.do"
+      },
+      {
+        "concept": "Earnings and income",
+        "variable": "Wage percentile within occupation",
+        "definition": "The worker's percentile rank in the hourly wage distribution of his occupation in a given year (Sample A, at least 10 workers in the occupation-year) or of his occupation, year and graduation cohort (Sample B). Residual-wage versions rank residuals from occupation-specific log wage regressions on year dummies, polynomials in experience and in occupational, industry and firm tenure, occupational spell number, education, marital status, union membership and region.",
+        "registers": [
+          "IDA",
+          "Income registers"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://typeset.io/pdf/the-u-shapes-of-occupational-mobility-1x8dzglekd.pdf",
+        "source_location": "Sections 2.1.1 and 2.2; Appendix Table A-1"
+      },
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Small and Large samples",
+        "definition": "Both samples: men, employees, education completed in or after 1980, in the data at least until 1995, not returning to school for at least three years after graduation. Small Sample: full-time private-sector workers, with histories truncated at the first part-time, public-sector or self-employment spell, at the first missing wage, firm or occupation code, and 15 years after graduation. Large Sample: adds public-sector workers, spells of part-time work and non-employment, and re-entry after missing firm, industry or occupation codes.",
+        "registers": [
+          "IDA",
+          "UDDA"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://typeset.io/pdf/the-u-shapes-of-occupational-mobility-1x8dzglekd.pdf",
+        "source_location": "Section 2.1.1 (Sample Selection)"
+      }
+    ]
+  },
+  {
     "id": "stoyanov2012",
     "authors": "Andrey Stoyanov and Nikolay Zubanov",
     "year": 2012,
