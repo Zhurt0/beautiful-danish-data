@@ -19015,6 +19015,96 @@
     "replication_package": "https://doi.org/10.7910/DVN/Y6JT1S"
   },
   {
+    "id": "belzil2000",
+    "authors": "Christian Belzil",
+    "year": 2000,
+    "journal": "Journal of Labor Economics",
+    "group": "jole",
+    "title": "Job Creation and Job Destruction, Worker Reallocation, and Wages",
+    "summary": "Asks whether workers earn more in firms that are creating jobs or turning over many workers. Firm-level measures of net job creation and worker reallocation are added to individual wage equations estimated with fixed effects on matched Danish firm-worker data. Net job creation raises male wages at all phases of the business cycle, most strongly for entry wages and low-tenure workers, while female wages apart from entry wages do not respond.",
+    "themes": [
+      "labor",
+      "firms"
+    ],
+    "data": [
+      "Integrated Database for Labour Market Research (IDA), Statistics Denmark: November employment of firms/workplaces linked to register records on all their employees (named in the 1996 working-paper version, EUI ECO 96/17; the published abstract only says 'Danish firm (workplace) data ... merged with individual records')"
+    ],
+    "level": "both",
+    "variables": [
+      "Treatment: firm net job creation/destruction rate",
+      "Treatment: firm worker (gross employment) reallocation rate, newcomers plus leavers relative to firm size",
+      "Outcome: individual log hourly wage, including entry wages",
+      "Controls: individual fixed effects, age, experience, education, firm size, business-cycle (year) effects",
+      "Heterogeneity: men vs women, tenure, phase of the business cycle"
+    ],
+    "period": "1980–1991 according to the 1996 working-paper version (not stated in the published abstract)",
+    "sample": "Male and female workers employed in a sample of Danish firms (workplaces), with firm employment histories merged to the workers' individual records.",
+    "sample_source": "https://ideas.repec.org/a/ucp/jlabec/v18y2000i2p183-203.html",
+    "sample_confidence": "abstract",
+    "definitions": [
+      {
+        "concept": "Sample definition and timing",
+        "variable": "IDA firm sample and worker restrictions (1996 working-paper version)",
+        "definition": "Sample extracted from IDA, which covers the entire population of Danish firms and workers with annual observations from 1980. Initially 1000 private-sector firms were selected randomly in 1980, representative in terms of industry, sector and region, and followed until 1991; as firms disappear new firms are added so that the number of firms always exceeds 1000; agriculture and mining are excluded. Workers are restricted to full-time workers, to wage observations with the maximum value of Statistics Denmark's wage quality index, and to individuals aged 16 or less in 1964 (at most 46 years old in 1991) because the experience measure is less reliable before 1964.",
+        "registers": [
+          "IDA"
+        ],
+        "codes": "1000 private firms sampled in 1980; panel 1980-1991; full-time only; maximum wage-quality index; age <= 16 in 1964",
+        "source_type": "working paper",
+        "source_url": "https://hdl.handle.net/1814/588",
+        "source_location": "Sections 3.1-3.2 of EUI Working Paper ECO 96/17 ('Employment Reallocation, Wages and the Allocation of Workers Between Expanding and Declining Firms'), an earlier version of the article under a different title"
+      },
+      {
+        "concept": "Firm characteristics and productivity",
+        "variable": "Net job creation rate",
+        "definition": "Job creation for firm j in year t is the change in firm employment between t-1 and t divided by firm size, X_jt = (E_jt - E_jt-1) / S_jt. Total employment in each firm is computed from the number of primary job holders in November of each year.",
+        "registers": [
+          "IDA"
+        ],
+        "codes": "X_jt = (E_jt - E_jt-1) / S_jt; employment measured in November",
+        "source_type": "working paper",
+        "source_url": "https://hdl.handle.net/1814/588",
+        "source_location": "Section 4.1, eq. (3), and Appendix 1 comments of EUI Working Paper ECO 96/17 (earlier version under a different title)"
+      },
+      {
+        "concept": "Firm characteristics and productivity",
+        "variable": "Gross employment (worker) reallocation rate",
+        "definition": "Sum of all newcomers (workers with no attachment to the current firm in the previous year) and all leavers (workers with no attachment to the firm in the following year) divided by firm size, (N_jt + M_jt) / S_jt. Because IDA does not record the cause of separation, this turnover measure is treated as an upper bound for gross employment reallocation.",
+        "registers": [
+          "IDA"
+        ],
+        "codes": "(N_jt + M_jt) / S_jt",
+        "source_type": "working paper",
+        "source_url": "https://hdl.handle.net/1814/588",
+        "source_location": "Section 2 and Section 4.1, eq. (4), of EUI Working Paper ECO 96/17 (earlier version under a different title)"
+      },
+      {
+        "concept": "Earnings and income",
+        "variable": "Real hourly wage",
+        "definition": "Individual hourly wage rate from IDA, in Danish kroner per hour, measured in November of each year; the dependent variable is the log real hourly wage. Only observations with the maximum value of the wage quality index imputed by Statistics Denmark are used.",
+        "registers": [
+          "IDA"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://hdl.handle.net/1814/588",
+        "source_location": "Sections 3.1-3.2, eq. (1), and Appendix 1 comments of EUI Working Paper ECO 96/17 (earlier version under a different title)"
+      },
+      {
+        "concept": "Employment and labour force status",
+        "variable": "Labour market experience",
+        "definition": "Total cumulated experience reported in IDA, measured as the sum of all employment periods since entering the labour force (actual rather than potential experience), which allows age and experience effects to be separately identified. The measure is less reliable for workers employed before 1964.",
+        "registers": [
+          "IDA"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://hdl.handle.net/1814/588",
+        "source_location": "Section 2 and Section 3.2 of EUI Working Paper ECO 96/17 (earlier version under a different title)"
+      }
+    ]
+  },
+  {
     "id": "svarer2005",
     "authors": "Michael Svarer, Michael Rosholm and Jakob Roland Munch",
     "year": 2005,
@@ -21524,6 +21614,106 @@
         "source_type": "published paper",
         "source_url": "https://doi.org/10.1016/j.jpubeco.2025.105563",
         "source_location": "Abstract (full text not accessible; abstract read from the OpenAlex record of DOI 10.1016/j.jpubeco.2025.105563)"
+      }
+    ]
+  },
+  {
+    "id": "billings2024",
+    "authors": "Stephen B. Billings, Mark Hoekstra and Gabriel Pons Rotger",
+    "year": 2024,
+    "journal": "Journal of Public Economics",
+    "group": "jpube",
+    "title": "The scale and nature of neighborhood effects on children",
+    "summary": "Uses the quasi-random assignment of urgent-need families to social housing units in Copenhagen to ask which neighbourhood characteristics matter for children and at what geographic scale. Neighbourhood quality is built from register data on all neighbours within a 2- to 15-minute walk of the assigned unit. Effects on education (and, in the published version, earnings) are large but very local, while effects on drug possession operate at a broader scale; neighbourhood unemployment and education predict outcomes better than neighbourhood income.",
+    "themes": [
+      "children",
+      "housing",
+      "education"
+    ],
+    "data": [
+      "Statistics Denmark administrative registers (cited as the Statistics Denmark database of administrative records; individual registers are not named): residential location and family structure of all Copenhagen residents, gender, immigration history and ethnicity",
+      "Register information on employment/unemployment, social assistance, disposable income and education of family members and neighbours",
+      "Criminal charges (Penal Code offences and possession of narcotic drugs)",
+      "Health records: mortality, doctor visits and contacts with psychiatric treatment and care",
+      "Municipality of Copenhagen social-housing allocation records for urgent-need households (first housing offers), 2009–2014",
+      "OpenStreetMap route network (walking times between addresses) and Boliga property-sale listings (hedonic house-price measure) — non-register sources"
+    ],
+    "level": "individual",
+    "variables": [
+      "Treatment: quality of the neighbourhood of the first offered social-housing unit (neighbours' income, unemployment, education and a summary index), measured within 2-, 5-, 10- and 15-minute walks",
+      "Outcome: enrolment in upper secondary education",
+      "Outcome: charged with a Penal Code offence; charged with possession of narcotic drugs (after age 16)",
+      "Outcome: any contact with psychiatric treatment and care in the four years after the first offer",
+      "Controls: year and month of assignment, household size, special-needs application",
+      "Heterogeneity: gender, ethnic minority/majority, distance from previous residence"
+    ],
+    "period": "Housing assignments 2009–2014; outcomes followed to the end of 2020 (working-paper version)",
+    "sample_size": "1,171 children assigned to social housing (Table 1 of the NBER working-paper version); on average 24,198 neighbours within a 15-minute walk",
+    "sample": "School-aged children (grades 0–8) in urgent-need households that received a first social-housing offer from the Municipality of Copenhagen in 2009–2014.",
+    "sample_source": "https://www.nber.org/system/files/working_papers/w30764/w30764.pdf",
+    "sample_confidence": "paper",
+    "definitions": [
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Quasi-random social housing assignment (first offer to urgent-need households)",
+        "definition": "Every third social housing unit that becomes vacant in Copenhagen is reserved by the municipality for households with 'urgent needs'. When a reserved unit is ready, the allocation program queues applicants whose household size and composition match the apartment and selects the application with the oldest referral date; neighbour characteristics and applicant preferences play no role. The first offer is used as the assigned unit (63% accept it). Units in local areas with more than 40% adult unemployment on January 1 are ineligible that year. Main sample: 1,171 children provided housing in 2009-2014.",
+        "registers": [
+          "Municipality of Copenhagen social housing allocation records",
+          "Statistics Denmark administrative registers (not named individually)"
+        ],
+        "codes": "Every third vacant unit; first offer; assignment years 2009-2014; 40% local-area adult unemployment ineligibility threshold; compliance 63%",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w30764/w30764.pdf",
+        "source_location": "Sections 'Denmark Social Housing Policy' and 'Data'"
+      },
+      {
+        "concept": "Geography and neighbourhood",
+        "variable": "Neighbourhood boundary by walking time",
+        "definition": "For each social housing apartment address, all residential addresses within 3 km bird's-eye distance are identified and the OpenStreetMap route network is used to compute the walking time of the nearest path between each address and the apartment. Neighbourhoods are the residents within 2, 5, 10 and 15 minutes' walk (every minute from 1 to 15 in the figures), averaging 527, 2,835, 10,930 and 24,198 neighbours respectively.",
+        "registers": [
+          "Residential addresses of all Copenhagen residents (Statistics Denmark)",
+          "OpenStreetMap"
+        ],
+        "codes": "3 km radius; walking-time cut-offs 2, 5, 10, 15 minutes",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w30764/w30764.pdf",
+        "source_location": "Footnote 7 and Results section"
+      },
+      {
+        "concept": "Geography and neighbourhood",
+        "variable": "Neighbourhood quality (income, unemployment, education and summary index)",
+        "definition": "Neighbourhood averages of the family attributes defined in Table 1: family income (average rank, 0-100, in disposable income among families of similar composition in the five years before assignment), family unemployment (average unemployment rate of family members aged 18 or older in the five years before assignment) and family education (average years of schooling of family members aged 25 or older). All are measured immediately before the household's assignment and scaled to mean zero and standard deviation one; the summary index combines the three (unemployment sign reversed) following Anderson (2008).",
+        "registers": [
+          "Income, employment and education registers (Statistics Denmark; not named individually)"
+        ],
+        "codes": "Standardised to mean 0, SD 1; five-year pre-assignment window; age cut-offs 18+ (unemployment) and 25+ (education)",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w30764/w30764.pdf",
+        "source_location": "Section 'Measurement of neighborhood quality'; Table 1 and Table 2 notes"
+      },
+      {
+        "concept": "Education and test scores",
+        "variable": "Education enrollment",
+        "definition": "Indicator that the child was enrolled in upper secondary education between the date of the first social housing offer and January 1, 2021.",
+        "registers": [
+          "Education register (Statistics Denmark; not named)"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w30764/w30764.pdf",
+        "source_location": "Table 1 notes"
+      },
+      {
+        "concept": "Crime",
+        "variable": "Crime and possession of narcotic drugs",
+        "definition": "Crime: the child was charged for offences against the Danish Penal Code after the first social housing assignment and after age 16 (described in the text as violent or property crime, excluding drug and technical offences). Possession of narcotic drugs: the child was charged for possession of narcotic drugs after the first offer of social housing and after age 16. Family crime and family drug possession are the same charges for at least one family member in the five years before assignment.",
+        "registers": [
+          "Criminal charges register (Statistics Denmark; not named)"
+        ],
+        "codes": "Charges after age 16 and after first offer; five-year pre-assignment window for family measures",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w30764/w30764.pdf",
+        "source_location": "Table 1 notes; Data section"
       }
     ]
   }

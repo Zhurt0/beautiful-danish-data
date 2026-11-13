@@ -208,9 +208,12 @@ def paper_card(p, show_themes=True):
 
 # ---------- selection note on the Summary page ----------
 SELECTION_AS_OF = "November 2026"
-SELECTION_EXTRA = ("The <em>Review of Economic Studies</em> for 2005&ndash;2018 was also screened article by article "
+SELECTION_EXTRA = ("The list was then checked twice. The <em>Review of Economic Studies</em> for 2005&ndash;2018 was screened article by article "
                    "(titles and abstracts of all 710 articles in volumes 72&ndash;85), which added one paper, "
-                   "Groes, Kircher and Manovskii (2015).")
+                   "Groes, Kircher and Manovskii (2015). In November 2026 every article listed for these journals on RePEc for "
+                   "1998&ndash;2026 (about 23,500 articles) was screened by title and by author name, and by abstract for the Top 5, "
+                   "<em>AER: Insights</em>, <em>AEJ: Applied Economics</em> and the <em>Journal of Labor Economics</em>; the abstracts of "
+                   "the other journals are still being read. This second check has added 13 papers so far.")
 JOURNAL_ORDER = [
     "American Economic Review", "Quarterly Journal of Economics", "Journal of Political Economy", "Econometrica",
     "Review of Economic Studies", "AER: Insights", "AEJ: Applied Economics", "AEJ: Economic Policy",
@@ -1213,7 +1216,7 @@ def build_network():
         <div class="container">
             <h2 class="section-title">Author network</h2>
             <p>Every author of the {len(PAPERS)} papers, linked to everyone they wrote one of these papers with. {len(nodes)} authors and {len(nw["links"])} co-author pairs. {biggest} authors are joined in one connected group; {solo} wrote all their papers here alone.</p>
-            <p class="note">Affiliations are those printed on each paper, taken from OpenAlex. Colour shows where an author was based on most of their papers here. Research networks such as NBER, CEPR, IZA and CESifo are left out, since nearly everyone lists one. Names were matched by OpenAlex author ID and checked by hand for duplicates.</p>
+            <p class="note">Names are spelled as on the papers. Affiliations are those listed for each paper, taken mostly from OpenAlex; where that source was wrong or empty they were checked against the published byline, and for papers added later they come from the paper or its publisher record. Colour shows where an author was based on most of their papers here. Research networks such as NBER, CEPR, IZA and CESifo are left out, since nearly everyone lists one. If your name or affiliation is wrong, or a paper of yours is missing, please open an issue on GitHub.</p>
         </div>
     </section>
     <section class="section viz-section">
