@@ -103,7 +103,6 @@ def nav(active):
             <p class="lang-switch"><span class="cur">EN</span><a href="zh/{active}" lang="zh-Hans" hreflang="zh-Hans">中文</a></p>
             <p class="eyebrow"><a href="{HOME}">Rentian Zhu</a> &rsaquo; Useful links</p>
             <h1><a href="index.html">Beautiful Danish Data</a> <span class="beta" title="Beta version: the list is still being checked and extended">Beta</span></h1>
-            <p class="slogan">Probably the best micro data in the world</p>
             <p class="tagline">A field guide to economics published with Danish administrative data</p>
         </div>
     </header>
