@@ -75,6 +75,9 @@ def head(title, description, canonical):
     <meta name="description" content="{e(description)}">
     <meta name="author" content="Rentian Zhu">
     <link rel="canonical" href="{SITE}{canonical}">
+    <link rel="alternate" hreflang="en" href="{SITE}{canonical}">
+    <link rel="alternate" hreflang="zh-Hans" href="{SITE}zh/{canonical}">
+    <link rel="alternate" hreflang="x-default" href="{SITE}{canonical}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Beautiful Danish Data">
     <meta property="og:title" content="{e(title)}">
@@ -97,6 +100,7 @@ def nav(active):
         lis += f'<li><a href="{href}"{cls}>{label}</a></li>'
     return f"""    <header>
         <div class="container">
+            <p class="lang-switch"><span class="cur">EN</span><a href="zh/{active}" lang="zh-Hans" hreflang="zh-Hans">中文</a></p>
             <p class="eyebrow"><a href="{HOME}">Rentian Zhu</a> &rsaquo; Useful links</p>
             <h1><a href="index.html">Beautiful Danish Data</a> <span class="beta" title="Beta version: the list is still being checked and extended">Beta</span></h1>
             <p class="tagline">A field guide to economics published with Danish administrative data</p>
@@ -1379,17 +1383,155 @@ def build_schools():
     return out
 
 
+# ---------- Chinese edition (zh/) ----------
+# The English pages are built first; the Chinese pages are the same HTML with text replaced from a translation table.
+# data/zh.json holds interface text ("text": English HTML fragment -> Chinese HTML fragment; "js": string literals in scripts).
+# data/papers_zh.json holds each paper's translated summary, variables, period, sample size and sample.
+# Anything without a translation stays in English, so a new paper shows up in English until it is translated.
+ZH_BLOCK_TAGS = "p|li|ul|ol|div|table|thead|tbody|tr|td|th|h[1-6]|dl|dt|dd|details|summary|section|select|option|label|button|header|footer|nav|title|figcaption"
+ZH_LEAF = re.compile(r"<(p|li|h[1-4]|th|td|dt|dd|summary|option|label|title|button|figcaption)\b([^>]*)>((?:(?!<(?:" + ZH_BLOCK_TAGS + r")\b).)*?)</\1>", re.S)
+ZH_TEXT = re.compile(r">([^<>]+)<")
+ZH_NUM = re.compile(r"\d[\d,.]*\d|\d")
+ZH_ATTR = re.compile(r'\b(placeholder|title|aria-label|data-label|alt)="([^"]*)"')
+ZH_META = re.compile(r'(<meta (?:name="description"|property="og:title"|property="og:description") content=")([^"]*)(")')
+
+
+def zh_col(s):
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def zh_norm(s):
+    """Replace numbers outside tags with {0}, {1}, ... so that counts in interface sentences can change."""
+    nums, out = [], []
+    for part in re.split(r"(<[^>]+>)", s):
+        if part.startswith("<"):
+            out.append(part)
+        else:
+            out.append(ZH_NUM.sub(lambda m: (nums.append(m.group(0)), "{%d}" % (len(nums) - 1))[1], part))
+    return "".join(out), nums
+
+
+def zh_get(tm, s):
+    key = zh_col(s)
+    if not key or not re.search(r"[A-Za-z]", key):
+        return None
+    if key in tm:
+        return tm[key]
+    nkey, nums = zh_norm(key)
+    if nums and nkey in tm:
+        out = tm[nkey]
+        for i, n in enumerate(nums):
+            out = out.replace("{%d}" % i, n)
+        return out
+    return None
+
+
+def zh_table():
+    tm, js = {}, {}
+    f = ROOT / "data" / "zh.json"
+    if f.exists():
+        d = json.loads(f.read_text())
+        tm.update({zh_col(k): v for k, v in d.get("text", {}).items()}); js.update(d.get("js", {}))
+    f = ROOT / "data" / "papers_zh.json"
+    if f.exists():
+        pz = json.loads(f.read_text())
+        for p in PAPERS:
+            z = pz.get(p["id"])
+            if not z:
+                continue
+            for k in ("summary", "period", "sample_size", "sample"):
+                if p.get(k) and z.get(k):
+                    tm[zh_col(e(p[k]))] = e(z[k])
+            if p.get("variables") and len(z.get("variables", [])) == len(p["variables"]):
+                for en, zh in zip(p["variables"], z["variables"]):
+                    tm[zh_col(e(en))] = e(zh)
+    return tm, js
+
+
+def zh_page(page, src, tm, js):
+    def keep_ws(orig, new):
+        return orig[:len(orig) - len(orig.lstrip())] + new + orig[len(orig.rstrip()):]
+
+    def block(m):
+        z = zh_get(tm, m.group(3))
+        return m.group(0) if z is None else f"<{m.group(1)}{m.group(2)}>{keep_ws(m.group(3), z)}</{m.group(1)}>"
+
+    def text(m):
+        z = zh_get(tm, m.group(1))
+        return m.group(0) if z is None else ">" + keep_ws(m.group(1), z) + "<"
+
+    def attr(m):
+        z = zh_get(tm, m.group(2))
+        return m.group(0) if z is None else f'{m.group(1)}="{re.sub("<[^>]+>", "", z)}"'
+
+    def script(m):
+        body = m.group(2)
+
+        def dq(q):                      # JSON payload values
+            try:
+                raw = json.loads(q.group(0))
+            except ValueError:
+                return q.group(0)
+            z = zh_get(tm, e(raw)) if isinstance(raw, str) else None
+            return q.group(0) if z is None else json.dumps(keep_ws(raw, html.unescape(re.sub("<[^>]+>", "", z))), ensure_ascii=False).replace("</", "<\\/")
+
+        def sq(q):                      # interface strings written in the script itself
+            inner = q.group(1)
+            z = js.get(inner.strip())
+            return q.group(0) if z is None else "'" + keep_ws(inner, z).replace("'", "\\'") + "'"
+
+        body = re.sub(r'"(?:[^"\\\n]|\\.)*"', dq, body)
+        body = re.sub(r"'((?:[^'\\\n]|\\.)*)'", sq, body)
+        body = ZH_TEXT.sub(text, body)
+        return m.group(1) + body + m.group(3)
+
+    parts = re.split(r"(<script\b[^>]*>.*?</script>)", src, flags=re.S)
+    for i, part in enumerate(parts):
+        if part.startswith("<script"):
+            parts[i] = re.sub(r"(<script\b[^>]*>)(.*?)(</script>)", script, part, flags=re.S)
+        else:
+            part = ZH_META.sub(lambda m: m.group(1) + (re.sub("<[^>]+>", "", zh_get(tm, m.group(2)) or m.group(2))) + m.group(3), part)
+            part = ZH_LEAF.sub(block, part)
+            part = ZH_TEXT.sub(text, part)
+            parts[i] = ZH_ATTR.sub(attr, part)
+    out = "".join(parts)
+    out = out.replace('<html lang="en">', '<html lang="zh-Hans">', 1)
+    out = out.replace(f'<link rel="canonical" href="{SITE}', f'<link rel="canonical" href="{SITE}zh/', 1)
+    out = out.replace(f'<meta property="og:url" content="{SITE}', f'<meta property="og:url" content="{SITE}zh/', 1)
+    out = out.replace('<meta property="og:site_name" content="Beautiful Danish Data">', '<meta property="og:site_name" content="Beautiful Danish Data">\n    <meta property="og:locale" content="zh_CN">', 1)
+    # no Google Fonts on the Chinese pages (not reachable everywhere); system serif fonts are set in the stylesheet
+    out = re.sub(r'\s*<link rel="preconnect" href="https://fonts\.g[^>]*>', "", out)
+    out = re.sub(r'\s*<link href="https://fonts\.googleapis\.com[^>]*>', "", out)
+    out = out.replace('src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"', 'src="../vendor/d3.min.js"')
+    out = re.sub(r'(?<=["\'(])(css|files|vendor)/', r"../\1/", out)
+    sw_en = f'<p class="lang-switch"><span class="cur">EN</span><a href="zh/{page}" lang="zh-Hans" hreflang="zh-Hans">中文</a></p>'
+    assert sw_en in out, page
+    out = out.replace(sw_en, f'<p class="lang-switch"><a href="../{page}" lang="en" hreflang="en">EN</a><span class="cur">中文</span></p>')
+    return out
+
+
+def build_zh(pages):
+    tm, js = zh_table()
+    if not tm:
+        return 0
+    (ROOT / "zh").mkdir(exist_ok=True)
+    for page, src in pages.items():
+        (ROOT / "zh" / page).write_text(zh_page(page, src, tm, js))
+    missing = [p["id"] for p in PAPERS if zh_col(e(p["summary"])) not in tm]
+    if missing:
+        print(f"zh: {len(missing)} papers have no Chinese summary and are shown in English: {', '.join(missing[:8])}{' ...' if len(missing) > 8 else ''}")
+    return len(pages)
+
+
 if __name__ == "__main__":
-    (ROOT / "index.html").write_text(build_index())
-    (ROOT / "themes.html").write_text(build_themes())
-    (ROOT / "variables.html").write_text(build_variables())
-    (ROOT / "samples.html").write_text(build_samples())
-    (ROOT / "lifecycle.html").write_text(build_lifecycle())
-    (ROOT / "codebook.html").write_text(build_codebook())
-    (ROOT / "survey.html").write_text(build_survey())
-    pages = 7
+    built = {
+        "index.html": build_index(), "themes.html": build_themes(), "variables.html": build_variables(),
+        "samples.html": build_samples(), "lifecycle.html": build_lifecycle(), "codebook.html": build_codebook(),
+        "survey.html": build_survey(),
+    }
     if NETWORK:
-        (ROOT / "network.html").write_text(build_network())
-        (ROOT / "schools.html").write_text(build_schools())
-        pages += 2
-    print(f"built {pages} pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers")
+        built["network.html"] = build_network(); built["schools.html"] = build_schools()
+    for name, src in built.items():
+        (ROOT / name).write_text(src)
+    n_zh = build_zh(built)
+    print(f"built {len(built)} pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers" + (f", plus {n_zh} Chinese pages in zh/" if n_zh else ""))

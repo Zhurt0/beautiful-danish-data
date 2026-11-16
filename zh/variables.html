@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>变量地图 | Beautiful Danish Data</title>
+    <meta name="description" content="本站论文所用丹麦统计局登记库与变量的地图，分为个人层面（BEF、IND、FORM、IDA、BFL、DREAM、UDDA、LPR、LMDB、MFR、DOD、犯罪登记库）和企业层面（FIRM、FIRE、FIDA、UHDI、VAT、CVR、专利）。">
+    <meta name="author" content="Rentian Zhu">
+    <link rel="canonical" href="https://zhurt0.github.io/beautiful-danish-data/zh/variables.html">
+    <link rel="alternate" hreflang="en" href="https://zhurt0.github.io/beautiful-danish-data/variables.html">
+    <link rel="alternate" hreflang="zh-Hans" href="https://zhurt0.github.io/beautiful-danish-data/zh/variables.html">
+    <link rel="alternate" hreflang="x-default" href="https://zhurt0.github.io/beautiful-danish-data/variables.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Beautiful Danish Data">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:title" content="变量地图 | Beautiful Danish Data">
+    <meta property="og:description" content="本站论文所用丹麦统计局登记库与变量的地图，分为个人层面（BEF、IND、FORM、IDA、BFL、DREAM、UDDA、LPR、LMDB、MFR、DOD、犯罪登记库）和企业层面（FIRM、FIRE、FIDA、UHDI、VAT、CVR、专利）。">
+    <meta property="og:url" content="https://zhurt0.github.io/beautiful-danish-data/zh/variables.html">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <p class="lang-switch"><a href="../variables.html" lang="en" hreflang="en">EN</a><span class="cur">中文</span></p>
+            <p class="eyebrow"><a href="https://zhurt0.github.io/rentianzhu/">Rentian Zhu</a> &rsaquo; 实用链接</p>
+            <h1><a href="index.html">Beautiful Danish Data</a> <span class="beta" title="测试版：清单仍在核对和扩充">测试版</span></h1>
+            <p class="tagline">用丹麦行政登记数据做出来的经济学研究：一份指南</p>
+        </div>
+    </header>
+    <nav>
+        <div class="container">
+            <ul><li><a href="index.html">概览</a></li><li><a href="themes.html">主题</a></li><li><a href="samples.html">数据与样本</a></li><li><a href="lifecycle.html">生命历程</a></li><li><a href="codebook.html">变量定义</a></li><li><a href="survey.html">调查</a></li><li><a href="variables.html" class="active">变量地图</a></li><li><a href="network.html">作者网络</a></li><li><a href="schools.html">哥本哈根与奥胡斯</a></li><li><a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a></li></ul>
+        </div>
+    </nav>
+    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">变量地图</h2>
+            <p>丹麦统计局（Statistics Denmark）以登记库的形式提供数据，每个主题一个登记库；个人一侧的登记库共用个人标识符（<code>PNR</code>），企业一侧的登记库共用企业标识符（<code>CVRNR</code>）。两侧通过 IDA、FIDA 或月度工资数据中的雇主关联对接。下面的地图列出本站论文所依托的登记库、其中最重要的变量，以及哪些论文使用了各个登记库。</p>
+            <p class="note">变量名沿用丹麦统计局高质量变量文档中的写法，但名称和版本后缀（如 <code>_13</code>）会随年份和项目而变。请把这些代码当作线索，写代码前先到 <a href="https://www.dst.dk/da/TilSalg/Forskningsservice/Dokumentation/hoejkvalitetsvariable" target="_blank" rel="noopener">dst.dk</a> 核对最新文档。</p>
+            <ul class="toc">
+                <li><a href="#individual">个人层面</a><span>14 个登记库</span></li>
+                <li><a href="#firm">企业层面</a><span>6 个登记库</span></li>
+                <li><a href="#bridge">连接两侧</a></li>
+            </ul>
+        </div>
+    </section>
+    <section class="section" id="individual">
+        <div class="container">
+            <h2 class="section-title">个人层面</h2>
+            <p class="blurb">以 <code>PNR</code> 为键。除另有说明外，每人每年一行。</p>
+            <div class="register" id="reg-bef-population-register">
+                <h3>BEF — 人口登记库</h3>
+                <p class="what">每位居民每年一行（BEF 月度版为每月一行）。其他所有登记库都以它为主干。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>PNR</code></td><td>个人标识符（已匿名化）。连接所有登记库。</td></tr>
+                    <tr><td><code>KOEN</code></td><td>性别。</td></tr>
+                    <tr><td><code>FOED_DAG / ALDER</code></td><td>出生日期 / 参照日的年龄。</td></tr>
+                    <tr><td><code>IE_TYPE</code></td><td>来源类型：丹麦裔、移民、移民后代。</td></tr>
+                    <tr><td><code>OPR_LAND</code></td><td>来源国。</td></tr>
+                    <tr><td><code>KOM</code></td><td>居住市镇。</td></tr>
+                    <tr><td><code>CIVST</code></td><td>婚姻状况。</td></tr>
+                    <tr><td><code>FAMILIE_ID / FAMILIE_TYPE</code></td><td>家庭标识符与家庭类型（伴侣、单身、子女）。</td></tr>
+                    <tr><td><code>MOR_PNR / FAR_PNR</code></td><td>母亲和父亲的 PNR。用于构建亲子关联和兄弟姐妹关联。</td></tr>
+                    <tr><td><code>AEGTE_ID</code></td><td>配偶或伴侣的 PNR。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#almar2026">Almar (2026)</a>, <a href="index.html#altmann2026">Altmann (2026)</a>, <a href="index.html#baker2026">Baker (2026)</a>, <a href="index.html#caplin2026">Caplin (2026)</a>, <a href="index.html#daysal2026">Daysal (2026)</a>, <a href="index.html#fadlon2026">Fadlon (2026)</a>, <a href="index.html#hasager2026">Hasager (2026)</a>, <a href="index.html#heinesen2026">Heinesen (2026)</a>, <a href="index.html#humlum2026">Humlum (2026)</a>, <a href="index.html#jensen2026aer">Jensen (2026)</a>, <a href="index.html#jorgensen2026">Jakobsen (2026)</a>, <a href="index.html#sander2026">Sander (2026)</a>, <a href="index.html#taubinsky2026">Taubinsky (2026)</a>, <a href="index.html#arendt2025">Arendt (2025)</a>, <a href="index.html#daysal2025">Daysal (2025)</a>, <a href="index.html#eshaghnia2025">Eshaghnia (2025)</a>, <a href="index.html#houmark2025ej">Houmark (2025)</a>, <a href="index.html#humlum2025">Humlum (2025)</a>, <a href="index.html#kristiansen2025">Kristiansen (2025)</a>, <a href="index.html#andersen2024">Andersen (2024)</a>, <a href="index.html#andersen2024restat">Andersen (2024)</a>, <a href="index.html#brenoe2024">Brenøe (2024)</a>, <a href="index.html#bruze2024">Bruze (2024)</a>, <a href="index.html#dahl2024">Dahl (2024)</a>, <a href="index.html#dustmann2024">Dustmann (2024)</a>, <a href="index.html#foerster2024">Foerster (2024)</a>, <a href="index.html#foged2024">Foged (2024)</a>, <a href="index.html#foged2024jole">Foged (2024)</a>, <a href="index.html#garciamiralles2024">García-Miralles (2024)</a>, <a href="index.html#hasager2024">Hasager (2024)</a>, <a href="index.html#jensen2024jpube">Jensen (2024)</a>, <a href="index.html#andersen2023">Andersen (2023)</a>, <a href="index.html#cairo2023">Cairo (2023)</a>, <a href="index.html#crawley2023">Crawley (2023)</a>, <a href="index.html#dustmann2023ej">Dustmann (2023)</a>, <a href="index.html#hvidberg2023">Hvidberg (2023)</a>, <a href="index.html#sigaard2023">Sigaard (2023)</a>, <a href="index.html#andersen2022">Andersen (2022)</a>, <a href="index.html#daysal2022">Daysal (2022)</a>, <a href="index.html#druedahl2022">Druedahl (2022)</a>, <a href="index.html#keller2022">Keller (2022)</a>, <a href="index.html#andersen2021ej">Andersen (2021)</a>, <a href="index.html#anker2021">Anker (2021)</a>, <a href="index.html#bingley2021">Bingley (2021)</a>, <a href="index.html#daysal2021jpube">Daysal (2021)</a>, <a href="index.html#dustmann2021">Dustmann (2021)</a>, <a href="index.html#fadlon2021">Fadlon (2021)</a>, <a href="index.html#friedrich2021">Friedrich (2021)</a>, <a href="index.html#gruber2021">Gruber (2021)</a>, <a href="index.html#kleven2021">Kleven (2021)</a>, <a href="index.html#agersnap2020">Agersnap (2020)</a>, <a href="index.html#andersen2020">Andersen (2020)</a>, <a href="index.html#bingley2020">Bingley (2020)</a>, <a href="index.html#breining2020">Breining (2020)</a>, <a href="index.html#brenoe2020">Brenøe (2020)</a>, <a href="index.html#epper2020">Epper (2020)</a>, <a href="index.html#kreiner2020">Kreiner (2020)</a>, <a href="index.html#kreiner2020restat">Kreiner (2020)</a>, <a href="index.html#rossinslater2020">Rossin-Slater (2020)</a>, <a href="index.html#bingley2019">Bingley (2019)</a>, <a href="index.html#dustmann2019">Dustmann (2019)</a>, <a href="index.html#fadlon2019">Fadlon (2019)</a>, <a href="index.html#kleven2019">Kleven (2019)</a>, <a href="index.html#boserup2018">Boserup (2018)</a>, <a href="index.html#joensen2018">Joensen (2018)</a>, <a href="index.html#landerso2017">Landersø (2017)</a>, <a href="index.html#fadlon2016">Fadlon (2016)</a>, <a href="index.html#foged2016">Foged (2016)</a>, <a href="index.html#bruze2015">Bruze (2015)</a>, <a href="index.html#chetty2014">Chetty (2014)</a>, <a href="index.html#kleven2014qje">Kleven (2014)</a>, <a href="index.html#chetty2011">Chetty (2011)</a>, <a href="index.html#clark2009">Clark (2009)</a>, <a href="index.html#damm2009">Damm (2009)</a>, <a href="index.html#bennedsen2007">Bennedsen (2007)</a>, <a href="index.html#andersen2018restat">Andersen (2018)</a>, <a href="index.html#bratu2020">Bratu (2020)</a>, <a href="index.html#chan2025">Chan (2025)</a>, <a href="index.html#eriksen2026">Eriksen (2026)</a>, <a href="index.html#faccini2026">Faccini (2026)</a>, <a href="index.html#billings2024">Billings (2024)</a>, <a href="index.html#harrison2020">Harrison (2020)</a>, <a href="index.html#borjas2019">Borjas (2019)</a></p>
+            </div>
+            <div class="register" id="reg-ind-income-register">
+                <h3>IND — 收入登记库</h3>
+                <p class="what">来自纳税申报的年度收入，几乎全部为第三方报送。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>PERINDKIALT_13</code></td><td>税前个人总收入。</td></tr>
+                    <tr><td><code>LOENMV_13</code></td><td>工资收入，含附加福利。</td></tr>
+                    <tr><td><code>ERHVERVSINDK_13</code></td><td>受雇和自雇的劳动收入。</td></tr>
+                    <tr><td><code>NETOVSKUD_13</code></td><td>自雇经营利润。</td></tr>
+                    <tr><td><code>OVERFORSINDK_13</code></td><td>领取的公共转移支付。</td></tr>
+                    <tr><td><code>DISPON_13</code></td><td>扣除税款和利息后的可支配收入。</td></tr>
+                    <tr><td><code>FORMUEINDK_BRUTTO</code></td><td>资本收入（利息、股息）。</td></tr>
+                    <tr><td><code>RENTUDGPR</code></td><td>利息支出（构造边际税率代理变量的基础）。</td></tr>
+                    <tr><td><code>SKATMVIALT_13</code></td><td>缴纳的税款总额。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#almar2026">Almar (2026)</a>, <a href="index.html#andersen2026">Andersen (2026)</a>, <a href="index.html#baker2026">Baker (2026)</a>, <a href="index.html#caplin2026">Caplin (2026)</a>, <a href="index.html#daysal2026">Daysal (2026)</a>, <a href="index.html#fadlon2026">Fadlon (2026)</a>, <a href="index.html#hasager2026">Hasager (2026)</a>, <a href="index.html#jensen2026aer">Jensen (2026)</a>, <a href="index.html#jorgensen2026">Jakobsen (2026)</a>, <a href="index.html#sander2026">Sander (2026)</a>, <a href="index.html#taubinsky2026">Taubinsky (2026)</a>, <a href="index.html#daysal2025">Daysal (2025)</a>, <a href="index.html#eshaghnia2025">Eshaghnia (2025)</a>, <a href="index.html#houmark2025ej">Houmark (2025)</a>, <a href="index.html#kleven2025">Kleven (2025)</a>, <a href="index.html#andersen2024restat">Andersen (2024)</a>, <a href="index.html#dahl2024">Dahl (2024)</a>, <a href="index.html#dustmann2024">Dustmann (2024)</a>, <a href="index.html#dustmann2024app">Dustmann (2024)</a>, <a href="index.html#foged2024">Foged (2024)</a>, <a href="index.html#foged2024jole">Foged (2024)</a>, <a href="index.html#jensen2024jpube">Jensen (2024)</a>, <a href="index.html#andersen2023">Andersen (2023)</a>, <a href="index.html#dustmann2023ej">Dustmann (2023)</a>, <a href="index.html#hvidberg2023">Hvidberg (2023)</a>, <a href="index.html#sigaard2023">Sigaard (2023)</a>, <a href="index.html#andersen2022">Andersen (2022)</a>, <a href="index.html#druedahl2022">Druedahl (2022)</a>, <a href="index.html#gillingham2022">Gillingham (2022)</a>, <a href="index.html#jakobsen2022jpube">Jakobsen (2022)</a>, <a href="index.html#labanca2022">Labanca (2022)</a>, <a href="index.html#andersen2021ej">Andersen (2021)</a>, <a href="index.html#bingley2021">Bingley (2021)</a>, <a href="index.html#gruber2021">Gruber (2021)</a>, <a href="index.html#andersen2020">Andersen (2020)</a>, <a href="index.html#bingley2020">Bingley (2020)</a>, <a href="index.html#brenoe2020">Brenøe (2020)</a>, <a href="index.html#epper2020">Epper (2020)</a>, <a href="index.html#jakobsen2020">Jakobsen (2020)</a>, <a href="index.html#kreiner2020">Kreiner (2020)</a>, <a href="index.html#kreiner2020restat">Kreiner (2020)</a>, <a href="index.html#alstadsaeter2019">Alstadsæter (2019)</a>, <a href="index.html#bingley2019">Bingley (2019)</a>, <a href="index.html#degiorgi2019">Giorgi (2019)</a>, <a href="index.html#kreiner2019">Kreiner (2019)</a>, <a href="index.html#sogaard2019">Søgaard (2019)</a>, <a href="index.html#boserup2018">Boserup (2018)</a>, <a href="index.html#joensen2018">Joensen (2018)</a>, <a href="index.html#rossinslater2018">Rossin-Slater (2018)</a>, <a href="index.html#bingley2017">Bingley (2017)</a>, <a href="index.html#jensen2017">Jensen (2017)</a>, <a href="index.html#fadlon2016">Fadlon (2016)</a>, <a href="index.html#kreiner2016">Kreiner (2016)</a>, <a href="index.html#chetty2014">Chetty (2014)</a>, <a href="index.html#kleven2014qje">Kleven (2014)</a>, <a href="index.html#browning2013">Browning (2013)</a>, <a href="index.html#dahl2013">Dahl (2013)</a>, <a href="index.html#lemaire2013">Maire (2013)</a>, <a href="index.html#chetty2011">Chetty (2011)</a>, <a href="index.html#kleven2011">Kleven (2011)</a>, <a href="index.html#lethpetersen2010">Leth-Petersen (2010)</a>, <a href="index.html#nielsen2010">Nielsen (2010)</a>, <a href="index.html#browning2003">Browning (2003)</a>, <a href="index.html#groes2015">Groes (2015)</a>, <a href="index.html#andersen2018restat">Andersen (2018)</a>, <a href="index.html#eriksen2026">Eriksen (2026)</a>, <a href="index.html#faccini2026">Faccini (2026)</a>, <a href="index.html#billings2024">Billings (2024)</a>, <a href="index.html#jakobsen2026">Jakobsen (2026)</a>, <a href="index.html#borjas2019">Borjas (2019)</a></p>
+            </div>
+            <div class="register" id="reg-form-wealth-register">
+                <h3>FORM — 财富登记库</h3>
+                <p class="what">由银行、抵押贷款机构和证券托管机构报送的年末资产与负债。1996 年以前为覆盖全民的财富税记录，此后为资产和债务的各个分项。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>FORMREST_NY05</code></td><td>不含养老金财富的净财富。</td></tr>
+                    <tr><td><code>BANKAKT</code></td><td>银行存款。</td></tr>
+                    <tr><td><code>AKTIER / OBLIGATIONER</code></td><td>按市值计的股票和债券。</td></tr>
+                    <tr><td><code>KOEJD</code></td><td>不动产的计税评估价值。</td></tr>
+                    <tr><td><code>BANKGAELD / REALKREDIT</code></td><td>银行债务 / 住房抵押贷款债务。</td></tr>
+                    <tr><td><code>PENSFORM（来自养老金登记库）</code></td><td>养老金财富，仅较晚年份可得。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#caplin2026">Caplin (2026)</a>, <a href="index.html#johannesen2026">Johannesen (2026)</a>, <a href="index.html#taubinsky2026">Taubinsky (2026)</a>, <a href="index.html#andersen2024restat">Andersen (2024)</a>, <a href="index.html#andersen2023">Andersen (2023)</a>, <a href="index.html#crawley2023">Crawley (2023)</a>, <a href="index.html#andersen2022">Andersen (2022)</a>, <a href="index.html#druedahl2022">Druedahl (2022)</a>, <a href="index.html#fadlon2021">Fadlon (2021)</a>, <a href="index.html#gruber2021">Gruber (2021)</a>, <a href="index.html#andersen2020">Andersen (2020)</a>, <a href="index.html#epper2020">Epper (2020)</a>, <a href="index.html#jakobsen2020">Jakobsen (2020)</a>, <a href="index.html#kreiner2020">Kreiner (2020)</a>, <a href="index.html#alstadsaeter2019">Alstadsæter (2019)</a>, <a href="index.html#degiorgi2019">Giorgi (2019)</a>, <a href="index.html#boserup2018">Boserup (2018)</a>, <a href="index.html#jensen2017">Jensen (2017)</a>, <a href="index.html#chetty2014">Chetty (2014)</a>, <a href="index.html#browning2013">Browning (2013)</a>, <a href="index.html#lethpetersen2010">Leth-Petersen (2010)</a>, <a href="index.html#nielsen2010">Nielsen (2010)</a>, <a href="index.html#browning2003">Browning (2003)</a>, <a href="index.html#andersen2018restat">Andersen (2018)</a>, <a href="index.html#faccini2026">Faccini (2026)</a>, <a href="index.html#jakobsen2026">Jakobsen (2026)</a></p>
+            </div>
+            <div class="register" id="reg-ida-idan-idap-integrated-labour-market-database">
+                <h3>IDA / IDAN / IDAP — 劳动力市场综合数据库</h3>
+                <p class="what">个人层面（IDAP）和工作层面（IDAN）的文件，把每年 11 月的每位雇员与其雇主和工作场所关联起来。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>ARBGNR / CVRNR</code></td><td>雇主（法人单位）标识符。</td></tr>
+                    <tr><td><code>ARBNR</code></td><td>工作场所（基层单位）标识符。</td></tr>
+                    <tr><td><code>TILKNYT</code></td><td>工作关系类型（主要工作、次要工作）。</td></tr>
+                    <tr><td><code>TIMELON</code></td><td>11 月那份工作的小时工资。</td></tr>
+                    <tr><td><code>STILL / DISCO</code></td><td>职业（2010 年起为 DISCO-08）。</td></tr>
+                    <tr><td><code>ERHVER</code></td><td>劳动力市场经验（年数，自 1964 年起）。</td></tr>
+                    <tr><td><code>ARLEDGR</code></td><td>当年的失业程度。</td></tr>
+                    <tr><td><code>PSTILL / SOCIO13</code></td><td>社会经济地位（就业、失业、非劳动力人口）。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#almar2026">Almar (2026)</a>, <a href="index.html#frederiksen2026">Frederiksen (2026)</a>, <a href="index.html#hasager2026">Hasager (2026)</a>, <a href="index.html#humlum2026">Humlum (2026)</a>, <a href="index.html#jensen2026aer">Jensen (2026)</a>, <a href="index.html#he2025">He (2025)</a>, <a href="index.html#humlum2025">Humlum (2025)</a>, <a href="index.html#hummels2025">Hummels (2025)</a>, <a href="index.html#akcigit2024">Akcigit (2024)</a>, <a href="index.html#brenoe2024">Brenøe (2024)</a>, <a href="index.html#fluchtmann2024">Fluchtmann (2024)</a>, <a href="index.html#fluchtmann2024jole">Fluchtmann (2024)</a>, <a href="index.html#foged2024">Foged (2024)</a>, <a href="index.html#foged2024jole">Foged (2024)</a>, <a href="index.html#hvidberg2023">Hvidberg (2023)</a>, <a href="index.html#lentz2023">Lentz (2023)</a>, <a href="index.html#sigaard2023">Sigaard (2023)</a>, <a href="index.html#vonessen2023">Essen (2023)</a>, <a href="index.html#friedrich2022">Friedrich (2022)</a>, <a href="index.html#keller2022">Keller (2022)</a>, <a href="index.html#labanca2022">Labanca (2022)</a>, <a href="index.html#andersen2021ej">Andersen (2021)</a>, <a href="index.html#bagger2020">Bagger (2021)</a>, <a href="index.html#fadlon2021">Fadlon (2021)</a>, <a href="index.html#friedrich2021">Friedrich (2021)</a>, <a href="index.html#olney2021">Olney (2021)</a>, <a href="index.html#taber2020">Taber (2020)</a>, <a href="index.html#bagger2019">Bagger (2019)</a>, <a href="index.html#degiorgi2019">Giorgi (2019)</a>, <a href="index.html#fadlon2019">Fadlon (2019)</a>, <a href="index.html#kleven2019">Kleven (2019)</a>, <a href="index.html#traiberman2019">Traiberman (2019)</a>, <a href="index.html#frederiksen2018">Frederiksen (2018)</a>, <a href="index.html#utar2018">Utar (2018)</a>, <a href="index.html#fadlon2016">Fadlon (2016)</a>, <a href="index.html#foged2016">Foged (2016)</a>, <a href="index.html#kreiner2015">Kreiner (2015)</a>, <a href="index.html#bagger2014">Bagger (2014)</a>, <a href="index.html#chetty2014">Chetty (2014)</a>, <a href="index.html#hummels2014">Hummels (2014)</a>, <a href="index.html#kleven2014aej">Kleven (2014)</a>, <a href="index.html#utar2014">Utar (2014)</a>, <a href="index.html#dahl2013">Dahl (2013)</a>, <a href="index.html#stoyanov2012">Stoyanov (2012)</a>, <a href="index.html#chetty2011">Chetty (2011)</a>, <a href="index.html#clark2009">Clark (2009)</a>, <a href="index.html#christensen2005">Christensen (2005)</a>, <a href="index.html#groes2015">Groes (2015)</a>, <a href="index.html#buhai2014">Buhai (2014)</a>, <a href="index.html#chan2025">Chan (2025)</a>, <a href="index.html#jensen2014restat">Jensen (2014)</a>, <a href="index.html#belzil2000">Belzil (2000)</a>, <a href="index.html#ashournia2018">Ashournia (2018)</a></p>
+            </div>
+            <div class="register" id="reg-akm-labour-market-classification">
+                <h3>AKM — 劳动力市场分类</h3>
+                <p class="what">全体人口的年度社会经济分类。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>SOCIO13</code></td><td>当年的主要社会经济地位。</td></tr>
+                    <tr><td><code>BESKST13</code></td><td>就业状态代码。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#almar2026">Almar (2026)</a>, <a href="index.html#daysal2026">Daysal (2026)</a>, <a href="index.html#jensen2026aer">Jensen (2026)</a>, <a href="index.html#daysal2025">Daysal (2025)</a>, <a href="index.html#brenoe2024">Brenøe (2024)</a>, <a href="index.html#bruze2024">Bruze (2024)</a>, <a href="index.html#dustmann2024">Dustmann (2024)</a>, <a href="index.html#jorgensen2024">Jørgensen (2024)</a>, <a href="index.html#dustmann2023ej">Dustmann (2023)</a>, <a href="index.html#daysal2022">Daysal (2022)</a>, <a href="index.html#rossinslater2018">Rossin-Slater (2018)</a>, <a href="index.html#landerso2017">Landersø (2017)</a>, <a href="index.html#lundborg2017">Lundborg (2017)</a>, <a href="index.html#joensen2016">Joensen (2016)</a>, <a href="index.html#dattagupta2010">Gupta (2010)</a>, <a href="index.html#heinesen2009">Heinesen (2010)</a></p>
+            </div>
+            <div class="register" id="reg-bfl-eindkomst-monthly-payroll">
+                <h3>BFL / eIndkomst — 月度工资记录</h3>
+                <p class="what">自 2008 年起由雇主按月报送的每位雇员的工资、工时和工作时段。对近年而言，它取代了 IDA 中仅有 11 月的快照。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>CVRNR / ARBNR</code></td><td>雇主与工作场所。</td></tr>
+                    <tr><td><code>AJO_SMAL_LOENBELOEB</code></td><td>当月窄口径工资支付额。</td></tr>
+                    <tr><td><code>AJO_LOENTIMER</code></td><td>当月带薪工时。</td></tr>
+                    <tr><td><code>AJO_JOB_START_DATO / AJO_JOB_SLUT_DATO</code></td><td>工作起止日期。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#caplin2026">Caplin (2026)</a>, <a href="index.html#jorgensen2026">Jakobsen (2026)</a>, <a href="index.html#hummels2025">Hummels (2025)</a>, <a href="index.html#fluchtmann2024">Fluchtmann (2024)</a>, <a href="index.html#fluchtmann2024jole">Fluchtmann (2024)</a>, <a href="index.html#garciamiralles2024">García-Miralles (2024)</a>, <a href="index.html#garciamiralles2024jpube">García-Miralles (2024)</a>, <a href="index.html#jensen2024jpube">Jensen (2024)</a>, <a href="index.html#jorgensen2024">Jørgensen (2024)</a>, <a href="index.html#andersen2023">Andersen (2023)</a>, <a href="index.html#cairo2023">Cairo (2023)</a>, <a href="index.html#kreiner2020restat">Kreiner (2020)</a>, <a href="index.html#sogaard2019">Søgaard (2019)</a>, <a href="index.html#kreiner2016">Kreiner (2016)</a>, <a href="index.html#kleven2014qje">Kleven (2014)</a></p>
+            </div>
+            <div class="register" id="reg-dream-public-transfers-weekly">
+                <h3>DREAM — 公共转移支付（按周）</h3>
+                <p class="what">自 1991 年起所有公共转移支付（失业金、社会救助、病假津贴、育儿假、养老金）的每周代码。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>Y_&lt;yyyy&gt;&lt;ww&gt;</code></td><td>每周一个变量，记录当周所领取福利的代码。</td></tr>
+                    <tr><td><code>BRANCHE</code></td><td>按月记录的就业行业。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#daysal2025">Daysal (2025)</a>, <a href="index.html#humlum2025">Humlum (2025)</a>, <a href="index.html#serena2025">Serena (2025)</a>, <a href="index.html#fluchtmann2024">Fluchtmann (2024)</a>, <a href="index.html#fluchtmann2024jole">Fluchtmann (2024)</a>, <a href="index.html#cairo2023">Cairo (2023)</a>, <a href="index.html#graversen2008">Graversen (2008)</a></p>
+            </div>
+            <div class="register" id="reg-udda-education-register">
+                <h3>UDDA — 教育登记库</h3>
+                <p class="what">全体居民的最高完成学历和在读时段（KOTRE）。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>HFAUDD</code></td><td>最高完成学历（AUDD 代码）。</td></tr>
+                    <tr><td><code>HFPRIA</code></td><td>最高学历的预期标准学制（年）。</td></tr>
+                    <tr><td><code>HF_VFRA / HF_VTIL</code></td><td>开始和完成日期。</td></tr>
+                    <tr><td><code>AUDD / ELEV3_VFRA (KOTRE)</code></td><td>按教育项目划分的在读时段。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#almar2026">Almar (2026)</a>, <a href="index.html#baker2026">Baker (2026)</a>, <a href="index.html#daysal2026">Daysal (2026)</a>, <a href="index.html#fadlon2026">Fadlon (2026)</a>, <a href="index.html#humlum2026">Humlum (2026)</a>, <a href="index.html#jorgensen2026">Jakobsen (2026)</a>, <a href="index.html#sander2026">Sander (2026)</a>, <a href="index.html#taubinsky2026">Taubinsky (2026)</a>, <a href="index.html#daysal2025">Daysal (2025)</a>, <a href="index.html#eshaghnia2025">Eshaghnia (2025)</a>, <a href="index.html#houmark2025ej">Houmark (2025)</a>, <a href="index.html#humlum2025">Humlum (2025)</a>, <a href="index.html#jensen2025">Jensen (2025)</a>, <a href="index.html#kristiansen2025">Kristiansen (2025)</a>, <a href="index.html#altindag2024">Altındağ (2024)</a>, <a href="index.html#andersen2024">Andersen (2024)</a>, <a href="index.html#brenoe2024">Brenøe (2024)</a>, <a href="index.html#dustmann2024app">Dustmann (2024)</a>, <a href="index.html#foged2024jole">Foged (2024)</a>, <a href="index.html#lundborg2024">Lundborg (2024)</a>, <a href="index.html#dustmann2023ej">Dustmann (2023)</a>, <a href="index.html#hvidberg2023">Hvidberg (2023)</a>, <a href="index.html#sigaard2023">Sigaard (2023)</a>, <a href="index.html#andersen2021ej">Andersen (2021)</a>, <a href="index.html#bingley2021">Bingley (2021)</a>, <a href="index.html#black2021">Black (2021)</a>, <a href="index.html#kleven2021">Kleven (2021)</a>, <a href="index.html#andersen2020">Andersen (2020)</a>, <a href="index.html#bingley2020">Bingley (2020)</a>, <a href="index.html#brenoe2020">Brenøe (2020)</a>, <a href="index.html#frederiksen2018">Frederiksen (2018)</a>, <a href="index.html#joensen2018">Joensen (2018)</a>, <a href="index.html#rossinslater2018">Rossin-Slater (2018)</a>, <a href="index.html#bingley2017">Bingley (2017)</a>, <a href="index.html#landerso2017">Landersø (2017)</a>, <a href="index.html#joensen2016">Joensen (2016)</a>, <a href="index.html#bruze2015">Bruze (2015)</a>, <a href="index.html#nielsen2010">Nielsen (2010)</a>, <a href="index.html#groes2015">Groes (2015)</a>, <a href="index.html#eriksen2026">Eriksen (2026)</a>, <a href="index.html#billings2024">Billings (2024)</a></p>
+            </div>
+            <div class="register" id="reg-lpr-national-patient-register">
+                <h3>LPR — 全国患者登记库</h3>
+                <p class="what">所有医院就诊（住院、门诊、急诊）及其诊断，自 1977 年起（门诊自 1995 年起）。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>C_ADIAG</code></td><td>主要诊断（ICD-10）。</td></tr>
+                    <tr><td><code>C_DIAG / C_DIAGTYPE</code></td><td>次要诊断及类型。</td></tr>
+                    <tr><td><code>D_INDDTO / D_UDDTO</code></td><td>入院和出院日期。</td></tr>
+                    <tr><td><code>C_PATTYPE</code></td><td>就诊类型（住院、门诊、急诊）。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#baker2026">Baker (2026)</a>, <a href="index.html#daysal2026">Daysal (2026)</a>, <a href="index.html#fadlon2026">Fadlon (2026)</a>, <a href="index.html#hasager2026">Hasager (2026)</a>, <a href="index.html#humlum2026">Humlum (2026)</a>, <a href="index.html#jensen2026aer">Jensen (2026)</a>, <a href="index.html#taubinsky2026">Taubinsky (2026)</a>, <a href="index.html#houmark2025ej">Houmark (2025)</a>, <a href="index.html#humlum2025">Humlum (2025)</a>, <a href="index.html#hummels2025">Hummels (2025)</a>, <a href="index.html#serena2025">Serena (2025)</a>, <a href="index.html#hasager2024">Hasager (2024)</a>, <a href="index.html#jensen2024jpube">Jensen (2024)</a>, <a href="index.html#dustmann2023ej">Dustmann (2023)</a>, <a href="index.html#black2021">Black (2021)</a>, <a href="index.html#daysal2021jpube">Daysal (2021)</a>, <a href="index.html#fadlon2021">Fadlon (2021)</a>, <a href="index.html#friedrich2021">Friedrich (2021)</a>, <a href="index.html#bingley2020">Bingley (2020)</a>, <a href="index.html#breining2020">Breining (2020)</a>, <a href="index.html#fadlon2019">Fadlon (2019)</a>, <a href="index.html#hjort2017">Hjort (2017)</a>, <a href="index.html#eriksen2026">Eriksen (2026)</a></p>
+            </div>
+            <div class="register" id="reg-lmdb-prescription-register">
+                <h3>LMDB — 处方登记库</h3>
+                <p class="what">自 1995 年起丹麦药房配发的所有处方。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>ATC</code></td><td>药物分类代码。</td></tr>
+                    <tr><td><code>EKSD</code></td><td>配药日期。</td></tr>
+                    <tr><td><code>APK / VOLUME</code></td><td>包装数和限定日剂量数。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#fadlon2026">Fadlon (2026)</a>, <a href="index.html#humlum2026">Humlum (2026)</a>, <a href="index.html#jensen2026aer">Jensen (2026)</a>, <a href="index.html#humlum2025">Humlum (2025)</a>, <a href="index.html#hummels2025">Hummels (2025)</a>, <a href="index.html#serena2025">Serena (2025)</a>, <a href="index.html#simonsen2025">Simonsen (2025)</a>, <a href="index.html#daysal2022">Daysal (2022)</a>, <a href="index.html#simonsen2021jpube">Simonsen (2021)</a>, <a href="index.html#fadlon2019">Fadlon (2019)</a></p>
+            </div>
+            <div class="register" id="reg-mfr-medical-birth-register">
+                <h3>MFR — 医学出生登记库</h3>
+                <p class="what">丹麦境内的每一例出生，含母亲、子女和分娩的特征。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>VAEGT</code></td><td>出生体重（克）。</td></tr>
+                    <tr><td><code>GESTATIONSALDER</code></td><td>胎龄。</td></tr>
+                    <tr><td><code>APGAR</code></td><td>Apgar 评分。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#daysal2026">Daysal (2026)</a>, <a href="index.html#altindag2024">Altındağ (2024)</a>, <a href="index.html#foerster2024">Foerster (2024)</a>, <a href="index.html#daysal2022">Daysal (2022)</a>, <a href="index.html#druedahl2022">Druedahl (2022)</a>, <a href="index.html#black2021">Black (2021)</a>, <a href="index.html#daysal2021jpube">Daysal (2021)</a>, <a href="index.html#dustmann2021">Dustmann (2021)</a>, <a href="index.html#bingley2020">Bingley (2020)</a>, <a href="index.html#breining2020">Breining (2020)</a>, <a href="index.html#brenoe2020">Brenøe (2020)</a>, <a href="index.html#landerso2017">Landersø (2017)</a></p>
+            </div>
+            <div class="register" id="reg-dod-death-register">
+                <h3>DOD — 死亡登记库</h3>
+                <p class="what">死亡日期和死因。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>DODDATO</code></td><td>死亡日期。</td></tr>
+                    <tr><td><code>C_DOD1A–C_DOD1D</code></td><td>根本死因和促成死因（ICD-10）。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#baker2026">Baker (2026)</a>, <a href="index.html#fadlon2026">Fadlon (2026)</a>, <a href="index.html#jensen2026aer">Jensen (2026)</a>, <a href="index.html#daysal2025">Daysal (2025)</a>, <a href="index.html#kristiansen2025">Kristiansen (2025)</a>, <a href="index.html#altindag2024">Altındağ (2024)</a>, <a href="index.html#dahl2024">Dahl (2024)</a>, <a href="index.html#druedahl2022">Druedahl (2022)</a>, <a href="index.html#andersen2021ej">Andersen (2021)</a>, <a href="index.html#fadlon2021">Fadlon (2021)</a>, <a href="index.html#friedrich2021">Friedrich (2021)</a>, <a href="index.html#fadlon2019">Fadlon (2019)</a>, <a href="index.html#hjort2017">Hjort (2017)</a></p>
+            </div>
+            <div class="register" id="reg-kraf-krsi-crime-registers">
+                <h3>KRAF / KRSI — 犯罪登记库</h3>
+                <p class="what">指控（KRAF）与定罪 / 判决（KRSI），含罪行代码，自 1980 年起。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>AFG_GER7</code></td><td>罪行代码（7 位）。</td></tr>
+                    <tr><td><code>AFG_AFGTYP</code></td><td>裁决类型（罚金、监禁等）。</td></tr>
+                    <tr><td><code>AFG_GERDTO</code></td><td>犯罪日期。</td></tr>
+                    <tr><td><code>AFG_AFGDTO</code></td><td>裁决日期。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#andersen2026app">Andersen (2026)</a>, <a href="index.html#hasager2026">Hasager (2026)</a>, <a href="index.html#eshaghnia2025">Eshaghnia (2025)</a>, <a href="index.html#jensen2025">Jensen (2025)</a>, <a href="index.html#bargain2024">Bargain (2024)</a>, <a href="index.html#dustmann2024">Dustmann (2024)</a>, <a href="index.html#dustmann2024app">Dustmann (2024)</a>, <a href="index.html#foged2024">Foged (2024)</a>, <a href="index.html#hasager2024">Hasager (2024)</a>, <a href="index.html#dustmann2023ej">Dustmann (2023)</a>, <a href="index.html#foged2023jpube">Foged (2023)</a>, <a href="index.html#anker2021">Anker (2021)</a>, <a href="index.html#dustmann2021">Dustmann (2021)</a>, <a href="index.html#bingley2020">Bingley (2020)</a>, <a href="index.html#breining2020">Breining (2020)</a>, <a href="index.html#landerso2017">Landersø (2017)</a>, <a href="index.html#damm2014">Damm (2014)</a>, <a href="index.html#billings2024">Billings (2024)</a></p>
+            </div>
+            <div class="register" id="reg-vnds-residence-histories">
+                <h3>VNDS / 居住史</h3>
+                <p class="what">完整的住址史及搬迁日期，含市镇、堂区和地址标识符。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>ADRESSE_ID / BOP_VFRA</code></td><td>地址标识符和迁入日期。</td></tr>
+                    <tr><td><code>KOM / SOGNEKODE</code></td><td>市镇和堂区。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#hasager2026">Hasager (2026)</a>, <a href="index.html#arendt2025">Arendt (2025)</a>, <a href="index.html#foged2024">Foged (2024)</a>, <a href="index.html#foged2024jole">Foged (2024)</a>, <a href="index.html#dustmann2023ej">Dustmann (2023)</a>, <a href="index.html#bingley2021">Bingley (2021)</a>, <a href="index.html#bratu2020">Bratu (2020)</a>, <a href="index.html#borjas2019">Borjas (2019)</a></p>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="firm">
+        <div class="container">
+            <h2 class="section-title">企业层面</h2>
+            <p class="blurb">以 <code>CVRNR</code>（法人单位）和 <code>ARBNR</code>（工作场所）为键。除另有说明外，每家企业每年一行。</p>
+            <div class="register" id="reg-firm-fire-firm-statistics-and-accounts-statistics">
+                <h3>FIRM / FIRE — 企业统计与会计统计</h3>
+                <p class="what">私营部门企业的年度账目。FIRM 覆盖所有企业（基本规模变量）；FIRE 是会计统计调查，对一个大样本提供完整的利润表和资产负债表，较大企业则全数调查。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>CVRNR</code></td><td>企业（法人单位）标识符，连接所有企业登记库，并通过 IDA/BFL 连接到雇员。</td></tr>
+                    <tr><td><code>BRANCHE (DB07)</code></td><td>行业代码（NACE rev. 2）。</td></tr>
+                    <tr><td><code>JUR_VIRK_FORM</code></td><td>法律形式（个人独资企业、有限公司等）。</td></tr>
+                    <tr><td><code>ANT_ANSATTE / AARSV</code></td><td>雇员人数 / 全职当量。</td></tr>
+                    <tr><td><code>OMS</code></td><td>营业额。</td></tr>
+                    <tr><td><code>EKSP</code></td><td>出口额。</td></tr>
+                    <tr><td><code>VTV</code></td><td>增加值。</td></tr>
+                    <tr><td><code>KAPI / AKTIVER</code></td><td>资本存量 / 总资产。</td></tr>
+                    <tr><td><code>RESULT / RESULT_FOER_SKAT</code></td><td>利润（税后/税前）。</td></tr>
+                    <tr><td><code>LOENOMK</code></td><td>工资成本。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#buus2025">Buus (2025)</a>, <a href="index.html#he2025">He (2025)</a>, <a href="index.html#hummels2025">Hummels (2025)</a>, <a href="index.html#renkin2024">Renkin (2024)</a>, <a href="index.html#friedrich2022">Friedrich (2022)</a>, <a href="index.html#labanca2022">Labanca (2022)</a>, <a href="index.html#olney2021">Olney (2021)</a>, <a href="index.html#traiberman2019">Traiberman (2019)</a>, <a href="index.html#bagger2014">Bagger (2014)</a>, <a href="index.html#hummels2014">Hummels (2014)</a>, <a href="index.html#utar2014">Utar (2014)</a>, <a href="index.html#lentz2008">Lentz (2008)</a>, <a href="index.html#chan2025">Chan (2025)</a>, <a href="index.html#cristea2016">Cristea (2016)</a>, <a href="index.html#ashournia2018">Ashournia (2018)</a></p>
+            </div>
+            <div class="register" id="reg-fida-firm-employee-link">
+                <h3>FIDA — 企业—雇员关联</h3>
+                <p class="what">把每位雇员（PNR）与企业（CVRNR）和工作场所（ARBNR）关联起来的年度文件。是个人一侧与企业一侧之间的桥梁。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>PNR</code></td><td>雇员。</td></tr>
+                    <tr><td><code>CVRNR</code></td><td>企业。</td></tr>
+                    <tr><td><code>ARBNR</code></td><td>工作场所。</td></tr>
+                    <tr><td><code>ANSAT_TYPE</code></td><td>雇员的工作关系类型（主要、次要）。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#hummels2025">Hummels (2025)</a>, <a href="index.html#akcigit2024">Akcigit (2024)</a>, <a href="index.html#friedrich2022">Friedrich (2022)</a>, <a href="index.html#labanca2022">Labanca (2022)</a>, <a href="index.html#olney2021">Olney (2021)</a>, <a href="index.html#utar2018">Utar (2018)</a>, <a href="index.html#hummels2014">Hummels (2014)</a>, <a href="index.html#groes2015">Groes (2015)</a>, <a href="index.html#ashournia2018">Ashournia (2018)</a></p>
+            </div>
+            <div class="register" id="reg-uhdi-uhdm-foreign-trade-by-firm">
+                <h3>UHDI / UHDM — 分企业对外贸易</h3>
+                <p class="what">按企业、产品（CN8）和贸易伙伴国划分的进出口，来自海关（欧盟外）和 Intrastat（欧盟内）。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>CVRNR</code></td><td>企业。</td></tr>
+                    <tr><td><code>VARE (CN8)</code></td><td>产品代码。</td></tr>
+                    <tr><td><code>LAND</code></td><td>贸易伙伴国。</td></tr>
+                    <tr><td><code>VAERDI / MAENGDE</code></td><td>以 DKK 计的价值 / 数量。</td></tr>
+                    <tr><td><code>IMPEKS</code></td><td>进口或出口标记。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#andersen2026">Andersen (2026)</a>, <a href="index.html#buus2025">Buus (2025)</a>, <a href="index.html#renkin2024">Renkin (2024)</a>, <a href="index.html#friedrich2022">Friedrich (2022)</a>, <a href="index.html#labanca2022">Labanca (2022)</a>, <a href="index.html#olney2021">Olney (2021)</a>, <a href="index.html#traiberman2019">Traiberman (2019)</a>, <a href="index.html#hummels2014">Hummels (2014)</a>, <a href="index.html#utar2014">Utar (2014)</a>, <a href="index.html#chan2025">Chan (2025)</a>, <a href="index.html#cristea2016">Cristea (2016)</a></p>
+            </div>
+            <div class="register" id="reg-vnds-moms-vat-based-turnover">
+                <h3>VNDS / Moms — 基于增值税的营业额</h3>
+                <p class="what">所有增值税登记企业按月或按季提交的增值税申报表，给出国内销售和采购。适合观察高频的企业经营活动。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>CVRNR</code></td><td>企业。</td></tr>
+                    <tr><td><code>SALG / KOEB</code></td><td>应缴增值税的销售额 / 采购额。</td></tr>
+                    <tr><td><code>PERIODE</code></td><td>申报期。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#hummels2025">Hummels (2025)</a>, <a href="index.html#brenoe2024">Brenøe (2024)</a>, <a href="index.html#fluchtmann2024jole">Fluchtmann (2024)</a>, <a href="index.html#renkin2024">Renkin (2024)</a></p>
+            </div>
+            <div class="register" id="reg-company-registers-cvr-ownership-management">
+                <h3>公司登记库（CVR、所有权、管理层）</h3>
+                <p class="what">有限公司的所有者、董事会成员和 CEO，丹麦居民附有个人标识符。用于把管理者和所有者与其家庭和职业生涯关联起来。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>CVRNR</code></td><td>企业。</td></tr>
+                    <tr><td><code>PNR</code></td><td>所有者 / CEO / 董事会成员。</td></tr>
+                    <tr><td><code>ROLLE</code></td><td>角色（CEO、董事长、董事会成员、所有者）。</td></tr>
+                    <tr><td><code>EJERANDEL</code></td><td>持股比例。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#olney2021">Olney (2021)</a>, <a href="index.html#bennedsen2007">Bennedsen (2007)</a></p>
+            </div>
+            <div class="register" id="reg-patents-and-r-d-external-linked-by-firm">
+                <h3>专利与研发（外部数据，按企业关联）</h3>
+                <p class="what">PATSTAT 或 DKPTO 的专利记录以及研发调查（FUI），按名称或通过丹麦统计局的匹配与 CVRNR 关联。</p>
+                <table>
+                    <thead><tr><th>变量</th><th>含义</th></tr></thead>
+                    <tbody>
+                    <tr><td><code>appln_id / publn_nr</code></td><td>专利申请标识符和公开标识符。</td></tr>
+                    <tr><td><code>IPC / CPC</code></td><td>技术分类。</td></tr>
+                    <tr><td><code>FUI: FOUUDG</code></td><td>企业内部研发支出。</td></tr>
+                    </tbody>
+                </table>
+                <p class="used-by"><strong>使用它的论文：</strong> <a href="index.html#akcigit2024">Akcigit (2024)</a></p>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="bridge">
+        <div class="container">
+            <h2 class="section-title">连接两侧</h2>
+            <div class="register">
+                <table>
+                    <thead><tr><th>你手头有</th><th>你想得到</th><th>经由</th></tr></thead>
+                    <tbody>
+                        <tr><td>一名雇员 (<code>PNR</code>)</td><td>其雇主的账目</td><td>IDAN 或 FIDA 给出 11 月那份工作的 <code>CVRNR</code>；BFL 则按月给出。然后按 <code>CVRNR</code> 和年份合并 FIRM/FIRE。</td></tr>
+                        <tr><td>一家企业 (<code>CVRNR</code>)</td><td>该企业的全部雇员及其工资</td><td>按 <code>CVRNR</code> 筛选 FIDA 或 IDAN，得到 <code>PNR</code> 集合。再合并 IND 取年度劳动收入，或合并 BFL 取月度工资和工时。</td></tr>
+                        <tr><td>一家企业</td><td>其 CEO 或所有者的家庭</td><td>公司登记库给出 CEO 的 <code>PNR</code>；BEF 给出其父母、配偶和子女。</td></tr>
+                        <tr><td>一名雇员</td><td>同一工作场所的同事</td><td>用 IDAN，按 <code>ARBNR</code> 和年份匹配，而不是按 <code>CVRNR</code>，因为一家企业可以有多个工作场所。</td></tr>
+                        <tr><td>一名雇员的工作经历</td><td>企业层面的贸易敞口</td><td>把 IDAN/BFL 中的工作时段按 <code>CVRNR</code> 和年份与 UHDI 合并，做法同 Hummels et al. (2014)。</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p class="beta-note"><span class="beta">测试版</span> 本站为测试版：论文清单仍在核对和扩充，条目可能有遗漏或变动。中文版说明：论文标题、作者、期刊、数据集名称和变量定义保留原文；摘要等内容译自英文版，如有出入以英文版为准。</p>
+            <p>由哥本哈根商学院的 <a href="https://zhurt0.github.io/rentianzhu/">Rentian Zhu（朱任天）</a> 维护。摘要是我本人对每篇论文的理解；欢迎在 <a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a> 上提交 pull request 更正或补充。</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -280,3 +280,17 @@ ul.plain li { padding: 4px 0; border-bottom: 1px dotted var(--border-color); }
 }
 
 .scope-note { border: 1px solid var(--border-color); border-left: 3px solid var(--accent-color); border-radius: 4px; background: var(--section-bg); padding: 12px 16px; margin: 0 0 16px; max-width: 84ch; }
+
+/* Language switch and Chinese edition */
+header .container { position: relative; }
+.lang-switch { position: absolute; top: 0; right: 20px; font-size: 0.8rem; letter-spacing: 0.04em; display: flex; border: 1px solid var(--border-color); border-radius: 999px; overflow: hidden; }
+.lang-switch a, .lang-switch .cur { padding: 3px 11px; }
+.lang-switch .cur { background: var(--primary-color); color: #fff; }
+.lang-switch a { color: var(--secondary-color); }
+.lang-switch a:hover { color: var(--accent-color); }
+html[lang^="zh"] body { font-family: Georgia, "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "SimSun", serif; line-height: 1.8; }
+html[lang^="zh"] .tagline { font-style: normal; }
+html[lang^="zh"] th { letter-spacing: 0; }
+@media (max-width: 600px) {
+    .lang-switch { position: static; width: max-content; margin: 0 auto 10px; }
+}

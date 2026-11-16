@@ -4,7 +4,7 @@ A field guide to economics published with Danish administrative register data.
 
 Live site: https://zhurt0.github.io/beautiful-danish-data/
 
-Nine pages:
+Nine pages, each also in Chinese under `zh/`:
 
 1. **Summary** (`index.html`): one-paragraph summaries of papers in the Top 5 journals, the *American Economic Journals* (Applied and Policy), the *Review of Economics and Statistics*, the *Economic Journal*, the *Journal of Labor Economics* and the *Journal of Public Economics* that are built on Danish registers, grouped by journal.
 2. **Themes** (`themes.html`): the same papers regrouped by topic (taxation, household finance, labour, trade, family, health, migration, crime, children, inequality).
@@ -35,6 +35,15 @@ git add -A && git commit -m "Add <paper>" && git push
 ```
 
 Theme keys and names are defined in `build.py`.
+
+## Chinese edition
+
+`python3 build.py` also writes a Chinese copy of every page to `zh/`. The Chinese pages are the English pages with text replaced from two files, so the two editions cannot drift apart in structure:
+
+- `data/papers_zh.json`: for each paper id, the Chinese `summary`, `variables` (same number of items, same order as in `data/papers.json`), `period`, `sample_size` and `sample`.
+- `data/zh.json`: interface text. `text` maps an English fragment exactly as it appears in the generated HTML (tags and entities included) to its Chinese version; numbers may be written as `{0}`, `{1}`, ... so that counts can change. `js` maps string literals used inside the page scripts.
+
+Paper titles, authors, journals, dataset names and the Codebook definitions stay in the original language. Anything without a translation is shown in English, and the build prints the ids of papers that still lack a Chinese summary. If an English sentence is edited, its entry in these files has to be updated too. The Chinese pages use system fonts and a local copy of D3 (`vendor/d3.min.js`) instead of Google Fonts and a CDN.
 
 ## Contributing
 
