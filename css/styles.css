@@ -253,3 +253,28 @@ table.lc-table .t { color: var(--muted); font-size: 0.82rem; }
 header h1 .beta { position: relative; top: -0.5em; margin-left: 4px; }
 .beta-note { margin-bottom: 8px; }
 .beta-note .beta { margin-right: 6px; }
+
+/* Copenhagen vs Aarhus */
+table.schools td, table.schools th { vertical-align: middle; }
+table.schools td:first-child { white-space: normal; }
+table.schools tr.sig td { font-weight: 700; }
+table.schools tr.sig td .muted { font-weight: 400; }
+table.schools .muted { color: var(--muted); font-size: 0.82rem; font-weight: 400; text-transform: none; letter-spacing: 0; }
+td.sch { white-space: nowrap; min-width: 11em; }
+.sbar { display: inline-block; width: 5.5em; height: 0.6em; background: var(--section-bg); border: 1px solid var(--border-color); vertical-align: middle; margin-right: 8px; }
+.sbar i { display: block; height: 100%; }
+.sbar i.ku { background: #2a78d6; }
+.sbar i.au { background: #eb6834; }
+.sval { display: inline-block; min-width: 2.4em; }
+ul.plain { list-style: none; font-size: 0.9rem; margin-top: 6px; }
+ul.plain li { padding: 4px 0; border-bottom: 1px dotted var(--border-color); }
+@media (max-width: 600px) {
+    table.schools thead { display: none; }
+    table.schools, table.schools tbody, table.schools tr, table.schools td { display: block; width: 100%; }
+    table.schools tr { border-bottom: 2px solid var(--border-color); padding: 8px 0; }
+    table.schools td { border: 0; padding: 3px 0; min-width: 0; white-space: normal; }
+    table.schools td::before { content: attr(data-label) ": "; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); font-weight: 400; }
+    table.schools td.sch[data-label="ku"]::before { content: "Copenhagen: "; }
+    table.schools td.sch[data-label="au"]::before { content: "Aarhus: "; }
+    table.schools td:first-child::before { content: ""; }
+}

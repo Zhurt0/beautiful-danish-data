@@ -90,7 +90,7 @@ def head(title, description, canonical):
 
 
 def nav(active):
-    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("lifecycle.html", "Life course"), ("codebook.html", "Codebook"), ("survey.html", "Survey"), ("variables.html", "Variable map"), ("network.html", "Author network")]
+    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("lifecycle.html", "Life course"), ("codebook.html", "Codebook"), ("survey.html", "Survey"), ("variables.html", "Variable map"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus")]
     lis = ""
     for href, label in items:
         cls = ' class="active"' if href == active else ""
@@ -1288,6 +1288,96 @@ def build_network():
     return out
 
 
+# ---------- Copenhagen vs Aarhus ----------
+SCHOOLS = ("University of Copenhagen", "Aarhus University")
+
+
+def fisher_p(a, b, c, d):
+    """Two-sided Fisher exact test for the table [[a, b], [c, d]]."""
+    from math import comb
+    n, r1, c1 = a + b + c + d, a + b, a + c
+    prob = lambda x: comb(r1, x) * comb(n - r1, c1 - x) / comb(n, c1)
+    p0 = prob(a)
+    return min(1.0, sum(prob(x) for x in range(max(0, c1 - (n - r1)), min(r1, c1) + 1) if prob(x) <= p0 * (1 + 1e-9)))
+
+
+def build_schools():
+    ku_name, au_name = SCHOOLS
+    where = {}
+    for n in NETWORK["nodes"]:
+        if n["primary"]:
+            for pid in n["papers"]:
+                where.setdefault(pid, set()).add(n["primary"][0])
+    ku = [p for p in PAPERS if ku_name in where.get(p["id"], ()) and au_name not in where.get(p["id"], ())]
+    au = [p for p in PAPERS if au_name in where.get(p["id"], ()) and ku_name not in where.get(p["id"], ())]
+    both = [p for p in PAPERS if ku_name in where.get(p["id"], ()) and au_name in where.get(p["id"], ())]
+    rows = []
+    for k, name, _ in THEMES:
+        x, y = sum(k in p["themes"] for p in ku), sum(k in p["themes"] for p in au)
+        if x + y < 5:
+            continue
+        rows.append((100 * x / len(ku) - 100 * y / len(au), name, x, y, fisher_p(x, len(ku) - x, y, len(au) - y)))
+    rows.sort(key=lambda r: -r[0])
+    bonf = 0.05 / len(rows)
+    sig = [r for r in rows if r[4] < 0.05]
+    strict = [r for r in rows if r[4] < bonf]
+    t5k, t5a = sum(p["group"] == "top5" for p in ku), sum(p["group"] == "top5" for p in au)
+    p_top5 = fisher_p(t5k, len(ku) - t5k, t5a, len(au) - t5a)
+
+    def cell(x, n, cls):
+        share = 100 * x / n
+        return (f'<td class="sch" data-label="{cls}"><span class="sbar"><i class="{cls}" style="width:{share:.0f}%"></i></span>'
+                f'<span class="sval">{share:.0f}%</span> <span class="muted">{x}/{n}</span></td>')
+
+    def pfmt(p):
+        return "&lt;0.001" if p < 0.001 else f"{p:.3f}"
+
+    def names(rs):
+        ns = [r[1].split(",")[0].split(" and ")[0].lower() for r in rs]
+        return ns[0] if len(ns) == 1 else ", ".join(ns[:-1]) + " and " + ns[-1]
+
+    more_ku = [r for r in sig if r[0] > 0]; more_au = [r for r in sig if r[0] < 0]
+    out = head(
+        "Copenhagen vs Aarhus | Beautiful Danish Data",
+        "The University of Copenhagen and Aarhus University both publish with Danish register data, but on different topics: a comparison of themes across the two groups of papers.",
+        "schools.html",
+    )
+    out += nav("schools.html")
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">Copenhagen and Aarhus do two kinds of economics</h2>
+            <p>Of the {len(PAPERS)} papers on this site, {len(ku)} have an author based at the University of Copenhagen and none at Aarhus University, and {len(au)} have an author at Aarhus and none at Copenhagen. Only {len(both)} have authors from both. The two groups work with the same registers but ask different questions: Copenhagen papers are more often about {names(more_ku) if more_ku else "the same themes"}, Aarhus papers about {names(more_au) if more_au else "the same themes"}.</p>
+            <div class="table-wrap">
+                <table class="schools">
+                    <thead><tr><th>Theme</th><th>Copenhagen <span class="muted">({len(ku)} papers)</span></th><th>Aarhus <span class="muted">({len(au)} papers)</span></th><th>Difference</th><th><em>p</em>-value</th></tr></thead>
+                    <tbody>
+"""
+    for diff, name, x, y, pv in rows:
+        mark = ' class="sig"' if pv < 0.05 else ""
+        out += (f'                        <tr{mark}><td data-label="Theme">{e(name)}</td>{cell(x, len(ku), "ku")}{cell(y, len(au), "au")}'
+                f'<td data-label="Difference">{("0" if round(diff) == 0 else f"{diff:+.0f}")} pp</td><td data-label="p-value">{pfmt(pv)}{"*" if pv < bonf else ""}</td></tr>\n')
+    out += f"""                    </tbody>
+                </table>
+            </div>
+            <p class="note">Share of each group's papers that carry the theme; a paper can carry several themes, so columns do not sum to 100. Themes with fewer than five papers across the two groups are left out. <em>p</em>-values are from two-sided Fisher exact tests; rows in bold are below 0.05. With {len(rows)} themes tested, a Bonferroni-corrected threshold is {bonf:.4f}: {("only " + names(strict) + (" passes" if len(strict) == 1 else " pass") + " it (marked *)") if strict else "no theme passes it"}, so read the other differences as suggestive.</p>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Same journals, different topics</h2>
+            <p>The two groups reach the Top 5 journals at similar rates: {t5k} of {len(ku)} Copenhagen papers ({100 * t5k / len(ku):.0f}%) and {t5a} of {len(au)} Aarhus papers ({100 * t5a / len(au):.0f}%), a difference that is not statistically significant (Fisher exact <em>p</em> = {p_top5:.2f}).</p>
+            <p class="note">How papers are assigned: an author's affiliation is the first institution listed for them on the <a href="network.html">Author network</a> page. A paper counts for a university if at least one of its authors is based there, so co-authors from other institutions do not change the assignment. The comparison covers only papers published in the journals on this list, and affiliations taken from publication records can be out of date.</p>
+"""
+    for label, ps in ((f"The {len(ku)} Copenhagen papers", ku), (f"The {len(au)} Aarhus papers", au), (f"The {len(both)} papers with authors from both", both)):
+        items = "".join(f'<li><a href="index.html#{p["id"]}">{e(short_cite(p))}</a>, <em>{e(p["title"])}</em></li>' for p in sorted(ps, key=lambda p: (-p["year"], p["authors"])))
+        out += f'            <details class="net-all"><summary>{e(label)}</summary><ul class="plain">{items}</ul></details>\n'
+    out += """        </div>
+    </section>
+"""
+    out += FOOTER
+    return out
+
+
 if __name__ == "__main__":
     (ROOT / "index.html").write_text(build_index())
     (ROOT / "themes.html").write_text(build_themes())
@@ -1299,5 +1389,6 @@ if __name__ == "__main__":
     pages = 7
     if NETWORK:
         (ROOT / "network.html").write_text(build_network())
-        pages += 1
+        (ROOT / "schools.html").write_text(build_schools())
+        pages += 2
     print(f"built {pages} pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers")
