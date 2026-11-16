@@ -1217,6 +1217,7 @@ def build_network():
     out += f"""    <section class="section intro">
         <div class="container">
             <h2 class="section-title">Author network</h2>
+            <p class="scope-note"><strong>This network only covers papers that use Danish data.</strong> It is built from the {len(PAPERS)} papers on this site, so an author&rsquo;s papers, co-authors and position here reflect only that work, not their research as a whole.</p>
             <p>Every author of the {len(PAPERS)} papers, linked to everyone they wrote one of these papers with. {len(nodes)} authors and {len(nw["links"])} co-author pairs. {biggest} authors are joined in one connected group; {solo} wrote all their papers here alone.</p>
             <p class="note">Names are spelled as on the papers. Affiliations are those listed for each paper, taken mostly from OpenAlex; where that source was wrong or empty they were checked against the published byline, and for papers added later they come from the paper or its publisher record. Colour shows where an author was based on most of their papers here. Research networks such as NBER, CEPR, IZA and CESifo are left out, since nearly everyone lists one. If your name or affiliation is wrong, or a paper of yours is missing, please open an issue on GitHub.</p>
         </div>

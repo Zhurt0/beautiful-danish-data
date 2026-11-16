@@ -278,3 +278,5 @@ ul.plain li { padding: 4px 0; border-bottom: 1px dotted var(--border-color); }
     table.schools td.sch[data-label="au"]::before { content: "Aarhus: "; }
     table.schools td:first-child::before { content: ""; }
 }
+
+.scope-note { border: 1px solid var(--border-color); border-left: 3px solid var(--accent-color); border-radius: 4px; background: var(--section-bg); padding: 12px 16px; margin: 0 0 16px; max-width: 84ch; }
