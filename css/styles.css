@@ -294,3 +294,8 @@ html[lang^="zh"] th { letter-spacing: 0; }
 @media (max-width: 600px) {
     .lang-switch { position: static; width: max-content; margin: 0 auto 10px; }
 }
+
+/* Slogan under the site title, set in Playball (SIL Open Font License), hosted locally */
+@font-face { font-family: "Playball"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/playball-latin.woff2") format("woff2"); }
+header .slogan { font-family: "Playball", "Brush Script MT", cursive; font-size: 1.9rem; line-height: 1.25; color: var(--primary-color); margin: 6px 0 2px; }
+@media (max-width: 600px) { header .slogan { font-size: 1.45rem; } }
