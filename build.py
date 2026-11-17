@@ -1797,6 +1797,17 @@ def build_zh(pages):
     return len(pages)
 
 
+def sitemap(pages, with_zh):
+    """Every page, with its Chinese twin as an alternate, for submission in Google Search Console."""
+    out = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+    for name in pages:
+        path = "" if name == "index.html" else name
+        alts = f'    <xhtml:link rel="alternate" hreflang="en" href="{SITE}{path}"/>\n    <xhtml:link rel="alternate" hreflang="zh-Hans" href="{SITE}zh/{path}"/>\n' if with_zh else ""
+        for loc in [SITE + path] + ([SITE + "zh/" + path] if with_zh else []):
+            out += f"  <url>\n    <loc>{loc}</loc>\n{alts}  </url>\n"
+    return out + "</urlset>\n"
+
+
 if __name__ == "__main__":
     built = {
         "index.html": build_index(), "themes.html": build_themes(), "variables.html": build_variables(),
@@ -1808,4 +1819,5 @@ if __name__ == "__main__":
     for name, src in built.items():
         (ROOT / name).write_text(src)
     n_zh = build_zh(built)
+    (ROOT / "sitemap.xml").write_text(sitemap(built, n_zh))
     print(f"built {len(built)} pages from {len(PAPERS)} papers and {len(VARS['individual']) + len(VARS['firm'])} registers" + (f", plus {n_zh} Chinese pages in zh/" if n_zh else ""))
