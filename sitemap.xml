@@ -11,6 +11,16 @@
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://zhurt0.github.io/beautiful-danish-data/zh/"/>
   </url>
   <url>
+    <loc>https://zhurt0.github.io/beautiful-danish-data/papers.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhurt0.github.io/beautiful-danish-data/papers.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://zhurt0.github.io/beautiful-danish-data/zh/papers.html"/>
+  </url>
+  <url>
+    <loc>https://zhurt0.github.io/beautiful-danish-data/zh/papers.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhurt0.github.io/beautiful-danish-data/papers.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://zhurt0.github.io/beautiful-danish-data/zh/papers.html"/>
+  </url>
+  <url>
     <loc>https://zhurt0.github.io/beautiful-danish-data/themes.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://zhurt0.github.io/beautiful-danish-data/themes.html"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://zhurt0.github.io/beautiful-danish-data/zh/themes.html"/>

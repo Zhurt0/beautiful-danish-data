@@ -97,7 +97,7 @@ def head(title, description, canonical):
 """
 
 
-NAV_MAIN = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("codebook.html", "Codebook")]
+NAV_MAIN = [("index.html", "Summary"), ("papers.html", "Papers"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("codebook.html", "Codebook")]
 NAV_MORE = [("variables.html", "Variable map"), ("lifecycle.html", "Life course"), ("survey.html", "Survey"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus")]
 
 
@@ -268,6 +268,7 @@ def selection_by_period():
 
 
 def build_index():
+    """The front page stays short: the opening, then the way into the papers. The full list is on papers.html."""
     counts = {g: sum(1 for p in PAPERS if p["group"] == g) for g, _, _ in GROUPS}
     out = head(
         "Beautiful Danish Data | Papers using Danish administrative data",
@@ -278,7 +279,30 @@ def build_index():
     out += home_hero()
     out += f"""    <section class="section intro">
         <div class="container">
-            <div class="selection">
+            <h2 class="section-title">Papers by journal</h2>
+            <p>{len(PAPERS)} papers from {len({p["journal"].replace(" (forthcoming)", "") for p in PAPERS})} journals, published {min(p["year"] for p in PAPERS)}&ndash;{max(p["year"] for p in PAPERS)}. Read them <a href="papers.html">by journal</a> or <a href="themes.html">by theme</a>, or see <a href="papers.html#selection">how the papers were selected</a>.</p>
+            <ul class="counts">
+{"".join(f'                <li><a href="papers.html#{g}">{e(n)}</a><span>{counts[g]}</span></li>' + chr(10) for g, n, _ in GROUPS)}            </ul>
+        </div>
+    </section>
+    <script>/* old links pointed at papers on this page */ if (location.hash.length > 1 && !document.getElementById(location.hash.slice(1))) location.replace('papers.html' + location.hash);</script>
+"""
+    out += FOOTER
+    return out
+
+
+def build_papers():
+    counts = {g: sum(1 for p in PAPERS if p["group"] == g) for g, _, _ in GROUPS}
+    out = head(
+        "Papers | Beautiful Danish Data",
+        "One-paragraph summaries of the papers built on Danish administrative register data, grouped by journal, with each paper's datasets, key variables, data period and sample size.",
+        "papers.html",
+    )
+    out += nav("papers.html")
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">By journal</h2>
+            <div class="selection" id="selection">
                 <h3>How the papers were selected</h3>
                 <dl>
                     <div><dt>Journals</dt><dd>{selection_journals()}</dd></div>
@@ -356,7 +380,7 @@ def register_block(r):
     used = ""
     if r["used_by"]:
         links = ", ".join(
-            f'<a href="index.html#{pid}">{e(PAPER_BY_ID[pid]["authors"].split(",")[0].split(" and ")[0].split()[-1])} ({PAPER_BY_ID[pid]["year"]})</a>'
+            f'<a href="papers.html#{pid}">{e(PAPER_BY_ID[pid]["authors"].split(",")[0].split(" and ")[0].split()[-1])} ({PAPER_BY_ID[pid]["year"]})</a>'
             for pid in r["used_by"] if pid in PAPER_BY_ID
         )
         used = f'                <p class="used-by"><strong>Used by:</strong> {links}</p>\n'
@@ -457,7 +481,7 @@ def build_samples():
         size = e(p["sample_size"]) if p.get("sample_size") else '<span class="na">&ndash;</span>'
         period = e(p["period"]) if p.get("period") else '<span class="na">&ndash;</span>'
         dl = "<ul>" + "".join(f"<li>{e(d)}</li>" for d in p["data"]) + "</ul>"
-        out += (f'                    <tr><td data-label="Paper"><a href="index.html#{p["id"]}">{e(short_cite(p))}</a><br><span class="t">{e(p["title"])}</span></td>'
+        out += (f'                    <tr><td data-label="Paper"><a href="papers.html#{p["id"]}">{e(short_cite(p))}</a><br><span class="t">{e(p["title"])}</span></td>'
                 f'<td data-label="Journal">{e(p["journal"])}</td><td data-label="Period">{period}</td><td data-label="Sample size">{size}</td><td data-label="Level">{LEVEL_LABEL[p["level"]]}</td>'
                 f'<td class="d" data-label="Data">{dl}</td></tr>\n')
     out += """                </tbody>
@@ -570,7 +594,7 @@ def build_codebook():
             regs = e(", ".join(d.get("registers") or []))
             codes = f'<br><code>{e(d["codes"])}</code>' if d.get("codes") else ""
             out += (f'                    <tr><td data-label="Variable"><strong>{e(d["variable"])}</strong></td>'
-                    f'<td data-label="Paper"><a href="index.html#{p["id"]}">{e(short_cite(p))}</a></td>'
+                    f'<td data-label="Paper"><a href="papers.html#{p["id"]}">{e(short_cite(p))}</a></td>'
                     f'<td data-label="Definition">{e(d["definition"])}</td>'
                     f'<td data-label="Registers and codes">{regs}{codes}</td>'
                     f'<td data-label="Source">{def_source(d)}</td></tr>\n')
@@ -645,7 +669,7 @@ def build_survey():
             continue
         out += f'            <h3 class="cb-title">{e(gname)} <span>{len(items)}</span></h3>\n'
         for sv in items:
-            papers = ", ".join(f'<a href="index.html#{pid}">{e(short_cite(by_id[pid]))}</a>' for pid in sv.get("papers", []) if pid in by_id)
+            papers = ", ".join(f'<a href="papers.html#{pid}">{e(short_cite(by_id[pid]))}</a>' for pid in sv.get("papers", []) if pid in by_id)
             docs = ""
             for d in sv.get("documents", []):
                 meta = " &middot; ".join(e(str(x)) for x in [d.get("language"), d.get("wave"), (f'{d["pages"]} pages' if d.get("pages") else None), d.get("location")] if x)
@@ -1126,7 +1150,7 @@ NETWORK_JS = r"""
             h += '<p class="np-aff"><span class="sw" style="background:' + COLOR[n.group] + '"></span>' + (n.primary.length ? esc(n.primary.join('; ')) : 'Affiliation not listed') + '</p>';
             if (n.institutions.length > n.primary.length) h += '<p class="np-sub">All affiliations on these papers: ' + esc(n.institutions.join('; ')) + '</p>';
             h += '<h4>' + n.papers.length + (n.papers.length === 1 ? ' paper' : ' papers') + '</h4><ul>';
-            n.papers.forEach(function (pid) { var p = D.papers[pid]; h += '<li><a href="index.html#' + pid + '">' + esc(p.cite) + '</a>, <em>' + esc(p.title) + '</em></li>'; });
+            n.papers.forEach(function (pid) { var p = D.papers[pid]; h += '<li><a href="papers.html#' + pid + '">' + esc(p.cite) + '</a>, <em>' + esc(p.title) + '</em></li>'; });
             h += '</ul><h4>' + co.length + (co.length === 1 ? ' co-author' : ' co-authors') + '</h4>';
             if (co.length) {
                 h += '<ul class="np-co">';
@@ -1266,7 +1290,7 @@ def build_network():
     pairs = sorted(nw["links"], key=lambda l: (-l["weight"], nodes[idx[l["source"]]]["name"]))
     for l in [x for x in pairs if x["weight"] >= 2]:
         a, b = idx[l["source"]], idx[l["target"]]
-        ps = "; ".join(f'<a href="index.html#{pid}">{e(nw["papers"][pid]["cite"])}</a>' for pid in l["papers"])
+        ps = "; ".join(f'<a href="papers.html#{pid}">{e(nw["papers"][pid]["cite"])}</a>' for pid in l["papers"])
         out += (f'                    <tr><td><a href="#net" data-i="{a}">{e(nodes[a]["name"])}</a> &amp; <a href="#net" data-i="{b}">{e(nodes[b]["name"])}</a></td>'
                 f'<td data-v="{l["weight"]}">{l["weight"]}</td><td>{ps}</td></tr>\n')
     out += f"""                </tbody>
@@ -1396,7 +1420,7 @@ def build_schools():
             <p class="note">How papers are assigned: an author's affiliation is the first institution listed for them on the <a href="network.html">Author network</a> page. A paper counts for a university if at least one of its authors is based there, so co-authors from other institutions do not change the assignment. The comparison covers only papers published in the journals on this list, and affiliations taken from publication records can be out of date.</p>
 """
     for label, ps in ((f"The {len(ku)} Copenhagen papers", ku), (f"The {len(au)} Aarhus papers", au), (f"The {len(both)} papers with authors from both", both)):
-        items = "".join(f'<li><a href="index.html#{p["id"]}">{e(short_cite(p))}</a>, <em>{e(p["title"])}</em></li>' for p in sorted(ps, key=lambda p: (-p["year"], p["authors"])))
+        items = "".join(f'<li><a href="papers.html#{p["id"]}">{e(short_cite(p))}</a>, <em>{e(p["title"])}</em></li>' for p in sorted(ps, key=lambda p: (-p["year"], p["authors"])))
         out += f'            <details class="net-all"><summary>{e(label)}</summary><ul class="plain">{items}</ul></details>\n'
     out += """        </div>
     </section>
@@ -1499,7 +1523,7 @@ def lpr_details():
         else:
             src_items = [x for x in p["data"] if re.search(r"\bLPR\b|patient regist|hospital", x, re.I)]
             what = f'<span class="muted">{e(src_items[0])}</span>' if src_items else '<span class="muted">Listed among the paper&rsquo;s data; no definition recorded yet</span>'
-        out += (f'                            <tr><td data-label="Paper"><a href="index.html#{p["id"]}">{e(short_cite(p))}</a><br><span class="t">{e(p["title"])}</span></td>'
+        out += (f'                            <tr><td data-label="Paper"><a href="papers.html#{p["id"]}">{e(short_cite(p))}</a><br><span class="t">{e(p["title"])}</span></td>'
                 f'<td data-label="Journal">{e(p["journal"])}</td><td data-label="Uses">{what}</td></tr>\n')
     out += """                        </tbody>
                     </table></div>
@@ -1811,7 +1835,7 @@ def sitemap(pages, with_zh):
 
 if __name__ == "__main__":
     built = {
-        "index.html": build_index(), "themes.html": build_themes(), "variables.html": build_variables(),
+        "index.html": build_index(), "papers.html": build_papers(), "themes.html": build_themes(), "variables.html": build_variables(),
         "samples.html": build_samples(), "lifecycle.html": build_lifecycle(), "codebook.html": build_codebook(),
         "survey.html": build_survey(),
     }
