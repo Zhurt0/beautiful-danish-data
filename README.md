@@ -4,7 +4,7 @@ A field guide to economics published with Danish administrative register data.
 
 Live site: https://zhurt0.github.io/beautiful-danish-data/
 
-Nine pages, each also in Chinese under `zh/`:
+Ten pages, each also in Chinese under `zh/`:
 
 1. **Summary** (`index.html`): one-paragraph summaries of papers in the Top 5 journals, the *American Economic Journals* (Applied and Policy), the *Review of Economics and Statistics*, the *Economic Journal*, the *Journal of Labor Economics* and the *Journal of Public Economics* that are built on Danish registers, grouped by journal.
 2. **Themes** (`themes.html`): the same papers regrouped by topic (taxation, household finance, labour, trade, family, health, migration, crime, children, inequality).
@@ -15,6 +15,7 @@ Nine pages, each also in Chinese under `zh/`:
 7. **Variable map** (`variables.html`): the Statistics Denmark registers and variables behind those papers, at the individual level and at the firm level, with a short guide to linking the two sides.
 8. **Author network** (`network.html`): who wrote with whom, coloured by where each author was based, with tables of the most frequent pairs, institutions and all authors.
 9. **Copenhagen vs Aarhus** (`schools.html`): how the themes of papers with University of Copenhagen authors differ from those with Aarhus University authors, with Fisher exact tests; computed from `data/papers.json` and `data/network.json` at build time.
+10. **Patient register** (`lpr.html`): the National Patient Register (LPR) in depth: history, what a record contains, tables and variables, pitfalls, access, and the papers on this site that use it. The text lives in `data/lpr.json`, where every statement names its source; the list of papers is computed from `data/papers.json`.
 
 ## Editing
 

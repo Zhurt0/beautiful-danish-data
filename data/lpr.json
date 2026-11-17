@@ -1,0 +1,530 @@
+{
+ "summary": "The National Patient Register (Landspatientregisteret, LPR) records every contact with a Danish hospital. It was set up in 1977 so that the health authority could monitor hospital use and plan capacity, and has had complete national coverage since 1978. It started with inpatients on somatic (non-psychiatric) wards and was extended step by step to outpatient, emergency and psychiatric contacts and to private hospitals. Today it is run by the Danish Health Data Authority (Sundhedsdatastyrelsen) and is also used to pay hospitals, monitor disease and quality, and for research.",
+ "summary_src": [
+  "lynge2011",
+  "schmidt2015",
+  "sds_page"
+ ],
+ "key_facts": [
+  [
+   "Unit",
+   "One record per hospital contact: an admission or an outpatient contact. Linked to a person by the CPR number.",
+   [
+    "sds_guide"
+   ]
+  ],
+  [
+   "Starts",
+   "1977 (somatic inpatients); complete national coverage from 1978.",
+   [
+    "lynge2011",
+    "schmidt2015"
+   ]
+  ],
+  [
+   "Coverage",
+   "8,085,603 different people had at least one record in 1977–2012, out of 8,342,199 people who lived in Denmark at some point in those years. Greenland and the Faroe Islands are not covered.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "Diagnoses",
+   "ICD-8 (a Danish version) until the end of 1993, ICD-10 from 1994. ICD-9 was never used in Denmark.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "Not in it",
+   "General practice, medicine bought at pharmacies, test results, causes of death and vital status. These sit in other registers.",
+   [
+    "sds_guide",
+    "schmidt2015"
+   ]
+  ],
+  [
+   "Run by",
+   "The Danish Health Data Authority. Researchers reach the data through its Research Service (Forskerservice) or through Statistics Denmark.",
+   [
+    "sds_page",
+    "dst_other"
+   ]
+  ]
+ ],
+ "timeline": [
+  [
+   "1977",
+   "The register is established with inpatients on somatic wards. Surgery is coded from the start.",
+   [
+    "lynge2011",
+    "schmidt2015"
+   ]
+  ],
+  [
+   "1978",
+   "Complete national coverage.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "1987",
+   "First revision of the admission data. Admission type (acute or planned) and the patient types 'outpatient' and 'emergency department patient' date from here. A detailed registration of accidents is added.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "1994",
+   "Diagnoses switch from ICD-8 to ICD-10 on 1 January. Registration of somatic outpatient contacts begins, complete from 1995.",
+   [
+    "schmidt2015",
+    "dst_adiag"
+   ]
+  ],
+  [
+   "1995",
+   "All psychiatric inpatient contacts, psychiatric and somatic outpatient contacts, and emergency department contacts are reported from now on. The Psychiatric Central Research Register, which had recorded psychiatric admissions since 1969, is merged in.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "1996",
+   "Surgery is coded by the Danish version of the Nordic (NOMESCO) classification.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "1999",
+   "Examinations and non-surgical treatments are included.",
+   [
+    "schmidt2015",
+    "sds_guide"
+   ]
+  ],
+  [
+   "2002",
+   "The register becomes the basis for paying hospitals through diagnosis-related groups (DRG). The patient-type codes are redefined.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "2003",
+   "Reporting becomes compulsory for private hospitals and private outpatient specialty clinics. Statistics Denmark's data hold private admissions from 2002.",
+   [
+    "schmidt2015",
+    "dst_other"
+   ]
+  ],
+  [
+   "2014",
+   "Emergency department visits stop being a patient type of their own and are recorded as acute outpatient contacts.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "2019",
+   "A new reporting model, LPR3, replaces LPR2 between January and 3 March. Contacts are now grouped into pathways, and admissions are no longer reported as such but built from linked contacts.",
+   [
+    "sds_news",
+    "dst_other",
+    "dst_use"
+   ]
+  ],
+  [
+   "2020",
+   "After a year of incomplete data, the Health Data Authority judges LPR3 quality satisfactory overall in May.",
+   [
+    "sds_letter2019",
+    "sds_letter2020"
+   ]
+  ]
+ ],
+ "timeline_note": "Sources disagree on three dates: the Health Data Authority's web page gives 1976 for the establishment; its extract guide and Statistics Denmark say outpatient and emergency contacts are registered 'since 1994', the 2015 review says all are reported from 1995; private hospitals are dated 2003 (compulsory reporting) or 2002 (in Statistics Denmark's data).",
+ "content": [
+  [
+   "The person",
+   "CPR number, municipality and region of residence. Unchanged since 1977.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "The contact",
+   "Hospital and department, dates (and times) of admission and discharge, admission type (acute or planned), patient type (inpatient, outpatient, emergency), where the patient was referred from and discharged to, and the reason for contact (disease, accident, violence, suicide attempt, late complication).",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "Primary diagnosis",
+   "One per contact: the main reason for the contact (aktionsdiagnose), set by the discharging physician. Every contact has one.",
+   [
+    "schmidt2015",
+    "dst_adiag"
+   ]
+  ],
+  [
+   "Secondary diagnoses",
+   "Optional, for other conditions relevant to the contact. Since 1994, 23% of contacts have at least one.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "Other diagnosis types",
+   "The referral diagnosis given by the referring unit, temporary diagnoses for ongoing outpatient contacts, and supplementary codes attached to a diagnosis (for example cancer stage).",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "Surgery and treatments",
+   "Operations since 1977; other treatments such as dialysis, ventilation, cancer treatment and psychotherapy since 1999. Each carries its own date.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "Examinations",
+   "That a scan, colonoscopy or biopsy took place, since 1999. The result is not recorded.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "Coding system",
+   "All codes belong to the Health Care Classification System (SKS). A leading letter gives the group: D for diagnoses (ICD-10 code I21 is stored as DI21), K for surgery, B for other treatments, U or ZZ for examinations.",
+   [
+    "schmidt2015"
+   ]
+  ]
+ ],
+ "tables_note": "Up to 2019 an extract has one main table with a row per contact and satellite tables joined to it by a record number. At Statistics Denmark the tables come in families: LPR_ for public somatic hospitals, PRIV_ for private hospitals, PSYK_ for psychiatry and UAF_ for contacts not yet closed. From 2019 the LPR3 tables have names starting with LPR_A_ (contacts, diagnoses, pathways, procedures).",
+ "tables_src": [
+  "sds_guide",
+  "dst_vars"
+ ],
+ "variables": [
+  [
+   "PNR",
+   "Personal identifier (CPR number).",
+   "LPR_ADM",
+   [
+    "dst_vars"
+   ]
+  ],
+  [
+   "RECNUM",
+   "Record number of the contact; joins the administrative table to the diagnosis and procedure tables. It changes when a record is corrected, so it cannot match an old extract to a new one.",
+   "LPR_ADM, LPR_DIAG",
+   [
+    "dst_vars",
+    "sds_guide"
+   ]
+  ],
+  [
+   "D_INDDTO, D_UDDTO",
+   "Admission and discharge dates (start and end of the contact). The end date is blank while a contact is still open.",
+   "LPR_ADM",
+   [
+    "dst_vars",
+    "sds_guide"
+   ]
+  ],
+  [
+   "C_PATTYPE",
+   "Patient type. 0 = inpatient (since 2002; '24-hour patient' before), 2 = outpatient (since 1987), 3 = emergency department patient (1987–2013).",
+   "LPR_ADM",
+   [
+    "dst_vars",
+    "schmidt2015"
+   ]
+  ],
+  [
+   "C_INDM",
+   "Mode of admission. From 1987 admission type is coded 1 = acute, 2 = planned.",
+   "LPR_ADM",
+   [
+    "dst_vars",
+    "schmidt2015"
+   ]
+  ],
+  [
+   "C_KONTAARS",
+   "Reason for contact (disease, accident, violence, suicide attempt and others), from 1987.",
+   "LPR_ADM",
+   [
+    "dst_vars",
+    "sds_guide"
+   ]
+  ],
+  [
+   "C_SGH, C_AFD",
+   "Hospital and department codes.",
+   "LPR_ADM",
+   [
+    "dst_vars"
+   ]
+  ],
+  [
+   "C_KOM",
+   "Municipality of residence.",
+   "LPR_ADM",
+   [
+    "dst_vars"
+   ]
+  ],
+  [
+   "C_ADIAG",
+   "Primary diagnosis, carried on the administrative table.",
+   "LPR_ADM",
+   [
+    "dst_vars",
+    "sds_guide"
+   ]
+  ],
+  [
+   "C_DIAG",
+   "Diagnosis code (ICD-8 or ICD-10); one row per diagnosis of a contact.",
+   "LPR_DIAG",
+   [
+    "dst_vars",
+    "sds_guide"
+   ]
+  ],
+  [
+   "C_DIAGTYPE",
+   "Diagnosis type: primary, secondary, referral and others.",
+   "LPR_DIAG",
+   [
+    "dst_vars",
+    "sds_guide"
+   ]
+  ],
+  [
+   "C_TILDIAG",
+   "Supplementary code attached to a diagnosis.",
+   "LPR_DIAG",
+   [
+    "dst_vars"
+   ]
+  ],
+  [
+   "C_OPR, D_ODTO",
+   "Procedure code and procedure date, for operations (from 1996) and for examinations and treatments (from 1999).",
+   "LPR_SKSOPR, LPR_SKSUBE",
+   [
+    "sds_guide"
+   ]
+  ],
+  [
+   "KONT_STARTTIDSPUNKT, KONT_TYPE, ADIAG, DIAG_KODE",
+   "Names in the LPR3 contact and diagnosis tables (2019 onwards). Statistics Denmark's variable list prints no labels for them.",
+   "LPR_A_KONTAKT, LPR_A_DIAGNOSE",
+   [
+    "dst_vars"
+   ]
+  ]
+ ],
+ "quality_intro": "The Scandinavian Journal of Public Health article calls the register overall a sound data source, and warns that its content and the definitions of single variables have changed over time and that changes in how hospitals are organised affect what is registered and how completely. For an economist who uses hospital contacts as a shock or an outcome, these are the points that matter most.",
+ "quality_intro_src": [
+  "lynge2011"
+ ],
+ "quality": [
+  [
+   "A diagnosis is only as good as its code",
+   "The share of registered diagnoses confirmed by the medical record (the positive predictive value) ranges from below 15% to 100% across 253 validated codes and algorithms. Heart attack is close to 100% in recent years; many others are much lower. Look up the validation study for the code you use.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "Only what reaches a hospital is there",
+   "Heart attacks and hip fractures are captured almost completely. Conditions mostly treated by a GP, such as hypertension, uncomplicated diabetes or mild depression, are captured poorly, and the hospital cases are the severe ones.",
+   [
+    "schmidt2015",
+    "mors2011"
+   ]
+  ],
+  [
+   "1994 and 1995 are breaks",
+   "The move to ICD-10 in 1994 and the arrival of outpatient and emergency contacts in 1995 create jumps in any long series. Recorded alcoholic cirrhosis was flat in 1988–1993, rose 32% in 1994 and another 10% once outpatient and emergency visits counted. Statistics Denmark recommends grouped diagnosis variables rather than detailed codes across 1994.",
+   [
+    "schmidt2015",
+    "dst_adiag"
+   ]
+  ],
+  [
+   "Patient types were redefined",
+   "The codes for inpatient, outpatient and emergency patients changed in 1987, 2002 and 2014, so counts of admissions, outpatient visits or emergency visits are not comparable across those years without recoding. Statistics Denmark reports a break in outpatient and emergency counts between 2013 and 2014.",
+   [
+    "schmidt2015",
+    "dst_use"
+   ]
+  ],
+  [
+   "2019 is a break, and a weak year",
+   "LPR2 and LPR3 data cannot be compared directly. Admission counts are not comparable between 2018 and 2019, and 2019 is not comparable with later years or between regions. About 9% of reports were in error in autumn 2019; by March 2020 the share of contacts with errors had fallen to 1.5%.",
+   [
+    "dst_use",
+    "sds_news",
+    "sds_letter2019",
+    "sds_letter2020"
+   ]
+  ],
+  [
+   "The first record is not the onset",
+   "Nothing exists before 1977, and outpatient diagnoses only from the mid-1990s. Treating the first recorded contact as a new case overstates incidence in early years; a wash-out period is advised.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "Payment and diagnostic practice move the data",
+   "DRG payment from 2002 may have made registration more complete and changed coding. New diagnostic criteria do the same: a rise in heart attack admissions in 2000–2004 is attributed to the troponin test introduced in 2000.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "Private hospitals are thin",
+   "Their reporting is considered incomplete even though it has been compulsory since 2003, least complete for privately paid services. They produced 2.2% of hospital activity in 2010.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "Extracts change",
+   "The register is corrected continuously, so two extracts taken at different times can differ, and record numbers change with corrections.",
+   [
+    "sds_guide"
+   ]
+  ],
+  [
+   "Administrative fields are more reliable than diagnoses",
+   "In a 1990 national sample of 1,094 discharges the primary diagnosis was correct at full detail in 73% of cases and at three digits in 81%, while admission type was wrong in 1.4% and discharge date in 1.5%. A 2003 sample found dates, hospital codes and CPR numbers accurate.",
+   [
+    "schmidt2015"
+   ]
+  ]
+ ],
+ "access": [
+  [
+   "Linkage",
+   "The CPR number links each contact to every other register: income, the labour market database, education, prescriptions and causes of death.",
+   [
+    "schmidt2015"
+   ]
+  ],
+  [
+   "At Statistics Denmark",
+   "Statistics Denmark holds LPR2 data for 1977–2019 and LPR3 data from 2019 that can be ordered for a project. The Health Data Authority releases its data to a Statistics Denmark project only after Statistics Denmark has approved the project.",
+   [
+    "dst_other"
+   ]
+  ],
+  [
+   "Psychiatry is separate",
+   "Psychiatric contacts (from 1995) sit in their own tables and have to be requested as such.",
+   [
+    "sds_guide",
+    "dst_vars"
+   ]
+  ],
+  [
+   "Ask for both code systems",
+   "A request for a diagnosis or procedure over the whole period has to list both the ICD-8 and the ICD-10 codes, and both procedure classifications.",
+   [
+    "sds_guide"
+   ]
+  ],
+  [
+   "Hospital prices",
+   "DRG tariffs are not part of the register but can be linked to a contact through the record number; Statistics Denmark holds them for 2002–2018.",
+   [
+    "dst_other"
+   ]
+  ]
+ ],
+ "access_note": "The access rules described in the published articles are those of 2011 and 2015. The current application procedure was not checked for this page.",
+ "sources": {
+  "lynge2011": {
+   "short": "Lynge et al. 2011",
+   "citation": "Lynge E, Sandegaard JL, Rebolj M. The Danish National Patient Register. Scandinavian Journal of Public Health 2011; 39(7 Suppl): 30–33.",
+   "url": "https://doi.org/10.1177/1403494811401482",
+   "read": "abstract only (the full text is not openly available)"
+  },
+  "schmidt2015": {
+   "short": "Schmidt et al. 2015",
+   "citation": "Schmidt M, Schmidt SAJ, Sandegaard JL, Ehrenstein V, Pedersen L, Sørensen HT. The Danish National Patient Registry: a review of content, data quality, and research potential. Clinical Epidemiology 2015; 7: 449–490.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4655913/",
+   "read": "full text"
+  },
+  "mors2011": {
+   "short": "Mors et al. 2011",
+   "citation": "Mors O, Perto GP, Mortensen PB. The Danish Psychiatric Central Research Register. Scandinavian Journal of Public Health 2011; 39(7 Suppl): 54–57.",
+   "url": "https://doi.org/10.1177/1403494810395825",
+   "read": "abstract only"
+  },
+  "sds_guide": {
+   "short": "Health Data Authority, extract guide 2022",
+   "citation": "Sundhedsdatastyrelsen. Vejledning i udtræk fra Landspatientregisteret. 23 March 2022.",
+   "url": "https://cdn.sundhedsdatastyrelsen.dk/sundhedsdatastyrelsen/Media/638675370025223404/Udtrek-Landspatientregisteret.pdf",
+   "read": "full text"
+  },
+  "sds_page": {
+   "short": "Health Data Authority, register page",
+   "citation": "Sundhedsdatastyrelsen. Landspatientregisteret (register description).",
+   "url": "https://sundhedsdatastyrelsen.dk/data-og-registre/nationale-sundhedsregistre/landspatientregisteret",
+   "read": "full text"
+  },
+  "sds_news": {
+   "short": "Health Data Authority, LPR3 news 2019",
+   "citation": "Sundhedsdatastyrelsen. Hele Danmark overgået til nyt landspatientregister, 7 March 2019, and the news items of 9 January and 4 February 2019.",
+   "url": "https://sundhedsdatastyrelsen.dk/nyheder/2019/lpr-3-i-hele-dk-07032019",
+   "read": "full text"
+  },
+  "sds_letter2019": {
+   "short": "Health Data Authority, letter October 2019",
+   "citation": "Sundhedsdatastyrelsen. Ny plan for dataleverancer fra LPR3, 11 October 2019.",
+   "url": "https://cdn1.gopublic.dk/sundhedsdatastyrelsen/media/16456/LPR3_uddatabrev_11102019.pdf",
+   "read": "full text"
+  },
+  "sds_letter2020": {
+   "short": "Health Data Authority, letter May 2020",
+   "citation": "Sundhedsdatastyrelsen. Landspatientregistret (LPR3) er på ret køl, men arbejdet er præget af COVID-19, May 2020.",
+   "url": "https://cdn1.gopublic.dk/sundhedsdatastyrelsen/media/16454/Status%20for%20arbejdet%20med%20det%20nye%20Landspatientregister_maj%202020.pdf",
+   "read": "full text"
+  },
+  "dst_use": {
+   "short": "Statistics Denmark, hospital use documentation",
+   "citation": "Danmarks Statistik. Statistikdokumentation: Sygehusbenyttelse.",
+   "url": "https://www.dst.dk/da/Statistik/dokumentation/statistikdokumentation/sygehusbenyttelse/indhold",
+   "read": "full text"
+  },
+  "dst_adiag": {
+   "short": "Statistics Denmark, ADIAG",
+   "citation": "Danmarks Statistik. Variable documentation: ADIAG (Aktionsdiagnose).",
+   "url": "https://www.dst.dk/da/Statistik/dokumentation/Times/sygehusbenyttelse/adiag",
+   "read": "full text"
+  },
+  "dst_other": {
+   "short": "Statistics Denmark, data from other sources",
+   "citation": "Danmarks Statistik. Data fra andre kilder (data for research from the Health Data Authority).",
+   "url": "https://www.dst.dk/da/TilSalg/data-til-forskning/generelt-om-data/data-fra-andre-kilder",
+   "read": "full text"
+  },
+  "dst_vars": {
+   "short": "Statistics Denmark, variable lists",
+   "citation": "Danmarks Statistiks Forskningsservice. Register- og variabeloversigter (LPR_ADM, LPR_DIAG, LPR_A_KONTAKT, LPR_A_DIAGNOSE).",
+   "url": "https://www.dst.dk/extranet/forskningvariabellister/Oversigt%20over%20registre.html",
+   "read": "full text"
+  }
+ }
+}

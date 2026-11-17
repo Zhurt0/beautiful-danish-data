@@ -294,3 +294,32 @@ html[lang^="zh"] th { letter-spacing: 0; }
 @media (max-width: 600px) {
     .lang-switch { position: static; width: max-content; margin: 0 auto 10px; }
 }
+
+/* Register page (LPR) */
+.refs { font-size: 0.78rem; color: var(--muted); white-space: normal; }
+.refs a { color: var(--muted); border-bottom: 1px dotted var(--border-color); }
+.refs a:hover { color: var(--accent-color); }
+.refs::before { content: "["; } .refs::after { content: "]"; }
+table.lpr td:first-child { white-space: nowrap; width: 1%; }
+table.lpr code { font-size: 0.82rem; white-space: nowrap; }
+table.lpr-papers code { white-space: normal; overflow-wrap: anywhere; }
+table.lpr { margin-top: 12px; }
+table.lpr td:last-child:not(:nth-child(2)) { width: 1%; }
+table.lpr td { vertical-align: top; }
+table.lpr-papers td:first-child { white-space: normal; width: 34%; }
+table.lpr-papers ul { list-style: none; }
+table.lpr-papers li { padding: 1px 0; }
+table.lpr-papers li + li { border-top: 1px dotted var(--border-color); }
+table.lpr-papers .t { color: var(--muted); font-size: 0.82rem; }
+.lpr-points { margin: 6px 0 12px 1.3em; max-width: 84ch; }
+.lpr-points li { margin-bottom: 10px; }
+.lpr-sources { list-style: none; font-size: 0.9rem; max-width: 90ch; }
+.lpr-sources li { padding: 6px 0; border-bottom: 1px dotted var(--border-color); overflow-wrap: anywhere; }
+.lpr-sources li:target { background: var(--section-bg); }
+.selection .refs { display: inline; }
+@media (max-width: 600px) {
+    table.lpr thead { display: none; }
+    table.lpr, table.lpr tbody, table.lpr tr, table.lpr td { display: block; width: 100% !important; }
+    table.lpr tr { border-bottom: 2px solid var(--border-color); padding: 8px 0; }
+    table.lpr td { border: 0; padding: 3px 0; white-space: normal !important; }
+}

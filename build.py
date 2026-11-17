@@ -12,6 +12,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 PAPERS = json.loads((ROOT / "data" / "papers.json").read_text())
 VARS = json.loads((ROOT / "data" / "variables.json").read_text())
+_LPR = ROOT / "data" / "lpr.json"
+LPR = json.loads(_LPR.read_text()) if _LPR.exists() else None
 _SV = ROOT / "data" / "surveys.json"
 SURVEYS = json.loads(_SV.read_text()) if _SV.exists() else []
 SURVEYS_BY_PAPER = {}
@@ -93,7 +95,7 @@ def head(title, description, canonical):
 
 
 def nav(active):
-    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("lifecycle.html", "Life course"), ("codebook.html", "Codebook"), ("survey.html", "Survey"), ("variables.html", "Variable map"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus")]
+    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("lifecycle.html", "Life course"), ("codebook.html", "Codebook"), ("survey.html", "Survey"), ("variables.html", "Variable map"), ("lpr.html", "Patient register"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus")]
     lis = ""
     for href, label in items:
         cls = ' class="active"' if href == active else ""
@@ -346,6 +348,7 @@ def register_block(r):
             for pid in r["used_by"] if pid in PAPER_BY_ID
         )
         used = f'                <p class="used-by"><strong>Used by:</strong> {links}</p>\n'
+    more = '                <p class="used-by"><a href="lpr.html">More on this register: history, content, variables and pitfalls</a></p>\n' if r["register"].startswith("LPR") and LPR else ""
     return f"""            <div class="register" id="reg-{slug(r['register'])}">
                 <h3>{e(r['register'])}</h3>
                 <p class="what">{e(r['what'])}</p>
@@ -354,7 +357,7 @@ def register_block(r):
                     <tbody>
 {rows}                    </tbody>
                 </table>
-{used}            </div>
+{used}{more}            </div>
 """
 
 
@@ -1383,6 +1386,162 @@ def build_schools():
     return out
 
 
+# ---------- National Patient Register (LPR) ----------
+def lpr_refs(keys):
+    return ' <span class="refs">' + "; ".join(f'<a href="#src-{k}">{e(LPR["sources"][k]["short"])}</a>' for k in keys) + "</span>"
+
+
+def build_lpr():
+    L = LPR
+    reg = next(r for r in VARS["individual"] if r["register"].startswith("LPR"))
+    touches = lambda d: any(re.search(r"\bLPR\b|patient regist", x, re.I) for x in d.get("registers", [])) or bool(re.search(r"\bLPR\b", d.get("definition", "")))
+    use = {}
+    for p in PAPERS:
+        ds = [d for d in p.get("definitions", []) if touches(d)]
+        if p["id"] in reg["used_by"] or ds:
+            use[p["id"]] = ds
+    papers = sorted((PAPER_BY_ID[i] for i in use), key=lambda p: (p["year"], p["authors"]))
+    n_defs = sum(len(v) for v in use.values())
+    bins = [("up to 2019", lambda y: y <= 2019), ("2020&ndash;2024", lambda y: 2020 <= y <= 2024), ("2025 onwards", lambda y: y >= 2025)]
+    by_period = "; ".join(f"{lab}: {sum(1 for p in papers if f(p['year']))}" for lab, f in bins)
+    first = papers[0]
+
+    out = head(
+        "National Patient Register (LPR) | Beautiful Danish Data",
+        "The Danish National Patient Register (Landspatientregisteret, LPR) for economists: history, what a record contains, variables, data-quality pitfalls and the papers that use it.",
+        "lpr.html",
+    )
+    out += nav("lpr.html")
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">The National Patient Register (LPR)</h2>
+            <p>{e(L["summary"])}{lpr_refs(L["summary_src"])}</p>
+            <div class="selection">
+                <h3>At a glance</h3>
+                <dl>
+"""
+    for lab, val, src in L["key_facts"]:
+        out += f'                    <div><dt>{e(lab)}</dt><dd>{e(val)}{lpr_refs(src)}</dd></div>\n'
+    out += f"""                </dl>
+            </div>
+            <ul class="toc">
+                <li><a href="#history">How it grew</a><span>{len(L["timeline"])} dates</span></li>
+                <li><a href="#content">What a record contains</a><span>{len(L["content"])} items</span></li>
+                <li><a href="#variables">Tables and variables</a><span>{len(L["variables"])} rows</span></li>
+                <li><a href="#pitfalls">What to watch out for</a><span>{len(L["quality"])} points</span></li>
+                <li><a href="#access">Access and linkage</a><span>{len(L["access"])} points</span></li>
+                <li><a href="#papers">Papers on this site that use it</a><span>{len(papers)}</span></li>
+                <li><a href="#sources">Sources</a><span>{len(L["sources"])}</span></li>
+            </ul>
+        </div>
+    </section>
+    <section class="section" id="history">
+        <div class="container">
+            <h2 class="section-title">How it grew</h2>
+            <p class="blurb">The register did not start as the all-contacts register it is today. Each extension is also a break in any series that runs across it.</p>
+            <div class="table-wrap"><table class="lpr">
+                <thead><tr><th>Year</th><th>What changed</th></tr></thead>
+                <tbody>
+"""
+    for year, ev, src in L["timeline"]:
+        out += f'                    <tr><td data-label="Year"><strong>{e(year)}</strong></td><td data-label="What changed">{e(ev)}{lpr_refs(src)}</td></tr>\n'
+    out += f"""                </tbody>
+            </table></div>
+            <p class="note">{e(L["timeline_note"])}</p>
+        </div>
+    </section>
+    <section class="section" id="content">
+        <div class="container">
+            <h2 class="section-title">What a record contains</h2>
+            <div class="table-wrap"><table class="lpr">
+                <thead><tr><th>Part</th><th>What is recorded</th></tr></thead>
+                <tbody>
+"""
+    for item, detail, src in L["content"]:
+        out += f'                    <tr><td data-label="Part"><strong>{e(item)}</strong></td><td data-label="What is recorded">{e(detail)}{lpr_refs(src)}</td></tr>\n'
+    out += f"""                </tbody>
+            </table></div>
+        </div>
+    </section>
+    <section class="section" id="variables">
+        <div class="container">
+            <h2 class="section-title">Tables and variables</h2>
+            <p>{e(L["tables_note"])}{lpr_refs(L["tables_src"])}</p>
+            <div class="table-wrap"><table class="lpr">
+                <thead><tr><th>Variable</th><th>Meaning</th><th>Table</th></tr></thead>
+                <tbody>
+"""
+    for name, meaning, table, src in L["variables"]:
+        codes = lambda t: "<br>".join(f"<code>{e(x)}</code>" for x in t.split(", "))
+        out += (f'                    <tr><td data-label="Variable">{codes(name)}</td><td data-label="Meaning">{e(meaning)}{lpr_refs(src)}</td>'
+                f'<td data-label="Table">{codes(table)}</td></tr>\n')
+    out += f"""                </tbody>
+            </table></div>
+            <p class="note">Variable names are those printed in Statistics Denmark's researcher variable lists and in the Health Data Authority's extract guide. Names, tables and the years each variable exists differ between the two and change over time, so check the documentation that comes with your own extract.</p>
+        </div>
+    </section>
+    <section class="section" id="pitfalls">
+        <div class="container">
+            <h2 class="section-title">What to watch out for</h2>
+            <p>{e(L["quality_intro"])}{lpr_refs(L["quality_intro_src"])}</p>
+            <ol class="lpr-points">
+"""
+    for title, text, src in L["quality"]:
+        out += f'                <li><strong>{e(title)}.</strong> {e(text)}{lpr_refs(src)}</li>\n'
+    out += """            </ol>
+        </div>
+    </section>
+    <section class="section" id="access">
+        <div class="container">
+            <h2 class="section-title">Access and linkage</h2>
+            <ul class="lpr-points">
+"""
+    for title, text, src in L["access"]:
+        out += f'                <li><strong>{e(title)}.</strong> {e(text)}{lpr_refs(src)}</li>\n'
+    out += f"""            </ul>
+            <p class="note">{e(L["access_note"])}</p>
+        </div>
+    </section>
+    <section class="section" id="papers">
+        <div class="container">
+            <h2 class="section-title">Papers on this site that use it</h2>
+            <p>{len(papers)} of the {len(PAPERS)} papers use the register, and the <a href="codebook.html">Codebook</a> holds {n_defs} of their variable definitions that draw on it. The register goes back to 1977, but the first of these papers is {e(short_cite(first))}. Papers by publication year: {by_period}.</p>
+            <div class="table-wrap"><table class="lpr lpr-papers">
+                <thead><tr><th>Paper</th><th>Journal</th><th>What it takes from the register</th></tr></thead>
+                <tbody>
+"""
+    for p in sorted(papers, key=lambda p: (-p["year"], p["authors"])):
+        ds = use[p["id"]]
+        if ds:
+            what = "<ul>" + "".join(f'<li>{e(d["variable"])}' + (f' <code>{e(d["codes"])}</code>' if d.get("codes") and len(d["codes"]) <= 90 else "") + "</li>" for d in ds[:4]) + "</ul>"
+            if len(ds) > 4:
+                what += f'<span class="muted">and {len(ds) - 4} more in the Codebook</span>'
+        else:
+            src_items = [x for x in p["data"] if re.search(r"\bLPR\b|patient regist|hospital", x, re.I)]
+            what = f'<span class="muted">{e(src_items[0])}</span>' if src_items else '<span class="muted">Listed among the paper&rsquo;s data; no definition recorded yet</span>'
+        out += (f'                    <tr><td data-label="Paper"><a href="index.html#{p["id"]}">{e(short_cite(p))}</a><br><span class="t">{e(p["title"])}</span></td>'
+                f'<td data-label="Journal">{e(p["journal"])}</td><td data-label="Uses">{what}</td></tr>\n')
+    out += """                </tbody>
+            </table></div>
+            <p class="note">A paper is listed if its data description names the register or if one of its Codebook definitions is built on it. Definitions are quoted from the papers and their replication material.</p>
+        </div>
+    </section>
+    <section class="section" id="sources">
+        <div class="container">
+            <h2 class="section-title">Sources</h2>
+            <p>The starting point is the article on the register in the <em>Scandinavian Journal of Public Health</em>'s 2011 supplement on Danish registers. Only its abstract is openly available, so most detail on this page comes from the open-access 2015 review by Schmidt and co-authors and from the documentation of the Danish Health Data Authority and Statistics Denmark. Each statement above names its source.</p>
+            <ul class="lpr-sources">
+"""
+    for k, v in L["sources"].items():
+        out += f'                <li id="src-{k}"><strong>{e(v["short"])}.</strong> {e(v["citation"])} <a href="{e(v["url"])}" target="_blank" rel="noopener">Link</a> <span class="muted">Read: {e(v["read"])}.</span></li>\n'
+    out += """            </ul>
+        </div>
+    </section>
+"""
+    out += FOOTER
+    return out
+
+
 # ---------- Chinese edition (zh/) ----------
 # The English pages are built first; the Chinese pages are the same HTML with text replaced from a translation table.
 # data/zh.json holds interface text ("text": English HTML fragment -> Chinese HTML fragment; "js": string literals in scripts).
@@ -1529,6 +1688,8 @@ if __name__ == "__main__":
         "samples.html": build_samples(), "lifecycle.html": build_lifecycle(), "codebook.html": build_codebook(),
         "survey.html": build_survey(),
     }
+    if LPR:
+        built["lpr.html"] = build_lpr()
     if NETWORK:
         built["network.html"] = build_network(); built["schools.html"] = build_schools()
     for name, src in built.items():
