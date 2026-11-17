@@ -819,13 +819,13 @@ def build_lifecycle():
     out += f"""    <section class="section intro">
         <div class="container">
             <h2 class="section-title">Life course in the registers</h2>
-            <p>A person living in Denmark leaves a trace in the registers at almost every turn of life. The chart follows one life from birth to death: the numbered events along the top are the main things that happen to people, and each row below is a register. A grey bar shows the ages over which a register follows a person, and a dot marks an event that the register records.</p>
+            <p>A person living in Denmark leaves a trace in the registers at almost every turn of life. The chart follows one life from birth to death: the numbered events along the top are the main things that happen to people, and each row below is a register. A light blue bar shows the ages over which a register follows a person, and a dot marks an event that the register records.</p>
             <p class="note">Ages are typical ages, for illustration. What exists also depends on the calendar year: monthly payroll (BFL) starts in 2008, prescriptions (LMDB) in 1995, weekly transfers (DREAM) in 1991, hospital records (LPR) in 1977 with outpatients from 1995, and the crime registers in 1980. Paper counts refer to the {len(PAPERS)} papers on this site. Income (IND), wealth (FORM) and labour-market status (AKM) are also updated every year whether or not anything happens.</p>
         </div>
     </section>
     <section class="section viz-section">
         <div class="container">
-            <div class="lc-legend"><span><svg width="34" height="10" aria-hidden="true"><rect x="1" y="2" width="32" height="6" rx="3" fill="#c3c2b7"/></svg> The register follows the person over these ages</span><span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="4.5" fill="#52514e" stroke="#fcfcfb" stroke-width="2"/></svg> The register records this event</span><span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></svg> Selected</span></div>
+            <div class="lc-legend"><span><svg width="34" height="10" aria-hidden="true"><rect x="1" y="2" width="32" height="6" rx="3" fill="#a2deed"/></svg> The register follows the person over these ages</span><span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="4.5" fill="#03045e" stroke="#ffffff" stroke-width="2"/></svg> The register records this event</span><span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="#3375b1" stroke="#ffffff" stroke-width="2"/></svg> Selected</span></div>
             <div class="lc-scroll"><div id="lc" class="lc-chart" role="img" aria-label="Life-course chart: {len(ev)} life events by age, and the {n_reg} registers that record them. The table below gives the same information."></div></div>
             <p class="viz-help">Hover or click an event number to see which registers record it and the range of ages it usually happens at; hover or click a register to see its events. On a phone, scroll the chart sideways.</p>
             <div id="lc-panel" class="lc-panel" aria-live="polite"></div>
@@ -855,7 +855,7 @@ LIFECYCLE_JS = r"""    <script>
     (function () {
         var D = __DATA__;
         var NS = 'http://www.w3.org/2000/svg';
-        var ACC = '#2a78d6', INK = '#0b0b0b', INK2 = '#52514e', MUTED = '#8a8980', GRID = '#e1e0d9', BAR = '#c3c2b7', SURF = '#fcfcfb';
+        var ACC = '#3375b1', INK = '#03045e', INK2 = '#4a5672', MUTED = '#76839b', GRID = '#dcebf2', BAR = '#a2deed', SURF = '#ffffff';
         var W = 1000, LW = 250, X0 = LW + 12, X1 = W - 20, AMAX = 95;
         function x(a) { return X0 + (X1 - X0) * a / AMAX; }
         function el(tag, attrs, parent) {
@@ -1022,8 +1022,10 @@ LIFECYCLE_JS = r"""    <script>
 
 _NW = ROOT / "data" / "network.json"
 NETWORK = json.loads(_NW.read_text()) if _NW.exists() else None
-NET_GROUPS = [("Danish universities", "#2a78d6"), ("Other Danish institutions", "#eb6834"),
-              ("Institutions abroad", "#1baf7a"), ("Not listed", "#a9a8a0")]
+# One palette for the whole site ("Ocean Breeze"); groups differ by lightness, not hue
+NAVY, BLUE, SKY, PALE, MIST = "#03045e", "#3375b1", "#50b1d4", "#a2deed", "#d1eff7"
+NET_GROUPS = [("Danish universities", NAVY), ("Other Danish institutions", BLUE),
+              ("Institutions abroad", SKY), ("Not listed", "#c3cbd6")]
 
 NETWORK_JS = r"""
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
@@ -1050,13 +1052,13 @@ NETWORK_JS = r"""
         var W = box.clientWidth, H = box.clientHeight;
         var svg = d3.select(box).append('svg').attr('width', W).attr('height', H).attr('viewBox', [0, 0, W, H]);
         var g = svg.append('g');
-        var link = g.append('g').attr('stroke', '#c3c2b7').attr('stroke-linecap', 'round').selectAll('line').data(links).join('line')
+        var link = g.append('g').attr('stroke', '#c9dbe5').attr('stroke-linecap', 'round').selectAll('line').data(links).join('line')
             .attr('x1', function (l) { return l.source.x; }).attr('y1', function (l) { return l.source.y; })
             .attr('x2', function (l) { return l.target.x; }).attr('y2', function (l) { return l.target.y; })
             .attr('stroke-width', function (l) { return 0.8 + 1.1 * (l.w - 1); }).attr('stroke-opacity', 0.75);
         var node = g.append('g').selectAll('circle').data(nodes).join('circle')
             .attr('cx', function (n) { return n.x; }).attr('cy', function (n) { return n.y; }).attr('r', r)
-            .attr('fill', function (n) { return COLOR[n.group]; }).attr('stroke', '#fcfcfb').attr('stroke-width', 1)
+            .attr('fill', function (n) { return COLOR[n.group]; }).attr('stroke', '#ffffff').attr('stroke-width', 1)
             .style('cursor', 'pointer');
         var labelG = g.append('g').attr('class', 'net-labels');
         var kc = 1, near = null, focusI = null;
@@ -1106,12 +1108,12 @@ NETWORK_JS = r"""
                 if (near) return near[n.i] ? 1 : 0.12;
                 if (inst) return n.institutions.indexOf(inst) >= 0 ? 1 : 0.12;
                 return 1;
-            }).attr('stroke', function (n) { return n.i === focus ? '#0b0b0b' : '#fcfcfb'; }).attr('stroke-width', function (n) { return n.i === focus ? 2 : 1; });
+            }).attr('stroke', function (n) { return n.i === focus ? '#03045e' : '#ffffff'; }).attr('stroke-width', function (n) { return n.i === focus ? 2 : 1; });
             link.attr('stroke-opacity', function (l) {
                 if (near) return (l.source.i === focus || l.target.i === focus) ? 0.95 : 0.06;
                 if (inst) return (l.source.institutions.indexOf(inst) >= 0 && l.target.institutions.indexOf(inst) >= 0) ? 0.9 : 0.06;
                 return 0.75;
-            }).attr('stroke', function (l) { return near && (l.source.i === focus || l.target.i === focus) ? '#52514e' : '#c3c2b7'; });
+            }).attr('stroke', function (l) { return near && (l.source.i === focus || l.target.i === focus) ? '#03045e' : '#c9dbe5'; });
             labels();
             labelG.selectAll('text').attr('opacity', function (n) { return inst && !near && n.institutions.indexOf(inst) < 0 ? 0.15 : 1; });
         }
@@ -1522,15 +1524,15 @@ def thumb_schools():
     top.sort(key=lambda r: -r[0])
     W, H, x0, bw = 420, 250, 132, 210
     g = f'<svg viewBox="0 0 {W} {H}" role="img" aria-hidden="true">'
-    g += f'<rect x="{x0}" y="14" width="10" height="10" rx="2" fill="#2a78d6"/><text x="{x0 + 15}" y="23" font-size="12" fill="#555">Copenhagen</text>'
-    g += f'<rect x="{x0 + 110}" y="14" width="10" height="10" rx="2" fill="#eb6834"/><text x="{x0 + 125}" y="23" font-size="12" fill="#555">Aarhus</text>'
+    g += f'<rect x="{x0}" y="14" width="10" height="10" rx="2" fill="{NAVY}"/><text x="{x0 + 15}" y="23" font-size="12" fill="#4a5672">Copenhagen</text>'
+    g += f'<rect x="{x0 + 110}" y="14" width="10" height="10" rx="2" fill="{SKY}"/><text x="{x0 + 125}" y="23" font-size="12" fill="#4a5672">Aarhus</text>'
     for i, (diff, name, x, y, _) in enumerate(top):
         yy = 46 + i * 40
         a, b = 100 * x / len(ku), 100 * y / len(au)
         label = name.split(",")[0].split(" and ")[0]
-        g += f'<text x="{x0 - 10}" y="{yy + 16}" text-anchor="end" font-size="12.5" fill="#444">{e(label)}</text>'
-        g += f'<rect x="{x0}" y="{yy}" width="{max(2, bw * a / 50):.1f}" height="11" rx="2.5" fill="#2a78d6"/><text x="{x0 + max(2, bw * a / 50) + 6:.1f}" y="{yy + 10}" font-size="11.5" fill="#2a78d6">{a:.0f}%</text>'
-        g += f'<rect x="{x0}" y="{yy + 14}" width="{max(2, bw * b / 50):.1f}" height="11" rx="2.5" fill="#eb6834"/><text x="{x0 + max(2, bw * b / 50) + 6:.1f}" y="{yy + 24}" font-size="11.5" fill="#eb6834">{b:.0f}%</text>'
+        g += f'<text x="{x0 - 10}" y="{yy + 16}" text-anchor="end" font-size="12.5" fill="#1f2a44">{e(label)}</text>'
+        g += f'<rect x="{x0}" y="{yy}" width="{max(2, bw * a / 50):.1f}" height="11" rx="2.5" fill="{NAVY}"/><text x="{x0 + max(2, bw * a / 50) + 6:.1f}" y="{yy + 10}" font-size="11.5" fill="#4a5672">{a:.0f}%</text>'
+        g += f'<rect x="{x0}" y="{yy + 14}" width="{max(2, bw * b / 50):.1f}" height="11" rx="2.5" fill="{SKY}"/><text x="{x0 + max(2, bw * b / 50) + 6:.1f}" y="{yy + 24}" font-size="11.5" fill="#4a5672">{b:.0f}%</text>'
     return g + "</svg>", max(rows, key=lambda r: abs(r[0])), len(ku), len(au)
 
 
@@ -1583,7 +1585,7 @@ def thumb_network():
     sy = lambda y: m + (y - y_lo) / (y_hi - y_lo) * (H - 2 * m)
     color = dict(NET_GROUPS)
     g = f'<svg viewBox="0 0 {W} {H}" role="img" aria-hidden="true">'
-    g += "".join(f'<line x1="{sx(pos[u][0]):.1f}" y1="{sy(pos[u][1]):.1f}" x2="{sx(pos[v][0]):.1f}" y2="{sy(pos[v][1]):.1f}" stroke="#bdbdbd" stroke-width="0.7"/>' for u, v in edges)
+    g += "".join(f'<line x1="{sx(pos[u][0]):.1f}" y1="{sy(pos[u][1]):.1f}" x2="{sx(pos[v][0]):.1f}" y2="{sy(pos[v][1]):.1f}" stroke="#c9dbe5" stroke-width="0.7"/>' for u, v in edges)
     for u in sorted(best, key=lambda u: len(nodes[u]["papers"])):
         g += f'<circle cx="{sx(pos[u][0]):.1f}" cy="{sy(pos[u][1]):.1f}" r="{2.0 + 1.1 * sqrt(len(nodes[u]["papers"])):.1f}" fill="{color[nodes[u]["group"]]}" stroke="#fff" stroke-width="0.6"/>'
     return g + "</svg>", len(best)
@@ -1594,26 +1596,24 @@ def thumb_lifecycle():
     sx = lambda age: x0 + (x1 - x0) * min(age, 95) / 95
     g = f'<svg viewBox="0 0 {W} {H}" role="img" aria-hidden="true">'
     ages = sorted(ev[1] for ev in LC_EVENTS)
-    g += f'<line x1="{x0}" y1="34" x2="{x1}" y2="34" stroke="#c3c2b7" stroke-width="1.2"/>'
+    g += f'<line x1="{x0}" y1="34" x2="{x1}" y2="34" stroke="#c9dbe5" stroke-width="1.2"/>'
     last, row = -99, 0
     for a in ages:
         row = (row + 1) % 3 if sx(a) - last < 11 else 0
-        g += f'<circle cx="{sx(a):.1f}" cy="{34 - row * 10}" r="4.6" fill="#cc0000" stroke="#fff" stroke-width="1.2"/>'
+        g += f'<circle cx="{sx(a):.1f}" cy="{34 - row * 10}" r="4.6" fill="{NAVY}" stroke="#fff" stroke-width="1.2"/>'
         last = sx(a)
     y = 58
-    tints = iter(["#7fa8dc", "#e7a07f", "#7fc3a6", "#b09ad8", "#d8bd7a", "#a9a9a0"] * 3)
     for group, ls in LC_LANES:
         rows = [sp for _, sp in ls if sp]
         if not rows:
             continue
-        tint = next(tints)
-        g += f'<text x="{x0 - 10}" y="{y + 4 + (len(rows) - 1) * 4.5:.1f}" text-anchor="end" font-size="11" fill="#555">{e(group.split(" and ")[0] if len(group) > 12 else group)}</text>'
+        g += f'<text x="{x0 - 10}" y="{y + 4 + (len(rows) - 1) * 4.5:.1f}" text-anchor="end" font-size="11" fill="#4a5672">{e(group.split(" and ")[0] if len(group) > 12 else group)}</text>'
         for spans in rows:
-            g += "".join(f'<rect x="{sx(a):.1f}" y="{y:.1f}" width="{max(4, sx(b) - sx(a)):.1f}" height="5" rx="2.5" fill="{tint}"/>' for a, b in spans)
+            g += "".join(f'<rect x="{sx(a):.1f}" y="{y:.1f}" width="{max(4, sx(b) - sx(a)):.1f}" height="5" rx="2.5" fill="{PALE}"/>' for a, b in spans)
             y += 9
         y += 7
     for a in (0, 20, 40, 60, 80):
-        g += f'<text x="{sx(a):.1f}" y="{H - 8}" text-anchor="middle" font-size="11" fill="#777">{a}</text>'
+        g += f'<text x="{sx(a):.1f}" y="{H - 8}" text-anchor="middle" font-size="11" fill="#76839b">{a}</text>'
     return g + "</svg>", len(LC_EVENTS), len(LC_REG) + 1
 
 
