@@ -20,18 +20,21 @@
 </head>
 <body>
     <header>
-        <div class="container">
-            <p class="lang-switch"><a href="../themes.html" lang="en" hreflang="en">EN</a><span class="cur">中文</span></p>
-            <p class="eyebrow"><a href="https://zhurt0.github.io/rentianzhu/">Rentian Zhu</a> &rsaquo; 实用链接</p>
-            <h1><a href="index.html">Beautiful Danish Data</a> <span class="beta" title="测试版：清单仍在核对和扩充">测试版</span></h1>
-            <p class="tagline">用丹麦行政登记数据做出来的经济学研究：一份指南</p>
+        <div class="container head-row">
+            <div class="brand">
+                <p class="eyebrow"><a href="https://zhurt0.github.io/rentianzhu/">Rentian Zhu</a> &rsaquo; 实用链接</p>
+                <h1><a href="index.html">Beautiful Danish Data</a> <span class="beta" title="测试版：清单仍在核对和扩充">测试版</span></h1>
+                <p class="tagline">用丹麦行政登记数据做出来的经济学研究：一份指南</p>
+            </div>
+            <div class="head-right">
+                <p class="lang-switch"><a href="../themes.html" lang="en" hreflang="en">EN</a><span class="cur">中文</span></p>
+                <nav aria-label="Pages">
+                    <ul><li><a href="index.html">概览</a></li><li><a href="themes.html" class="active">主题</a></li><li><a href="samples.html">数据与样本</a></li><li><a href="codebook.html">变量定义</a></li><li class="more"><details><summary>更多</summary><ul><li><a href="variables.html">变量地图</a></li><li><a href="lifecycle.html">生命历程</a></li><li><a href="survey.html">调查</a></li><li><a href="network.html">作者网络</a></li><li><a href="schools.html">哥本哈根与奥胡斯</a></li></ul></details></li><li><a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a></li></ul>
+                </nav>
+            </div>
         </div>
     </header>
-    <nav>
-        <div class="container">
-            <ul><li><a href="index.html">概览</a></li><li><a href="themes.html" class="active">主题</a></li><li><a href="samples.html">数据与样本</a></li><li><a href="lifecycle.html">生命历程</a></li><li><a href="codebook.html">变量定义</a></li><li><a href="survey.html">调查</a></li><li><a href="variables.html">变量地图</a></li><li><a href="lpr.html">患者登记库</a></li><li><a href="network.html">作者网络</a></li><li><a href="schools.html">哥本哈根与奥胡斯</a></li><li><a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a></li></ul>
-        </div>
-    </nav>
+    <script>document.addEventListener('click', function (ev) { document.querySelectorAll('nav details[open]').forEach(function (d) { if (!d.contains(ev.target)) d.removeAttribute('open'); }); });</script>
     <section class="section intro">
         <div class="container">
             <h2 class="section-title">按主题</h2>

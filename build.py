@@ -94,26 +94,36 @@ def head(title, description, canonical):
 """
 
 
+NAV_MAIN = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("codebook.html", "Codebook")]
+NAV_MORE = [("variables.html", "Variable map"), ("lifecycle.html", "Life course"), ("survey.html", "Survey"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus")]
+
+
+NAV_SCRIPT = """    <script>document.addEventListener('click', function (ev) { document.querySelectorAll('nav details[open]').forEach(function (d) { if (!d.contains(ev.target)) d.removeAttribute('open'); }); });</script>
+"""
+
+
 def nav(active):
-    items = [("index.html", "Summary"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("lifecycle.html", "Life course"), ("codebook.html", "Codebook"), ("survey.html", "Survey"), ("variables.html", "Variable map"), ("lpr.html", "Patient register"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus")]
-    lis = ""
-    for href, label in items:
-        cls = ' class="active"' if href == active else ""
-        lis += f'<li><a href="{href}"{cls}>{label}</a></li>'
+    link = lambda href, label: f'<li><a href="{href}"' + (' class="active"' if href == active else "") + f'>{label}</a></li>'
+    lis = "".join(link(h, l) for h, l in NAV_MAIN)
+    in_more = any(h == active for h, _ in NAV_MORE)
+    lis += ('<li class="more"><details><summary' + (' class="active"' if in_more else "") + '>More</summary><ul>'
+            + "".join(link(h, l) for h, l in NAV_MORE) + "</ul></details></li>")
     return f"""    <header>
-        <div class="container">
-            <p class="lang-switch"><span class="cur">EN</span><a href="zh/{active}" lang="zh-Hans" hreflang="zh-Hans">中文</a></p>
-            <p class="eyebrow"><a href="{HOME}">Rentian Zhu</a> &rsaquo; Useful links</p>
-            <h1><a href="index.html">Beautiful Danish Data</a> <span class="beta" title="Beta version: the list is still being checked and extended">Beta</span></h1>
-            <p class="tagline">A field guide to economics published with Danish administrative data</p>
+        <div class="container head-row">
+            <div class="brand">
+                <p class="eyebrow"><a href="{HOME}">Rentian Zhu</a> &rsaquo; Useful links</p>
+                <h1><a href="index.html">Beautiful Danish Data</a> <span class="beta" title="Beta version: the list is still being checked and extended">Beta</span></h1>
+                <p class="tagline">A field guide to economics published with Danish administrative data</p>
+            </div>
+            <div class="head-right">
+                <p class="lang-switch"><span class="cur">EN</span><a href="zh/{active}" lang="zh-Hans" hreflang="zh-Hans">中文</a></p>
+                <nav aria-label="Pages">
+                    <ul>{lis}<li><a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a></li></ul>
+                </nav>
+            </div>
         </div>
     </header>
-    <nav>
-        <div class="container">
-            <ul>{lis}<li><a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a></li></ul>
-        </div>
-    </nav>
-"""
+""" + NAV_SCRIPT
 
 
 FOOTER = f"""    <footer>
@@ -213,6 +223,7 @@ def paper_card(p, show_themes=True):
 
 
 # ---------- selection note on the Summary page ----------
+HOME_INTRO = "Denmark links every resident, firm, hospital visit, tax return and job to a single identifier, and lets researchers work with the whole population from the 1980s onwards. This page is a reading list of the economics that has come out of that infrastructure in the top general-interest journals and in the two leading field journals for labour and public economics: what question each paper asks, what it finds, and which registers it is built from."
 SELECTION_AS_OF = "November 2026"
 SELECTION_EXTRA = ("The list was then checked twice. The <em>Review of Economic Studies</em> for 2005&ndash;2018 was screened article by article "
                    "(titles and abstracts of all 710 articles in volumes 72&ndash;85), which added one paper, "
@@ -262,10 +273,9 @@ def build_index():
         "",
     )
     out += nav("index.html")
+    out += home_hero()
     out += f"""    <section class="section intro">
         <div class="container">
-            <h2 class="section-title">Why this page</h2>
-            <p>Denmark links every resident, firm, hospital visit, tax return and job to a single identifier, and lets researchers work with the whole population from the 1980s onwards. This page is a reading list of the economics that has come out of that infrastructure in the top general-interest journals and in the two leading field journals for labour and public economics: what question each paper asks, what it finds, and which registers it is built from.</p>
             <div class="selection">
                 <h3>How the papers were selected</h3>
                 <dl>
@@ -348,7 +358,7 @@ def register_block(r):
             for pid in r["used_by"] if pid in PAPER_BY_ID
         )
         used = f'                <p class="used-by"><strong>Used by:</strong> {links}</p>\n'
-    more = '                <p class="used-by"><a href="lpr.html">More on this register: history, content, variables and pitfalls</a></p>\n' if r["register"].startswith("LPR") and LPR else ""
+    more = lpr_details() if r["register"].startswith("LPR") and LPR else ""
     return f"""            <div class="register" id="reg-{slug(r['register'])}">
                 <h3>{e(r['register'])}</h3>
                 <p class="what">{e(r['what'])}</p>
@@ -1309,7 +1319,7 @@ def fisher_p(a, b, c, d):
     return min(1.0, sum(prob(x) for x in range(max(0, c1 - (n - r1)), min(r1, c1) + 1) if prob(x) <= p0 * (1 + 1e-9)))
 
 
-def build_schools():
+def schools_data():
     ku_name, au_name = SCHOOLS
     where = {}
     for n in NETWORK["nodes"]:
@@ -1326,6 +1336,11 @@ def build_schools():
             continue
         rows.append((100 * x / len(ku) - 100 * y / len(au), name, x, y, fisher_p(x, len(ku) - x, y, len(au) - y)))
     rows.sort(key=lambda r: -r[0])
+    return ku, au, both, rows
+
+
+def build_schools():
+    ku, au, both, rows = schools_data()
     bonf = 0.05 / len(rows)
     sig = [r for r in rows if r[4] < 0.05]
     strict = [r for r in rows if r[4] < bonf]
@@ -1391,7 +1406,8 @@ def lpr_refs(keys):
     return ' <span class="refs">' + "; ".join(f'<a href="#src-{k}">{e(LPR["sources"][k]["short"])}</a>' for k in keys) + "</span>"
 
 
-def build_lpr():
+def lpr_details():
+    """Everything about the National Patient Register, shown inside its block on the Variable map."""
     L = LPR
     reg = next(r for r in VARS["individual"] if r["register"].startswith("LPR"))
     touches = lambda d: any(re.search(r"\bLPR\b|patient regist", x, re.I) for x in d.get("registers", [])) or bool(re.search(r"\bLPR\b", d.get("definition", "")))
@@ -1405,110 +1421,70 @@ def build_lpr():
     bins = [("up to 2019", lambda y: y <= 2019), ("2020&ndash;2024", lambda y: 2020 <= y <= 2024), ("2025 onwards", lambda y: y >= 2025)]
     by_period = "; ".join(f"{lab}: {sum(1 for p in papers if f(p['year']))}" for lab, f in bins)
     first = papers[0]
+    codes = lambda t: "<br>".join(f"<code>{e(x)}</code>" for x in t.split(", "))
 
-    out = head(
-        "National Patient Register (LPR) | Beautiful Danish Data",
-        "The Danish National Patient Register (Landspatientregisteret, LPR) for economists: history, what a record contains, variables, data-quality pitfalls and the papers that use it.",
-        "lpr.html",
-    )
-    out += nav("lpr.html")
-    out += f"""    <section class="section intro">
-        <div class="container">
-            <h2 class="section-title">The National Patient Register (LPR)</h2>
-            <p>{e(L["summary"])}{lpr_refs(L["summary_src"])}</p>
-            <div class="selection">
-                <h3>At a glance</h3>
-                <dl>
+    out = f"""                <details class="reg-more" id="lpr">
+                    <summary>More on this register: history, content, variables and pitfalls</summary>
+                    <p>{e(L["summary"])}{lpr_refs(L["summary_src"])}</p>
+                    <div class="selection">
+                        <h3>At a glance</h3>
+                        <dl>
 """
     for lab, val, src in L["key_facts"]:
-        out += f'                    <div><dt>{e(lab)}</dt><dd>{e(val)}{lpr_refs(src)}</dd></div>\n'
-    out += f"""                </dl>
-            </div>
-            <ul class="toc">
-                <li><a href="#history">How it grew</a><span>{len(L["timeline"])} dates</span></li>
-                <li><a href="#content">What a record contains</a><span>{len(L["content"])} items</span></li>
-                <li><a href="#variables">Tables and variables</a><span>{len(L["variables"])} rows</span></li>
-                <li><a href="#pitfalls">What to watch out for</a><span>{len(L["quality"])} points</span></li>
-                <li><a href="#access">Access and linkage</a><span>{len(L["access"])} points</span></li>
-                <li><a href="#papers">Papers on this site that use it</a><span>{len(papers)}</span></li>
-                <li><a href="#sources">Sources</a><span>{len(L["sources"])}</span></li>
-            </ul>
-        </div>
-    </section>
-    <section class="section" id="history">
-        <div class="container">
-            <h2 class="section-title">How it grew</h2>
-            <p class="blurb">The register did not start as the all-contacts register it is today. Each extension is also a break in any series that runs across it.</p>
-            <div class="table-wrap"><table class="lpr">
-                <thead><tr><th>Year</th><th>What changed</th></tr></thead>
-                <tbody>
+        out += f'                            <div><dt>{e(lab)}</dt><dd>{e(val)}{lpr_refs(src)}</dd></div>\n'
+    out += """                        </dl>
+                    </div>
+                    <h4>How it grew</h4>
+                    <p class="blurb">The register did not start as the all-contacts register it is today. Each extension is also a break in any series that runs across it.</p>
+                    <div class="table-wrap"><table class="lpr">
+                        <thead><tr><th>Year</th><th>What changed</th></tr></thead>
+                        <tbody>
 """
     for year, ev, src in L["timeline"]:
-        out += f'                    <tr><td data-label="Year"><strong>{e(year)}</strong></td><td data-label="What changed">{e(ev)}{lpr_refs(src)}</td></tr>\n'
-    out += f"""                </tbody>
-            </table></div>
-            <p class="note">{e(L["timeline_note"])}</p>
-        </div>
-    </section>
-    <section class="section" id="content">
-        <div class="container">
-            <h2 class="section-title">What a record contains</h2>
-            <div class="table-wrap"><table class="lpr">
-                <thead><tr><th>Part</th><th>What is recorded</th></tr></thead>
-                <tbody>
+        out += f'                            <tr><td data-label="Year"><strong>{e(year)}</strong></td><td data-label="What changed">{e(ev)}{lpr_refs(src)}</td></tr>\n'
+    out += f"""                        </tbody>
+                    </table></div>
+                    <p class="note">{e(L["timeline_note"])}</p>
+                    <h4>What a record contains</h4>
+                    <div class="table-wrap"><table class="lpr">
+                        <thead><tr><th>Part</th><th>What is recorded</th></tr></thead>
+                        <tbody>
 """
     for item, detail, src in L["content"]:
-        out += f'                    <tr><td data-label="Part"><strong>{e(item)}</strong></td><td data-label="What is recorded">{e(detail)}{lpr_refs(src)}</td></tr>\n'
-    out += f"""                </tbody>
-            </table></div>
-        </div>
-    </section>
-    <section class="section" id="variables">
-        <div class="container">
-            <h2 class="section-title">Tables and variables</h2>
-            <p>{e(L["tables_note"])}{lpr_refs(L["tables_src"])}</p>
-            <div class="table-wrap"><table class="lpr">
-                <thead><tr><th>Variable</th><th>Meaning</th><th>Table</th></tr></thead>
-                <tbody>
+        out += f'                            <tr><td data-label="Part"><strong>{e(item)}</strong></td><td data-label="What is recorded">{e(detail)}{lpr_refs(src)}</td></tr>\n'
+    out += f"""                        </tbody>
+                    </table></div>
+                    <h4>Tables and variables</h4>
+                    <p>{e(L["tables_note"])}{lpr_refs(L["tables_src"])}</p>
+                    <div class="table-wrap"><table class="lpr">
+                        <thead><tr><th>Variable</th><th>Meaning</th><th>Table</th></tr></thead>
+                        <tbody>
 """
     for name, meaning, table, src in L["variables"]:
-        codes = lambda t: "<br>".join(f"<code>{e(x)}</code>" for x in t.split(", "))
-        out += (f'                    <tr><td data-label="Variable">{codes(name)}</td><td data-label="Meaning">{e(meaning)}{lpr_refs(src)}</td>'
+        out += (f'                            <tr><td data-label="Variable">{codes(name)}</td><td data-label="Meaning">{e(meaning)}{lpr_refs(src)}</td>'
                 f'<td data-label="Table">{codes(table)}</td></tr>\n')
-    out += f"""                </tbody>
-            </table></div>
-            <p class="note">Variable names are those printed in Statistics Denmark's researcher variable lists and in the Health Data Authority's extract guide. Names, tables and the years each variable exists differ between the two and change over time, so check the documentation that comes with your own extract.</p>
-        </div>
-    </section>
-    <section class="section" id="pitfalls">
-        <div class="container">
-            <h2 class="section-title">What to watch out for</h2>
-            <p>{e(L["quality_intro"])}{lpr_refs(L["quality_intro_src"])}</p>
-            <ol class="lpr-points">
+    out += f"""                        </tbody>
+                    </table></div>
+                    <p class="note">Variable names are those printed in Statistics Denmark's researcher variable lists and in the Health Data Authority's extract guide. Names, tables and the years each variable exists differ between the two and change over time, so check the documentation that comes with your own extract.</p>
+                    <h4>What to watch out for</h4>
+                    <p>{e(L["quality_intro"])}{lpr_refs(L["quality_intro_src"])}</p>
+                    <ol class="lpr-points">
 """
     for title, text, src in L["quality"]:
-        out += f'                <li><strong>{e(title)}.</strong> {e(text)}{lpr_refs(src)}</li>\n'
-    out += """            </ol>
-        </div>
-    </section>
-    <section class="section" id="access">
-        <div class="container">
-            <h2 class="section-title">Access and linkage</h2>
-            <ul class="lpr-points">
+        out += f'                        <li><strong>{e(title)}.</strong> {e(text)}{lpr_refs(src)}</li>\n'
+    out += """                    </ol>
+                    <h4>Access and linkage</h4>
+                    <ul class="lpr-points">
 """
     for title, text, src in L["access"]:
-        out += f'                <li><strong>{e(title)}.</strong> {e(text)}{lpr_refs(src)}</li>\n'
-    out += f"""            </ul>
-            <p class="note">{e(L["access_note"])}</p>
-        </div>
-    </section>
-    <section class="section" id="papers">
-        <div class="container">
-            <h2 class="section-title">Papers on this site that use it</h2>
-            <p>{len(papers)} of the {len(PAPERS)} papers use the register, and the <a href="codebook.html">Codebook</a> holds {n_defs} of their variable definitions that draw on it. The register goes back to 1977, but the first of these papers is {e(short_cite(first))}. Papers by publication year: {by_period}.</p>
-            <div class="table-wrap"><table class="lpr lpr-papers">
-                <thead><tr><th>Paper</th><th>Journal</th><th>What it takes from the register</th></tr></thead>
-                <tbody>
+        out += f'                        <li><strong>{e(title)}.</strong> {e(text)}{lpr_refs(src)}</li>\n'
+    out += f"""                    </ul>
+                    <p class="note">{e(L["access_note"])}</p>
+                    <h4>Papers on this site that use it</h4>
+                    <p>{len(papers)} of the {len(PAPERS)} papers use the register, and the <a href="codebook.html">Codebook</a> holds {n_defs} of their variable definitions that draw on it. The register goes back to 1977, but the first of these papers is {e(short_cite(first))}. Papers by publication year: {by_period}.</p>
+                    <div class="table-wrap"><table class="lpr lpr-papers">
+                        <thead><tr><th>Paper</th><th>Journal</th><th>What it takes from the register</th></tr></thead>
+                        <tbody>
 """
     for p in sorted(papers, key=lambda p: (-p["year"], p["authors"])):
         ds = use[p["id"]]
@@ -1519,27 +1495,166 @@ def build_lpr():
         else:
             src_items = [x for x in p["data"] if re.search(r"\bLPR\b|patient regist|hospital", x, re.I)]
             what = f'<span class="muted">{e(src_items[0])}</span>' if src_items else '<span class="muted">Listed among the paper&rsquo;s data; no definition recorded yet</span>'
-        out += (f'                    <tr><td data-label="Paper"><a href="index.html#{p["id"]}">{e(short_cite(p))}</a><br><span class="t">{e(p["title"])}</span></td>'
+        out += (f'                            <tr><td data-label="Paper"><a href="index.html#{p["id"]}">{e(short_cite(p))}</a><br><span class="t">{e(p["title"])}</span></td>'
                 f'<td data-label="Journal">{e(p["journal"])}</td><td data-label="Uses">{what}</td></tr>\n')
-    out += """                </tbody>
-            </table></div>
-            <p class="note">A paper is listed if its data description names the register or if one of its Codebook definitions is built on it. Definitions are quoted from the papers and their replication material.</p>
-        </div>
-    </section>
-    <section class="section" id="sources">
-        <div class="container">
-            <h2 class="section-title">Sources</h2>
-            <p>The starting point is the article on the register in the <em>Scandinavian Journal of Public Health</em>'s 2011 supplement on Danish registers. Only its abstract is openly available, so most detail on this page comes from the open-access 2015 review by Schmidt and co-authors and from the documentation of the Danish Health Data Authority and Statistics Denmark. Each statement above names its source.</p>
-            <ul class="lpr-sources">
+    out += """                        </tbody>
+                    </table></div>
+                    <p class="note">A paper is listed if its data description names the register or if one of its Codebook definitions is built on it. Definitions are quoted from the papers and their replication material.</p>
+                    <h4>Sources</h4>
+                    <p>The starting point is the article on the register in the <em>Scandinavian Journal of Public Health</em>'s 2011 supplement on Danish registers. Only its abstract is openly available, so most detail on this page comes from the open-access 2015 review by Schmidt and co-authors and from the documentation of the Danish Health Data Authority and Statistics Denmark. Each statement above names its source.</p>
+                    <ul class="lpr-sources">
 """
     for k, v in L["sources"].items():
-        out += f'                <li id="src-{k}"><strong>{e(v["short"])}.</strong> {e(v["citation"])} <a href="{e(v["url"])}" target="_blank" rel="noopener">Link</a> <span class="muted">Read: {e(v["read"])}.</span></li>\n'
-    out += """            </ul>
-        </div>
+        out += f'                        <li id="src-{k}"><strong>{e(v["short"])}.</strong> {e(v["citation"])} <a href="{e(v["url"])}" target="_blank" rel="noopener">Link</a> <span class="muted">Read: {e(v["read"])}.</span></li>\n'
+    out += """                    </ul>
+                </details>
+"""
+    return out
+
+
+# ---------- home page: three picture cards ----------
+def thumb_schools():
+    ku, au, _, rows = schools_data()
+    top = sorted(rows, key=lambda r: -abs(r[0]))[:5]
+    top.sort(key=lambda r: -r[0])
+    W, H, x0, bw = 420, 250, 132, 210
+    g = f'<svg viewBox="0 0 {W} {H}" role="img" aria-hidden="true">'
+    g += f'<rect x="{x0}" y="14" width="10" height="10" rx="2" fill="#2a78d6"/><text x="{x0 + 15}" y="23" font-size="12" fill="#555">Copenhagen</text>'
+    g += f'<rect x="{x0 + 110}" y="14" width="10" height="10" rx="2" fill="#eb6834"/><text x="{x0 + 125}" y="23" font-size="12" fill="#555">Aarhus</text>'
+    for i, (diff, name, x, y, _) in enumerate(top):
+        yy = 46 + i * 40
+        a, b = 100 * x / len(ku), 100 * y / len(au)
+        label = name.split(",")[0].split(" and ")[0]
+        g += f'<text x="{x0 - 10}" y="{yy + 16}" text-anchor="end" font-size="12.5" fill="#444">{e(label)}</text>'
+        g += f'<rect x="{x0}" y="{yy}" width="{max(2, bw * a / 50):.1f}" height="11" rx="2.5" fill="#2a78d6"/><text x="{x0 + max(2, bw * a / 50) + 6:.1f}" y="{yy + 10}" font-size="11.5" fill="#2a78d6">{a:.0f}%</text>'
+        g += f'<rect x="{x0}" y="{yy + 14}" width="{max(2, bw * b / 50):.1f}" height="11" rx="2.5" fill="#eb6834"/><text x="{x0 + max(2, bw * b / 50) + 6:.1f}" y="{yy + 24}" font-size="11.5" fill="#eb6834">{b:.0f}%</text>'
+    return g + "</svg>", max(rows, key=lambda r: abs(r[0])), len(ku), len(au)
+
+
+def thumb_network():
+    """A static picture of the largest connected group of co-authors (spring layout, fixed seed)."""
+    import random
+    from math import sqrt
+    nodes = NETWORK["nodes"]; idx = {n["id"]: i for i, n in enumerate(nodes)}
+    adj = {i: set() for i in range(len(nodes))}
+    for l in NETWORK["links"]:
+        a, b = idx[l["source"]], idx[l["target"]]; adj[a].add(b); adj[b].add(a)
+    seen, best = set(), []
+    for i in adj:
+        if i in seen:
+            continue
+        comp, stack = [], [i]; seen.add(i)
+        while stack:
+            u = stack.pop(); comp.append(u)
+            for v in adj[u]:
+                if v not in seen:
+                    seen.add(v); stack.append(v)
+        if len(comp) > len(best):
+            best = comp
+    # Fruchterman-Reingold with a pull to the centre (stronger vertically, so the picture comes out wide);
+    # fixed seed, so the picture only changes when the data do
+    AR = 1.68
+    rnd = random.Random(7); n = len(best); pos = {u: [rnd.uniform(-AR, AR), rnd.uniform(-1, 1)] for u in best}
+    k = sqrt(4 * AR / n); iters = 300
+    edges = [(u, v) for u in best for v in adj[u] if u < v]
+    for it in range(iters):
+        temp = 0.25 * (1 - it / iters) ** 1.5 + 0.002
+        disp = {u: [-0.9 * pos[u][0] / AR, -0.9 * AR * pos[u][1]] for u in best}
+        for a in range(n):
+            u = best[a]; pu = pos[u]
+            for b in range(a + 1, n):
+                v = best[b]; dx, dy = pu[0] - pos[v][0], pu[1] - pos[v][1]
+                d2 = dx * dx + dy * dy + 1e-6; f = k * k / d2
+                disp[u][0] += dx * f; disp[u][1] += dy * f; disp[v][0] -= dx * f; disp[v][1] -= dy * f
+        for u, v in edges:
+            dx, dy = pos[u][0] - pos[v][0], pos[u][1] - pos[v][1]
+            d = sqrt(dx * dx + dy * dy) + 1e-6; f = d / k
+            disp[u][0] -= dx * f; disp[u][1] -= dy * f; disp[v][0] += dx * f; disp[v][1] += dy * f
+        for u in best:
+            dx, dy = disp[u]; d = sqrt(dx * dx + dy * dy) + 1e-6; step = min(d, temp)
+            pos[u][0] += dx / d * step; pos[u][1] += dy / d * step
+    xs = [q[0] for q in pos.values()]; ys = [q[1] for q in pos.values()]
+    x_lo, x_hi, y_lo, y_hi = min(xs), max(xs), min(ys), max(ys)
+    W, H, m = 420, 250, 16
+    sx = lambda x: m + (x - x_lo) / (x_hi - x_lo) * (W - 2 * m)
+    sy = lambda y: m + (y - y_lo) / (y_hi - y_lo) * (H - 2 * m)
+    color = dict(NET_GROUPS)
+    g = f'<svg viewBox="0 0 {W} {H}" role="img" aria-hidden="true">'
+    g += "".join(f'<line x1="{sx(pos[u][0]):.1f}" y1="{sy(pos[u][1]):.1f}" x2="{sx(pos[v][0]):.1f}" y2="{sy(pos[v][1]):.1f}" stroke="#bdbdbd" stroke-width="0.7"/>' for u, v in edges)
+    for u in sorted(best, key=lambda u: len(nodes[u]["papers"])):
+        g += f'<circle cx="{sx(pos[u][0]):.1f}" cy="{sy(pos[u][1]):.1f}" r="{2.0 + 1.1 * sqrt(len(nodes[u]["papers"])):.1f}" fill="{color[nodes[u]["group"]]}" stroke="#fff" stroke-width="0.6"/>'
+    return g + "</svg>", len(best)
+
+
+def thumb_lifecycle():
+    W, H, x0, x1 = 420, 250, 96, 404
+    sx = lambda age: x0 + (x1 - x0) * min(age, 95) / 95
+    g = f'<svg viewBox="0 0 {W} {H}" role="img" aria-hidden="true">'
+    ages = sorted(ev[1] for ev in LC_EVENTS)
+    g += f'<line x1="{x0}" y1="34" x2="{x1}" y2="34" stroke="#c3c2b7" stroke-width="1.2"/>'
+    last, row = -99, 0
+    for a in ages:
+        row = (row + 1) % 3 if sx(a) - last < 11 else 0
+        g += f'<circle cx="{sx(a):.1f}" cy="{34 - row * 10}" r="4.6" fill="#cc0000" stroke="#fff" stroke-width="1.2"/>'
+        last = sx(a)
+    y = 58
+    tints = iter(["#7fa8dc", "#e7a07f", "#7fc3a6", "#b09ad8", "#d8bd7a", "#a9a9a0"] * 3)
+    for group, ls in LC_LANES:
+        rows = [sp for _, sp in ls if sp]
+        if not rows:
+            continue
+        tint = next(tints)
+        g += f'<text x="{x0 - 10}" y="{y + 4 + (len(rows) - 1) * 4.5:.1f}" text-anchor="end" font-size="11" fill="#555">{e(group.split(" and ")[0] if len(group) > 12 else group)}</text>'
+        for spans in rows:
+            g += "".join(f'<rect x="{sx(a):.1f}" y="{y:.1f}" width="{max(4, sx(b) - sx(a)):.1f}" height="5" rx="2.5" fill="{tint}"/>' for a, b in spans)
+            y += 9
+        y += 7
+    for a in (0, 20, 40, 60, 80):
+        g += f'<text x="{sx(a):.1f}" y="{H - 8}" text-anchor="middle" font-size="11" fill="#777">{a}</text>'
+    return g + "</svg>", len(LC_EVENTS), len(LC_REG) + 1
+
+
+def home_hero():
+    n_defs = sum(len(p.get("definitions", [])) for p in PAPERS)
+    n_regs = len(VARS["individual"]) + len(VARS["firm"])
+    stats = [(f"{len(PAPERS):,}", "Papers")]
+    panels = ""
+    if NETWORK:
+        stats.append((f"{len(NETWORK['nodes']):,}", "Authors"))
+        s_svg, top, n_ku, n_au = thumb_schools()
+        n_svg, n_big = thumb_network()
+        l_svg, n_ev, n_reg = thumb_lifecycle()
+        a, b = 100 * top[2] / n_ku, 100 * top[3] / n_au
+        topic = top[1].split(",")[0].split(" and ")[0]
+        tabs = [
+            ("schools.html", "Two schools", s_svg, "Copenhagen vs Aarhus", f"Two universities, two kinds of economics. {topic}: {a:.0f}% of Copenhagen papers, {b:.0f}% of Aarhus papers."),
+            ("network.html", "Network", n_svg, "Author network", f"{len(NETWORK['nodes'])} authors and who they write with. {n_big} of them form one connected group."),
+            ("lifecycle.html", "Life course", l_svg, "Life course", f"{n_ev} events in a life, from birth to death, and the {n_reg} registers that record them."),
+        ]
+        inputs = "".join(f'<input type="radio" name="explore" id="ex{i}"{" checked" if i == 1 else ""}>' for i in range(1, len(tabs) + 1))
+        labels = "".join(f'<label for="ex{i}">{e(t[1])}</label>' for i, t in enumerate(tabs, 1))
+        cards = "".join(
+            f'\n                <a class="panel p{i}" href="{href}"><span class="panel-fig">{svg}</span><span class="panel-body"><span class="panel-title">{e(title)}</span>'
+            f'<span class="panel-text">{e(text)}</span><span class="panel-link">Open the page</span></span></a>'
+            for i, (href, _, svg, title, text) in enumerate(tabs, 1))
+        panels = f"""            <div class="explore">
+                {inputs}
+                <div class="explore-head"><span class="explore-label">Explore</span><div class="seg">{labels}</div></div>{cards}
+            </div>
+"""
+    stats += [(f"{n_regs:,}", "Registers"), (f"{n_defs:,}", "Definitions")]
+    st = "".join(f'<div><dt>{e(l)}</dt><dd>{v}</dd></div>' for v, l in stats)
+    return f"""    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h2 class="hero-title">What have economists learned from <em>Danish registers</em>?</h2>
+                <p class="hero-lead">{HOME_INTRO}</p>
+                <dl class="stats">{st}</dl>
+                <p class="hero-note"><span class="beta">Beta</span> The list is still being checked and extended, so entries can be missing or change.</p>
+            </div>
+{panels}        </div>
     </section>
 """
-    out += FOOTER
-    return out
 
 
 # ---------- Chinese edition (zh/) ----------
@@ -1688,8 +1803,6 @@ if __name__ == "__main__":
         "samples.html": build_samples(), "lifecycle.html": build_lifecycle(), "codebook.html": build_codebook(),
         "survey.html": build_survey(),
     }
-    if LPR:
-        built["lpr.html"] = build_lpr()
     if NETWORK:
         built["network.html"] = build_network(); built["schools.html"] = build_schools()
     for name, src in built.items():
