@@ -1630,8 +1630,8 @@ def home_hero():
         a, b = 100 * top[2] / n_ku, 100 * top[3] / n_au
         topic = top[1].split(",")[0].split(" and ")[0]
         tabs = [
-            ("schools.html", "Two schools", s_svg, "Copenhagen vs Aarhus", f"Two universities, two kinds of economics. {topic}: {a:.0f}% of Copenhagen papers, {b:.0f}% of Aarhus papers."),
             ("network.html", "Network", n_svg, "Author network", f"{len(NETWORK['nodes'])} authors and who they write with. {n_big} of them form one connected group."),
+            ("schools.html", "Two schools", s_svg, "Copenhagen vs Aarhus", f"Two universities, two kinds of economics. {topic}: {a:.0f}% of Copenhagen papers, {b:.0f}% of Aarhus papers."),
             ("lifecycle.html", "Life course", l_svg, "Life course", f"{n_ev} events in a life, from birth to death, and the {n_reg} registers that record them."),
         ]
         inputs = "".join(f'<input type="radio" name="explore" id="ex{i}"{" checked" if i == 1 else ""}>' for i in range(1, len(tabs) + 1))
