@@ -298,7 +298,14 @@ ul.plain li { padding: 4px 0; border-bottom: 1px dotted var(--border-color); }
 .lang-switch .cur { background: var(--navy); color: #fff; }
 .lang-switch a { color: var(--secondary-color); }
 .lang-switch a:hover { color: var(--accent-color); }
-html[lang^="zh"] body { font-family: Georgia, "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "SimSun", serif; line-height: 1.8; }
+/* Chinese edition: body text in a clean sans-serif (PingFang, YaHei), headings and figures in a serif (Songti)
+   with Baskerville or Times for Latin letters and digits, so numbers are lining figures and not Georgia's old-style ones */
+html[lang^="zh"] {
+    --zh-sans: -apple-system, "Helvetica Neue", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans SC", "WenQuanYi Zen Hei", sans-serif;
+    --zh-serif: Baskerville, "Times New Roman", "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC", "SimSun", serif;
+}
+html[lang^="zh"] body { font-family: var(--zh-sans); line-height: 1.8; }
+html[lang^="zh"] h1, html[lang^="zh"] h2, html[lang^="zh"] h3, html[lang^="zh"] h4, html[lang^="zh"] .panel-title, html[lang^="zh"] .stats dd { font-family: var(--zh-serif); }
 html[lang^="zh"] .tagline { font-style: normal; }
 html[lang^="zh"] th { letter-spacing: 0; }
 @media (max-width: 1200px) {
@@ -369,14 +376,16 @@ table.lpr-papers .t { color: var(--muted); font-size: 0.82rem; }
 .panel-text { display: block; font-size: 0.92rem; color: var(--secondary-color); margin: 6px 0 14px; }
 .panel-link { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-color); }
 .panel-link::after { content: " \2197"; }
-html[lang^="zh"] .hero-title { letter-spacing: 0; line-height: 1.25; }
-html[lang^="zh"] .hero-title em { font-style: normal; }
-html[lang^="zh"] .stats dt, html[lang^="zh"] .explore-label, html[lang^="zh"] .panel-link { letter-spacing: 0.06em; }
+html[lang^="zh"] .hero-title { font-size: clamp(1.75rem, 3.2vw, 2.85rem); font-weight: 700; letter-spacing: 0.01em; line-height: 1.35; }
+html[lang^="zh"] .hero-title em { font-style: normal; white-space: nowrap; }
+html[lang^="zh"] .hero-lead { font-size: 1.02rem; line-height: 1.95; }
+html[lang^="zh"] .stats dt, html[lang^="zh"] .explore-label, html[lang^="zh"] .panel-link { font-size: 0.8rem; letter-spacing: 0.08em; }
+html[lang^="zh"] .seg label { font-size: 0.86rem; }
 @media (min-width: 901px) {
     /* the two columns start and end on the same lines: the preview card stretches down to the row of figures */
     .hero-grid { align-items: stretch; }
     .hero-text, .explore { display: flex; flex-direction: column; }
-    .stats { margin-top: auto; }
+    .hero-text { justify-content: space-between; }
     #ex1:checked ~ .p1, #ex2:checked ~ .p2, #ex3:checked ~ .p3 { display: flex; flex-direction: column; flex: 1; }
     .panel-fig { flex: 1; display: flex; align-items: center; }
     .panel-fig svg { flex: 1; }
