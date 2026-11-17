@@ -3,6 +3,7 @@
 
 Run `python3 build.py` after editing data/papers.json or data/variables.json.
 """
+import hashlib
 import html
 import re
 import json
@@ -10,6 +11,8 @@ import urllib.parse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+# Changes whenever the stylesheet does, so a browser never pairs new pages with an old cached stylesheet
+CSS_VERSION = hashlib.sha1((ROOT / "css" / "styles.css").read_bytes()).hexdigest()[:8]
 PAPERS = json.loads((ROOT / "data" / "papers.json").read_text())
 VARS = json.loads((ROOT / "data" / "variables.json").read_text())
 _LPR = ROOT / "data" / "lpr.json"
@@ -87,7 +90,7 @@ def head(title, description, canonical):
     <meta property="og:url" content="{SITE}{canonical}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v={CSS_VERSION}">
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
