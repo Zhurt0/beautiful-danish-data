@@ -16,7 +16,7 @@
     <meta property="og:title" content="论文 | Beautiful Danish Data">
     <meta property="og:description" content="基于丹麦行政登记数据的论文摘要，按期刊分组，并列出每篇论文的数据集、关键变量、数据时期和样本量。">
     <meta property="og:url" content="https://zhurt0.github.io/beautiful-danish-data/zh/papers.html">
-    <link rel="stylesheet" href="../css/styles.css?v=ff705ae1">
+    <link rel="stylesheet" href="../css/styles.css?v=4380b91b">
 </head>
 <body>
     <header>
@@ -38,6 +38,8 @@
     <section class="section intro">
         <div class="container">
             <h2 class="section-title">按期刊</h2>
+            <input id="pfilter" class="filter" type="search" placeholder="搜索论文：作者、标题、期刊、登记库、变量或关键词" aria-label="搜索论文" autocomplete="off">
+            <p id="pcount" class="pcount muted" aria-live="polite"></p>
             <div class="selection" id="selection">
                 <h3>论文是怎么选出来的</h3>
                 <dl>
@@ -4258,6 +4260,30 @@
             </div>
         </div>
     </section>
+    <script>
+    (function () {
+        var box = document.getElementById('pfilter'), count = document.getElementById('pcount');
+        var cards = Array.prototype.slice.call(document.querySelectorAll('article.paper')), text = null;
+        function plain(s) {
+            return s.toLowerCase().replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/å/g, 'a').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        }
+        function run() {
+            var words = plain(box.value).split(/\s+/).filter(Boolean), n = 0;
+            if (!text) text = cards.map(function (c) { return plain(c.textContent); });
+            cards.forEach(function (c, i) {
+                var hit = words.every(function (w) { return text[i].indexOf(w) >= 0; });
+                c.hidden = !hit; if (hit) n++;
+            });
+            document.querySelectorAll('section.section[id]').forEach(function (s) {
+                s.hidden = !s.querySelector('article.paper:not([hidden])');
+            });
+            document.body.classList.toggle('searching', words.length > 0);
+            count.textContent = !words.length ? '' : n ? '共 {t} 篇论文，符合条件的有 {n} 篇'.replace('{n}', n).replace('{t}', cards.length) : '没有符合条件的论文';
+        }
+        box.addEventListener('input', run);
+        if (box.value) run();
+    })();
+    </script>
     <footer>
         <div class="container">
             <p>由哥本哈根商学院的 <a href="https://zhurt0.github.io/rentianzhu/">Rentian Zhu（朱任天）</a> 维护。摘要是我本人对每篇论文的理解；欢迎在 <a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a> 上提交 pull request 更正或补充。中文版说明：论文标题、作者、期刊、数据集名称和变量定义保留原文；摘要等内容译自英文版，如有出入以英文版为准。</p>

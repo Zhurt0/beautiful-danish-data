@@ -291,6 +291,35 @@ def build_index():
     return out
 
 
+# Search on the Papers page: every word typed must appear somewhere in a paper's card (authors, title, journal,
+# summary, data, variables, definitions). Accents are ignored, so "sorensen" finds "Sørensen".
+PAPER_SEARCH = """    <script>
+    (function () {
+        var box = document.getElementById('pfilter'), count = document.getElementById('pcount');
+        var cards = Array.prototype.slice.call(document.querySelectorAll('article.paper')), text = null;
+        function plain(s) {
+            return s.toLowerCase().replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/å/g, 'a').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '');
+        }
+        function run() {
+            var words = plain(box.value).split(/\s+/).filter(Boolean), n = 0;
+            if (!text) text = cards.map(function (c) { return plain(c.textContent); });
+            cards.forEach(function (c, i) {
+                var hit = words.every(function (w) { return text[i].indexOf(w) >= 0; });
+                c.hidden = !hit; if (hit) n++;
+            });
+            document.querySelectorAll('section.section[id]').forEach(function (s) {
+                s.hidden = !s.querySelector('article.paper:not([hidden])');
+            });
+            document.body.classList.toggle('searching', words.length > 0);
+            count.textContent = !words.length ? '' : n ? 'Showing {n} of {t} papers'.replace('{n}', n).replace('{t}', cards.length) : 'No papers match';
+        }
+        box.addEventListener('input', run);
+        if (box.value) run();
+    })();
+    </script>
+"""
+
+
 def build_papers():
     counts = {g: sum(1 for p in PAPERS if p["group"] == g) for g, _, _ in GROUPS}
     out = head(
@@ -302,6 +331,8 @@ def build_papers():
     out += f"""    <section class="section intro">
         <div class="container">
             <h2 class="section-title">By journal</h2>
+            <input id="pfilter" class="filter" type="search" placeholder="Search papers: author, title, journal, register, variable or keyword" aria-label="Search papers" autocomplete="off">
+            <p id="pcount" class="pcount muted" aria-live="polite"></p>
             <div class="selection" id="selection">
                 <h3>How the papers were selected</h3>
                 <dl>
@@ -331,6 +362,7 @@ def build_papers():
         </div>
     </section>
 """
+    out += PAPER_SEARCH
     out += FOOTER
     return out
 

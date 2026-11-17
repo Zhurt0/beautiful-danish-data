@@ -44,6 +44,8 @@
   "Denmark links every resident, firm, hospital visit, tax return and job to a single identifier, and lets researchers work with the whole population from the 1980s onwards. This page is a reading list of the economics that has come out of that infrastructure in the top general-interest journals and in the two leading field journals for labour and public economics: what question each paper asks, what it finds, and which registers it is built from.": "丹麦用同一个识别号把每一位居民、每一家企业、每一次就诊、每一份报税单和每一份工作连在一起，研究者可以使用 1980 年代以来的全体人口数据。本页是一份阅读清单，收录依托这套基础设施、发表在顶级综合期刊以及劳动经济学和公共经济学两本顶尖领域期刊上的经济学研究：每篇论文问了什么问题、发现了什么、用了哪些登记库。",
   "Denmark links every resident, firm, hospital visit, tax return and job to a single identifier, and lets researchers work with the whole population from the {0}s onwards. This page is a reading list of the economics that has come out of that infrastructure in the top general-interest journals and in the two leading field journals for labour and public economics: what question each paper asks, what it finds, and which registers it is built from.": "丹麦用同一个识别号把每一位居民、每一家企业、每一次就诊、每一份报税单和每一份工作连在一起，研究者可以使用 {0} 年代以来的全体人口数据。本页是一份阅读清单，收录依托这套基础设施、发表在顶级综合期刊以及劳动经济学和公共经济学两本顶尖领域期刊上的经济学研究：每篇论文问了什么问题、发现了什么、用了哪些登记库。",
   "How the papers were selected": "论文是怎么选出来的",
+  "Search papers: author, title, journal, register, variable or keyword": "搜索论文：作者、标题、期刊、登记库、变量或关键词",
+  "Search papers": "搜索论文",
   "By journal": "按期刊",
   "Papers by journal": "按期刊浏览",
   "Papers | Beautiful Danish Data": "论文 | Beautiful Danish Data",
@@ -1204,6 +1206,8 @@
   "papers</span></h3>": "篇论文</span></h3>",
   "</strong><br>Typical ages": "</strong><br>典型年龄",
   "Affiliation not listed": "未列出机构",
+  "Showing {n} of {t} papers": "共 {t} 篇论文，符合条件的有 {n} 篇",
+  "No papers match": "没有符合条件的论文",
   "<p class=\"np-sub\">All affiliations on these papers:": "<p class=\"np-sub\">这些论文上列出的全部机构："
  }
 }

@@ -348,13 +348,13 @@ table.lpr-papers .t { color: var(--muted); font-size: 0.82rem; }
 .stats { display: flex; flex-wrap: wrap; gap: 14px 40px; }
 .stats > div { display: flex; flex-direction: column-reverse; }
 .stats dd { font-size: 2.15rem; line-height: 1.1; color: var(--ink); }
-.stats dt { font-family: var(--sans); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
+.stats dt { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
 .explore { position: relative; }
 .explore > input { position: absolute; opacity: 0; pointer-events: none; }
 .explore-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px 14px; margin-bottom: 14px; }
-.explore-label { font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.explore-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .seg { display: inline-flex; border: 1px solid var(--border-color); border-radius: 999px; background: #fff; padding: 3px; }
-.seg label { font-family: var(--sans); font-size: 0.8rem; padding: 5px 14px; border-radius: 999px; cursor: pointer; color: var(--secondary-color); white-space: nowrap; transition: background 0.15s ease, color 0.15s ease; }
+.seg label { font-size: 0.84rem; line-height: 1.4; padding: 5px 15px; border-radius: 999px; cursor: pointer; color: var(--secondary-color); white-space: nowrap; transition: background 0.15s ease, color 0.15s ease; }
 .seg label:hover { color: var(--accent-color); }
 #ex1:checked ~ .explore-head label[for="ex1"], #ex2:checked ~ .explore-head label[for="ex2"], #ex3:checked ~ .explore-head label[for="ex3"] { background: var(--ink); color: #fff; }
 #ex1:focus-visible ~ .explore-head label[for="ex1"], #ex2:focus-visible ~ .explore-head label[for="ex2"], #ex3:focus-visible ~ .explore-head label[for="ex3"] { outline: 2px solid var(--accent-color); outline-offset: 2px; }
@@ -366,7 +366,7 @@ table.lpr-papers .t { color: var(--muted); font-size: 0.82rem; }
 .panel-body { display: block; padding: 16px 22px 20px; }
 .panel-title { display: block; font-size: 1.32rem; line-height: 1.25; color: var(--ink); }
 .panel-text { display: block; font-size: 0.92rem; color: var(--secondary-color); margin: 6px 0 14px; }
-.panel-link { font-family: var(--sans); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-color); }
+.panel-link { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-color); }
 .panel-link::after { content: " \2197"; }
 html[lang^="zh"] .hero-title { letter-spacing: 0; line-height: 1.25; }
 html[lang^="zh"] .hero-title em { font-style: normal; }
@@ -389,7 +389,7 @@ html[lang^="zh"] .stats dt, html[lang^="zh"] .explore-label, html[lang^="zh"] .p
     .stats dd { font-size: 1.5rem; }
     .stats dt { font-size: 0.6rem; letter-spacing: 0.08em; }
     .hero-lead { font-size: 0.98rem; }
-    .seg label { padding: 5px 11px; font-size: 0.78rem; }
+    .seg label { padding: 5px 10px; font-size: 0.78rem; }
     .panel-body { padding: 14px 16px 18px; }
 }
 
@@ -399,3 +399,8 @@ details.reg-more > summary { cursor: pointer; font-weight: 700; color: var(--acc
 details.reg-more[open] > summary { margin-bottom: 10px; }
 details.reg-more h4 { font-size: 1.05rem; margin: 22px 0 6px; color: var(--primary-color); }
 details.reg-more > p { max-width: 84ch; margin-bottom: 8px; }
+
+/* Search on the Papers page: while searching, the notes above the list step aside */
+#pfilter { max-width: 620px; margin-bottom: 6px; }
+.pcount { font-size: 0.9rem; min-height: 1.5em; margin-bottom: 8px; }
+body.searching .selection, body.searching .intro .selection + p, body.searching .intro .counts { display: none; }
