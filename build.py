@@ -236,7 +236,7 @@ SELECTION_EXTRA = ("The list was then checked twice. The <em>Review of Economic 
                    "<em>American Economic Review</em> before 2011, the <em>Journal of Public Economics</em> before 2010, the "
                    "<em>Economic Journal</em> for 2010&ndash;2017 and older volumes of the <em>Journal of Political Economy</em> and <em>Econometrica</em>.")
 # Papers in which Denmark is one of several countries. They were left out until November 2026.
-MULTI_COUNTRY = ["bratsberg2007", "moscarini2012", "cosar2015", "eika2019", "bertheau2023", "butikofer2024", "kleven2025atlas"]
+MULTI_COUNTRY = ["roemer2003", "bratsberg2007", "moscarini2012", "cosar2015", "eika2019", "bertheau2023", "butikofer2024", "kleven2025atlas"]
 
 
 def selection_multi():
