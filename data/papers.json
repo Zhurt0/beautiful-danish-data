@@ -7632,6 +7632,107 @@
     ]
   },
   {
+    "id": "bertheau2023",
+    "authors": "Antoine Bertheau, Edoardo Maria Acabbi, Cristina Barceló, Andreas Gulyas, Stefano Lombardi and Raffaele Saggio",
+    "year": 2023,
+    "journal": "AER: Insights",
+    "group": "aeri",
+    "title": "The Unequal Consequences of Job Loss across Countries",
+    "summary": "Applies one harmonised mass-layoff event-study design to matched employer-employee registers from seven countries (Austria, Denmark, France, Italy, Portugal, Spain and Sweden). Five years after displacement, earnings are about 10% lower in Denmark and Sweden but about 30% lower in Italy, Spain and Portugal, mainly because displaced workers in Southern Europe are less likely to be re-employed. For Denmark the earnings loss after five years is 11.5%, the employment loss 3.6 percentage points and the daily wage loss about 4%, of which 44% is accounted for by moving to employers with lower wage premiums.",
+    "themes": [
+      "labor",
+      "firms"
+    ],
+    "data": [
+      "IDA datasets (IDAN, IDAS, IDAP), Statistics Denmark, 1980–2018: universe of Danish residents with establishment and firm identifiers",
+      "Individual income dataset (IND), Statistics Denmark: earnings",
+      "AMDB (Arbeitsmarktdatenbank) social security records, 1984–2019 (Austria)",
+      "DADS-Panel 1991–2018 with DADS-Poste, DADS-Etablissement and MMO, accessed via CASD (France)",
+      "INPS-LOSAI social security records, roughly 6.5% of workers (Italy)",
+      "Quadros de Pessoal, 1987–2018 (Portugal)",
+      "Muestra Continua de Vidas Laborales (MCVL), 4% sample of Social Security records, 2005–2019 (Spain)",
+      "RAMS matched employer–employee database with LOUISE, Statistics Sweden via IFAU (Sweden)",
+      "OECD harmonised unemployment rate (cross-country)"
+    ],
+    "level": "both",
+    "variables": [
+      "Treatment: displacement in a mass layoff (separation from the main employer in a year when establishment employment falls by at least 30%)",
+      "Control group: non-displaced workers matched 1:1 on a propensity score within year × gender × industry cells",
+      "Outcome: yearly labour earnings (2010 EUR), employment, log daily wage",
+      "Outcome: AKM employer-specific wage premium (establishment fixed effect)",
+      "Event window: five years before to five years after displacement, estimated separately by country"
+    ],
+    "period": "Danish data: IDA 1980–2018, job losses 1983–2017 (other countries: job losses between 1987 and 2019)",
+    "sample_size": "Danish sample: 201.91 thousand displaced workers and 201.91 thousand matched control workers (Table 1); 4,295 thousand person-year observations in the Danish earnings and employment event studies (Table 2)",
+    "sample": "Danish sample: workers aged at most 50 with at least three years of tenure at an establishment with at least 50 employees in the year before a mass layoff in 1983–2017, and their matched non-displaced controls; the same restrictions are applied in the other six countries.",
+    "sample_source": "https://www.nber.org/system/files/working_papers/w29727/w29727.pdf",
+    "sample_confidence": "paper",
+    "replication_package": "https://doi.org/10.3886/E172381V1",
+    "definitions": [
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Displaced (treated) worker",
+        "definition": "With t* the year of the displacement event, a worker is displaced if (i) the worker separates from the main employer in t* and (ii) employment at that establishment drops by at least 30% in t* (plant closures included). The sample is restricted to workers aged at most 50 with at least three years of tenure at the main employer in the year before the event, employed at establishments with at least 50 employees at the end of the pre-displacement year. Workers recalled by their main employer within five years are dropped, and events where more than 20% of workers jointly move to another firm are excluded to avoid classifying mergers or outsourcing as mass layoffs. The same definition is applied to all seven countries; the Danish data have no information on the reason for job separation.",
+        "registers": [
+          "IDA (IDAN, IDAS, IDAP)"
+        ],
+        "codes": "Establishment employment drop >= 30% in t*; age <= 50 in t*-1; tenure >= 3 years; establishment size >= 50; recalls within 5 years dropped; events with > 20% of workers moving jointly excluded",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w29727/w29727.pdf",
+        "source_location": "Section I.A and I.B (incl. footnote 3); Appendix B.A; Table A.4"
+      },
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Matched control group",
+        "definition": "Potential controls are workers who do not concurrently satisfy both displacement conditions and meet the same sample restrictions. Data are partitioned into cells by calendar year, gender and industry; within each cell a probit propensity score for being displaced is estimated on earnings in t*-2 and t*-3, age, tenure and employer size in t*-1, and one control is assigned to each treated worker by 1:1 nearest-neighbour matching without replacement. Contract type and full-time status are also matched on where available. Control workers are never treated, may be coworkers of displaced workers, and are used as control only once.",
+        "registers": [
+          "IDA (IDAN, IDAS, IDAP)"
+        ],
+        "codes": "1:1 nearest neighbour without replacement; cells = calendar year × gender × industry",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w29727/w29727.pdf",
+        "source_location": "Section I.B; Appendix B.A"
+      },
+      {
+        "concept": "Earnings and income",
+        "variable": "Yearly labour earnings and employment (harmonised)",
+        "definition": "Earnings are the sum of yearly labour earnings before taxation, possibly from different employers, deflated to 2010 EUR, including overtime, bonuses and severance payments when available. A person is employed if they have any positive labour earnings during the year; zero earnings are imputed for years of non-employment. For Denmark, earnings comprise all salary-related income in a year; they cover all jobs and include severance payments but not self-employment income. The dataset IND is also used for information on earnings.",
+        "registers": [
+          "IDA (IDAN, IDAS, IDAP)",
+          "IND"
+        ],
+        "codes": null,
+        "source_type": "online appendix",
+        "source_url": "https://www.aeaweb.org/articles/materials/19373",
+        "source_location": "Online Appendix C (introduction and section B. Denmark); Table A.4; main text Section I.A"
+      },
+      {
+        "concept": "Earnings and income",
+        "variable": "Daily wage",
+        "definition": "Daily earnings from the main employer, computed as labour earnings over days worked; hours worked are not available for all countries. The main employer is the establishment at which the worker's annual earnings are largest, and all employment spells at the same establishment within a year are connected. In the Danish data the data source changed in 2008, which affects the computation of the days worked and labour earnings variables.",
+        "registers": [
+          "IDA (IDAN, IDAS, IDAP)"
+        ],
+        "codes": null,
+        "source_type": "online appendix",
+        "source_url": "https://www.aeaweb.org/articles/materials/19373",
+        "source_location": "Online Appendix C (introduction and section B. Denmark); Table A.4"
+      },
+      {
+        "concept": "Firm characteristics and productivity",
+        "variable": "Establishment size, industry and public sector (Denmark)",
+        "definition": "The unit of analysis for the employer is the establishment. In Denmark the number of employees in the establishment on November 28th is used as establishment size, industry groups follow the NACE classification, and public sector employers include the state and municipalities. All public jobs are recorded in the Danish registers; in a robustness check public jobs (all, or teachers, public sector clerks, legislators and government officials) are reclassified as non-employment in Denmark, Sweden and France to match the narrower coverage in Italy, Portugal and Spain.",
+        "registers": [
+          "IDA (IDAN, IDAS, IDAP)"
+        ],
+        "codes": "Establishment size measured on November 28th; industry: NACE",
+        "source_type": "online appendix",
+        "source_url": "https://www.aeaweb.org/articles/materials/19373",
+        "source_location": "Online Appendix C, section B. Denmark; Appendix B.D and footnote 20; Figure A.6"
+      }
+    ]
+  },
+  {
     "id": "utar2014",
     "authors": "Hale Utar",
     "year": 2014,
@@ -12075,6 +12176,104 @@
     ]
   },
   {
+    "id": "moscarini2012",
+    "authors": "Giuseppe Moscarini and Fabien Postel-Vinay",
+    "year": 2012,
+    "journal": "American Economic Review",
+    "group": "top5",
+    "title": "The Contribution of Large and Small Employers to Job Creation in Times of High and Low Unemployment",
+    "summary": "Asks whether large or small employers account for more of the cyclical swings in net job creation. In U.S. data the employment growth of initially large firms minus that of small firms has a correlation of about -0.5 with detrended unemployment, so large employers shed relatively more jobs when unemployment is high and add more when it is low. The pattern is replicated with firm panels for Denmark and France and with published size-class series for the United Kingdom and Canada; in the Danish IDA employer panel the correlation is -0.59 over 1981-2008.",
+    "themes": [
+      "labor",
+      "firms",
+      "macro"
+    ],
+    "data": [
+      "Integreret Database for Arbejdsmarkedsforskning (IDA, Integrated Database for Labor Market Research), Statistics Denmark: employer-level panel (IDA firm file) with workforce size in the last week of November, 1981–2008, private employers only",
+      "IDA wage information (mean wage earned by a firm's employees in 1981)",
+      "OECD harmonised unemployment rate for Denmark",
+      "Business Dynamic Statistics (BDS), Census Bureau, 1979–2009 used (United States)",
+      "Business Employment Dynamics (BED), Bureau of Labor Statistics, 1992:III–2010:III (United States)",
+      "Bénéfices Réels Normaux (BRN) firm panel, INSEE, 1985–2005 (France)",
+      "Employment shares by firm size class, Department for Business, Innovation and Skills, 1994–2006 (United Kingdom)",
+      "Business Dynamics in Canada employment shares by firm size, Statistics Canada, 1983–2003 (Canada)"
+    ],
+    "level": "firm",
+    "variables": [
+      "Outcome: differential net job creation rate, employment growth of initially large minus initially small employers",
+      "Cyclical indicator: detrended (HP-filtered) unemployment rate; also real GDP and its growth",
+      "Size classes: fewer than 20 vs more than 500 employees in Denmark and France (fewer than 50 vs more than 1,000 in the U.S. BDS)",
+      "Classification: size fixed a year in advance, or fixed once and for all in 1981",
+      "Alternative classification: mean wage paid by the firm in 1981"
+    ],
+    "period": "Denmark 1981–2008 (IDA employer panel); United States 1979–2009 (BDS)",
+    "sample": "Danish private-sector employers (firms identified by a tax register number) in the IDA employer panel, excluding public-sector and not-for-profit employers; the 'large' category holds between 150 and 250 firms.",
+    "sample_source": "https://campuspress.yale.edu/moscarini/files/2017/01/large_employers-wqq557.pdf",
+    "sample_confidence": "paper",
+    "definitions": [
+      {
+        "concept": "Sample definition and timing",
+        "variable": "IDA employer panel",
+        "definition": "IDA is a register-based matched employer-employee dataset with basic socioeconomic information collected on workers annually in the last week of November and some background information on employers (including employer identifiers); it covers the entire Danish population aged 16 to 69. As part of the IDA program Statistics Denmark maintains an employer-level panel with the basic information on employers, including workforce size as of the last week of November. The panel runs 28 years, from 1981 to and including 2008, and the sample excludes public-sector and not-for-profit employers.",
+        "registers": [
+          "IDA"
+        ],
+        "codes": "Panel years 1981-2008; size measured in the last week of November",
+        "source_type": "published paper",
+        "source_url": "https://campuspress.yale.edu/moscarini/files/2017/01/large_employers-wqq557.pdf",
+        "source_location": "Section IV.A, 'Denmark', and footnote 15"
+      },
+      {
+        "concept": "Firm characteristics and productivity",
+        "variable": "Firm identifier (tax register number)",
+        "definition": "In both the Danish and the French data a firm is identified by a tax register number. These identifiers are not entirely stable over time, since firms can change their tax register number or obtain several at the same time, so some observed firm dynamics may reflect mergers and acquisitions. The unweighted average growth rate is preferred because it is less sensitive to spurious entry and exit from such changes and to outliers where there are relatively few large firms, as in Denmark.",
+        "registers": [
+          "IDA"
+        ],
+        "codes": null,
+        "source_type": "published paper",
+        "source_url": "https://campuspress.yale.edu/moscarini/files/2017/01/large_employers-wqq557.pdf",
+        "source_location": "Section IV.A, footnote 14"
+      },
+      {
+        "concept": "Firm characteristics and productivity",
+        "variable": "Large and small employers (size classes)",
+        "definition": "For Denmark, small firms have fewer than 20 employees and large firms more than 500. Firms are assigned to a size class either a year in advance over rolling two-year windows, replicating the structure of the U.S. BDS (Figure 8), or once and for all by their size in 1981 without ever being reclassified (Figure 9). The number of Danish firms in the large category is between 150 and 250.",
+        "registers": [
+          "IDA"
+        ],
+        "codes": "Small: < 20 employees; large: > 500 employees",
+        "source_type": "published paper",
+        "source_url": "https://campuspress.yale.edu/moscarini/files/2017/01/large_employers-wqq557.pdf",
+        "source_location": "Section IV.A; notes to Figures 8 and 9"
+      },
+      {
+        "concept": "Firm characteristics and productivity",
+        "variable": "Differential employment growth rate (unweighted)",
+        "definition": "Firm-level growth is the change in employment between t-1 and t divided by the average of employment at t-1 and t (weight alpha = 1/2), which is symmetric and defined for entrants and closing employers. With firm-level data the growth rate of a size class is the unweighted average of this rate across the firms in the class (equation 2), and the differential growth rate is the large-class rate minus the small-class rate. The series and the unemployment rate are detrended with a Hodrick-Prescott filter. The Danish results rest on the unweighted definition; with the employment-weighted definition (equation 1) the Danish correlations are -0.06, -0.16 and -0.10 and not statistically significant.",
+        "registers": [
+          "IDA"
+        ],
+        "codes": "g_it = (L_it - L_it-1) / [0.5 (L_it + L_it-1)]",
+        "source_type": "published paper",
+        "source_url": "https://campuspress.yale.edu/moscarini/files/2017/01/large_employers-wqq557.pdf",
+        "source_location": "Section II.A, equations (1) and (2); Section IV.A"
+      },
+      {
+        "concept": "Earnings and income",
+        "variable": "High- and low-paying firms (mean wage in 1981)",
+        "definition": "As an alternative to initial size, firms are allocated once and for all to low- and high-paying bins according to the mean wage earned by their employees in 1981, taken from the wage information in IDA; the high-paying firms are on average larger.",
+        "registers": [
+          "IDA"
+        ],
+        "codes": "Low-paying: < DKK 58,000/year; high-paying: > DKK 83,000/year",
+        "source_type": "published paper",
+        "source_url": "https://campuspress.yale.edu/moscarini/files/2017/01/large_employers-wqq557.pdf",
+        "source_location": "Section IV.A; notes to Figure 10"
+      }
+    ]
+  },
+  {
     "id": "gillingham2022",
     "authors": "Kenneth Gillingham, Fedor Iskhakov, Anders Munk-Nielsen, John Rust and Bertel Schjerning",
     "year": 2022,
@@ -12192,6 +12391,101 @@
         "source_type": "working paper",
         "source_url": "https://resources.environment.yale.edu/gillingham/Gillinghametal_EqbTradeAutos.pdf",
         "source_location": "Appendix F.1; Section 6"
+      }
+    ]
+  },
+  {
+    "id": "eika2019",
+    "authors": "Lasse Eika, Magne Mogstad and Basit Zafar",
+    "year": 2019,
+    "journal": "Journal of Political Economy",
+    "group": "top5",
+    "title": "Educational Assortative Mating and Household Income Inequality",
+    "summary": "Measures educational assortative mating as how often each wife-husband education pairing occurs relative to random matching, and uses a semiparametric decomposition to quantify its role in household income inequality. The analysis centres on the United States and is repeated for Denmark, Germany, the United Kingdom and Norway. In every country, Denmark included, sorting is positive at all education levels and raises cross-sectional inequality, but changes in sorting over time barely move the trend in inequality, which is driven mainly by changes in the returns to education.",
+    "themes": [
+      "family",
+      "inequality",
+      "education"
+    ],
+    "data": [
+      "Danish registry data, 1980–2013: administrative records for every individual and household with gender, date of birth, marital status, educational attainment, income and family identifiers to match spouses",
+      "March Current Population Survey (CPS), 1962–2013 (United States)",
+      "Public-use samples of the decennial censuses, 1940–2013, used for assortative mating only (United States)",
+      "German Socio-Economic Panel (SOEP), 1984–2013 (Germany)",
+      "Labour Force Survey (LFS), 1979–2013, with income from 1993 (United Kingdom)",
+      "Registry databases maintained by Statistics Norway, 1967–2013 (Norway)"
+    ],
+    "level": "individual",
+    "variables": [
+      "Measure: marital sorting parameter s(ef, em), the observed probability of a wife-husband education pairing relative to random matching",
+      "Education: four levels (no high school degree, high school degree, some college, college degree)",
+      "Outcome: household income (spouses' pooled wages and self-employment income) and its Gini coefficient",
+      "Decomposition factors: educational assortative mating, returns to education and educational composition (DiNardo, Fortin and Lemieux method)",
+      "Cross-country comparison: common base years 1984 and 2013"
+    ],
+    "period": "Denmark 1980–2013 (Danish registry data; base years 1984 and 2013 in the decomposition); United States 1962–2013 (CPS), with census data back to 1940",
+    "sample_size": "Danish sample: 891,725 observations in 1984 and 898,992 in 2013 (Appendix Table A2, married couples aged 26–60)",
+    "sample": "Married couples in which at least one spouse is aged 26–60 in the given year; for Denmark drawn from administrative records covering every individual and household, 1980–2013.",
+    "sample_source": "https://www.nber.org/system/files/working_papers/w20271/w20271.pdf",
+    "sample_confidence": "paper",
+    "definitions": [
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Married couples aged 26-60",
+        "definition": "In every year the sample is restricted to married couples where at least one of the spouses is between 26 and 60 years old. Individuals with missing information on income are excluded and negative income is set to zero. For Denmark and Norway the authors access administrative data containing records for every individual and household; the Danish data begin in 1980 (the Norwegian data in 1967), while Germany and the U.K. rely on survey data.",
+        "registers": [
+          "Danish registry data (registers not named in the paper)"
+        ],
+        "codes": "At least one spouse aged 26-60; Danish data 1980-2013",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w20271/w20271.pdf",
+        "source_location": "Sections 2.2 and 2.3"
+      },
+      {
+        "concept": "Education and test scores",
+        "variable": "Education level (four groups, Danish mapping)",
+        "definition": "Individuals are assigned to one of four mutually exclusive groups by highest level of education completed: high school dropouts (< 12 years of schooling), high school graduates (12 years), some college (13-15 years) and college graduates (> 15 years). For Denmark the mapping of years of education to categories is similar to the U.S. one with two exceptions: due to the system for vocational education at the upper secondary level, individuals with 12 to 13.5 years of schooling are classified as having a high school degree, and individuals with 15 years of education are classified as having a college degree, as this corresponds to a Bachelor's degree in Denmark.",
+        "registers": [
+          "Danish registry data (registers not named in the paper)"
+        ],
+        "codes": "Denmark: 12-13.5 years of schooling = high school degree; 15 years = college degree",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w20271/w20271.pdf",
+        "source_location": "Section 2.3 and Appendix B.1"
+      },
+      {
+        "concept": "Earnings and income",
+        "variable": "Individual and household income",
+        "definition": "Individual income consists of wages and income from self-employment; household income is measured by pooling the individual income of the spouses. For Denmark, household income is the sum of wages and income from self-employment for the husband and the wife. In the income regressions by education level, individuals with zero income are included in the Danish sample, whereas the other countries' samples are married individuals with positive income.",
+        "registers": [
+          "Danish registry data (registers not named in the paper)"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w20271/w20271.pdf",
+        "source_location": "Section 2.3, Appendix B.1 and notes to Appendix Table A3"
+      },
+      {
+        "concept": "Family links, fertility and household",
+        "variable": "Marital sorting parameter s(ef, em)",
+        "definition": "The observed probability that a husband with education level em is married to a wife with education level ef, relative to the probability under random matching with respect to education: s(ef, em) = P(Ef = ef, Em = em) / [P(Ef = ef) P(Em = em)]. Values above 1 on the diagonal (ef = em) indicate positive assortative mating. Estimated for each country and every year for all combinations of the spouses' education levels.",
+        "registers": [],
+        "codes": "s(ef, em) = P(Ef = ef, Em = em) / [P(Ef = ef) P(Em = em)]",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w20271/w20271.pdf",
+        "source_location": "Section 3.1, equation (1); Section 3.3 for the other countries"
+      },
+      {
+        "concept": "Employment and labour force status",
+        "variable": "Labor force participation",
+        "definition": "Defined as having positive labor income from wages or self-employment; reported for Danish wives and husbands in 1984 and 2013.",
+        "registers": [
+          "Danish registry data (registers not named in the paper)"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w20271/w20271.pdf",
+        "source_location": "Notes to Appendix Table A2"
       }
     ]
   },
@@ -13121,6 +13415,97 @@
         "source_type": "working paper",
         "source_url": "https://typeset.io/pdf/the-u-shapes-of-occupational-mobility-1x8dzglekd.pdf",
         "source_location": "Section 2.1.1 (Sample Selection)"
+      }
+    ]
+  },
+  {
+    "id": "kleven2025atlas",
+    "authors": "Henrik Kleven, Camille Landais and Gabriel Leite-Mariante",
+    "year": 2025,
+    "journal": "Review of Economic Studies",
+    "group": "top5",
+    "title": "The Child Penalty Atlas",
+    "summary": "Builds a world atlas of child penalties in employment for 134 countries, mostly from pseudo-event studies of first childbirth in cross-sectional census and survey data, validated against true event studies where panel data exist. Denmark is one of five countries estimated from full-population administrative panels and one of the validation countries; its child penalty of 14% is the smallest among the European countries shown. Across countries, the share of gender inequality explained by child penalties rises with economic development.",
+    "themes": [
+      "gender",
+      "family",
+      "labor"
+    ],
+    "data": [
+      "Danish administrative panel covering the full population, 1980–2017 (the same administrative data sources as Kleven, Landais and Søgaard 2019, updated to more recent years; registers not named in the paper)",
+      "Danish full-count historical censuses 1787–1801 (two waves), harmonised by IPUMS International (historical analysis; not register data)",
+      "Administrative panels covering the full population (Austria, Sweden, Switzerland; Norway from estimates provided by Andresen and Nix)",
+      "HILDA panel survey 2001–2019 (Australia)",
+      "Japan Household Panel Survey 2004–2020 (Japan)",
+      "Census samples harmonised by IPUMS International (75 countries) and census data from national statistical offices (Tunisia, Angola)",
+      "Luxembourg Income Study household surveys (16 countries)",
+      "Demographic and Health Surveys (17 countries)",
+      "EU-SILC (8 countries)",
+      "National Labour Force Surveys (5 countries)",
+      "MICS (Algeria), 2005 1% Mini-Census (China), Annual Population Survey (United Kingdom), CPS and ACS (United States)",
+      "Validation panels: GSOEP (Germany), BHPS (United Kingdom), PSID and NLSY (United States), EPS (Chile), KLIPS (South Korea), RLMS (Russia)",
+      "World Bank World Development Indicators (country-level GDP, population, industrial composition, urbanisation)"
+    ],
+    "level": "individual",
+    "variables": [
+      "Event: birth of first child (event time from 5 years before to 10 years after)",
+      "Outcome: employment of men and women (annual employment in the Danish panel)",
+      "Child penalty: average percentage effect of parenthood on women's employment relative to men's over event times 0–10",
+      "Validation: pseudo-event study (matched cross-sections) vs actual event study in panel data",
+      "Country-level correlates: GDP per capita, sectoral composition, share of employees, urbanisation",
+      "Marriage penalty: event study around first marriage"
+    ],
+    "period": "Danish administrative panel: 1980–2017 (the other countries' data cover different periods; Danish historical censuses 1787–1801)",
+    "sample_size": "Danish sample: 20,729,380 individual × year observations in 38 annual waves (working-paper Online Appendix Table A.1); about 281 million individual × year observations across all 134 countries (published paper, conclusion)",
+    "sample": "Men and women observed around the birth of their first child, with age at first birth restricted to 20–45; for Denmark the full population in administrative panel data, for most other countries census or survey cross-sections turned into a matched pseudo-panel.",
+    "sample_source": "https://www.nber.org/system/files/working_papers/w31649/w31649.pdf",
+    "sample_confidence": "paper",
+    "definitions": [
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Danish administrative panel in the atlas",
+        "definition": "Denmark is one of five countries (with Austria, Norway, Sweden and Switzerland) for which the atlas uses administrative panels covering the full population rather than cross-sections. For Austria, Denmark and Sweden the child penalties are estimated on the same administrative data sources as in Kleven et al. (2019a, 2019b), updated to include more recent years, so the estimates differ slightly from those papers. The data table lists Denmark as panel data for 1980-2017 with 38 waves, an annual employment measure that excludes paid maternity leave, and 20,729,380 individual-year observations. The Danish administrative data do not include information on Greenlanders.",
+        "registers": [
+          "Danish full-population administrative panel (registers not named)"
+        ],
+        "codes": "Denmark: Panel Data, 1980-2017, 38 waves, employment measure Annual, maternity leave excluded Yes, 20,729,380 observations",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w31649/w31649.pdf",
+        "source_location": "Section 2.2 and footnote 4; Online Appendix Table A.1; footnote on Greenland in Section 4.4 (same text in the published version, Section 2.2 and footnotes 4 and 13)"
+      },
+      {
+        "concept": "Family links, fertility and household",
+        "variable": "Child penalty in employment",
+        "definition": "For men and women separately, employment is regressed on event-time dummies around the birth of the first child (t = 0), with full sets of age and year dummies; the omitted event time is t = -2, the year before pregnancy. Each event-time coefficient is scaled by the predicted employment level absent children. The child penalty is the average effect on men minus women over non-negative event times, net of the same difference over negative event times; reported penalties average over event times 0-10 and age at first birth is restricted to 20-45. Estimated this way on the Danish panel, the penalty is 14%.",
+        "registers": [
+          "Danish full-population administrative panel (registers not named)"
+        ],
+        "codes": "Base event time t = -2; penalty averaged over event times 0-10; age at first birth 20-45",
+        "source_type": "published paper",
+        "source_url": "https://researchonline.lse.ac.uk/id/eprint/123685/3/rdae104.pdf",
+        "source_location": "Section 3.1, equations (1)-(3) and footnote 6; Section 4.2.1; notes to Figures 3-5"
+      },
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Validation of the pseudo-event study on Danish panel data",
+        "definition": "The panel data are transformed into a matched pseudo-panel by ignoring the panel information on negative event times: each parent observed at event time 0 is matched to childless individuals observed n years earlier who are n years younger and share the same characteristics (gender, education in four categories, marital status in four categories, rural/urban). The pseudo-event study estimated on this transformed sample is then compared with the actual event study on the same sample. Denmark is one of five countries shown (with Austria, Chile, Japan and the United Kingdom); the two estimates of the Danish child penalty are 0.131 (pseudo) and 0.141 (actual).",
+        "registers": [
+          "Danish full-population administrative panel (registers not named)"
+        ],
+        "codes": "Denmark: Pseudo ES = 0.131, Actual ES = 0.141; matching for n = 1,...,5 (n = 0,...,4 with annual outcomes)",
+        "source_type": "working paper",
+        "source_url": "https://www.nber.org/system/files/working_papers/w31649/w31649.pdf",
+        "source_location": "Section 3.2 and footnotes 8-9; Figure 3, panel C"
+      },
+      {
+        "concept": "Employment and labour force status",
+        "variable": "Employment (harmonised across countries)",
+        "definition": "For most countries employment is current employment status over a short period (usually a week) before the survey, excluding protected parental leave where it can be separated. For a few countries the only available information captures work activity over the previous or the current calendar year, so the evidence is based on annual rather than weekly employment; the data table lists Denmark's employment measure as annual. For the subset of countries where employment can be measured with and without paid leave, the choice has a trivial effect on the estimated penalties except in a handful of countries with very long leave.",
+        "registers": [],
+        "codes": null,
+        "source_type": "published paper",
+        "source_url": "https://researchonline.lse.ac.uk/id/eprint/123685/3/rdae104.pdf",
+        "source_location": "Section 2.3; Denmark's row of Appendix Table A.1 (working-paper version) gives the employment measure as Annual"
       }
     ]
   },
@@ -15544,6 +15929,201 @@
     ]
   },
   {
+    "id": "butikofer2024",
+    "authors": "Aline Bütikofer, Katrine V. Løken and Alexander Willén",
+    "year": 2024,
+    "journal": "Review of Economics and Statistics",
+    "group": "restat",
+    "title": "Building Bridges and Widening Gaps",
+    "summary": "Uses the 2000 opening of the Öresund bridge between Malmö (Sweden) and Copenhagen (Denmark) to study what access to a larger labour market does to wages. Comparing Malmö residents with residents of Swedish municipalities outside the region in an event study, commuting to Denmark rose sharply and average wages rose by 13.5% (published abstract), with the largest gains for high-educated men and the smallest for low-educated women. The Danish side is covered only by aggregate regional wages, which show no negative effect in Copenhagen.",
+    "themes": [
+      "labor",
+      "gender",
+      "inequality"
+    ],
+    "data": [
+      "Cross-border commuting database established in 2009 by agreement between the Swedish and Danish governments: individual-level employment, earnings, industry and sector of all Swedish residents working in Denmark, 1997–2014, with wages from Danish administrative tax records (delivered by Statistics Sweden as 'Gränsregional statistik, arbetspendling över riksgräns')",
+      "Aggregate wage data from Statistics Denmark by gender and region (Copenhagen compared with East Jutland); not microdata",
+      "Population-wide administrative registers at Statistics Sweden, all residents aged 16–65, 1997–2014 (LISA in the replication package), with education, employment, wages, municipality of residence, family composition and immigration status (Sweden)"
+    ],
+    "level": "individual",
+    "variables": [
+      "Treatment: residing in Malmö after the bridge opened in 2000 (controls: municipalities in the Swedish counties bordering Scania)",
+      "Outcome: working in Denmark (positive wages from Denmark) and working in Sweden",
+      "Outcome: yearly wage from Denmark, from Sweden and in total (thousands of SEK)",
+      "Outcome: unemployment benefit receipt in Sweden; holding more than one job",
+      "Heterogeneity: gender, education level and field, marital status, children"
+    ],
+    "period": "1997–2008 in the main analysis (cross-border data cover 1997–2014; Swedish registers from 1995 for some pre-trend tests)",
+    "sample_size": "6,375,370 individual-year observations, of which 3,237,882 men and 3,137,488 women (Table 1 of the IZA working-paper version; the published version may differ)",
+    "sample": "All individuals aged 18–65 residing in Malmö or in one of the control municipalities in the Swedish counties bordering Scania during 1997–2008; Danish information is available only for those among them who work in Denmark.",
+    "sample_source": "https://docs.iza.org/dp12885.pdf",
+    "sample_confidence": "paper",
+    "definitions": [
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Cross-border commuting data linked to Swedish registers",
+        "definition": "Statistics Sweden's registers contain only labour market activity within Sweden. Through an agreement between the governments of Sweden and Denmark, a separate database on cross-border commuting was established in 2009; it contains individual-level information on all labour market activities of Swedish residents in Denmark between 1997 and 2014, including employment, earnings, industry and sector, and is linked to the Statistics Sweden data through unique individual identifiers. The cooperation was discontinued in 2015 because of disagreements over data protection rules, so the data are no longer updated. The Swedish data can be linked to the Danish registries only from 1997.",
+        "registers": [
+          "Sweden-Denmark cross-border commuting database (Gränsregional statistik, arbetspendling över riksgräns; Danish source register not named)"
+        ],
+        "codes": "Replication package variables: SumLon_Arb (gross wage for the highest-paid job in the country), SyssMark_Arb / NovMark_Arb (commuting marker), AstKom_Arb (workplace municipality), 1997-2014",
+        "source_type": "working paper",
+        "source_url": "https://docs.iza.org/dp12885.pdf",
+        "source_location": "Section 3 (Data) and footnote 22; Section 4; variable list in the replication package (https://doi.org/10.7910/DVN/EYZH8T)"
+      },
+      {
+        "concept": "Earnings and income",
+        "variable": "Wage in Denmark, wage in Sweden and total wage",
+        "definition": "Wage measures come from administrative tax records in both Denmark and Sweden and are total yearly wages in each country, measured in thousands of SEK; individuals with zero wages are included. In the replication code the Danish wage is the cross-border variable SumLon_Arb_SEK, set to zero when missing, the Swedish wage is LoneInk (gross cash wage), and the total wage is their sum. Work performed in Sweden for the Danish public sector is classified as Swedish income.",
+        "registers": [
+          "Sweden-Denmark cross-border commuting database (Danish administrative tax records)",
+          "Statistics Sweden registers (LISA)"
+        ],
+        "codes": "DKtotwage = SumLon_Arb_SEK (0 if missing); SEKtotwage = LoneInk; Totwage = SEKtotwage + DKtotwage",
+        "source_type": "replication package",
+        "source_url": "https://doi.org/10.7910/DVN/EYZH8T",
+        "source_location": "Cleaning.do, 'Generating outcome variables'; working paper Section 3 and footnote 20"
+      },
+      {
+        "concept": "Employment and labour force status",
+        "variable": "Working in Denmark",
+        "definition": "Individuals are defined as employed in Denmark if they have positive wages from Denmark, as employed in Sweden if they have positive wages from Sweden, and as employed in both countries if they have positive wages from both.",
+        "registers": [
+          "Sweden-Denmark cross-border commuting database (Danish administrative tax records)"
+        ],
+        "codes": "DKwork = (DKtotwage > 0); SEKwork = (SEKtotwage > 0)",
+        "source_type": "replication package",
+        "source_url": "https://doi.org/10.7910/DVN/EYZH8T",
+        "source_location": "Cleaning.do, 'Generating outcome variables'; working paper Section 3"
+      },
+      {
+        "concept": "Geography and neighbourhood",
+        "variable": "Treatment and control municipalities",
+        "definition": "Treatment is residing in Malmö; the main control group is all municipalities in the Swedish counties bordering Scania. Event-study coefficients for 1997-2008 are estimated relative to 1999, the year before the bridge opened, with municipality, year and birth-year fixed effects and the municipal immigrant share as a control; standard errors are clustered by municipality. The sample is not conditioned on pre-bridge residence.",
+        "registers": [
+          "Statistics Sweden registers (municipality of residence)"
+        ],
+        "codes": "Treat = (kommun == 1280); omitted year 1999",
+        "source_type": "working paper",
+        "source_url": "https://docs.iza.org/dp12885.pdf",
+        "source_location": "Section 4, equation (1); Cleaning.do in the replication package for the municipality code"
+      },
+      {
+        "concept": "Earnings and income",
+        "variable": "Aggregate wages on the Danish side",
+        "definition": "For the receiving city the authors use aggregate wage data from Statistics Denmark by gender and region, where the labour force includes individuals aged 15 and older, and compare mean wages in Copenhagen with East Jutland before and after the bridge opened. The measure is not directly comparable with the Swedish microdata and the full econometric analysis cannot be run on the Danish side.",
+        "registers": [
+          "Statistics Denmark aggregate regional wage statistics"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://docs.iza.org/dp12885.pdf",
+        "source_location": "Section 3 (last paragraph); Section 5.1 and footnote 39; Appendix Figure A15"
+      }
+    ]
+  },
+  {
+    "id": "cosar2015",
+    "authors": "A. Kerem Coşar, Paul L. E. Grieco and Felix Tintelnot",
+    "year": 2015,
+    "journal": "Review of Economics and Statistics",
+    "group": "restat",
+    "title": "Borders, Geography, and Oligopoly: Evidence from the Wind Turbine Industry",
+    "summary": "Asks how much a national border segments a market inside the EU, using every wind farm project installed in Denmark and Germany in 1995–1996 and the road distance from each project to each turbine manufacturer. A structural oligopoly model with an export entry decision separates distance costs from variable and fixed border costs. The five large Danish producers hold about 93% of projects in Denmark but about 32% in Germany, and 40 to 50 percent of that gap is attributed to national border costs; removing them would raise total surplus in the industry by about 4% in Denmark and 6% in Germany.",
+    "themes": [
+      "trade",
+      "firms"
+    ],
+    "data": [
+      "Danish Energy Agency register of wind turbines (public; all Danish turbine installations since 1977, with installation date, manufacturer, capacity, rotor diameter, tower height, cadastral and local authority numbers)",
+      "Betreiber-Datenbasis project-level data on wind turbine installations 1982–2005, purchased from a private consulting company (Germany)",
+      "Hand-collected locations of each manufacturer's primary production facility, from firm websites and industry contacts (Denmark and Germany)",
+      "Road distances from manufacturers to projects, Google Maps API as of June 2011",
+      "List prices of turbine models from the Interessenverband Windkraft Binnenland market survey (Germany)"
+    ],
+    "level": "firm",
+    "variables": [
+      "Unit: wind farm project (turbines installed in the same year by the same manufacturer at the same site)",
+      "Outcome: identity of the manufacturer chosen to supply each project (five large Danish firms, five large German firms, or the fringe)",
+      "Cost shifter: log road distance from the manufacturer's main plant to the project",
+      "Cost shifter: national border dummy (project and manufacturer in different countries)",
+      "Cost shifter: state border dummy (both in Germany but in different states)",
+      "Descriptive outcome: market share of the five large Danish firms by distance to the Danish-German border"
+    ],
+    "period": "1995–1996 for the structural estimation; the Danish register covers installations from 1977 and the descriptive border regression pools 1982–2005",
+    "sample_size": "296 Danish wind farm projects installed in 1995–1996 (the Danish sample), out of 1,225 projects in the estimation sample; the other 929 are in Germany (Section 2.2, Table 3 and Appendix Table 2)",
+    "sample": "All onshore wind farm projects installed in Denmark and Germany in 1995–1996, each matched to the ten large Danish and German turbine manufacturers and a competitive fringe.",
+    "sample_source": "https://paulgrieco.github.io/files/preprint/wind-turbines.pdf",
+    "sample_confidence": "paper",
+    "definitions": [
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Danish wind turbine installations and projects",
+        "definition": "The register of Danish wind turbines is publicly available from the Danish Energy Agency and spans the entire universe of Danish turbine installations since 1977 until the most recent month. The German data come with project identifiers; Danish turbines are aggregated into projects: turbines installed in the same year, by the same manufacturer, under the same cadastral and local authority number are assigned to the same project.",
+        "registers": [
+          "Danish Energy Agency register of wind turbines"
+        ],
+        "codes": "Project = same installation year, same manufacturer, same cadastral number and same local authority number",
+        "source_type": "online appendix",
+        "source_url": "https://paulgrieco.github.io/files/appendix/wind-turbines-app.pdf",
+        "source_location": "Appendix B.1"
+      },
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Estimation period 1995–1996",
+        "definition": "The analysis concentrates on projects installed in 1995–1996: the set of firms was stable (a merger wave ran from 1997 to 2005), site owners were typically independent producers, subsidies had been in place for several years, and from the late 1990s a substantial fraction of installations are offshore, where road distance is not a useful cost shifter. Summary statistics cover onshore projects only: 296 projects in Denmark and 929 in Germany.",
+        "registers": [
+          "Danish Energy Agency register of wind turbines",
+          "Betreiber-Datenbasis (Germany)"
+        ],
+        "codes": "Installation years 1995–1996; onshore projects only; N = 1,225",
+        "source_type": "working paper",
+        "source_url": "https://paulgrieco.github.io/files/preprint/wind-turbines.pdf",
+        "source_location": "Section 2.1; Section 2.2; Table 3; Appendix B.2, Table 2 notes"
+      },
+      {
+        "concept": "Trade and offshoring",
+        "variable": "National and state border dummies",
+        "definition": "In the per-megawatt cost function of manufacturer j for project i, the dummy border equals one if the project and the manufacturer are located in different countries and zero otherwise; the dummy state equals one if both are located in Germany but in different states and zero otherwise. Costs also depend on a firm fixed effect and the log of distance.",
+        "registers": [
+          "Danish Energy Agency register of wind turbines",
+          "Betreiber-Datenbasis (Germany)"
+        ],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://paulgrieco.github.io/files/preprint/wind-turbines.pdf",
+        "source_location": "Section 3.1, equation (2)"
+      },
+      {
+        "concept": "Geography and neighbourhood",
+        "variable": "Manufacturer-to-project road distance",
+        "definition": "Manufacturer locations were hand-collected from firms' websites and industry contacts; for the three firms with secondary plants (Bonus, Vestas and Nordex) the headquarters is used. Road distances between project and production coordinates were calculated as of June 2011 with the Google Maps API, so they reflect the most recent road network. Distance is measured in units of 100 km in the estimates, and great-circle distances gave virtually the same results.",
+        "registers": [
+          "Danish Energy Agency register of wind turbines",
+          "Hand-collected manufacturer locations"
+        ],
+        "codes": "Road distance as of June 2011; units of 100 km",
+        "source_type": "online appendix",
+        "source_url": "https://paulgrieco.github.io/files/appendix/wind-turbines-app.pdf",
+        "source_location": "Appendix B.1; Table 3 notes in the working paper"
+      },
+      {
+        "concept": "Firm characteristics and productivity",
+        "variable": "Market share of large Danish firms at the border (regression discontinuity)",
+        "definition": "Linear probability model at project level: the dependent variable equals one if the producer of the project is one of the five large Danish firms and zero otherwise, regressed on a cubic polynomial of the project's distance to the Danish-German border, a Germany dummy that picks up the border effect, and their interactions. The border coefficient is -0.305 for 1995–1996.",
+        "registers": [
+          "Danish Energy Agency register of wind turbines",
+          "Betreiber-Datenbasis (Germany)"
+        ],
+        "codes": "Five large Danish firms: Vestas, Micon, Bonus, Nordtank, WindWorld; 1,226 observations for 1995–1996 and 9,622 for 1982–2005",
+        "source_type": "working paper",
+        "source_url": "https://paulgrieco.github.io/files/preprint/wind-turbines.pdf",
+        "source_location": "Section 2.2, Table 2; Appendix B.4"
+      }
+    ]
+  },
+  {
     "id": "clark2009",
     "authors": "Andrew E. Clark, Nicolai Kristensen and Niels Westergård-Nielsen",
     "year": 2009,
@@ -17015,6 +17595,96 @@
         "source_type": "working paper",
         "source_url": "https://papers.tinbergen.nl/10093.pdf",
         "source_location": "Section 3.1; Section 3.2, footnote 10"
+      }
+    ]
+  },
+  {
+    "id": "bratsberg2007",
+    "authors": "Bernt Bratsberg, Knut Røed, Oddbjørn Raaum, Robin Naylor, Markus Jäntti, Tor Eriksson and Eva Österbacka",
+    "year": 2007,
+    "journal": "Economic Journal",
+    "group": "ej",
+    "title": "Nonlinearities in Intergenerational Earnings Mobility: Consequences for Cross-Country Comparisons",
+    "summary": "Compares father–son earnings mobility in Denmark, Finland, Norway, the UK and the US using samples standardised as closely as possible across countries. In the three Nordic countries the relationship between sons' and fathers' log earnings is flat at the bottom of the fathers' earnings distribution and steeper higher up, while in the UK and the US it is close to linear, so linear elasticities overstate the cross-country differences. For Denmark the linear elasticity is 0.121, against 0.241 at the median of fathers' earnings in the nonlinear model.",
+    "themes": [
+      "inequality",
+      "children"
+    ],
+    "data": [
+      "Danish tax registers: total annual earnings from all employers, fathers in 1980 and 1981 and sons in 1998 and 2000 (1958 birth cohort)",
+      "Danish register information on father–son links through birth records, parents living together in 1981, fathers' education and gross taxable wealth in 1994, and sons' years of schooling (registers not named in the paper)",
+      "Population registers and pension register earnings records, 1958 birth cohort (Norway)",
+      "Quinquennial census panel 1970–2000 with earnings from tax records, 1956–1960 birth cohorts (Finland)",
+      "National Child Development Study (NCDS), 1958 birth cohort survey (UK)",
+      "National Longitudinal Survey of Youth (NLSY79), 1957–1964 birth cohorts (US)"
+    ],
+    "level": "individual",
+    "variables": [
+      "Outcome: son's log earnings, two observation years (Denmark: 1998 and 2000)",
+      "Explanatory: father's log earnings, two observation years (Denmark: 1980 and 1981); alternatively the sum of mother's and father's earnings",
+      "Specification: linear versus polynomial in father's log earnings (fourth order for Denmark), controlling for father's age and its square",
+      "Outcome: probability that the son is excluded because of zero earnings",
+      "Checks: fathers' gross taxable wealth and survival in the 1990s; sons' years of schooling"
+    ],
+    "period": "Danish data: 1958 birth cohort; fathers' earnings 1980 and 1981, sons' earnings 1998 and 2000",
+    "sample_size": "Danish sample: 18,706 father–son observations in the baseline regressions (Table 1); 20,648 sons in the gross sample that includes those with zero earnings (Table 4)",
+    "sample": "Danish sample: sons born in 1958 with positive earnings in 1998 or 2000, matched through birth records to their biological fathers' earnings in 1980 and 1981, after dropping 559 outliers with extremely low father's earnings.",
+    "sample_source": "https://warwick.ac.uk/fac/soc/economics/research/workingpapers/2008/twerp_782.pdf",
+    "sample_confidence": "paper",
+    "definitions": [
+      {
+        "concept": "Earnings and income",
+        "variable": "Annual earnings (Denmark)",
+        "definition": "Total earnings from all employers paid to each worker during the year, taken from tax registers; the records are used by tax authorities to assess each employee's earnings and are deductible labour costs for employers, and the construction of the variable did not change over the period studied. Fathers' earnings are measured in 1980 and 1981 and sons' earnings in 1998 and 2000. For cross-country comparison all earnings are adjusted for general wage growth and expressed in international US dollars at year-2000 prices, using PPP exchange rates from World Development Indicators 2003 and national CPI indices.",
+        "registers": [
+          "Tax registers"
+        ],
+        "codes": "PPP year for Denmark: 1980 (parents), 2000 (sons)",
+        "source_type": "working paper",
+        "source_url": "https://warwick.ac.uk/fac/soc/economics/research/workingpapers/2008/twerp_782.pdf",
+        "source_location": "Section 3 (Data); endnote 6"
+      },
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Danish 1958 cohort sample and outlier rule",
+        "definition": "The register samples are built to mimic the UK National Child Development Study, which sampled children born in one week of March 1958; for Denmark the 1958 birth cohort is used. Apparent extreme outliers are dropped: sample inclusion is based on a regression of log(father's earnings) on father's age and educational attainment, log(wealth in 1994) and a dummy for missing wealth data, and observations whose residual exceeds in absolute value three times the regression's root mean squared error are dropped (559 observations, all with extremely low earnings). A further check drops fathers or families with earnings below $3,000 in all countries.",
+        "registers": [],
+        "codes": "Drop if |residual| > 3 × RMSE (559 observations dropped); common-restriction check: parental earnings >= $3,000",
+        "source_type": "working paper",
+        "source_url": "https://warwick.ac.uk/fac/soc/economics/research/workingpapers/2008/twerp_782.pdf",
+        "source_location": "Section 3 (Data); endnote 5; Table 5"
+      },
+      {
+        "concept": "Family links, fertility and household",
+        "variable": "Father–son link",
+        "definition": "In Denmark and Norway fathers and sons are matched through birth records, so the father is the biological father whether or not he lived with the son, whereas the UK and US survey samples require co-residence. As a sensitivity check the Danish sample is restricted to families where the mother and father are observed living together in 1981 (16,373 observations).",
+        "registers": [],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://warwick.ac.uk/fac/soc/economics/research/workingpapers/2008/twerp_782.pdf",
+        "source_location": "Section 5 (Sample selection bias; fathers); Table 3, columns 4 and 5"
+      },
+      {
+        "concept": "Sample definition and timing",
+        "variable": "Exclusion of sons with zero earnings",
+        "definition": "Only strictly positive earnings enter the log-earnings regressions. The gross sample consists of all sons with at least one valid earnings observation; a son is excluded if he is recorded with zero earnings. In Denmark the mean exclusion rate is 0.0928 in a gross sample of 20,648, and all of those excluded have zero earnings in both observation years.",
+        "registers": [
+          "Tax registers"
+        ],
+        "codes": "Danish gross sample 20,648; mean exclusion rate .0928",
+        "source_type": "working paper",
+        "source_url": "https://warwick.ac.uk/fac/soc/economics/research/workingpapers/2008/twerp_782.pdf",
+        "source_location": "Section 5 (Sample selection bias; sons); Table 4 and notes"
+      },
+      {
+        "concept": "Wealth, debt and consumption",
+        "variable": "Fathers' gross taxable wealth in 1994",
+        "definition": "Gross taxable wealth of fathers observed about 20 years after their earnings, used to check whether fathers with very low recorded earnings had unreported resources. The measure includes property value (recorded below market value) and is only recorded for fathers still alive in 1994; about 40 percent of Danish fathers in the lowest earnings percentile were still alive by the mid to late 1990s.",
+        "registers": [],
+        "codes": null,
+        "source_type": "working paper",
+        "source_url": "https://warwick.ac.uk/fac/soc/economics/research/workingpapers/2008/twerp_782.pdf",
+        "source_location": "Section 5 (Under-reported earnings); Figure 7"
       }
     ]
   },

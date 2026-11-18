@@ -235,6 +235,19 @@ SELECTION_EXTRA = ("The list was then checked twice. The <em>Review of Economic 
                    "About 4,000 articles have no abstract online and could only be screened by title and author: mostly the "
                    "<em>American Economic Review</em> before 2011, the <em>Journal of Public Economics</em> before 2010, the "
                    "<em>Economic Journal</em> for 2010&ndash;2017 and older volumes of the <em>Journal of Political Economy</em> and <em>Econometrica</em>.")
+# Papers in which Denmark is one of several countries. They were left out until November 2026.
+MULTI_COUNTRY = ["bratsberg2007", "moscarini2012", "cosar2015", "eika2019", "bertheau2023", "butikofer2024", "kleven2025atlas"]
+
+
+def selection_multi():
+    by_id = {p["id"]: p for p in PAPERS}
+    cites = ", ".join(f'<a href="papers.html#{i}">{e(short_cite(by_id[i]))}</a>' for i in MULTI_COUNTRY if i in by_id)
+    n = sum(1 for i in MULTI_COUNTRY if i in by_id)
+    return (f"Papers that use Danish register data as one of several countries were left out at first and have been included since "
+            f"November 2026. {n} were added, each checked against the paper itself: {cites}. A paper counts when Danish register "
+            f"microdata are among the country datasets it analyses.")
+
+
 JOURNAL_ORDER = [
     "American Economic Review", "Quarterly Journal of Economics", "Journal of Political Economy", "Econometrica",
     "Review of Economic Studies", "AER: Insights", "AEJ: Applied Economics", "AEJ: Economic Policy",
@@ -339,8 +352,9 @@ def build_papers():
                     <div><dt>Journals</dt><dd>{selection_journals()}</dd></div>
                     <div><dt>Period</dt><dd>Articles published from {min(p["year"] for p in PAPERS)} to {max(p["year"] for p in PAPERS)}, including articles accepted and forthcoming as of {SELECTION_AS_OF}. The earliest paper found is from {min(p["year"] for p in PAPERS)}. {selection_by_period()}</dd></div>
                     <div><dt>Search</dt><dd>A Crossref search of every article in these journals whose title or abstract mentions Denmark or Danish data, plus the publication lists of the main Danish research groups and authors, with each paper then checked by hand. {SELECTION_EXTRA}</dd></div>
-                    <div><dt>Included</dt><dd>Papers whose main analysis is built on Danish administrative register data.</dd></div>
-                    <div><dt>Excluded</dt><dd><em>AEA Papers and Proceedings</em>, finance journals, and papers that use Danish data only as one country among many.</dd></div>
+                    <div><dt>Included</dt><dd>Papers that analyse Danish administrative register data, whether Denmark is the only country studied or one of several.</dd></div>
+                    <div><dt>Several countries</dt><dd>{selection_multi()}</dd></div>
+                    <div><dt>Excluded</dt><dd><em>AEA Papers and Proceedings</em>, finance journals, and papers whose only Danish input is aggregate statistics, a survey that is not linked to the registers, or a commercial database.</dd></div>
                 </dl>
             </div>
             <p>The list covers {len(PAPERS)} papers. It will still miss papers whose title and abstract do not name the country, especially older ones whose abstracts are not in Crossref, so additions are welcome. Each paper lists its datasets, key variables, data period and sample size, and the <a href="samples.html">Data &amp; samples</a> page puts these in one sortable table. The <a href="themes.html">Themes</a> page regroups the same papers by topic, and the <a href="variables.html">Variable map</a> lists the registers and variables they rely on, at the individual and the firm level. If a paper is missing or a summary is wrong, open an issue or a pull request on GitHub.</p>
