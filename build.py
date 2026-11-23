@@ -1842,10 +1842,43 @@ def build_publication():
         elif not k.endswith("_miss"):
             cur[1].append((k, label))
 
+    # raw means first: shares as paired dots on a 0-100% axis, the other variables as a small table
+    MEANS = PUB["means"]
+    CONT = ["n_authors", "sen_max", "sen_min", "year", "log_n", "span", "n_data", "log_cites"]
+    gridp = ", ".join(f"linear-gradient(var(--border-color), var(--border-color)) {t}% 0 / 1px 100% no-repeat" for t in (0, 25, 50, 75, 100))
+    axisp = ('<div class="cf-axis db-axis" aria-hidden="true"><span></span><span></span><div class="cf-ticks">'
+             + "".join(f'<span style="left:{t}%">{t}%</span>' for t in (0, 25, 50, 75, 100)) + "</div></div>\n")
+    raw = ""
+    for label, rows in blocks:
+        rows = [(k, l) for k, l in rows if k not in CONT]
+        raw += f'            <h3 class="cf-title">{label}</h3>\n            <div class="coef db" style="--grid: {gridp}">\n                {axisp}'
+        for k, l in rows:
+            a, b = 100 * MEANS[k][0], 100 * MEANS[k][1]
+            raw += (f'                <div class="cv"><div class="cv-name">{l}</div><div class="cr" title="{a:.0f}% of other papers, {b:.0f}% of Top 5 papers">'
+                    f'<div class="track"><i class="ci" style="left:{min(a, b):.1f}%;width:{abs(b - a):.1f}%"></i><i class="dot" style="left:{a:.1f}%"></i><i class="dot t" style="left:{b:.1f}%"></i></div>'
+                    f'<span class="db-val">{a:.0f}%</span><span class="db-val t">{b:.0f}%</span></div></div>\n')
+        raw += "            </div>\n"
+    lab = {k: l for k, l, _ in PUB_ROWS if k}
+    cont_rows = "".join(
+        f'<tr><td>{"Publication year" if k == "year" else lab[k]}</td><td>{MEANS[k][0] + (2015 if k == "year" else 0):.{1 if k == "year" else 2}f}</td><td>{MEANS[k][1] + (2015 if k == "year" else 0):.{1 if k == "year" else 2}f}</td></tr>'
+        for k in CONT if k != "log_cites")
+    cont_rows += f'<tr><td>Citations, median</td><td>{PUB["median_cites"][0]:.0f}</td><td>{PUB["median_cites"][1]:.0f}</td></tr>'
+
     out += f"""    <section class="section intro">
         <div class="container">
             <h2 class="section-title">What goes with a Top 5 publication</h2>
             <p>Of the {PUB["n_papers"]} papers on this site, {PUB["n_top5"]} appeared in a Top 5 journal. The charts ask which features of a paper go with being one of them. Papers with an author at a leading department, with larger samples and with more citations are more often in the Top 5. The seniority of the authors makes no detectable difference.</p>
+            <h2 class="section-title sub">The raw differences</h2>
+            <p>Before any regression, this is how Top 5 papers differ from the rest. Each line shows the share of papers with a feature in the two groups.</p>
+            <p class="cf-key"><span class="k"><span class="cr"><span class="track"><i class="dot" style="left:50%"></i></span></span> <span>Other journals</span></span><span class="k"><span class="cr"><span class="track"><i class="dot t" style="left:50%"></i></span></span> <span>Top 5</span></span></p>
+{raw}            <div class="table-wrap">
+                <table class="regvars cnt means">
+                    <thead><tr><th>Average</th><th>Other journals</th><th>Top 5</th></tr></thead>
+                    <tbody>{cont_rows}</tbody>
+                </table>
+            </div>
+            <p class="note">Shares and averages over all {PUB["n_papers"]} papers, except the research-assistant line, which covers the papers whose full text could be read. Seniority is in years and is defined in the table at the bottom of the page.</p>
+            <h2 class="section-title sub">The regressions</h2>
             <p>Each line is one estimate: the dot is the change in the probability of a Top 5 publication that goes with the variable, and the bar is its 95% confidence interval. A variable has one line for every specification it enters, numbered as below. Each specification adds variables to the one before.</p>
             <ul class="cf-specs">{"".join(f'<li><b>{m["num"]}</b> {e(m["label"])}</li>' for m in ms)}</ul>
             <p class="cf-key"><span class="k"><span class="cr sig"><span class="track"><i class="ci" style="left:0;width:100%"></i><i class="dot" style="left:50%"></i></span></span> <span>Interval excludes zero</span></span><span class="k"><span class="cr"><span class="track"><i class="ci" style="left:0;width:100%"></i><i class="dot" style="left:50%"></i></span></span> <span>Interval includes zero</span></span></p>

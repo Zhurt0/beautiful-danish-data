@@ -16,7 +16,7 @@
     <meta property="og:title" content="发表分析 | Beautiful Danish Data">
     <meta property="og:description" content="丹麦登记数据论文的哪些特征与发表在 Top 5 期刊相关：对作者团队、机构、数据、资历和引用数做 logit 回归得到的系数图。">
     <meta property="og:url" content="https://zhurt0.github.io/beautiful-danish-data/zh/publication.html">
-    <link rel="stylesheet" href="../css/styles.css?v=ac015592">
+    <link rel="stylesheet" href="../css/styles.css?v=df94ff93">
 </head>
 <body>
     <header>
@@ -39,6 +39,48 @@
         <div class="container">
             <h2 class="section-title">哪些特征与 Top 5 发表相关</h2>
             <p>本站的 184 篇论文中，有 49 篇发表在 Top 5 期刊。下面的图考察论文的哪些特征与此相关。有顶尖系作者、样本更大、引用更多的论文更常出现在 Top 5。作者的资历看不出有影响。</p>
+            <h2 class="section-title sub">原始差异</h2>
+            <p>在做任何回归之前，Top 5 论文与其他论文的差别如下。每一行是两组论文中具有该特征的占比。</p>
+            <p class="cf-key"><span class="k"><span class="cr"><span class="track"><i class="dot" style="left:50%"></i></span></span> <span>其他期刊</span></span><span class="k"><span class="cr"><span class="track"><i class="dot t" style="left:50%"></i></span></span> <span>Top 5</span></span></p>
+            <h3 class="cf-title">作者团队</h3>
+            <div class="coef db" style="--grid: linear-gradient(var(--border-color), var(--border-color)) 0% 0 / 1px 100% no-repeat, linear-gradient(var(--border-color), var(--border-color)) 25% 0 / 1px 100% no-repeat, linear-gradient(var(--border-color), var(--border-color)) 50% 0 / 1px 100% no-repeat, linear-gradient(var(--border-color), var(--border-color)) 75% 0 / 1px 100% no-repeat, linear-gradient(var(--border-color), var(--border-color)) 100% 0 / 1px 100% no-repeat">
+                <div class="cf-axis db-axis" aria-hidden="true"><span></span><span></span><div class="cf-ticks"><span style="left:0%">0%</span><span style="left:25%">25%</span><span style="left:50%">50%</span><span style="left:75%">75%</span><span style="left:100%">100%</span></div></div>
+                <div class="cv"><div class="cv-name">丹麦与国外作者合作</div><div class="cr" title="其他论文 59%，Top 5 论文 67%"><div class="track"><i class="ci" style="left:59.0%;width:8.0%"></i><i class="dot" style="left:59.0%"></i><i class="dot t" style="left:67.0%"></i></div><span class="db-val">59%</span><span class="db-val t">67%</span></div></div>
+                <div class="cv"><div class="cv-name">仅国外作者</div><div class="cr" title="其他论文 13%，Top 5 论文 22%"><div class="track"><i class="ci" style="left:13.0%;width:9.0%"></i><i class="dot" style="left:13.0%"></i><i class="dot t" style="left:22.0%"></i></div><span class="db-val">13%</span><span class="db-val t">22%</span></div></div>
+                <div class="cv"><div class="cv-name">有美国机构的作者</div><div class="cr" title="其他论文 44%，Top 5 论文 71%"><div class="track"><i class="ci" style="left:44.0%;width:27.0%"></i><i class="dot" style="left:44.0%"></i><i class="dot t" style="left:71.0%"></i></div><span class="db-val">44%</span><span class="db-val t">71%</span></div></div>
+                <div class="cv"><div class="cv-name">有顶尖系的作者</div><div class="cr" title="其他论文 35%，Top 5 论文 69%"><div class="track"><i class="ci" style="left:35.0%;width:34.0%"></i><i class="dot" style="left:35.0%"></i><i class="dot t" style="left:69.0%"></i></div><span class="db-val">35%</span><span class="db-val t">69%</span></div></div>
+                <div class="cv"><div class="cv-name">有哥本哈根大学的作者</div><div class="cr" title="其他论文 47%，Top 5 论文 51%"><div class="track"><i class="ci" style="left:47.0%;width:4.0%"></i><i class="dot" style="left:47.0%"></i><i class="dot t" style="left:51.0%"></i></div><span class="db-val">47%</span><span class="db-val t">51%</span></div></div>
+                <div class="cv"><div class="cv-name">有奥胡斯大学的作者</div><div class="cr" title="其他论文 30%，Top 5 论文 31%"><div class="track"><i class="ci" style="left:30.0%;width:1.0%"></i><i class="dot" style="left:30.0%"></i><i class="dot t" style="left:31.0%"></i></div><span class="db-val">30%</span><span class="db-val t">31%</span></div></div>
+            </div>
+            <h3 class="cf-title">论文</h3>
+            <div class="coef db" style="--grid: linear-gradient(var(--border-color), var(--border-color)) 0% 0 / 1px 100% no-repeat, linear-gradient(var(--border-color), var(--border-color)) 25% 0 / 1px 100% no-repeat, linear-gradient(var(--border-color), var(--border-color)) 50% 0 / 1px 100% no-repeat, linear-gradient(var(--border-color), var(--border-color)) 75% 0 / 1px 100% no-repeat, linear-gradient(var(--border-color), var(--border-color)) 100% 0 / 1px 100% no-repeat">
+                <div class="cf-axis db-axis" aria-hidden="true"><span></span><span></span><div class="cf-ticks"><span style="left:0%">0%</span><span style="left:25%">25%</span><span style="left:50%">50%</span><span style="left:75%">75%</span><span style="left:100%">100%</span></div></div>
+                <div class="cv"><div class="cv-name">企业层面数据</div><div class="cr" title="其他论文 22%，Top 5 论文 33%"><div class="track"><i class="ci" style="left:22.0%;width:11.0%"></i><i class="dot" style="left:22.0%"></i><i class="dot t" style="left:33.0%"></i></div><span class="db-val">22%</span><span class="db-val t">33%</span></div></div>
+                <div class="cv"><div class="cv-name">标题含丹麦</div><div class="cr" title="其他论文 17%，Top 5 论文 20%"><div class="track"><i class="ci" style="left:17.0%;width:3.0%"></i><i class="dot" style="left:17.0%"></i><i class="dot t" style="left:20.0%"></i></div><span class="db-val">17%</span><span class="db-val t">20%</span></div></div>
+                <div class="cv"><div class="cv-name">链接了问卷调查</div><div class="cr" title="其他论文 14%，Top 5 论文 20%"><div class="track"><i class="ci" style="left:14.0%;width:6.0%"></i><i class="dot" style="left:14.0%"></i><i class="dot t" style="left:20.0%"></i></div><span class="db-val">14%</span><span class="db-val t">20%</span></div></div>
+                <div class="cv"><div class="cv-name">复制包</div><div class="cr" title="其他论文 23%，Top 5 论文 31%"><div class="track"><i class="ci" style="left:23.0%;width:8.0%"></i><i class="dot" style="left:23.0%"></i><i class="dot t" style="left:31.0%"></i></div><span class="db-val">23%</span><span class="db-val t">31%</span></div></div>
+                <div class="cv"><div class="cv-name">NBER 工作论文</div><div class="cr" title="其他论文 24%，Top 5 论文 53%"><div class="track"><i class="ci" style="left:24.0%;width:29.0%"></i><i class="dot" style="left:24.0%"></i><i class="dot t" style="left:53.0%"></i></div><span class="db-val">24%</span><span class="db-val t">53%</span></div></div>
+                <div class="cv"><div class="cv-name">感谢了研究助理</div><div class="cr" title="其他论文 16%，Top 5 论文 35%"><div class="track"><i class="ci" style="left:16.0%;width:19.0%"></i><i class="dot" style="left:16.0%"></i><i class="dot t" style="left:35.0%"></i></div><span class="db-val">16%</span><span class="db-val t">35%</span></div></div>
+            </div>
+            <h3 class="cf-title">主题</h3>
+            <div class="coef db" style="--grid: linear-gradient(var(--border-color), var(--border-color)) 0% 0 / 1px 100% no-repeat, linear-gradient(var(--border-color), var(--border-color)) 25% 0 / 1px 100% no-repeat, linear-gradient(var(--border-color), var(--border-color)) 50% 0 / 1px 100% no-repeat, linear-gradient(var(--border-color), var(--border-color)) 75% 0 / 1px 100% no-repeat, linear-gradient(var(--border-color), var(--border-color)) 100% 0 / 1px 100% no-repeat">
+                <div class="cf-axis db-axis" aria-hidden="true"><span></span><span></span><div class="cf-ticks"><span style="left:0%">0%</span><span style="left:25%">25%</span><span style="left:50%">50%</span><span style="left:75%">75%</span><span style="left:100%">100%</span></div></div>
+                <div class="cv"><div class="cv-name">税收</div><div class="cr" title="其他论文 16%，Top 5 论文 20%"><div class="track"><i class="ci" style="left:16.0%;width:4.0%"></i><i class="dot" style="left:16.0%"></i><i class="dot t" style="left:20.0%"></i></div><span class="db-val">16%</span><span class="db-val t">20%</span></div></div>
+                <div class="cv"><div class="cv-name">家庭金融</div><div class="cr" title="其他论文 15%，Top 5 论文 24%"><div class="track"><i class="ci" style="left:15.0%;width:9.0%"></i><i class="dot" style="left:15.0%"></i><i class="dot t" style="left:24.0%"></i></div><span class="db-val">15%</span><span class="db-val t">24%</span></div></div>
+                <div class="cv"><div class="cv-name">劳动</div><div class="cr" title="其他论文 44%，Top 5 论文 49%"><div class="track"><i class="ci" style="left:44.0%;width:5.0%"></i><i class="dot" style="left:44.0%"></i><i class="dot t" style="left:49.0%"></i></div><span class="db-val">44%</span><span class="db-val t">49%</span></div></div>
+                <div class="cv"><div class="cv-name">健康</div><div class="cr" title="其他论文 16%，Top 5 论文 10%"><div class="track"><i class="ci" style="left:10.0%;width:6.0%"></i><i class="dot" style="left:16.0%"></i><i class="dot t" style="left:10.0%"></i></div><span class="db-val">16%</span><span class="db-val t">10%</span></div></div>
+                <div class="cv"><div class="cv-name">家庭</div><div class="cr" title="其他论文 16%，Top 5 论文 22%"><div class="track"><i class="ci" style="left:16.0%;width:6.0%"></i><i class="dot" style="left:16.0%"></i><i class="dot t" style="left:22.0%"></i></div><span class="db-val">16%</span><span class="db-val t">22%</span></div></div>
+                <div class="cv"><div class="cv-name">企业</div><div class="cr" title="其他论文 18%，Top 5 论文 16%"><div class="track"><i class="ci" style="left:16.0%;width:2.0%"></i><i class="dot" style="left:18.0%"></i><i class="dot t" style="left:16.0%"></i></div><span class="db-val">18%</span><span class="db-val t">16%</span></div></div>
+                <div class="cv"><div class="cv-name">儿童</div><div class="cr" title="其他论文 23%，Top 5 论文 8%"><div class="track"><i class="ci" style="left:8.0%;width:15.0%"></i><i class="dot" style="left:23.0%"></i><i class="dot t" style="left:8.0%"></i></div><span class="db-val">23%</span><span class="db-val t">8%</span></div></div>
+            </div>
+            <div class="table-wrap">
+                <table class="regvars cnt means">
+                    <thead><tr><th>均值</th><th>其他期刊</th><th>Top 5</th></tr></thead>
+                    <tbody><tr><td>作者人数</td><td>2.94</td><td>3.29</td></tr><tr><td>最资深作者的资历</td><td>21.50</td><td>22.69</td></tr><tr><td>最年轻作者的资历</td><td>7.98</td><td>8.53</td></tr><tr><td>发表年份</td><td>2019.4</td><td>2019.7</td></tr><tr><td>样本量（log10）</td><td>5.13</td><td>5.74</td></tr><tr><td>数据年数</td><td>18.41</td><td>21.08</td></tr><tr><td>数据集个数</td><td>4.43</td><td>4.90</td></tr><tr><td>引用数中位数</td><td>44</td><td>197</td></tr></tbody>
+                </table>
+            </div>
+            <p class="note">占比和均值按全部 184 篇论文计算；研究助理一行除外，它只包括能读到全文的论文。资历以年为单位，定义见页面底部的表格。</p>
+            <h2 class="section-title sub">回归结果</h2>
             <p>每一行是一个估计值：圆点是该变量对应的 Top 5 发表概率的变化，横线是 95% 置信区间。一个变量进入几个模型设定就有几行，编号见下。每个设定都在前一个的基础上增加变量。</p>
             <ul class="cf-specs"><li><b>(1)</b> 作者构成</li><li><b>(2)</b> + 机构</li><li><b>(3)</b> + 论文特征</li><li><b>(4)</b> + 资历</li><li><b>(5)</b> + 引用</li><li><b>(6)</b> + 研究助理、主题</li></ul>
             <p class="cf-key"><span class="k"><span class="cr sig"><span class="track"><i class="ci" style="left:0;width:100%"></i><i class="dot" style="left:50%"></i></span></span> <span>区间不含零</span></span><span class="k"><span class="cr"><span class="track"><i class="ci" style="left:0;width:100%"></i><i class="dot" style="left:50%"></i></span></span> <span>区间含零</span></span></p>

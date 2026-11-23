@@ -515,3 +515,18 @@ ul.ra-later li { margin-bottom: 6px; }
     .stk-row { grid-template-columns: 6.5em 1fr 2.2em; font-size: 0.8rem; }
     .stk-bar b.nar { display: none; }
 }
+
+/* Publication analysis: raw means as paired dots */
+.section-title.sub { margin-top: 38px; }
+.coef.db .cr { grid-template-columns: 1fr 3.2em 3.2em; height: 22px; }
+.coef.db .track { height: 22px; }
+.coef.db .track .ci { top: 10px; background: var(--pale); }
+.coef.db .track .dot { top: 5.5px; }
+.track .dot.t { background: var(--navy); border-color: var(--navy); }
+.coef.db .cv { padding: 3px 0; }
+.db-val { text-align: right; font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.db-val.t { color: var(--navy); font-weight: 700; }
+.coef.db .cf-ticks { margin-left: 0; margin-right: 6.4em; }
+.cf-key .cr { display: inline-block; }
+.cf-key .k .cr:not(.sig) .track .ci { display: block; }
+table.regvars.means { max-width: 34em; }
