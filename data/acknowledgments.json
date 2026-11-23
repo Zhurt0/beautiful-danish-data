@@ -1,0 +1,1503 @@
+{
+ "n_read": 169,
+ "n_ack": 155,
+ "n_top5": 47,
+ "n_other": 108,
+ "any_funder": [
+  81,
+  43
+ ],
+ "funders": [
+  {
+   "name": "Independent Research Fund Denmark",
+   "n": 40,
+   "top5": 9,
+   "other": 31,
+   "share_top5": 0.191,
+   "share_other": 0.287,
+   "p": 0.237
+  },
+  {
+   "name": "Danish National Research Foundation",
+   "n": 38,
+   "top5": 13,
+   "other": 25,
+   "share_top5": 0.277,
+   "share_other": 0.231,
+   "p": 0.549
+  },
+  {
+   "name": "Other European public funders",
+   "n": 32,
+   "top5": 13,
+   "other": 19,
+   "share_top5": 0.277,
+   "share_other": 0.176,
+   "p": 0.195
+  },
+  {
+   "name": "Economic Policy Research Network (EPRN)",
+   "n": 17,
+   "top5": 6,
+   "other": 11,
+   "share_top5": 0.128,
+   "share_other": 0.102,
+   "p": 0.78
+  },
+  {
+   "name": "Other US foundations",
+   "n": 15,
+   "top5": 9,
+   "other": 6,
+   "share_top5": 0.191,
+   "share_other": 0.056,
+   "p": 0.015
+  },
+  {
+   "name": "Rockwool Foundation",
+   "n": 15,
+   "top5": 4,
+   "other": 11,
+   "share_top5": 0.085,
+   "share_other": 0.102,
+   "p": 1.0
+  },
+  {
+   "name": "European Research Council",
+   "n": 15,
+   "top5": 7,
+   "other": 8,
+   "share_top5": 0.149,
+   "share_other": 0.074,
+   "p": 0.153
+  },
+  {
+   "name": "Other Danish foundations",
+   "n": 11,
+   "top5": 3,
+   "other": 8,
+   "share_top5": 0.064,
+   "share_other": 0.074,
+   "p": 1.0
+  },
+  {
+   "name": "US National Science Foundation",
+   "n": 10,
+   "top5": 7,
+   "other": 3,
+   "share_top5": 0.149,
+   "share_other": 0.028,
+   "p": 0.009
+  },
+  {
+   "name": "Danish Strategic Research Council / Innovation Fund",
+   "n": 9,
+   "top5": 0,
+   "other": 9,
+   "share_top5": 0.0,
+   "share_other": 0.083,
+   "p": 0.058
+  },
+  {
+   "name": "Carlsberg Foundation",
+   "n": 8,
+   "top5": 1,
+   "other": 7,
+   "share_top5": 0.021,
+   "share_other": 0.065,
+   "p": 0.436
+  },
+  {
+   "name": "Novo Nordisk Foundation",
+   "n": 5,
+   "top5": 0,
+   "other": 5,
+   "share_top5": 0.0,
+   "share_other": 0.046,
+   "p": 0.323
+  },
+  {
+   "name": "US National Institutes of Health",
+   "n": 3,
+   "top5": 0,
+   "other": 3,
+   "share_top5": 0.0,
+   "share_other": 0.028,
+   "p": 0.554
+  },
+  {
+   "name": "Danish Finance Institute",
+   "n": 2,
+   "top5": 1,
+   "other": 1,
+   "share_top5": 0.021,
+   "share_other": 0.009,
+   "p": 0.516
+  }
+ ],
+ "thanks": {
+  "n_people": 608,
+  "n_mentions": 968,
+  "mean": [
+   4.9,
+   9.3
+  ],
+  "median": [
+   3.5,
+   8.0
+  ],
+  "p_count": 0.0016,
+  "star_h": 60,
+  "n_star": 70,
+  "star": [
+   32,
+   108,
+   28,
+   47
+  ],
+  "p_star": 0.0006,
+  "reg": {
+   "star": {
+    "b": 0.088,
+    "se": 0.087,
+    "p": 0.31
+   },
+   "log_thanked": {
+    "b": 0.062,
+    "se": 0.041,
+    "p": 0.13
+   }
+  },
+  "reg_n": 155
+ },
+ "most": [
+  {
+   "name": "Søren Leth-Petersen",
+   "n": 17,
+   "top5": 5,
+   "site": "dk",
+   "h": 26
+  },
+  {
+   "name": "Claus Thustrup Kreiner",
+   "n": 12,
+   "top5": 3,
+   "site": "dk",
+   "h": 34
+  },
+  {
+   "name": "Mette Ejrnæs",
+   "n": 11,
+   "top5": 2,
+   "site": "dk",
+   "h": 22
+  },
+  {
+   "name": "Raj Chetty",
+   "n": 10,
+   "top5": 5,
+   "site": "abroad",
+   "h": 85
+  },
+  {
+   "name": "Martin Browning",
+   "n": 10,
+   "top5": 3,
+   "site": "abroad",
+   "h": 50
+  },
+  {
+   "name": "Gordon Dahl",
+   "n": 9,
+   "top5": 0,
+   "site": "abroad",
+   "h": 35
+  },
+  {
+   "name": "Bo Honoré",
+   "n": 7,
+   "top5": 1,
+   "site": null,
+   "h": 30
+  },
+  {
+   "name": "Henrik Kleven",
+   "n": 7,
+   "top5": 2,
+   "site": "abroad",
+   "h": 53
+  },
+  {
+   "name": "Thomas Jørgensen",
+   "n": 7,
+   "top5": 1,
+   "site": "dk",
+   "h": 10
+  },
+  {
+   "name": "Henning Bunzel",
+   "n": 7,
+   "top5": 4,
+   "site": null,
+   "h": 11
+  },
+  {
+   "name": "Paul Bingley",
+   "n": 7,
+   "top5": 2,
+   "site": "dk",
+   "h": 23
+  },
+  {
+   "name": "Emmanuel Saez",
+   "n": 7,
+   "top5": 4,
+   "site": "abroad",
+   "h": 101
+  },
+  {
+   "name": "Ilyana Kuziemko",
+   "n": 6,
+   "top5": 3,
+   "site": null,
+   "h": 35
+  },
+  {
+   "name": "Jakob Søgaard",
+   "n": 6,
+   "top5": 1,
+   "site": "dk",
+   "h": 15
+  },
+  {
+   "name": "Jakob Roland Munch",
+   "n": 6,
+   "top5": 0,
+   "site": "dk",
+   "h": 28
+  },
+  {
+   "name": "Mette Gørtz",
+   "n": 6,
+   "top5": 0,
+   "site": "dk",
+   "h": 17
+  },
+  {
+   "name": "Hilary Hoynes",
+   "n": 6,
+   "top5": 1,
+   "site": null,
+   "h": 59
+  },
+  {
+   "name": "Wojciech Kopczuk",
+   "n": 6,
+   "top5": 4,
+   "site": "abroad",
+   "h": 42
+  },
+  {
+   "name": "David Laibson",
+   "n": 5,
+   "top5": 2,
+   "site": null,
+   "h": 187
+  },
+  {
+   "name": "John Friedman",
+   "n": 5,
+   "top5": 4,
+   "site": "abroad",
+   "h": 33
+  },
+  {
+   "name": "Joseph Altonji",
+   "n": 5,
+   "top5": 3,
+   "site": null,
+   "h": 65
+  },
+  {
+   "name": "Lawrence Katz",
+   "n": 5,
+   "top5": 2,
+   "site": null,
+   "h": 105
+  },
+  {
+   "name": "Magne Mogstad",
+   "n": 5,
+   "top5": 2,
+   "site": "abroad",
+   "h": 58
+  },
+  {
+   "name": "Julie Cullen",
+   "n": 5,
+   "top5": 0,
+   "site": null,
+   "h": 26
+  },
+  {
+   "name": "Amy Finkelstein",
+   "n": 4,
+   "top5": 1,
+   "site": null,
+   "h": 75
+  },
+  {
+   "name": "Rasmus Landersø",
+   "n": 4,
+   "top5": 1,
+   "site": "dk",
+   "h": 16
+  },
+  {
+   "name": "Richard Blundell",
+   "n": 4,
+   "top5": 4,
+   "site": null,
+   "h": 110
+  },
+  {
+   "name": "Andrea Weber",
+   "n": 4,
+   "top5": 1,
+   "site": null,
+   "h": 43
+  },
+  {
+   "name": "Rune Vejlin",
+   "n": 4,
+   "top5": 1,
+   "site": "dk",
+   "h": 14
+  },
+  {
+   "name": "Costas Meghir",
+   "n": 4,
+   "top5": 2,
+   "site": null,
+   "h": 87
+  }
+ ],
+ "net": {
+  "nodes": [
+   {
+    "name": "Amy Finkelstein",
+    "n": 4,
+    "site": null,
+    "x": 1.0,
+    "y": 0.4526
+   },
+   {
+    "name": "Bo Honoré",
+    "n": 7,
+    "site": null,
+    "x": 0.7725,
+    "y": 0.6066
+   },
+   {
+    "name": "Ilyana Kuziemko",
+    "n": 6,
+    "site": null,
+    "x": 0.827,
+    "y": 0.4327
+   },
+   {
+    "name": "Jakob Søgaard",
+    "n": 6,
+    "site": "dk",
+    "x": 0.4837,
+    "y": 0.6728
+   },
+   {
+    "name": "David Laibson",
+    "n": 5,
+    "site": null,
+    "x": 0.4933,
+    "y": 0.2282
+   },
+   {
+    "name": "Sumit Agarwal",
+    "n": 3,
+    "site": null,
+    "x": 0.4844,
+    "y": 0.0
+   },
+   {
+    "name": "Henrik Kleven",
+    "n": 7,
+    "site": "abroad",
+    "x": 0.6693,
+    "y": 0.5157
+   },
+   {
+    "name": "Richard Blundell",
+    "n": 4,
+    "site": null,
+    "x": 0.2355,
+    "y": 0.566
+   },
+   {
+    "name": "Andrea Weber",
+    "n": 4,
+    "site": null,
+    "x": 0.7681,
+    "y": 0.1298
+   },
+   {
+    "name": "Søren Leth-Petersen",
+    "n": 17,
+    "site": "dk",
+    "x": 0.4211,
+    "y": 0.5166
+   },
+   {
+    "name": "Adam Sheridan",
+    "n": 3,
+    "site": "abroad",
+    "x": 0.3791,
+    "y": 0.6584
+   },
+   {
+    "name": "Claus Thustrup Kreiner",
+    "n": 12,
+    "site": "dk",
+    "x": 0.5309,
+    "y": 0.5514
+   },
+   {
+    "name": "John Friedman",
+    "n": 5,
+    "site": "abroad",
+    "x": 0.6592,
+    "y": 0.4108
+   },
+   {
+    "name": "Raj Chetty",
+    "n": 10,
+    "site": "abroad",
+    "x": 0.6271,
+    "y": 0.3738
+   },
+   {
+    "name": "Bertel Schjerning",
+    "n": 3,
+    "site": "dk",
+    "x": 0.5083,
+    "y": 0.9985
+   },
+   {
+    "name": "Martin Browning",
+    "n": 10,
+    "site": "abroad",
+    "x": 0.576,
+    "y": 0.6298
+   },
+   {
+    "name": "Mette Ejrnæs",
+    "n": 11,
+    "site": "dk",
+    "x": 0.472,
+    "y": 0.7657
+   },
+   {
+    "name": "Thomas Jørgensen",
+    "n": 7,
+    "site": "dk",
+    "x": 0.5679,
+    "y": 0.6854
+   },
+   {
+    "name": "Fane Groes",
+    "n": 3,
+    "site": "dk",
+    "x": 0.6756,
+    "y": 0.8788
+   },
+   {
+    "name": "Meltem Daysal",
+    "n": 4,
+    "site": null,
+    "x": 0.4164,
+    "y": 0.6179
+   },
+   {
+    "name": "Luigi Pistaferri",
+    "n": 3,
+    "site": "abroad",
+    "x": 0.4338,
+    "y": 1.0
+   },
+   {
+    "name": "Andreas Peichl",
+    "n": 3,
+    "site": null,
+    "x": 0.249,
+    "y": 0.4725
+   },
+   {
+    "name": "Benjamin Ly Serena",
+    "n": 3,
+    "site": "dk",
+    "x": 0.4407,
+    "y": 0.6595
+   },
+   {
+    "name": "Paul Bingley",
+    "n": 7,
+    "site": "dk",
+    "x": 0.3681,
+    "y": 0.7454
+   },
+   {
+    "name": "Mette Gørtz",
+    "n": 6,
+    "site": "dk",
+    "x": 0.4235,
+    "y": 0.6932
+   },
+   {
+    "name": "David Card",
+    "n": 4,
+    "site": null,
+    "x": 0.9475,
+    "y": 0.1415
+   },
+   {
+    "name": "Gordon Dahl",
+    "n": 9,
+    "site": "abroad",
+    "x": 0.5037,
+    "y": 0.6308
+   },
+   {
+    "name": "Emmanuel Saez",
+    "n": 7,
+    "site": "abroad",
+    "x": 0.6744,
+    "y": 0.3299
+   },
+   {
+    "name": "Lawrence Katz",
+    "n": 5,
+    "site": null,
+    "x": 0.5469,
+    "y": 0.3528
+   },
+   {
+    "name": "Patrick Kline",
+    "n": 3,
+    "site": null,
+    "x": 0.5987,
+    "y": 0.2059
+   },
+   {
+    "name": "Christopher Carroll",
+    "n": 4,
+    "site": null,
+    "x": 0.4131,
+    "y": 0.0256
+   },
+   {
+    "name": "Danny Yagan",
+    "n": 4,
+    "site": null,
+    "x": 0.6129,
+    "y": 0.2805
+   },
+   {
+    "name": "Jonathan Parker",
+    "n": 3,
+    "site": null,
+    "x": 0.2662,
+    "y": 0.3903
+   },
+   {
+    "name": "Nathan Hendren",
+    "n": 4,
+    "site": null,
+    "x": 0.5185,
+    "y": 0.3045
+   },
+   {
+    "name": "Hilary Hoynes",
+    "n": 6,
+    "site": null,
+    "x": 0.8185,
+    "y": 0.2917
+   },
+   {
+    "name": "Janet Currie",
+    "n": 3,
+    "site": null,
+    "x": 0.9845,
+    "y": 0.2243
+   },
+   {
+    "name": "Magne Mogstad",
+    "n": 5,
+    "site": "abroad",
+    "x": 0.3092,
+    "y": 0.3343
+   },
+   {
+    "name": "Nabanita Datta Gupta",
+    "n": 3,
+    "site": "dk",
+    "x": 0.2341,
+    "y": 0.9165
+   },
+   {
+    "name": "Eric French",
+    "n": 3,
+    "site": null,
+    "x": 0.1675,
+    "y": 0.4534
+   },
+   {
+    "name": "Jeffrey Clemens",
+    "n": 3,
+    "site": null,
+    "x": 0.4703,
+    "y": 0.5147
+   },
+   {
+    "name": "Julie Cullen",
+    "n": 5,
+    "site": null,
+    "x": 0.4908,
+    "y": 0.5924
+   },
+   {
+    "name": "Rafael Lalive",
+    "n": 3,
+    "site": null,
+    "x": 0.4637,
+    "y": 0.5881
+   },
+   {
+    "name": "Alessandra Voena",
+    "n": 3,
+    "site": null,
+    "x": 0.0,
+    "y": 0.4127
+   },
+   {
+    "name": "Itzik Fadlon",
+    "n": 4,
+    "site": "abroad",
+    "x": 0.4274,
+    "y": 0.5814
+   },
+   {
+    "name": "Torben Heien Nielsen",
+    "n": 4,
+    "site": "dk",
+    "x": 0.4706,
+    "y": 0.6319
+   },
+   {
+    "name": "Wojciech Kopczuk",
+    "n": 6,
+    "site": "abroad",
+    "x": 0.7065,
+    "y": 0.3941
+   },
+   {
+    "name": "Joel Slemrod",
+    "n": 4,
+    "site": null,
+    "x": 0.7482,
+    "y": 0.3714
+   },
+   {
+    "name": "Shelly Lundberg",
+    "n": 3,
+    "site": null,
+    "x": 0.3203,
+    "y": 0.8574
+   }
+  ],
+  "links": [
+   {
+    "a": "Amy Finkelstein",
+    "b": "Ilyana Kuziemko",
+    "w": 2
+   },
+   {
+    "a": "Bo Honoré",
+    "b": "Ilyana Kuziemko",
+    "w": 3
+   },
+   {
+    "a": "Bo Honoré",
+    "b": "Martin Browning",
+    "w": 2
+   },
+   {
+    "a": "Ilyana Kuziemko",
+    "b": "Hilary Hoynes",
+    "w": 2
+   },
+   {
+    "a": "Ilyana Kuziemko",
+    "b": "Raj Chetty",
+    "w": 2
+   },
+   {
+    "a": "Ilyana Kuziemko",
+    "b": "Wojciech Kopczuk",
+    "w": 2
+   },
+   {
+    "a": "Jakob Søgaard",
+    "b": "Benjamin Ly Serena",
+    "w": 2
+   },
+   {
+    "a": "Jakob Søgaard",
+    "b": "Claus Thustrup Kreiner",
+    "w": 2
+   },
+   {
+    "a": "Jakob Søgaard",
+    "b": "Gordon Dahl",
+    "w": 2
+   },
+   {
+    "a": "Jakob Søgaard",
+    "b": "Itzik Fadlon",
+    "w": 2
+   },
+   {
+    "a": "Jakob Søgaard",
+    "b": "Julie Cullen",
+    "w": 2
+   },
+   {
+    "a": "Jakob Søgaard",
+    "b": "Meltem Daysal",
+    "w": 2
+   },
+   {
+    "a": "Jakob Søgaard",
+    "b": "Mette Gørtz",
+    "w": 2
+   },
+   {
+    "a": "Jakob Søgaard",
+    "b": "Rafael Lalive",
+    "w": 2
+   },
+   {
+    "a": "Jakob Søgaard",
+    "b": "Søren Leth-Petersen",
+    "w": 3
+   },
+   {
+    "a": "Jakob Søgaard",
+    "b": "Torben Heien Nielsen",
+    "w": 2
+   },
+   {
+    "a": "Jakob Søgaard",
+    "b": "Thomas Jørgensen",
+    "w": 2
+   },
+   {
+    "a": "David Laibson",
+    "b": "Sumit Agarwal",
+    "w": 2
+   },
+   {
+    "a": "David Laibson",
+    "b": "Christopher Carroll",
+    "w": 2
+   },
+   {
+    "a": "David Laibson",
+    "b": "Danny Yagan",
+    "w": 2
+   },
+   {
+    "a": "David Laibson",
+    "b": "Lawrence Katz",
+    "w": 3
+   },
+   {
+    "a": "David Laibson",
+    "b": "Nathan Hendren",
+    "w": 3
+   },
+   {
+    "a": "David Laibson",
+    "b": "Raj Chetty",
+    "w": 2
+   },
+   {
+    "a": "David Laibson",
+    "b": "Søren Leth-Petersen",
+    "w": 2
+   },
+   {
+    "a": "Henrik Kleven",
+    "b": "Claus Thustrup Kreiner",
+    "w": 3
+   },
+   {
+    "a": "Henrik Kleven",
+    "b": "Emmanuel Saez",
+    "w": 3
+   },
+   {
+    "a": "Henrik Kleven",
+    "b": "Thomas Jørgensen",
+    "w": 2
+   },
+   {
+    "a": "Henrik Kleven",
+    "b": "Joel Slemrod",
+    "w": 2
+   },
+   {
+    "a": "Richard Blundell",
+    "b": "Søren Leth-Petersen",
+    "w": 2
+   },
+   {
+    "a": "Andrea Weber",
+    "b": "Emmanuel Saez",
+    "w": 2
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Adam Sheridan",
+    "w": 2
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Claus Thustrup Kreiner",
+    "w": 7
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Raj Chetty",
+    "w": 3
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Mette Ejrnæs",
+    "w": 3
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Magne Mogstad",
+    "w": 2
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Jonathan Parker",
+    "w": 2
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Martin Browning",
+    "w": 3
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Paul Bingley",
+    "w": 2
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Thomas Jørgensen",
+    "w": 3
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Lawrence Katz",
+    "w": 2
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Nathan Hendren",
+    "w": 2
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Eric French",
+    "w": 2
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Gordon Dahl",
+    "w": 4
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Jeffrey Clemens",
+    "w": 3
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Julie Cullen",
+    "w": 4
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Rafael Lalive",
+    "w": 3
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Benjamin Ly Serena",
+    "w": 2
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Itzik Fadlon",
+    "w": 3
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Meltem Daysal",
+    "w": 2
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Mette Gørtz",
+    "w": 3
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Torben Heien Nielsen",
+    "w": 3
+   },
+   {
+    "a": "Søren Leth-Petersen",
+    "b": "Andreas Peichl",
+    "w": 2
+   },
+   {
+    "a": "Adam Sheridan",
+    "b": "Claus Thustrup Kreiner",
+    "w": 2
+   },
+   {
+    "a": "Adam Sheridan",
+    "b": "Benjamin Ly Serena",
+    "w": 2
+   },
+   {
+    "a": "Adam Sheridan",
+    "b": "Mette Ejrnæs",
+    "w": 2
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "John Friedman",
+    "w": 2
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Raj Chetty",
+    "w": 4
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Emmanuel Saez",
+    "w": 2
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Lawrence Katz",
+    "w": 2
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Mette Ejrnæs",
+    "w": 3
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Paul Bingley",
+    "w": 2
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Martin Browning",
+    "w": 3
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Thomas Jørgensen",
+    "w": 4
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Gordon Dahl",
+    "w": 5
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Jeffrey Clemens",
+    "w": 2
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Julie Cullen",
+    "w": 3
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Rafael Lalive",
+    "w": 3
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Benjamin Ly Serena",
+    "w": 2
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Itzik Fadlon",
+    "w": 2
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Meltem Daysal",
+    "w": 3
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Mette Gørtz",
+    "w": 2
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Torben Heien Nielsen",
+    "w": 2
+   },
+   {
+    "a": "Claus Thustrup Kreiner",
+    "b": "Wojciech Kopczuk",
+    "w": 2
+   },
+   {
+    "a": "John Friedman",
+    "b": "Raj Chetty",
+    "w": 5
+   },
+   {
+    "a": "John Friedman",
+    "b": "Danny Yagan",
+    "w": 2
+   },
+   {
+    "a": "John Friedman",
+    "b": "Emmanuel Saez",
+    "w": 2
+   },
+   {
+    "a": "John Friedman",
+    "b": "Wojciech Kopczuk",
+    "w": 4
+   },
+   {
+    "a": "John Friedman",
+    "b": "Joel Slemrod",
+    "w": 2
+   },
+   {
+    "a": "Raj Chetty",
+    "b": "Lawrence Katz",
+    "w": 3
+   },
+   {
+    "a": "Raj Chetty",
+    "b": "Nathan Hendren",
+    "w": 3
+   },
+   {
+    "a": "Raj Chetty",
+    "b": "Danny Yagan",
+    "w": 3
+   },
+   {
+    "a": "Raj Chetty",
+    "b": "Emmanuel Saez",
+    "w": 3
+   },
+   {
+    "a": "Raj Chetty",
+    "b": "Wojciech Kopczuk",
+    "w": 6
+   },
+   {
+    "a": "Raj Chetty",
+    "b": "Joel Slemrod",
+    "w": 3
+   },
+   {
+    "a": "Raj Chetty",
+    "b": "Hilary Hoynes",
+    "w": 3
+   },
+   {
+    "a": "Bertel Schjerning",
+    "b": "Mette Ejrnæs",
+    "w": 3
+   },
+   {
+    "a": "Martin Browning",
+    "b": "Mette Ejrnæs",
+    "w": 4
+   },
+   {
+    "a": "Martin Browning",
+    "b": "Thomas Jørgensen",
+    "w": 3
+   },
+   {
+    "a": "Martin Browning",
+    "b": "Gordon Dahl",
+    "w": 2
+   },
+   {
+    "a": "Martin Browning",
+    "b": "Julie Cullen",
+    "w": 2
+   },
+   {
+    "a": "Martin Browning",
+    "b": "Rafael Lalive",
+    "w": 2
+   },
+   {
+    "a": "Mette Ejrnæs",
+    "b": "Thomas Jørgensen",
+    "w": 3
+   },
+   {
+    "a": "Mette Ejrnæs",
+    "b": "Luigi Pistaferri",
+    "w": 2
+   },
+   {
+    "a": "Mette Ejrnæs",
+    "b": "Benjamin Ly Serena",
+    "w": 2
+   },
+   {
+    "a": "Mette Ejrnæs",
+    "b": "Mette Gørtz",
+    "w": 2
+   },
+   {
+    "a": "Mette Ejrnæs",
+    "b": "Paul Bingley",
+    "w": 2
+   },
+   {
+    "a": "Thomas Jørgensen",
+    "b": "Gordon Dahl",
+    "w": 2
+   },
+   {
+    "a": "Thomas Jørgensen",
+    "b": "Torben Heien Nielsen",
+    "w": 2
+   },
+   {
+    "a": "Thomas Jørgensen",
+    "b": "Fane Groes",
+    "w": 2
+   },
+   {
+    "a": "Meltem Daysal",
+    "b": "Benjamin Ly Serena",
+    "w": 2
+   },
+   {
+    "a": "Meltem Daysal",
+    "b": "Gordon Dahl",
+    "w": 3
+   },
+   {
+    "a": "Meltem Daysal",
+    "b": "Itzik Fadlon",
+    "w": 2
+   },
+   {
+    "a": "Meltem Daysal",
+    "b": "Julie Cullen",
+    "w": 2
+   },
+   {
+    "a": "Meltem Daysal",
+    "b": "Mette Gørtz",
+    "w": 2
+   },
+   {
+    "a": "Meltem Daysal",
+    "b": "Rafael Lalive",
+    "w": 2
+   },
+   {
+    "a": "Meltem Daysal",
+    "b": "Torben Heien Nielsen",
+    "w": 2
+   },
+   {
+    "a": "Benjamin Ly Serena",
+    "b": "Gordon Dahl",
+    "w": 2
+   },
+   {
+    "a": "Benjamin Ly Serena",
+    "b": "Itzik Fadlon",
+    "w": 2
+   },
+   {
+    "a": "Benjamin Ly Serena",
+    "b": "Julie Cullen",
+    "w": 2
+   },
+   {
+    "a": "Benjamin Ly Serena",
+    "b": "Mette Gørtz",
+    "w": 2
+   },
+   {
+    "a": "Benjamin Ly Serena",
+    "b": "Rafael Lalive",
+    "w": 2
+   },
+   {
+    "a": "Benjamin Ly Serena",
+    "b": "Torben Heien Nielsen",
+    "w": 2
+   },
+   {
+    "a": "Paul Bingley",
+    "b": "Nabanita Datta Gupta",
+    "w": 2
+   },
+   {
+    "a": "Paul Bingley",
+    "b": "Mette Gørtz",
+    "w": 2
+   },
+   {
+    "a": "Paul Bingley",
+    "b": "Shelly Lundberg",
+    "w": 2
+   },
+   {
+    "a": "Mette Gørtz",
+    "b": "Gordon Dahl",
+    "w": 2
+   },
+   {
+    "a": "Mette Gørtz",
+    "b": "Itzik Fadlon",
+    "w": 2
+   },
+   {
+    "a": "Mette Gørtz",
+    "b": "Julie Cullen",
+    "w": 2
+   },
+   {
+    "a": "Mette Gørtz",
+    "b": "Rafael Lalive",
+    "w": 2
+   },
+   {
+    "a": "Mette Gørtz",
+    "b": "Torben Heien Nielsen",
+    "w": 2
+   },
+   {
+    "a": "Mette Gørtz",
+    "b": "Shelly Lundberg",
+    "w": 2
+   },
+   {
+    "a": "David Card",
+    "b": "Hilary Hoynes",
+    "w": 2
+   },
+   {
+    "a": "Gordon Dahl",
+    "b": "Jeffrey Clemens",
+    "w": 3
+   },
+   {
+    "a": "Gordon Dahl",
+    "b": "Julie Cullen",
+    "w": 5
+   },
+   {
+    "a": "Gordon Dahl",
+    "b": "Rafael Lalive",
+    "w": 3
+   },
+   {
+    "a": "Gordon Dahl",
+    "b": "Itzik Fadlon",
+    "w": 4
+   },
+   {
+    "a": "Gordon Dahl",
+    "b": "Torben Heien Nielsen",
+    "w": 3
+   },
+   {
+    "a": "Emmanuel Saez",
+    "b": "Lawrence Katz",
+    "w": 2
+   },
+   {
+    "a": "Emmanuel Saez",
+    "b": "Patrick Kline",
+    "w": 2
+   },
+   {
+    "a": "Emmanuel Saez",
+    "b": "Danny Yagan",
+    "w": 2
+   },
+   {
+    "a": "Emmanuel Saez",
+    "b": "Wojciech Kopczuk",
+    "w": 3
+   },
+   {
+    "a": "Emmanuel Saez",
+    "b": "Hilary Hoynes",
+    "w": 2
+   },
+   {
+    "a": "Emmanuel Saez",
+    "b": "Joel Slemrod",
+    "w": 3
+   },
+   {
+    "a": "Lawrence Katz",
+    "b": "Patrick Kline",
+    "w": 2
+   },
+   {
+    "a": "Lawrence Katz",
+    "b": "Danny Yagan",
+    "w": 2
+   },
+   {
+    "a": "Lawrence Katz",
+    "b": "Nathan Hendren",
+    "w": 3
+   },
+   {
+    "a": "Patrick Kline",
+    "b": "Danny Yagan",
+    "w": 2
+   },
+   {
+    "a": "Patrick Kline",
+    "b": "Nathan Hendren",
+    "w": 2
+   },
+   {
+    "a": "Danny Yagan",
+    "b": "Nathan Hendren",
+    "w": 3
+   },
+   {
+    "a": "Danny Yagan",
+    "b": "Wojciech Kopczuk",
+    "w": 2
+   },
+   {
+    "a": "Hilary Hoynes",
+    "b": "Janet Currie",
+    "w": 2
+   },
+   {
+    "a": "Hilary Hoynes",
+    "b": "Joel Slemrod",
+    "w": 2
+   },
+   {
+    "a": "Hilary Hoynes",
+    "b": "Wojciech Kopczuk",
+    "w": 2
+   },
+   {
+    "a": "Eric French",
+    "b": "Alessandra Voena",
+    "w": 2
+   },
+   {
+    "a": "Jeffrey Clemens",
+    "b": "Julie Cullen",
+    "w": 3
+   },
+   {
+    "a": "Jeffrey Clemens",
+    "b": "Rafael Lalive",
+    "w": 2
+   },
+   {
+    "a": "Jeffrey Clemens",
+    "b": "Itzik Fadlon",
+    "w": 2
+   },
+   {
+    "a": "Jeffrey Clemens",
+    "b": "Torben Heien Nielsen",
+    "w": 2
+   },
+   {
+    "a": "Julie Cullen",
+    "b": "Rafael Lalive",
+    "w": 3
+   },
+   {
+    "a": "Julie Cullen",
+    "b": "Itzik Fadlon",
+    "w": 4
+   },
+   {
+    "a": "Julie Cullen",
+    "b": "Torben Heien Nielsen",
+    "w": 3
+   },
+   {
+    "a": "Rafael Lalive",
+    "b": "Itzik Fadlon",
+    "w": 2
+   },
+   {
+    "a": "Rafael Lalive",
+    "b": "Torben Heien Nielsen",
+    "w": 2
+   },
+   {
+    "a": "Itzik Fadlon",
+    "b": "Torben Heien Nielsen",
+    "w": 3
+   },
+   {
+    "a": "Wojciech Kopczuk",
+    "b": "Joel Slemrod",
+    "w": 3
+   }
+  ],
+  "isolated": 25
+ }
+}

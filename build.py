@@ -98,7 +98,7 @@ def head(title, description, canonical):
 
 
 NAV_MAIN = [("index.html", "Summary"), ("papers.html", "Papers"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("codebook.html", "Codebook")]
-NAV_MORE = [("variables.html", "Variable map"), ("lifecycle.html", "Life course"), ("survey.html", "Survey"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus"), ("publication.html", "Publication analysis"), ("assistants.html", "Research assistants")]
+NAV_MORE = [("variables.html", "Variable map"), ("lifecycle.html", "Life course"), ("survey.html", "Survey"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus"), ("publication.html", "Publication analysis"), ("assistants.html", "Research assistants"), ("acknowledgments.html", "Funding and thanks"), ("productivity.html", "Papers per researcher")]
 
 
 NAV_SCRIPT = """    <script>document.addEventListener('click', function (ev) { document.querySelectorAll('nav details[open]').forEach(function (d) { if (!d.contains(ev.target)) d.removeAttribute('open'); }); });</script>
@@ -2037,6 +2037,148 @@ def build_assistants():
     return out
 
 
+# ---------- Funding and thanks: what the acknowledgments say ----------
+_ACK = ROOT / "data" / "acknowledgments.json"
+ACK = json.loads(_ACK.read_text()) if _ACK.exists() else None
+_PROD = ROOT / "data" / "productivity.json"
+PROD = json.loads(_PROD.read_text()) if _PROD.exists() else None
+
+
+def build_acknowledgments():
+    K = ACK; T = K["thanks"]; nT, nO = K["n_top5"], K["n_other"]
+    pf = lambda p: "&lt; 0.001" if p < 0.001 else f"{p:.3f}"
+    MAXS = 40
+    gridp = ", ".join(f"linear-gradient(var(--border-color), var(--border-color)) {100 * t / MAXS:.0f}% 0 / 1px 100% no-repeat" for t in (0, 10, 20, 30, 40))
+    axisp = ('<div class="cf-axis db-axis" aria-hidden="true"><span></span><span></span><div class="cf-ticks">'
+             + "".join(f'<span style="left:{100 * t / MAXS:.0f}%">{t}%</span>' for t in (0, 10, 20, 30, 40)) + "</div></div>\n")
+    fund = f'            <div class="coef db" style="--grid: {gridp}">\n                {axisp}'
+    for r in K["funders"]:
+        a, b = 100 * r["share_other"], 100 * r["share_top5"]
+        fund += (f'                <div class="cv"><div class="cv-name">{e(r["name"])}</div><div class="cr" title="{a:.0f}% of other papers, {b:.0f}% of Top 5 papers">'
+                 f'<div class="track"><i class="ci" style="left:{min(a, b) * 100 / MAXS:.1f}%;width:{abs(b - a) * 100 / MAXS:.1f}%"></i><i class="dot" style="left:{a * 100 / MAXS:.1f}%"></i><i class="dot t" style="left:{b * 100 / MAXS:.1f}%"></i></div>'
+                 f'<span class="db-val">{a:.0f}%</span><span class="db-val t">{b:.0f}%</span></div></div>\n')
+    fund += "            </div>\n"
+    f_rows = "".join(f'<tr{" class=\"sig\"" if r["p"] < 0.05 else ""}><td>{e(r["name"])}</td><td>{r["other"]}</td><td>{r["top5"]}</td><td>{r["n"]}</td><td>{pf(r["p"])}</td></tr>' for r in K["funders"])
+    sigf = [r["name"] for r in K["funders"] if r["p"] < 0.05 and r["share_top5"] > r["share_other"]]
+    mmax = max(m["n"] for m in K["most"])
+    most = "".join(
+        f'                <div class="stk-row mt"><span class="stk-label">{e(m["name"])}{" <span class=\"here\" title=\"Author of a paper on this site\">&bull;</span>" if m["site"] else ""}</span>'
+        f'<span class="stk-bar" style="width:{100 * m["n"] / mmax:.1f}%">' + (f'<i class="s0" style="width:{100 * m["top5"] / m["n"]:.1f}%" title="{m["top5"]} Top 5 papers"></i>' if m["top5"] else "")
+        + (f'<i class="s2" style="width:{100 * (m["n"] - m["top5"]) / m["n"]:.1f}%" title="{m["n"] - m["top5"]} papers in other journals"></i>' if m["n"] > m["top5"] else "")
+        + f'</span><span class="stk-n">{m["n"]}</span></div>\n' for m in K["most"])
+    # network, laid out when the data file was made
+    W, Hh, PAD = 1000, 640, 60
+    px = lambda n: PAD + n["x"] * (W - 2 * PAD); py = lambda n: PAD / 2 + n["y"] * (Hh - PAD)
+    by = {n["name"]: n for n in K["net"]["nodes"]}
+    svg = f'<svg class="thx-net" viewBox="0 0 {W} {Hh}" role="img" aria-label="Network of the people thanked most often">'
+    for l in K["net"]["links"]:
+        a, b = by[l["a"]], by[l["b"]]
+        svg += f'<line x1="{px(a):.1f}" y1="{py(a):.1f}" x2="{px(b):.1f}" y2="{py(b):.1f}" stroke-width="{0.6 + 0.5 * (l["w"] - 2):.1f}"/>'
+    for n in sorted(K["net"]["nodes"], key=lambda n: n["n"]):
+        r = 3 + 1.6 * n["n"] ** 0.75
+        svg += (f'<g class="{n["site"] or "none"}"><circle cx="{px(n):.1f}" cy="{py(n):.1f}" r="{r:.1f}"><title>{e(n["name"])}: thanked in {n["n"]} papers</title></circle>'
+                f'<text x="{px(n):.1f}" y="{py(n) + r + 11:.1f}">{e(n["name"].split()[-1] if n["n"] < 5 else n["name"])}</text></g>')
+    svg += "</svg>"
+    st = T["star"]
+    out = head(
+        "Funding and thanks | Beautiful Danish Data",
+        "What the acknowledgments of Danish register papers say: who funded the work, who is thanked for comments, and how Top 5 papers differ.",
+        "acknowledgments.html",
+    )
+    out += nav("acknowledgments.html")
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">Who paid for the research</h2>
+            <p>An acknowledgment was found in {K["n_ack"]} of the {K["n_read"]} papers whose full text could be read: {nT} Top 5 papers and {nO} in the other journals. The two Danish research councils are named most often, and at similar rates in both groups. {("What sets the Top 5 papers apart is American money: " + " and ".join({"Other US foundations": "US foundations", "US National Science Foundation": "the US National Science Foundation"}.get(n, n) for n in sigf) + " are named far more often there.") if sigf else "No funder is clearly more common in the Top 5."}</p>
+            <p class="cf-key"><span class="k"><span class="cr"><span class="track"><i class="dot" style="left:50%"></i></span></span> <span>Other journals</span></span><span class="k"><span class="cr"><span class="track"><i class="dot t" style="left:50%"></i></span></span> <span>Top 5</span></span></p>
+            <h3 class="cf-title">Share of papers naming each funder</h3>
+{fund}            <p class="note">A paper can name several funders. Research centres are counted under the body that funds them: CEBI, CAM, EPRU, FRIC and CREATES under the Danish National Research Foundation. Funders were found by searching the acknowledgment for their names, so one that is written in an unusual way is missed. {K["any_funder"][1]} of the {nT} Top 5 papers and {K["any_funder"][0]} of the {nO} others name at least one funder on this list.</p>
+            <details class="net-all"><summary>The same numbers as a table</summary>
+            <div class="table-wrap">
+                <table class="regvars cnt">
+                    <thead><tr><th>Funder</th><th>Other journals</th><th>Top 5</th><th>Papers</th><th><em>p</em>-value</th></tr></thead>
+                    <tbody>{f_rows}</tbody>
+                </table>
+            </div>
+            <p class="note">Number of papers naming the funder. <em>p</em>-values are from two-sided Fisher exact tests of the difference in shares; rows in bold are below 0.05. With {len(K["funders"])} funders tested, read single differences with care.</p>
+            </details>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Who is thanked</h2>
+            <p>The acknowledgments thank {T["n_people"]} different people for comments, discussions or help. Top 5 papers thank more of them, {T["mean"][1]:.1f} on average against {T["mean"][0]:.1f} in the other journals, and they more often thank someone highly cited: {st[2]} of {st[3]} Top 5 papers ({100 * st[2] / st[3]:.0f}%) against {st[0]} of {st[1]} others ({100 * st[0] / st[1]:.0f}%).</p>
+            <div class="tiles">
+                <div class="tile"><b>{T["n_people"]}</b><span>people thanked</span></div>
+                <div class="tile"><b>{T["mean"][1]:.1f}</b><span>people thanked by the average Top 5 paper</span></div>
+                <div class="tile"><b>{T["mean"][0]:.1f}</b><span>people thanked by the average paper in other journals</span></div>
+                <div class="tile"><b>{T["n_star"]}</b><span>of the people thanked are highly cited</span></div>
+            </div>
+            <p>Thanking a highly cited economist is not what gets a paper into the Top 5. In a regression that holds fixed where the authors are based, whether one is at a leading department, the sample size and the year, the difference shrinks to {100 * T["reg"]["star"]["b"]:.0f} percentage points and is no longer distinguishable from zero (<em>p</em> = {T["reg"]["star"]["p"]:.2f}). Teams with authors at leading departments both reach the Top 5 more often and know more of these people.</p>
+            <h3 class="cf-title">The 30 people thanked most often</h3>
+            <p class="stk-key"><span class="k"><i class="s0"></i><span>Top 5 papers</span></span><span class="k"><i class="s2"></i><span>Papers in other journals</span></span><span class="k"><span class="here">&bull;</span><span>Author of a paper on this site</span></span></p>
+            <div class="stk">
+{most}            </div>
+            <p class="note">Number of papers that thank each person. Authors are not counted for their own papers. Highly cited means an h-index of {T["star_h"]} or more in OpenAlex. Names were read from the acknowledgment by a script and matched by first initial and surname, so two people who share both are merged and a name split across lines can be missed. Most of the texts read are working-paper versions.</p>
+            <h3 class="cf-title">Who is thanked together</h3>
+            <p>The {len(K["net"]["nodes"])} people in the chart are each thanked in at least three papers. A line joins two people who are thanked together in at least two papers, and people who are thanked together often sit close to each other. Two groups stand out: economists in Copenhagen around Søren Leth-Petersen and Claus Thustrup Kreiner, and public-finance economists in the United States around Raj Chetty and Emmanuel Saez.</p>
+            <p class="stk-key"><span class="k"><i class="s0 round"></i><span>Author on this site, based in Denmark</span></span><span class="k"><i class="s1 round"></i><span>Author on this site, based abroad</span></span><span class="k"><i class="sn round"></i><span>Not an author on this site</span></span></p>
+            <div class="table-wrap">{svg}</div>
+            <p class="note">The size of a circle shows how many papers thank the person. {K["net"]["isolated"]} people thanked in three or more papers are left out because they share no pair of papers with anyone else in the chart.</p>
+        </div>
+    </section>
+"""
+    out += FOOTER
+    return out
+
+
+def build_productivity():
+    rows, tot = PROD["rows"], PROD["total"]
+    per = lambda r: 100 * r["papers"] / r["econ"]
+    big = [r for r in rows if r["econ"] >= 30]; small = [r for r in rows if r["econ"] < 30]
+    mx = max(per(r) for r in big)
+    short = lambda n: n.replace(" - The Danish Center for Social Science Research", "")
+    bars = "".join(
+        f'                <div class="hb-row"><span class="hb-label">{e(short(r["name"]))}</span>'
+        f'<span class="hb-track"><i style="width:{max(per(r), 0.3) * 62 / mx:.1f}%"></i><b>{per(r):.0f}</b></span></div>\n' for r in sorted(big, key=lambda r: -per(r)))
+    trs = "".join(
+        f'<tr{" class=\"total\"" if r is tot else ""}><td>{e(short(r["name"]))}</td><td>{r["econ"]}</td><td>{r["econ_site"]}</td><td>{100 * r["econ_site"] / r["econ"]:.0f}%</td><td>{r["papers"]}</td><td>{r["top5"]}</td><td>{per(r):.0f}</td></tr>'
+        for r in sorted(rows, key=lambda r: -r["econ"]) + [tot])
+    ku = next(r for r in rows if r["name"] == "University of Copenhagen"); cbs = next(r for r in rows if r["name"] == "Copenhagen Business School")
+    out = head(
+        "Papers per researcher | Beautiful Danish Data",
+        "How many register-data papers in the leading journals each Danish institution has for every hundred of its economics researchers.",
+        "productivity.html",
+    )
+    out += nav("productivity.html")
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">A small share of Denmark's economists write these papers</h2>
+            <p>About {tot["econ"]} researchers in Denmark publish mainly in economics today. {tot["econ_site"]} of them, or {100 * tot["econ_site"] / tot["econ"]:.0f}%, are an author of at least one paper on this site. Set against the number of economists, the University of Copenhagen has the most papers: {per(ku):.0f} for every hundred, against {per(cbs):.0f} at Copenhagen Business School.</p>
+            <div class="tiles">
+                <div class="tile"><b>{tot["econ"]}</b><span>economics researchers in Denmark</span></div>
+                <div class="tile"><b>{tot["econ_site"]}</b><span>of them wrote a paper on this site</span></div>
+                <div class="tile"><b>{tot["papers"]}</b><span>papers with an author based in Denmark</span></div>
+                <div class="tile"><b>{100 * tot["papers"] / tot["econ"]:.0f}</b><span>papers for every hundred economists</span></div>
+            </div>
+            <h3 class="cf-title">Papers for every hundred economics researchers</h3>
+            <div class="hb">
+{bars}            </div>
+            <p class="note">Institutions with at least 30 economics researchers. Smaller ones are left out of the chart because with so few researchers the ratio says little; they are in the table below.</p>
+            <div class="table-wrap">
+                <table class="regvars cnt">
+                    <thead><tr><th>Institution</th><th>Economics researchers</th><th>Of whom authors here</th><th>Share</th><th>Papers</th><th>Top 5 papers</th><th>Papers per 100</th></tr></thead>
+                    <tbody>{trs}</tbody>
+                </table>
+            </div>
+            <p class="note">The two sides of the ratio are measured differently, so read it as a rough guide. Economics researchers are people in OpenAlex whose latest institution is in Denmark, who have at least five works of which 40% or more are in economics, econometrics and finance, and who have published since 2022. That counts PhD students and visitors with enough papers and misses people OpenAlex files under another field. Papers are the papers on this site with an author who lists the institution on the <a href="network.html">Author network</a> page, at any time since 1998, so they include work by people who have since left. A paper with authors at two institutions counts for both, and the Denmark row counts each paper once.</p>
+        </div>
+    </section>
+"""
+    out += FOOTER
+    return out
+
+
 def zh_col(s):
     return re.sub(r"\s+", " ", s).strip()
 
@@ -2187,6 +2329,10 @@ if __name__ == "__main__":
         built["publication.html"] = build_publication()
     if ARA:
         built["assistants.html"] = build_assistants()
+    if ACK:
+        built["acknowledgments.html"] = build_acknowledgments()
+    if PROD:
+        built["productivity.html"] = build_productivity()
     for name, src in built.items():
         (ROOT / name).write_text(src)
     n_zh = build_zh(built)

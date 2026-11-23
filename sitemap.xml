@@ -120,4 +120,24 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://zhurt0.github.io/beautiful-danish-data/assistants.html"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://zhurt0.github.io/beautiful-danish-data/zh/assistants.html"/>
   </url>
+  <url>
+    <loc>https://zhurt0.github.io/beautiful-danish-data/acknowledgments.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhurt0.github.io/beautiful-danish-data/acknowledgments.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://zhurt0.github.io/beautiful-danish-data/zh/acknowledgments.html"/>
+  </url>
+  <url>
+    <loc>https://zhurt0.github.io/beautiful-danish-data/zh/acknowledgments.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhurt0.github.io/beautiful-danish-data/acknowledgments.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://zhurt0.github.io/beautiful-danish-data/zh/acknowledgments.html"/>
+  </url>
+  <url>
+    <loc>https://zhurt0.github.io/beautiful-danish-data/productivity.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhurt0.github.io/beautiful-danish-data/productivity.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://zhurt0.github.io/beautiful-danish-data/zh/productivity.html"/>
+  </url>
+  <url>
+    <loc>https://zhurt0.github.io/beautiful-danish-data/zh/productivity.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhurt0.github.io/beautiful-danish-data/productivity.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://zhurt0.github.io/beautiful-danish-data/zh/productivity.html"/>
+  </url>
 </urlset>

@@ -4,7 +4,7 @@ A field guide to economics published with Danish administrative register data.
 
 Live site: https://zhurt0.github.io/beautiful-danish-data/
 
-Twelve pages, each also in Chinese under `zh/`. The header shows the five main pages and puts the rest under "More":
+Fourteen pages, each also in Chinese under `zh/`. The header shows the five main pages and puts the rest under "More":
 
 1. **Summary** (`index.html`): a short front page with the headline figures, a three-tab preview (Author network, Copenhagen vs Aarhus, Life course) whose small pictures are drawn from the data at build time, and the way into the papers by journal.
 1. **Papers** (`papers.html`): one-paragraph summaries of papers in the Top 5 journals, the *American Economic Journals* (Applied and Policy), the *Review of Economics and Statistics*, the *Economic Journal*, the *Journal of Labor Economics* and the *Journal of Public Economics* that are built on Danish registers, grouped by journal, with the note on how the papers were selected.
@@ -18,6 +18,8 @@ Twelve pages, each also in Chinese under `zh/`. The header shows the five main p
 1. **Copenhagen vs Aarhus** (`schools.html`): how the themes of papers with University of Copenhagen authors differ from those with Aarhus University authors, with Fisher exact tests; computed from `data/papers.json` and `data/network.json` at build time.
 1. **Publication analysis** (`publication.html`): coefficient charts (with the full regression table behind a toggle) of which paper features go with publication in a Top 5 journal (author team, institutions, data, seniority, citations). The results are stored in `data/publication.json`, produced by `analysis/publication_analysis.py`; the page does not rerun the regression. The page also shows the share of papers written with and without authors based outside Denmark, by journal and period, from `data/authors_ra.json`.
 1. **Research assistants** (`assistants.html`): the research assistants thanked in the acknowledgments: how many, in which papers, and where they went next. The page reads aggregates from `data/authors_ra.json`; names and individual positions are not in the repository, apart from the six assistants who later wrote a paper on this site.
+1. **Funding and thanks** (`acknowledgments.html`): which funders the acknowledgments name and who is thanked for comments, with Top 5 papers compared to the rest, the 30 people thanked most often and a chart of who is thanked together. Aggregates are in `data/acknowledgments.json`, made by `analysis/acknowledgments_analysis.py`.
+1. **Papers per researcher** (`productivity.html`): papers on this site per hundred economics researchers at each Danish institution, with the researcher counts taken from OpenAlex. The numbers are in `data/productivity.json`, made by `analysis/productivity_analysis.py`.
 
 ## Editing
 

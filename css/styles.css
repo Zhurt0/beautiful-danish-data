@@ -530,3 +530,26 @@ ul.ra-later li { margin-bottom: 6px; }
 .cf-key .cr { display: inline-block; }
 .cf-key .k .cr:not(.sig) .track .ci { display: block; }
 table.regvars.means { max-width: 34em; }
+
+/* Funding and thanks; papers per researcher */
+.stk-row.mt { grid-template-columns: 14em 1fr 2.6em; }
+.stk-row.mt .stk-bar { height: 16px; min-width: 6px; }
+.stk-row.mt > .stk-n { color: var(--text-color); }
+.stk-row.mt { grid-template-columns: 14em minmax(0, 1fr) 2.6em; justify-items: start; }
+.stk-row.mt .stk-n { justify-self: end; }
+.here { color: var(--blue); font-weight: 700; }
+.stk-key i.round { border-radius: 50%; }
+.stk-key i.sn, svg.thx-net g.none circle { background: var(--mist); fill: var(--mist); }
+.stk-key i.sn { border: 1px solid var(--sky); }
+svg.thx-net { display: block; width: 100%; min-width: 760px; height: auto; font-family: var(--sans); margin: 6px 0; border-bottom: 2px solid var(--navy); }
+svg.thx-net line { stroke: var(--pale); }
+svg.thx-net circle { stroke: var(--background-color); stroke-width: 2; }
+svg.thx-net g.dk circle { fill: var(--navy); }
+svg.thx-net g.abroad circle { fill: var(--blue); }
+svg.thx-net g.none circle { stroke: var(--sky); stroke-width: 1; }
+svg.thx-net text { font-size: 11px; fill: var(--secondary-color); text-anchor: middle; paint-order: stroke; stroke: var(--background-color); stroke-width: 3px; }
+svg.thx-net g:hover text { fill: var(--navy); font-weight: 700; }
+table.regvars tr.sig td { font-weight: 700; }
+table.regvars tr.total td { border-top: 1px solid var(--navy); font-weight: 700; }
+@media (max-width: 700px) { .stk-row.mt { grid-template-columns: 9.5em minmax(0, 1fr) 2em; } }
+.tiles + p { margin-top: 18px; }

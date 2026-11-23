@@ -1,0 +1,93 @@
+{
+ "rows": [
+  {
+   "name": "University of Copenhagen",
+   "econ": 198,
+   "econ_site": 28,
+   "papers": 88,
+   "top5": 25,
+   "site_authors": 51
+  },
+  {
+   "name": "Aarhus University",
+   "econ": 197,
+   "econ_site": 18,
+   "papers": 56,
+   "top5": 15,
+   "site_authors": 42
+  },
+  {
+   "name": "Copenhagen Business School",
+   "econ": 181,
+   "econ_site": 13,
+   "papers": 19,
+   "top5": 7,
+   "site_authors": 13
+  },
+  {
+   "name": "University of Southern Denmark",
+   "econ": 79,
+   "econ_site": 2,
+   "papers": 12,
+   "top5": 0,
+   "site_authors": 6
+  },
+  {
+   "name": "Aalborg University",
+   "econ": 58,
+   "econ_site": 0,
+   "papers": 0,
+   "top5": 0,
+   "site_authors": 0
+  },
+  {
+   "name": "Danmarks Nationalbank",
+   "econ": 36,
+   "econ_site": 6,
+   "papers": 9,
+   "top5": 2,
+   "site_authors": 9
+  },
+  {
+   "name": "Technical University of Denmark",
+   "econ": 31,
+   "econ_site": 0,
+   "papers": 1,
+   "top5": 0,
+   "site_authors": 2
+  },
+  {
+   "name": "Roskilde University",
+   "econ": 18,
+   "econ_site": 0,
+   "papers": 0,
+   "top5": 0,
+   "site_authors": 0
+  },
+  {
+   "name": "VIVE - The Danish Center for Social Science Research",
+   "econ": 11,
+   "econ_site": 4,
+   "papers": 16,
+   "top5": 0,
+   "site_authors": 9
+  },
+  {
+   "name": "Rockwool Foundation",
+   "econ": 9,
+   "econ_site": 4,
+   "papers": 22,
+   "top5": 1,
+   "site_authors": 13
+  }
+ ],
+ "total": {
+  "name": "Denmark",
+  "econ": 873,
+  "econ_site": 72,
+  "papers": 151,
+  "top5": 34,
+  "site_authors": 133
+ },
+ "n_listed": 4133
+}
