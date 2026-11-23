@@ -1792,35 +1792,84 @@ def build_publication():
 
     out = head(
         "Publication analysis | Beautiful Danish Data",
-        "Which features of a Danish register paper go with publication in a Top 5 journal: a logit regression on author team, institutions, data, seniority and citations.",
+        "Which features of a Danish register paper go with publication in a Top 5 journal: coefficient charts from a logit regression on author team, institutions, data, seniority and citations.",
         "publication.html",
     )
     out += nav("publication.html")
     m5 = ms[4]
-    out += f"""    <section class="section intro">
-        <div class="container">
-            <h2 class="section-title">What goes with a Top 5 publication</h2>
-            <p>Of the {PUB["n_papers"]} papers on this site, {PUB["n_top5"]} appeared in a Top 5 journal. The table asks which features of a paper go with being one of them. Papers with an author at a leading department, with larger samples and with more citations are more often in the Top 5. The seniority of the authors makes no detectable difference.</p>
-            <div class="table-wrap">
-                <table class="regtable">
+    # full table, kept behind a disclosure as the table view of the charts
+    full = f"""                <table class="regtable">
                     <thead><tr><th></th>{"".join(f'<th>{m["num"]}<span class="mlabel">{e(m["label"])}</span></th>' for m in ms)}</tr></thead>
                     <tbody>
 """
     for k, label, _ in PUB_ROWS:
         if k is None:
-            out += f'                        <tr class="rgroup"><td colspan="{len(ms) + 1}">{label}</td></tr>\n'
+            full += f'                        <tr class="rgroup"><td colspan="{len(ms) + 1}">{label}</td></tr>\n'
         else:
-            out += f'                        <tr><td>{label}</td>{"".join(cell(m, k) for m in ms)}</tr>\n'
+            full += f'                        <tr><td>{label}</td>{"".join(cell(m, k) for m in ms)}</tr>\n'
+    full += "                    </tbody>\n                </table>\n"
     foot = [("Papers", lambda m: str(m["n"])), ("Top 5 papers", lambda m: str(m["top5"])), ("Pseudo R&sup2;", lambda m: f'{m["r2"]:.3f}'),
             ("Cross-validated AUC", lambda m: f'{m["auc"]:.3f}'), ("Cross-validated accuracy", lambda m: f'{100 * m["acc"]:.1f}%'),
             ("Accuracy of always guessing not Top 5", lambda m: f'{100 * m["base"]:.1f}%')]
-    out += '                        <tr class="rgroup rfitgroup"><td colspan="%d">Fit</td></tr>\n' % (len(ms) + 1)
-    for i, (label, fn) in enumerate(foot):
-        out += f'                        <tr class="rfit{" rfirst" if i == 0 else ""}"><td>{label}</td>{"".join(f"<td>{fn(m)}</td>" for m in ms)}</tr>\n'
+
+    # coefficient charts: one per block of variables, one line per specification the variable enters
+    LO, HI, TICKS = -0.5, 0.6, (-0.4, -0.2, 0.0, 0.2, 0.4)
+    pos = lambda x: 100 * (min(max(x, LO), HI) - LO) / (HI - LO)
+    grid = ", ".join(f"linear-gradient({'var(--secondary-color)' if t == 0 else 'var(--border-color)'}, {'var(--secondary-color)' if t == 0 else 'var(--border-color)'}) {pos(t):.2f}% 0 / 1px 100% no-repeat" for t in TICKS)
+    axis = ('<div class="cf-axis" aria-hidden="true"><span></span><span></span><div class="cf-ticks">'
+            + "".join(f'<span style="left:{pos(t):.2f}%">{"0" if t == 0 else ("&minus;" if t < 0 else "+") + f"{abs(t):.1f}"}</span>' for t in TICKS) + "</div></div>\n")
+
+    def chart(rows):
+        h = f'            <div class="coef" style="--grid: {grid}">\n                {axis}'
+        for k, label in rows:
+            h += f'                <div class="cv"><div class="cv-name">{label}</div><div class="cv-rows">'
+            for m in ms:
+                c = m["coef"].get(k)
+                if not c:
+                    continue
+                lo, hi = c["b"] - 1.96 * c["se"], c["b"] + 1.96 * c["se"]
+                sig = lo > 0 or hi < 0
+                tip = f'{m["num"]} {m["label"]}: {"−" if c["b"] < 0 else ""}{abs(c["b"]):.3f} (SE {c["se"]:.3f}), p = {c["p"]:.3f}'
+                h += (f'<div class="cr{" sig" if sig else ""}" title="{e(tip)}"><span class="sp">{m["num"]}</span><div class="track">'
+                      f'<i class="ci" style="left:{pos(lo):.2f}%;width:{pos(hi) - pos(lo):.2f}%"></i><i class="dot" style="left:{pos(c["b"]):.2f}%"></i></div></div>')
+            h += "</div></div>\n"
+        return h + f"                {axis}            </div>\n"
+
+    blocks, cur = [], None
+    for k, label, _ in PUB_ROWS:
+        if k is None:
+            cur = (label, []); blocks.append(cur)
+        elif not k.endswith("_miss"):
+            cur[1].append((k, label))
+
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">What goes with a Top 5 publication</h2>
+            <p>Of the {PUB["n_papers"]} papers on this site, {PUB["n_top5"]} appeared in a Top 5 journal. The charts ask which features of a paper go with being one of them. Papers with an author at a leading department, with larger samples and with more citations are more often in the Top 5. The seniority of the authors makes no detectable difference.</p>
+            <p>Each line is one estimate: the dot is the change in the probability of a Top 5 publication that goes with the variable, and the bar is its 95% confidence interval. A variable has one line for every specification it enters, numbered as below. Each specification adds variables to the one before.</p>
+            <ul class="cf-specs">{"".join(f'<li><b>{m["num"]}</b> {e(m["label"])}</li>' for m in ms)}</ul>
+            <p class="cf-key"><span class="k"><span class="cr sig"><span class="track"><i class="ci" style="left:0;width:100%"></i><i class="dot" style="left:50%"></i></span></span> <span>Interval excludes zero</span></span><span class="k"><span class="cr"><span class="track"><i class="ci" style="left:0;width:100%"></i><i class="dot" style="left:50%"></i></span></span> <span>Interval includes zero</span></span></p>
+"""
+    for label, rows in blocks:
+        out += f'            <h3 class="cf-title">{label}</h3>\n' + chart(rows)
+    out += f"""            <p class="note">Logit regressions; the outcome is one if the paper appeared in a Top 5 journal. Estimates are average marginal effects on a common scale, so 0.2 means 20 percentage points. Hover over a line for the numbers. The two indicators for a missing sample size and a missing citation count are in the regressions but not drawn. Specification (6) covers only the papers whose full text could be read, because the research-assistant variable comes from the acknowledgments.</p>
+            <h3 class="cf-title">Fit</h3>
+            <div class="table-wrap">
+                <table class="regtable fit">
+                    <thead><tr><th></th>{"".join(f'<th>{m["num"]}<span class="mlabel">{e(m["label"])}</span></th>' for m in ms)}</tr></thead>
+                    <tbody>
+"""
+    for label, fn in foot:
+        out += f'                        <tr class="rfit"><td>{label}</td>{"".join(f"<td>{fn(m)}</td>" for m in ms)}</tr>\n'
     out += f"""                    </tbody>
                 </table>
             </div>
-            <p class="note">Logit regressions; the outcome is one if the paper appeared in a Top 5 journal. Cells show average marginal effects, the change in the probability of a Top 5 publication, with standard errors in parentheses. * <em>p</em> &lt; 0.10, ** <em>p</em> &lt; 0.05, *** <em>p</em> &lt; 0.01. Column (6) covers only the papers whose full text could be read, because the research-assistant variable comes from the acknowledgments. The cross-validated figures are averages over 20 repetitions of five-fold cross-validation; an AUC of 0.5 is no better than chance.</p>
+            <p class="note">The cross-validated figures are averages over 20 repetitions of five-fold cross-validation; an AUC of 0.5 is no better than chance.</p>
+            <details class="net-all"><summary>The same estimates as a table</summary>
+            <div class="table-wrap">
+{full}            </div>
+            <p class="note">Average marginal effects with standard errors in parentheses. * <em>p</em> &lt; 0.10, ** <em>p</em> &lt; 0.05, *** <em>p</em> &lt; 0.01.</p>
+            </details>
         </div>
     </section>
     <section class="section">

@@ -16,7 +16,7 @@ Eleven pages, each also in Chinese under `zh/`. The header shows the five main p
 1. **Variable map** (`variables.html`): the Statistics Denmark registers and variables behind those papers, at the individual level and at the firm level, with a short guide to linking the two sides. The National Patient Register (LPR) entry opens into a longer account: history, what a record contains, tables and variables, pitfalls, access, and the papers on this site that use it. That text lives in `data/lpr.json`, where every statement names its source.
 1. **Author network** (`network.html`): who wrote with whom, coloured by where each author was based, with tables of the most frequent pairs, institutions and all authors.
 1. **Copenhagen vs Aarhus** (`schools.html`): how the themes of papers with University of Copenhagen authors differ from those with Aarhus University authors, with Fisher exact tests; computed from `data/papers.json` and `data/network.json` at build time.
-1. **Publication analysis** (`publication.html`): a regression table of which paper features go with publication in a Top 5 journal (author team, institutions, data, seniority, citations). The results are stored in `data/publication.json`, produced by `analysis/publication_analysis.py`; the page does not rerun the regression.
+1. **Publication analysis** (`publication.html`): coefficient charts (with the full regression table behind a toggle) of which paper features go with publication in a Top 5 journal (author team, institutions, data, seniority, citations). The results are stored in `data/publication.json`, produced by `analysis/publication_analysis.py`; the page does not rerun the regression.
 
 ## Editing
 
