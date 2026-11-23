@@ -89,5 +89,86 @@
   "top5": 34,
   "site_authors": 133
  },
- "n_listed": 4133
+ "n_listed": 4133,
+ "fields": {
+  "rows": [
+   {
+    "field": "Finance",
+    "people": 239,
+    "here": 4
+   },
+   {
+    "field": "Health",
+    "people": 123,
+    "here": 10
+   },
+   {
+    "field": "Environment, energy and agriculture",
+    "people": 89,
+    "here": 2
+   },
+   {
+    "field": "Macro and monetary",
+    "people": 83,
+    "here": 7
+   },
+   {
+    "field": "Public finance and political economy",
+    "people": 67,
+    "here": 11
+   },
+   {
+    "field": "Labour",
+    "people": 60,
+    "here": 21
+   },
+   {
+    "field": "Firms, innovation and competition",
+    "people": 46,
+    "here": 0
+   },
+   {
+    "field": "Trade and international",
+    "people": 33,
+    "here": 4
+   },
+   {
+    "field": "Economic history",
+    "people": 28,
+    "here": 0
+   },
+   {
+    "field": "Urban, housing and regional",
+    "people": 25,
+    "here": 1
+   },
+   {
+    "field": "Household finance and pensions",
+    "people": 24,
+    "here": 7
+   },
+   {
+    "field": "Theory and econometrics",
+    "people": 16,
+    "here": 2
+   },
+   {
+    "field": "Behavioural and experimental",
+    "people": 14,
+    "here": 2
+   },
+   {
+    "field": "Other",
+    "people": 13,
+    "here": 0
+   },
+   {
+    "field": "Education, family and inequality",
+    "people": 7,
+    "here": 1
+   }
+  ],
+  "n": 867,
+  "n_here": 72
+ }
 }

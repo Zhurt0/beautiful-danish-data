@@ -2175,6 +2175,26 @@ def build_productivity():
         </div>
     </section>
 """
+    F = PROD.get("fields")
+    if F:
+        fr = sorted([r for r in F["rows"] if r["field"] != "Other"], key=lambda r: (-r["here"] / r["people"], -r["people"]))
+        other = next((r for r in F["rows"] if r["field"] == "Other"), {"people": 0})
+        fmax = max(r["here"] / r["people"] for r in fr)
+        fbars = "".join(
+            f'                <div class="hb-row"><span class="hb-label">{e(r["field"])}</span>'
+            f'<span class="hb-track"><i style="width:{max(100 * r["here"] / r["people"], 0.4) * 62 / (100 * fmax):.1f}%"></i><b>{100 * r["here"] / r["people"]:.0f}%</b><span class="hb-of">{r["here"]} of {r["people"]}</span></span></div>\n' for r in fr)
+        top, big = fr[0], max(fr, key=lambda r: r["people"])
+        out += f"""    <section class="section">
+        <div class="container">
+            <h2 class="section-title">By field of the researcher</h2>
+            <p>Here the people are sorted by field, not the papers. Each of the {F["n"]} economics researchers is placed in the field where most of their own publications fall, and the chart shows what share of each field has written a paper on this site. {e(top["field"])} economists are the most likely to have one ({top["here"]} of {top["people"]}). {e(big["field"])} is the largest field in Denmark, with {big["people"]} researchers, and almost none of them work with the registers in these journals.</p>
+            <h3 class="cf-title">Share of researchers in each field who wrote a paper on this site</h3>
+            <div class="hb">
+{fbars}            </div>
+            <p class="note">A researcher's field is read from the topics OpenAlex assigns to their publications, grouped into the fields above by keyword, and taken as the group with the most publications. The topics are coarse and sometimes wrong: work on risk preferences, for example, is often filed under health, and education research mostly sits outside economics in OpenAlex, which is why that field is so small here. {other["people"]} researchers whose topics fit none of the fields are left out, and topics were missing for {tot["econ"] - F["n"]} of the {tot["econ"]} researchers counted above. Treat the shares as a rough guide.</p>
+        </div>
+    </section>
+"""
     out += FOOTER
     return out
 

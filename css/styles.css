@@ -553,3 +553,4 @@ table.regvars tr.sig td { font-weight: 700; }
 table.regvars tr.total td { border-top: 1px solid var(--navy); font-weight: 700; }
 @media (max-width: 700px) { .stk-row.mt { grid-template-columns: 9.5em minmax(0, 1fr) 2em; } }
 .tiles + p { margin-top: 18px; }
+.hb-of { font-size: 0.78rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
