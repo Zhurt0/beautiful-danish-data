@@ -415,15 +415,28 @@ details.reg-more > p { max-width: 84ch; margin-bottom: 8px; }
 .pcount { font-size: 0.9rem; min-height: 1.5em; margin-bottom: 8px; }
 body.searching .selection, body.searching .intro .selection + p, body.searching .intro .counts { display: none; }
 
-/* Publication analysis: regression table */
-table.regtable { font-family: var(--sans); font-size: 0.86rem; min-width: 760px; }
-table.regtable th, table.regtable td { text-align: right; padding: 5px 10px; white-space: nowrap; }
-table.regtable th:first-child, table.regtable td:first-child { text-align: left; white-space: normal; }
-table.regtable th { text-transform: none; letter-spacing: 0; font-size: 0.86rem; vertical-align: bottom; }
-table.regtable .mlabel { display: block; font-weight: 400; font-size: 0.76rem; color: var(--muted); }
-table.regtable .se { display: block; color: var(--muted); font-size: 0.78rem; }
-table.regtable tr.rgroup td { text-align: left; font-weight: 700; color: var(--secondary-color); background: var(--section-bg); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
-table.regtable tr.rfit td { border-bottom: 0; padding-top: 3px; padding-bottom: 3px; }
-table.regvars { font-size: 0.9rem; }
+/* Publication analysis: regression table, set like a journal table (rules above and below, none between rows) */
+table.regtable, table.regvars { font-family: var(--sans); font-variant-numeric: tabular-nums; border-top: 2px solid var(--navy); border-bottom: 2px solid var(--navy); margin: 18px 0 14px; }
+table.regtable { font-size: 0.88rem; min-width: 780px; }
+table.regtable th, table.regtable td { text-align: right; padding: 6px 14px; white-space: nowrap; border-bottom: 0; background: transparent; }
+table.regtable th:first-child, table.regtable td:first-child { text-align: left; white-space: normal; padding-left: 6px; color: var(--text-color); }
+table.regtable thead th { text-transform: none; letter-spacing: 0; font-size: 1rem; color: var(--navy); vertical-align: bottom; padding-top: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--navy); }
+table.regtable .mlabel { display: block; font-weight: 400; font-size: 0.74rem; color: var(--muted); margin-top: 2px; }
+table.regtable td { color: var(--muted); line-height: 1.25; }
+table.regtable td.sig { color: var(--navy); font-weight: 700; }
+table.regtable .stars { display: inline-block; width: 0; font-size: 0.72rem; vertical-align: 0.3em; font-weight: 700; }
+table.regtable .se { display: block; color: var(--muted); font-size: 0.76rem; font-weight: 400; }
+table.regtable tbody tr:not(.rgroup):hover td { background: var(--mist); }
+table.regtable tr.rgroup td { text-align: left; font-weight: 700; color: var(--blue); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; padding-top: 16px; padding-bottom: 4px; border-top: 1px solid var(--border-color); }
+table.regtable tbody tr.rgroup:first-child td { border-top: 0; padding-top: 10px; }
+table.regtable tr.rfitgroup td { border-top: 1px solid var(--navy); }
+table.regtable tr.rfit td { padding-top: 3px; padding-bottom: 3px; color: var(--text-color); }
+table.regtable tr.rfit:last-child td { padding-bottom: 12px; }
+table.regvars { font-size: 0.88rem; }
+table.regvars th { background: transparent; color: var(--navy); border-bottom: 1px solid var(--navy); padding-top: 10px; padding-bottom: 8px; }
+table.regvars td { border-bottom: 1px solid var(--border-color); padding: 6px 10px; }
+table.regvars tr:last-child td { border-bottom: 0; }
+table.regvars tbody tr:hover td { background: var(--mist); }
 table.regvars td:nth-child(2), table.regvars td:nth-child(3), table.regvars th:nth-child(2), table.regvars th:nth-child(3) { text-align: right; white-space: nowrap; }
-table.regvars td:first-child { white-space: normal; }
+table.regvars td:first-child { white-space: normal; font-weight: 700; color: var(--text-color); }
+table.regvars td:last-child { color: var(--secondary-color); min-width: 16em; }

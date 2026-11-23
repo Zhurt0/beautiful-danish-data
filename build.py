@@ -1786,7 +1786,9 @@ def build_publication():
         c = m["coef"].get(k)
         if not c:
             return "<td></td>"
-        return f'<td>{num(c["b"])}{stars(c["p"])}<span class="se">({c["se"]:.3f})</span></td>'
+        st = stars(c["p"])
+        return (f'<td{" class=\"sig\"" if st else ""}><span class="est">{num(c["b"])}</span>'
+                + (f'<span class="stars">{st}</span>' if st else "") + f'<span class="se">({c["se"]:.3f})</span></td>')
 
     out = head(
         "Publication analysis | Beautiful Danish Data",
@@ -1812,9 +1814,9 @@ def build_publication():
     foot = [("Papers", lambda m: str(m["n"])), ("Top 5 papers", lambda m: str(m["top5"])), ("Pseudo R&sup2;", lambda m: f'{m["r2"]:.3f}'),
             ("Cross-validated AUC", lambda m: f'{m["auc"]:.3f}'), ("Cross-validated accuracy", lambda m: f'{100 * m["acc"]:.1f}%'),
             ("Accuracy of always guessing not Top 5", lambda m: f'{100 * m["base"]:.1f}%')]
-    out += '                        <tr class="rgroup"><td colspan="%d">Fit</td></tr>\n' % (len(ms) + 1)
-    for label, fn in foot:
-        out += f'                        <tr class="rfit"><td>{label}</td>{"".join(f"<td>{fn(m)}</td>" for m in ms)}</tr>\n'
+    out += '                        <tr class="rgroup rfitgroup"><td colspan="%d">Fit</td></tr>\n' % (len(ms) + 1)
+    for i, (label, fn) in enumerate(foot):
+        out += f'                        <tr class="rfit{" rfirst" if i == 0 else ""}"><td>{label}</td>{"".join(f"<td>{fn(m)}</td>" for m in ms)}</tr>\n'
     out += f"""                    </tbody>
                 </table>
             </div>
