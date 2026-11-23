@@ -4,7 +4,7 @@ A field guide to economics published with Danish administrative register data.
 
 Live site: https://zhurt0.github.io/beautiful-danish-data/
 
-Eleven pages, each also in Chinese under `zh/`. The header shows the five main pages and puts the rest under "More":
+Twelve pages, each also in Chinese under `zh/`. The header shows the five main pages and puts the rest under "More":
 
 1. **Summary** (`index.html`): a short front page with the headline figures, a three-tab preview (Author network, Copenhagen vs Aarhus, Life course) whose small pictures are drawn from the data at build time, and the way into the papers by journal.
 1. **Papers** (`papers.html`): one-paragraph summaries of papers in the Top 5 journals, the *American Economic Journals* (Applied and Policy), the *Review of Economics and Statistics*, the *Economic Journal*, the *Journal of Labor Economics* and the *Journal of Public Economics* that are built on Danish registers, grouped by journal, with the note on how the papers were selected.
@@ -17,6 +17,7 @@ Eleven pages, each also in Chinese under `zh/`. The header shows the five main p
 1. **Author network** (`network.html`): who wrote with whom, coloured by where each author was based, with tables of the most frequent pairs, institutions and all authors.
 1. **Copenhagen vs Aarhus** (`schools.html`): how the themes of papers with University of Copenhagen authors differ from those with Aarhus University authors, with Fisher exact tests; computed from `data/papers.json` and `data/network.json` at build time.
 1. **Publication analysis** (`publication.html`): coefficient charts (with the full regression table behind a toggle) of which paper features go with publication in a Top 5 journal (author team, institutions, data, seniority, citations). The results are stored in `data/publication.json`, produced by `analysis/publication_analysis.py`; the page does not rerun the regression.
+1. **Authors and RAs** (`authors.html`): the share of papers written with and without authors based outside Denmark, by journal and period, and the research assistants thanked in the acknowledgments: how many, in which papers, and where they went next. The page reads aggregates from `data/authors_ra.json`; names and individual positions are not in the repository, apart from the six assistants who later wrote a paper on this site.
 
 ## Editing
 

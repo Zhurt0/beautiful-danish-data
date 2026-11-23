@@ -98,7 +98,7 @@ def head(title, description, canonical):
 
 
 NAV_MAIN = [("index.html", "Summary"), ("papers.html", "Papers"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("codebook.html", "Codebook")]
-NAV_MORE = [("variables.html", "Variable map"), ("lifecycle.html", "Life course"), ("survey.html", "Survey"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus"), ("publication.html", "Publication analysis")]
+NAV_MORE = [("variables.html", "Variable map"), ("lifecycle.html", "Life course"), ("survey.html", "Survey"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus"), ("publication.html", "Publication analysis"), ("authors.html", "Authors and RAs")]
 
 
 NAV_SCRIPT = """    <script>document.addEventListener('click', function (ev) { document.querySelectorAll('nav details[open]').forEach(function (d) { if (!d.contains(ev.target)) d.removeAttribute('open'); }); });</script>
@@ -1898,6 +1898,111 @@ def build_publication():
     return out
 
 
+# ---------- Authors and research assistants ----------
+_ARA = ROOT / "data" / "authors_ra.json"
+ARA = json.loads(_ARA.read_text()) if _ARA.exists() else None
+ARA_GROUP = {"top5": "Top 5", "aeri": "AER: Insights", "aej": "AEJ", "restat": "REStat", "ej": "Economic Journal", "jole": "JOLE", "jpube": "JPubE", "all": "All papers"}
+ARA_TEAM = ["Authors in Denmark only", "Authors in Denmark and abroad", "Authors abroad only"]
+ARA_CAT = {"academic faculty": "Faculty position", "postdoc": "Postdoc", "PhD student": "PhD student",
+           "PhD completed, later position not found": "PhD completed, position not found",
+           "central bank / government / intl org": "Central bank, government or international organisation",
+           "research institute / think tank": "Research institute", "private sector": "Private sector",
+           "still a pre-doctoral RA": "Still a research assistant", "unknown": "Not found"}
+
+
+def build_authors():
+    A, R = ARA["author"], ARA["ra"]
+    pct = lambda x, n: 100 * x / n if n else 0
+
+    def stacked(rows, label_of):
+        h = '            <div class="stk">\n'
+        for key, *vals in rows:
+            n = sum(vals)
+            segs = "".join(
+                f'<i class="s{i}" style="width:{pct(v, n):.2f}%" title="{v} of {n} papers">{f"<b{' class=nar' if pct(v, n) < 16 else ''}>{pct(v, n):.0f}%</b>" if pct(v, n) >= 7 else ""}</i>'
+                for i, v in enumerate(vals) if v)
+            h += (f'                <div class="stk-row{" total" if key == "all" else ""}"><span class="stk-label">{e(label_of(key))}</span>'
+                  f'<span class="stk-bar">{segs}</span><span class="stk-n">{n}</span></div>\n')
+        return h + "            </div>\n"
+
+    def counts_table(rows, label_of, first):
+        h = f'<table class="regvars cnt"><thead><tr><th>{first}</th>' + "".join(f"<th>{t}</th>" for t in ARA_TEAM) + "<th>Papers</th></tr></thead><tbody>"
+        for key, *vals in rows:
+            h += f"<tr><td>{e(label_of(key))}</td>" + "".join(f"<td>{v}</td>" for v in vals) + f"<td>{sum(vals)}</td></tr>"
+        return h + "</tbody></table>"
+
+    legend = '<p class="stk-key">' + "".join(f'<span class="k"><i class="s{i}"></i><span>{t}</span></span>' for i, t in enumerate(ARA_TEAM)) + "</p>"
+    tot = A["by_group"][-1]; n_all = sum(tot[1:])
+    t5 = A["by_group"][0]; jp = next(r for r in A["by_group"] if r[0] == "jpube")
+    out = head(
+        "Authors and research assistants | Beautiful Danish Data",
+        "How many Danish register papers are written with researchers outside Denmark, which papers thank research assistants, and where those assistants went next.",
+        "authors.html",
+    )
+    out += nav("authors.html")
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">Most papers are written with someone abroad</h2>
+            <p>Of the {n_all} papers on this site, {tot[2] + tot[3]} ({pct(tot[2] + tot[3], n_all):.0f}%) have at least one author based outside Denmark, and {tot[1]} ({pct(tot[1], n_all):.0f}%) are written entirely by authors based in Denmark. Teams based only in Denmark are rare in the Top 5 ({t5[1]} of {sum(t5[1:])} papers) and common in the Journal of Public Economics ({jp[1]} of {sum(jp[1:])}).</p>
+            <h3 class="cf-title">By journal</h3>
+            {legend}
+{stacked(A["by_group"], lambda k: ARA_GROUP[k])}            <h3 class="cf-title">By year of publication</h3>
+            {legend}
+{stacked(A["by_period"], lambda k: k)}            <p class="note">Share of papers by where the authors are based; the number on the right is the count of papers. Based means the institution an author works at, not nationality, so a Danish economist at a university abroad counts as abroad. For {A["basis"]["per-paper"]} papers the locations are the affiliations on that paper in OpenAlex; for the other {A["basis"]["author-level"]} they are the author's usual institution on the <a href="network.html">Author network</a> page.</p>
+            <details class="net-all"><summary>The same numbers as a table</summary>
+            <div class="table-wrap">{counts_table(A["by_group"], lambda k: ARA_GROUP[k], "Journal")}</div>
+            <div class="table-wrap">{counts_table(A["by_period"], lambda k: k, "Published")}</div>
+            </details>
+        </div>
+    </section>
+"""
+    known = R["n_ra"] - dict(R["cats"])["unknown"]
+    cmax = max(v for _, v in R["cats"])
+    bars = "".join(
+        f'                <div class="hb-row{" none" if k == "unknown" else ""}"><span class="hb-label">{ARA_CAT[k]}</span>'
+        f'<span class="hb-track"><i style="width:{100 * v / cmax:.1f}%"></i><b>{v}</b></span></div>\n' for k, v in R["cats"])
+    tm = {k: (n, x) for k, n, x in R["by_team"]}
+    g_rows = "".join(f'<tr><td>{e(ARA_GROUP[g])}</td><td>{n}</td><td>{x}</td><td>{pct(x, n):.0f}%</td><td>{k}</td></tr>' for g, n, x, k in R["by_group"])
+    later = ""
+    for l in sorted(R["later"], key=lambda l: -len(l["papers"])):
+        rp = PAPER_BY_ID[l["ra_paper"]]
+        links = ", ".join(f'<a href="papers.html#{pid}">{e(short_cite(PAPER_BY_ID[pid]))}</a>' for pid in l["papers"] if pid in PAPER_BY_ID and pid != rp["id"])
+        mid = " was thanked in an early version of " if rp["id"] in l["papers"] else " was thanked in "
+        end = " became one of its authors, and is also an author of " if rp["id"] in l["papers"] else " and is an author of "
+        later += f'                <li><strong>{e(l["name"])}</strong>{mid}<a href="papers.html#{rp["id"]}">{e(short_cite(rp))}</a>,{end}{links}.</li>\n'
+    out += f"""    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Research assistants and where they went</h2>
+            <p>The acknowledgments of {R["n_papers"]} papers thank someone for research assistance, out of the {R["n_pdf"]} whose full text could be read. They name {R["n_ra"]} people. A web search found what {known} of them did next: most went on to a PhD, and many are now on a university faculty.</p>
+            <div class="tiles">
+                <div class="tile"><b>{R["n_papers"]}</b><span>papers thank research assistants</span></div>
+                <div class="tile"><b>{R["n_ra"]}</b><span>people thanked</span></div>
+                <div class="tile"><b>{R["n_phd"]}</b><span>went on to a PhD, finished or in progress</span></div>
+                <div class="tile"><b>{len(R["later"])}</b><span>later wrote a paper on this site</span></div>
+            </div>
+            <h3 class="cf-title">Where they are now</h3>
+            <div class="hb">
+{bars}            </div>
+            <p class="note">Latest position found for each of the {R["n_ra"]} people, from university pages, personal sites and publication records. The search relied on search results and could not open most pages, so some positions may be out of date. People who were not found are mostly student assistants in Denmark with no public profile; that says nothing about how they fared, and it tilts the picture towards academia. Names and individual positions are not published here.</p>
+            <h3 class="cf-title">Which papers thank research assistants</h3>
+            <p>Thanks for research assistance are concentrated in the Top 5 and in papers written across borders: {tm["Mixed"][1]} of the {tm["Mixed"][0]} papers with authors in Denmark and abroad thank an assistant ({pct(tm["Mixed"][1], tm["Mixed"][0]):.0f}%), against {tm["DK only"][1]} of {tm["DK only"][0]} with authors in Denmark only and {tm["Abroad only"][1]} of {tm["Abroad only"][0]} with authors abroad only.</p>
+            <div class="table-wrap">
+                <table class="regvars cnt">
+                    <thead><tr><th>Journal</th><th>Papers read</th><th>Thank assistants</th><th>Share</th><th>People thanked</th></tr></thead>
+                    <tbody>{g_rows}</tbody>
+                </table>
+            </div>
+            <p class="note">Most of the texts read are working-paper versions, whose acknowledgments can differ from the published ones. A person thanked in two papers is counted in both rows.</p>
+            <h3 class="cf-title">From research assistant to author</h3>
+            <ul class="plain ra-later">
+{later}            </ul>
+        </div>
+    </section>
+"""
+    out += FOOTER
+    return out
+
+
 def zh_col(s):
     return re.sub(r"\s+", " ", s).strip()
 
@@ -2046,6 +2151,8 @@ if __name__ == "__main__":
         built["network.html"] = build_network(); built["schools.html"] = build_schools()
     if PUB:
         built["publication.html"] = build_publication()
+    if ARA:
+        built["authors.html"] = build_authors()
     for name, src in built.items():
         (ROOT / name).write_text(src)
     n_zh = build_zh(built)

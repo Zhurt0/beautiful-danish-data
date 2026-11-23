@@ -1,0 +1,242 @@
+{
+ "author": {
+  "by_group": [
+   [
+    "top5",
+    5,
+    33,
+    11
+   ],
+   [
+    "aeri",
+    0,
+    6,
+    1
+   ],
+   [
+    "aej",
+    7,
+    19,
+    4
+   ],
+   [
+    "restat",
+    7,
+    15,
+    3
+   ],
+   [
+    "ej",
+    7,
+    16,
+    4
+   ],
+   [
+    "jole",
+    5,
+    14,
+    2
+   ],
+   [
+    "jpube",
+    12,
+    10,
+    3
+   ],
+   [
+    "all",
+    43,
+    113,
+    28
+   ]
+  ],
+  "by_period": [
+   [
+    "Up to 2014",
+    11,
+    19,
+    8
+   ],
+   [
+    "2015–19",
+    6,
+    22,
+    7
+   ],
+   [
+    "2020–23",
+    8,
+    34,
+    4
+   ],
+   [
+    "2024–26",
+    18,
+    38,
+    9
+   ]
+  ],
+  "basis": {
+   "author-level": 20,
+   "per-paper": 164
+  }
+ },
+ "ra": {
+  "n_ra": 77,
+  "n_thanks": 78,
+  "n_papers": 36,
+  "n_pdf": 169,
+  "n_phd": 45,
+  "cats": [
+   [
+    "academic faculty",
+    16
+   ],
+   [
+    "postdoc",
+    2
+   ],
+   [
+    "PhD student",
+    14
+   ],
+   [
+    "PhD completed, later position not found",
+    2
+   ],
+   [
+    "central bank / government / intl org",
+    4
+   ],
+   [
+    "research institute / think tank",
+    4
+   ],
+   [
+    "private sector",
+    5
+   ],
+   [
+    "still a pre-doctoral RA",
+    1
+   ],
+   [
+    "unknown",
+    29
+   ]
+  ],
+  "by_group": [
+   [
+    "top5",
+    49,
+    17,
+    50
+   ],
+   [
+    "aeri",
+    7,
+    0,
+    0
+   ],
+   [
+    "aej",
+    27,
+    1,
+    1
+   ],
+   [
+    "restat",
+    22,
+    3,
+    3
+   ],
+   [
+    "ej",
+    25,
+    6,
+    8
+   ],
+   [
+    "jole",
+    19,
+    6,
+    9
+   ],
+   [
+    "jpube",
+    20,
+    3,
+    7
+   ]
+  ],
+  "by_team": [
+   [
+    "DK only",
+    35,
+    3
+   ],
+   [
+    "Mixed",
+    107,
+    31
+   ],
+   [
+    "Abroad only",
+    27,
+    2
+   ]
+  ],
+  "later": [
+   {
+    "name": "Ida Lykke Kristiansen",
+    "ra_paper": "rossinslater2020",
+    "papers": [
+     "kristiansen2025"
+    ]
+   },
+   {
+    "name": "Jakob Egholt Søgaard",
+    "ra_paper": "kleven2011",
+    "papers": [
+     "kleven2025",
+     "jorgensen2024",
+     "jakobsen2022jpube",
+     "kleven2021",
+     "kleven2019",
+     "sogaard2019"
+    ]
+   },
+   {
+    "name": "Jonathan Leganza",
+    "ra_paper": "fadlon2019",
+    "papers": [
+     "garciamiralles2024",
+     "garciamiralles2024jpube"
+    ]
+   },
+   {
+    "name": "Kristoffer Balle Hvidberg",
+    "ra_paper": "kreiner2020",
+    "papers": [
+     "hvidberg2023"
+    ]
+   },
+   {
+    "name": "Rasmus Lentz",
+    "ra_paper": "christensen2005",
+    "papers": [
+     "christensen2005",
+     "lentz2008",
+     "lentz2023"
+    ]
+   },
+   {
+    "name": "Kristian Urup Olesen Larsen",
+    "ra_paper": "dahl2024",
+    "papers": [
+     "kleven2025"
+    ]
+   }
+  ]
+ }
+}
