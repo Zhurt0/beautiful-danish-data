@@ -21,7 +21,7 @@ d.drop(columns='cites').reset_index().to_csv(f'{R}/analysis/top5_regression_data
 print(d.groupby('top5')[['sen_max','sen_min','log_cites','cites']].agg(['mean','median']).round(2).T, d.cites_miss.sum())
 A=['mixed','abroad_only','n_authors','year','firm']
 B=['us_author','top_inst','ku','aarhus']
-C=['log_n','log_n_miss','span','n_data','dk_title','survey','repl_pkg','nber_wp']
+C=['log_n','log_n_miss','span','n_data','dk_title','survey','repl_pkg']
 D=['sen_max','sen_min']; E=['log_cites','cites_miss']; F=['has_ra']; TH=[c for c in d if c.startswith('th_')]
 s=d[d.has_pdf==1]
 specs=[('(1)','Author mix',A,d),('(2)','+ Institutions',A+B,d),('(3)','+ Paper traits',A+B+C,d),('(4)','+ Seniority',A+B+C+D,d),

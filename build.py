@@ -98,7 +98,7 @@ def head(title, description, canonical):
 
 
 NAV_MAIN = [("index.html", "Summary"), ("papers.html", "Papers"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("codebook.html", "Codebook")]
-NAV_MORE = [("variables.html", "Variable map"), ("lifecycle.html", "Life course"), ("survey.html", "Survey"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus"), ("publication.html", "Publication analysis"), ("authors.html", "Authors and RAs")]
+NAV_MORE = [("variables.html", "Variable map"), ("lifecycle.html", "Life course"), ("survey.html", "Survey"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus"), ("publication.html", "Publication analysis"), ("assistants.html", "Research assistants")]
 
 
 NAV_SCRIPT = """    <script>document.addEventListener('click', function (ev) { document.querySelectorAll('nav details[open]').forEach(function (d) { if (!d.contains(ev.target)) d.removeAttribute('open'); }); });</script>
@@ -1766,7 +1766,6 @@ PUB_ROWS = [
     ("dk_title", "Denmark in the title", "The title contains Denmark or Danish"),
     ("survey", "Linked survey", "The paper links a survey to the registers"),
     ("repl_pkg", "Replication package", "A public replication package is listed"),
-    ("nber_wp", "NBER working paper", "A version of the paper appeared as an NBER working paper"),
     ("log_cites", "Citations (log)", "Natural logarithm of one plus the OpenAlex citation count in November 2026"),
     ("cites_miss", "Citations not found", "No OpenAlex record matched; the median is used in its place"),
     ("has_ra", "Thanks research assistants", "The acknowledgments thank at least one person for research assistance"),
@@ -1878,7 +1877,7 @@ def build_publication():
                 </table>
             </div>
             <p class="note">Shares and averages over all {PUB["n_papers"]} papers, except the research-assistant line, which covers the papers whose full text could be read. Seniority is in years and is defined in the table at the bottom of the page.</p>
-            <h2 class="section-title sub">The regressions</h2>
+{author_location_block() if ARA else ""}            <h2 class="section-title sub">The regressions</h2>
             <p>Each line is one estimate: the dot is the change in the probability of a Top 5 publication that goes with the variable, and the bar is its 95% confidence interval. A variable has one line for every specification it enters, numbered as below. Each specification adds variables to the one before.</p>
             <ul class="cf-specs">{"".join(f'<li><b>{m["num"]}</b> {e(m["label"])}</li>' for m in ms)}</ul>
             <p class="cf-key"><span class="k"><span class="cr sig"><span class="track"><i class="ci" style="left:0;width:100%"></i><i class="dot" style="left:50%"></i></span></span> <span>Interval excludes zero</span></span><span class="k"><span class="cr"><span class="track"><i class="ci" style="left:0;width:100%"></i><i class="dot" style="left:50%"></i></span></span> <span>Interval includes zero</span></span></p>
@@ -1943,8 +1942,9 @@ ARA_CAT = {"academic faculty": "Faculty position", "postdoc": "Postdoc", "PhD st
            "still a pre-doctoral RA": "Still a research assistant", "unknown": "Not found"}
 
 
-def build_authors():
-    A, R = ARA["author"], ARA["ra"]
+def author_location_block():
+    """Where the authors are based, by journal and period; shown on the Publication analysis page."""
+    A = ARA["author"]
     pct = lambda x, n: 100 * x / n if n else 0
 
     def stacked(rows, label_of):
@@ -1967,15 +1967,7 @@ def build_authors():
     legend = '<p class="stk-key">' + "".join(f'<span class="k"><i class="s{i}"></i><span>{t}</span></span>' for i, t in enumerate(ARA_TEAM)) + "</p>"
     tot = A["by_group"][-1]; n_all = sum(tot[1:])
     t5 = A["by_group"][0]; jp = next(r for r in A["by_group"] if r[0] == "jpube")
-    out = head(
-        "Authors and research assistants | Beautiful Danish Data",
-        "How many Danish register papers are written with researchers outside Denmark, which papers thank research assistants, and where those assistants went next.",
-        "authors.html",
-    )
-    out += nav("authors.html")
-    out += f"""    <section class="section intro">
-        <div class="container">
-            <h2 class="section-title">Most papers are written with someone abroad</h2>
+    return f"""            <h2 class="section-title sub">Most papers are written with someone abroad</h2>
             <p>Of the {n_all} papers on this site, {tot[2] + tot[3]} ({pct(tot[2] + tot[3], n_all):.0f}%) have at least one author based outside Denmark, and {tot[1]} ({pct(tot[1], n_all):.0f}%) are written entirely by authors based in Denmark. Teams based only in Denmark are rare in the Top 5 ({t5[1]} of {sum(t5[1:])} papers) and common in the Journal of Public Economics ({jp[1]} of {sum(jp[1:])}).</p>
             <h3 class="cf-title">By journal</h3>
             {legend}
@@ -1986,9 +1978,18 @@ def build_authors():
             <div class="table-wrap">{counts_table(A["by_group"], lambda k: ARA_GROUP[k], "Journal")}</div>
             <div class="table-wrap">{counts_table(A["by_period"], lambda k: k, "Published")}</div>
             </details>
-        </div>
-    </section>
 """
+
+
+def build_assistants():
+    R = ARA["ra"]
+    pct = lambda x, n: 100 * x / n if n else 0
+    out = head(
+        "Research assistants | Beautiful Danish Data",
+        "Which Danish register papers thank research assistants in their acknowledgments, and where those assistants went next.",
+        "assistants.html",
+    )
+    out += nav("assistants.html")
     known = R["n_ra"] - dict(R["cats"])["unknown"]
     cmax = max(v for _, v in R["cats"])
     bars = "".join(
@@ -2003,7 +2004,7 @@ def build_authors():
         mid = " was thanked in an early version of " if rp["id"] in l["papers"] else " was thanked in "
         end = " became one of its authors, and is also an author of " if rp["id"] in l["papers"] else " and is an author of "
         later += f'                <li><strong>{e(l["name"])}</strong>{mid}<a href="papers.html#{rp["id"]}">{e(short_cite(rp))}</a>,{end}{links}.</li>\n'
-    out += f"""    <section class="section">
+    out += f"""    <section class="section intro">
         <div class="container">
             <h2 class="section-title">Research assistants and where they went</h2>
             <p>The acknowledgments of {R["n_papers"]} papers thank someone for research assistance, out of the {R["n_pdf"]} whose full text could be read. They name {R["n_ra"]} people. A web search found what {known} of them did next: most went on to a PhD, and many are now on a university faculty.</p>
@@ -2185,7 +2186,7 @@ if __name__ == "__main__":
     if PUB:
         built["publication.html"] = build_publication()
     if ARA:
-        built["authors.html"] = build_authors()
+        built["assistants.html"] = build_assistants()
     for name, src in built.items():
         (ROOT / name).write_text(src)
     n_zh = build_zh(built)

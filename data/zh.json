@@ -1327,7 +1327,10 @@
   "Citations, median": "引用数中位数",
   "Before any regression, this is how Top 5 papers differ from the rest. Each line shows the share of papers with a feature in the two groups.": "在做任何回归之前，Top 5 论文与其他论文的差别如下。每一行是两组论文中具有该特征的占比。",
   "Shares and averages over all 184 papers, except the research-assistant line, which covers the papers whose full text could be read. Seniority is in years and is defined in the table at the bottom of the page.": "占比和均值按全部 184 篇论文计算；研究助理一行除外，它只包括能读到全文的论文。资历以年为单位，定义见页面底部的表格。",
-  "{0}% of other papers, {1}% of Top {2} papers": "其他论文 {0}%，Top {2} 论文 {1}%"
+  "{0}% of other papers, {1}% of Top {2} papers": "其他论文 {0}%，Top {2} 论文 {1}%",
+  "Research assistants": "研究助理",
+  "Research assistants | Beautiful Danish Data": "研究助理 | Beautiful Danish Data",
+  "Which Danish register papers thank research assistants in their acknowledgments, and where those assistants went next.": "哪些丹麦登记数据论文在致谢中感谢了研究助理，以及这些助理后来去了哪里。"
  },
  "js": {
   "Age": "年龄",
