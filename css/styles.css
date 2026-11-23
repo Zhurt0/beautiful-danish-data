@@ -414,3 +414,16 @@ details.reg-more > p { max-width: 84ch; margin-bottom: 8px; }
 #pfilter { max-width: 620px; margin-bottom: 6px; }
 .pcount { font-size: 0.9rem; min-height: 1.5em; margin-bottom: 8px; }
 body.searching .selection, body.searching .intro .selection + p, body.searching .intro .counts { display: none; }
+
+/* Publication analysis: regression table */
+table.regtable { font-family: var(--sans); font-size: 0.86rem; min-width: 760px; }
+table.regtable th, table.regtable td { text-align: right; padding: 5px 10px; white-space: nowrap; }
+table.regtable th:first-child, table.regtable td:first-child { text-align: left; white-space: normal; }
+table.regtable th { text-transform: none; letter-spacing: 0; font-size: 0.86rem; vertical-align: bottom; }
+table.regtable .mlabel { display: block; font-weight: 400; font-size: 0.76rem; color: var(--muted); }
+table.regtable .se { display: block; color: var(--muted); font-size: 0.78rem; }
+table.regtable tr.rgroup td { text-align: left; font-weight: 700; color: var(--secondary-color); background: var(--section-bg); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+table.regtable tr.rfit td { border-bottom: 0; padding-top: 3px; padding-bottom: 3px; }
+table.regvars { font-size: 0.9rem; }
+table.regvars td:nth-child(2), table.regvars td:nth-child(3), table.regvars th:nth-child(2), table.regvars th:nth-child(3) { text-align: right; white-space: nowrap; }
+table.regvars td:first-child { white-space: normal; }

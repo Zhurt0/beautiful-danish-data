@@ -100,4 +100,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://zhurt0.github.io/beautiful-danish-data/schools.html"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://zhurt0.github.io/beautiful-danish-data/zh/schools.html"/>
   </url>
+  <url>
+    <loc>https://zhurt0.github.io/beautiful-danish-data/publication.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhurt0.github.io/beautiful-danish-data/publication.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://zhurt0.github.io/beautiful-danish-data/zh/publication.html"/>
+  </url>
+  <url>
+    <loc>https://zhurt0.github.io/beautiful-danish-data/zh/publication.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhurt0.github.io/beautiful-danish-data/publication.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://zhurt0.github.io/beautiful-danish-data/zh/publication.html"/>
+  </url>
 </urlset>

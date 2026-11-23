@@ -98,7 +98,7 @@ def head(title, description, canonical):
 
 
 NAV_MAIN = [("index.html", "Summary"), ("papers.html", "Papers"), ("themes.html", "Themes"), ("samples.html", "Data & samples"), ("codebook.html", "Codebook")]
-NAV_MORE = [("variables.html", "Variable map"), ("lifecycle.html", "Life course"), ("survey.html", "Survey"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus")]
+NAV_MORE = [("variables.html", "Variable map"), ("lifecycle.html", "Life course"), ("survey.html", "Survey"), ("network.html", "Author network"), ("schools.html", "Copenhagen vs Aarhus"), ("publication.html", "Publication analysis")]
 
 
 NAV_SCRIPT = """    <script>document.addEventListener('click', function (ev) { document.querySelectorAll('nav details[open]').forEach(function (d) { if (!d.contains(ev.target)) d.removeAttribute('open'); }); });</script>
@@ -1741,6 +1741,112 @@ ZH_ATTR = re.compile(r'\b(placeholder|title|aria-label|data-label|alt)="([^"]*)"
 ZH_META = re.compile(r'(<meta (?:name="description"|property="og:title"|property="og:description") content=")([^"]*)(")')
 
 
+# ---------- Publication analysis: what goes with a Top 5 publication ----------
+_PUB = ROOT / "data" / "publication.json"
+PUB = json.loads(_PUB.read_text()) if _PUB.exists() else None
+# (key, label, how it is measured); a None key starts a block of rows
+PUB_ROWS = [
+    (None, "Author team", None),
+    ("mixed", "Authors in Denmark and abroad", "Some authors based in Denmark and some abroad; the reference group is papers whose authors are all based in Denmark"),
+    ("abroad_only", "Authors abroad only", "No author based in Denmark"),
+    ("n_authors", "Number of authors", "Count of authors"),
+    ("us_author", "Author at a US institution", "At least one author affiliated with a US institution on the paper"),
+    ("top_inst", "Author at a leading department", "At least one author at Harvard, Chicago, Berkeley, Princeton, MIT, Stanford, LSE, Yale, Northwestern, Columbia, NYU or UCL"),
+    ("ku", "Author at the University of Copenhagen", "At least one author who lists the University of Copenhagen"),
+    ("aarhus", "Author at Aarhus University", "At least one author who lists Aarhus University"),
+    ("sen_max", "Seniority of the most senior author", "Years between that author's first publications in OpenAlex and the paper's year"),
+    ("sen_min", "Seniority of the most junior author", "Same measure for the author who started most recently"),
+    (None, "Paper", None),
+    ("year", "Publication year", "Year of publication minus 2015"),
+    ("firm", "Firm-level data", "The paper uses firm-level registers, alone or with individual-level ones"),
+    ("log_n", "Sample size (log10)", "Base-10 logarithm of the largest sample size reported on the Data &amp; samples page"),
+    ("log_n_miss", "Sample size not reported", "Sample size missing; the median is used in its place"),
+    ("span", "Years of data", "Length of the data period in years"),
+    ("n_data", "Number of datasets", "Datasets listed for the paper on this site"),
+    ("dk_title", "Denmark in the title", "The title contains Denmark or Danish"),
+    ("survey", "Linked survey", "The paper links a survey to the registers"),
+    ("repl_pkg", "Replication package", "A public replication package is listed"),
+    ("nber_wp", "NBER working paper", "A version of the paper appeared as an NBER working paper"),
+    ("log_cites", "Citations (log)", "Natural logarithm of one plus the OpenAlex citation count in November 2026"),
+    ("cites_miss", "Citations not found", "No OpenAlex record matched; the median is used in its place"),
+    ("has_ra", "Thanks research assistants", "The acknowledgments thank at least one person for research assistance"),
+    (None, "Themes", None),
+    ("th_taxation", "Taxation", "Theme on this site"), ("th_household-finance", "Household finance", "Theme on this site"),
+    ("th_labor", "Labour", "Theme on this site"), ("th_health", "Health", "Theme on this site"), ("th_family", "Family", "Theme on this site"),
+    ("th_firms", "Firms", "Theme on this site"), ("th_children", "Children", "Theme on this site"),
+]
+
+
+def build_publication():
+    ms = PUB["models"]
+    stars = lambda p: "***" if p < 0.01 else "**" if p < 0.05 else "*" if p < 0.1 else ""
+    num = lambda x: ("&minus;" if x < 0 else "") + f"{abs(x):.3f}"
+
+    def cell(m, k):
+        c = m["coef"].get(k)
+        if not c:
+            return "<td></td>"
+        return f'<td>{num(c["b"])}{stars(c["p"])}<span class="se">({c["se"]:.3f})</span></td>'
+
+    out = head(
+        "Publication analysis | Beautiful Danish Data",
+        "Which features of a Danish register paper go with publication in a Top 5 journal: a logit regression on author team, institutions, data, seniority and citations.",
+        "publication.html",
+    )
+    out += nav("publication.html")
+    m5 = ms[4]
+    out += f"""    <section class="section intro">
+        <div class="container">
+            <h2 class="section-title">What goes with a Top 5 publication</h2>
+            <p>Of the {PUB["n_papers"]} papers on this site, {PUB["n_top5"]} appeared in a Top 5 journal. The table asks which features of a paper go with being one of them. Papers with an author at a leading department, with larger samples and with more citations are more often in the Top 5. The seniority of the authors makes no detectable difference.</p>
+            <div class="table-wrap">
+                <table class="regtable">
+                    <thead><tr><th></th>{"".join(f'<th>{m["num"]}<span class="mlabel">{e(m["label"])}</span></th>' for m in ms)}</tr></thead>
+                    <tbody>
+"""
+    for k, label, _ in PUB_ROWS:
+        if k is None:
+            out += f'                        <tr class="rgroup"><td colspan="{len(ms) + 1}">{label}</td></tr>\n'
+        else:
+            out += f'                        <tr><td>{label}</td>{"".join(cell(m, k) for m in ms)}</tr>\n'
+    foot = [("Papers", lambda m: str(m["n"])), ("Top 5 papers", lambda m: str(m["top5"])), ("Pseudo R&sup2;", lambda m: f'{m["r2"]:.3f}'),
+            ("Cross-validated AUC", lambda m: f'{m["auc"]:.3f}'), ("Cross-validated accuracy", lambda m: f'{100 * m["acc"]:.1f}%'),
+            ("Accuracy of always guessing not Top 5", lambda m: f'{100 * m["base"]:.1f}%')]
+    out += '                        <tr class="rgroup"><td colspan="%d">Fit</td></tr>\n' % (len(ms) + 1)
+    for label, fn in foot:
+        out += f'                        <tr class="rfit"><td>{label}</td>{"".join(f"<td>{fn(m)}</td>" for m in ms)}</tr>\n'
+    out += f"""                    </tbody>
+                </table>
+            </div>
+            <p class="note">Logit regressions; the outcome is one if the paper appeared in a Top 5 journal. Cells show average marginal effects, the change in the probability of a Top 5 publication, with standard errors in parentheses. * <em>p</em> &lt; 0.10, ** <em>p</em> &lt; 0.05, *** <em>p</em> &lt; 0.01. Column (6) covers only the papers whose full text could be read, because the research-assistant variable comes from the acknowledgments. The cross-validated figures are averages over 20 repetitions of five-fold cross-validation; an AUC of 0.5 is no better than chance.</p>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">How to read it</h2>
+            <p>These are associations within a selected group, not causes. Every paper here was already published in a good journal, so the comparison is Top 5 against other good journals. Citations are counted after publication and a Top 5 publication itself brings citations, so column (5) describes the papers and does not predict anything in advance. Replication packages are required by the Top 5 journals, so that row may also reflect the outcome.</p>
+            <p>The models predict poorly. Column (5) classifies {100 * m5["acc"]:.1f}% of papers correctly out of sample, against {100 * m5["base"]:.1f}% for always guessing that a paper is not in the Top 5.</p>
+            <div class="table-wrap">
+                <table class="regvars">
+                    <thead><tr><th>Variable</th><th>Other journals</th><th>Top 5</th><th>How it is measured</th></tr></thead>
+                    <tbody>
+"""
+    for k, label, how in PUB_ROWS:
+        if k is None:
+            continue
+        a, b = PUB["means"][k]
+        out += f'                        <tr><td>{label}</td><td>{a:.2f}</td><td>{b:.2f}</td><td>{how}</td></tr>\n'
+    out += f"""                    </tbody>
+                </table>
+            </div>
+            <p class="note">Means by group; for yes-or-no variables the mean is the share of papers. The median paper outside the Top 5 has {PUB["median_cites"][0]:.0f} citations and the median Top 5 paper {PUB["median_cites"][1]:.0f}. Author locations come from the affiliations on each paper in OpenAlex where available, and otherwise from the <a href="network.html">Author network</a> page; the leading-department, Copenhagen and Aarhus variables use every institution listed for an author on that page. Seniority is missing for a few authors with no OpenAlex profile and is then taken over the remaining authors. The data and the script are in the <code>analysis</code> folder on <a href="https://github.com/Zhurt0/beautiful-danish-data" target="_blank" rel="noopener">GitHub</a>.</p>
+        </div>
+    </section>
+"""
+    out += FOOTER
+    return out
+
+
 def zh_col(s):
     return re.sub(r"\s+", " ", s).strip()
 
@@ -1887,6 +1993,8 @@ if __name__ == "__main__":
     }
     if NETWORK:
         built["network.html"] = build_network(); built["schools.html"] = build_schools()
+    if PUB:
+        built["publication.html"] = build_publication()
     for name, src in built.items():
         (ROOT / name).write_text(src)
     n_zh = build_zh(built)

@@ -4,7 +4,7 @@ A field guide to economics published with Danish administrative register data.
 
 Live site: https://zhurt0.github.io/beautiful-danish-data/
 
-Ten pages, each also in Chinese under `zh/`. The header shows the five main pages and puts the rest under "More":
+Eleven pages, each also in Chinese under `zh/`. The header shows the five main pages and puts the rest under "More":
 
 1. **Summary** (`index.html`): a short front page with the headline figures, a three-tab preview (Author network, Copenhagen vs Aarhus, Life course) whose small pictures are drawn from the data at build time, and the way into the papers by journal.
 1. **Papers** (`papers.html`): one-paragraph summaries of papers in the Top 5 journals, the *American Economic Journals* (Applied and Policy), the *Review of Economics and Statistics*, the *Economic Journal*, the *Journal of Labor Economics* and the *Journal of Public Economics* that are built on Danish registers, grouped by journal, with the note on how the papers were selected.
@@ -16,6 +16,7 @@ Ten pages, each also in Chinese under `zh/`. The header shows the five main page
 1. **Variable map** (`variables.html`): the Statistics Denmark registers and variables behind those papers, at the individual level and at the firm level, with a short guide to linking the two sides. The National Patient Register (LPR) entry opens into a longer account: history, what a record contains, tables and variables, pitfalls, access, and the papers on this site that use it. That text lives in `data/lpr.json`, where every statement names its source.
 1. **Author network** (`network.html`): who wrote with whom, coloured by where each author was based, with tables of the most frequent pairs, institutions and all authors.
 1. **Copenhagen vs Aarhus** (`schools.html`): how the themes of papers with University of Copenhagen authors differ from those with Aarhus University authors, with Fisher exact tests; computed from `data/papers.json` and `data/network.json` at build time.
+1. **Publication analysis** (`publication.html`): a regression table of which paper features go with publication in a Top 5 journal (author team, institutions, data, seniority, citations). The results are stored in `data/publication.json`, produced by `analysis/publication_analysis.py`; the page does not rerun the regression.
 
 ## Editing
 
